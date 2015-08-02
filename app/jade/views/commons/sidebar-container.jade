@@ -1,0 +1,5 @@
+ul.nav.nav-sidebar.col-sm-3.col-md-2.sidebar
+	li(ng-class="{ active : $state.current.name == 'dashboard' }")
+		a(href='') {{ 'DASHBOARD' | translate }}
+	li(ng-class="{ active : $state.current.name == 'inventory' }")
+		a(href='') {{ 'INVENTORY' | translate }}

@@ -1,0 +1,58 @@
+
+<div class="row">
+  <ul class="nav nav-sidebar col-sm-3 col-md-2 sidebar">
+    <li ng-class="{ active: user.id == vm.currentUser.id }" ng-repeat="user in vm.userList"><a href="">{{ (user.first_name + ' ' + user.last_name) || user.username }}</a></li>
+  </ul>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="page-header">{{ 'PROFILE' | translate }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <h2 class="sub-header">{{ 'PERSONAL_DATA' | translate }}</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>{{ 'USERNAME' | translate }}:</th>
+              <th>
+                <p>{{ vm.currentUser.username }}</p>
+              </th>
+            </tr>
+            <tr>
+              <th>{{ 'PASSWORD' | translate }}:</th>
+              <th><a href="" ng-click="vm.openEditPasswordModal()" class="editable editable-click">{{ 'EDIT_PASSWORD' | translate }}</a></th>
+            </tr>
+            <tr>
+              <th>{{ 'FIRST_NAME' | translate }}:</th>
+              <th><a href="" editable-text="vm.currentUser.first_name" onbeforesave="vm.updateUserData('first_name', $data)">{{ vm.currentUser.first_name || 'NO_FIRST_NAME' }}</a></th>
+            </tr>
+            <tr>
+              <th>{{ 'LAST_NAME' | translate }}:</th>
+              <th><a href="" editable-text="vm.currentUser.last_name" onbeforesave="vm.updateUserData('last_name', $data)">{{ vm.currentUser.last_name || 'NO_LAST_NAME' }}</a></th>
+            </tr>
+            <tr>
+              <th>{{ 'CREATED_AT' | translate }}:</th>
+              <th>
+                <p>{{ vm.currentUser.created_at * 1000 | date }}</p>
+              </th>
+            </tr>
+            <tr>
+              <th>{{ 'LAST_LOGIN' | translate }}:</th>
+              <th>
+                <p>{{ vm.currentUser.last_login * 1000 | date }}</p>
+              </th>
+            </tr>
+            <tr>
+              <th>{{ 'PERMISSIONS' | translate }}:</th>
+              <th>
+                <p>{{ vm.currentUser.permissions | translate }}</p>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

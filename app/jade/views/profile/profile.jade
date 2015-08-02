@@ -1,0 +1,43 @@
+.row
+	ul.nav.nav-sidebar.col-sm-3.col-md-2.sidebar
+		li(ng-class='{ active: user.id == vm.currentUser.id }', ng-repeat='user in vm.userList')
+			a(href='') {{ (user.first_name + ' ' + user.last_name) || user.username }}
+	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+		.row
+			.col-sm-12
+				h1.page-header {{ 'PROFILE' | translate }}
+		.row
+			.col-sm-6
+				h2.sub-header {{ 'PERSONAL_DATA' | translate }}
+				table.table
+					tbody
+						tr
+							th {{ 'USERNAME' | translate }}:
+							th
+								p {{ vm.currentUser.username }}
+						tr
+							th {{ 'PASSWORD' | translate }}:
+							th
+								a.editable.editable-click(href='', ng-click="vm.openEditPasswordModal()") {{ 'EDIT_PASSWORD' | translate }}
+						tr
+							th {{ 'FIRST_NAME' | translate }}:
+							th
+								a(href='', editable-text='vm.currentUser.first_name', onbeforesave="vm.updateUserData('first_name', $data)") {{ vm.currentUser.first_name || 'NO_FIRST_NAME' }}
+						tr
+							th {{ 'LAST_NAME' | translate }}:
+							th
+								a(href='', editable-text='vm.currentUser.last_name', onbeforesave="vm.updateUserData('last_name', $data)") {{ vm.currentUser.last_name || 'NO_LAST_NAME' }}
+						tr
+							th {{ 'CREATED_AT' | translate }}:
+							th
+								p
+									{{ vm.currentUser.created_at * 1000 | date }}
+						tr
+							th {{ 'LAST_LOGIN' | translate }}:
+							th
+								p
+									{{ vm.currentUser.last_login * 1000 | date }}
+						tr
+							th {{ 'PERMISSIONS' | translate }}:
+							th
+								p {{ vm.currentUser.permissions | translate }}

@@ -1,0 +1,17 @@
+
+<div class="row">
+  <div class="col-sm-3 col-sm-offset-4">
+    <h1>{{ 'APP_NAME' | translate }}</h1>
+    <form>
+      <div class="form-group">
+        <label for="email">{{ 'USERNAME' | translate }}:</label>
+        <input id="email" tabindex="1" type="email" placeholder="{{ 'EMAIL' | translate }}" ng-model="vm.username" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="password">{{ 'PASSWORD' | translate }}:</label>
+        <input id="password" tabindex="2" type="password" placeholder="{{ 'PASSWORD' | translate }}" ng-model="vm.password" class="form-control"/>
+      </div>
+      <button type="submit" ng-click="vm.logIn()" class="btn btn-primary btn-block"> {{ 'LOG_IN' | translate }}</button>
+    </form>
+  </div>
+</div>
