@@ -32,7 +32,7 @@
 		.module('inventoryApp')
 		.run(runBlock);
 
-		runBlock.$inject = ['$rootScope', '$state', 'editableOptions', 'localStorageService', 'LOCAL_STORAGE_KEYS'];
+		runBlock.$inject = ['$rootScope', '$state', 'editableOptions'];
 
 	function configure($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, NotificationProvider) {
 
@@ -73,6 +73,11 @@
 		.state('template', {
 			abstract: true,
 			authenticate : true,
+			resolve: {
+				currentUser: function(userservice) {
+					return userservice.getCurrentUser();
+				}
+			},
 			views: {
 				'headerContainer': {
 					templateUrl: 'views/commons/header-container.html',
@@ -102,6 +107,11 @@
 		.state('profile', {
 			url:'/profile',
 			authenticate : true,
+			resolve: {
+				currentUser: function(userservice) {
+					return userservice.getCurrentUser();
+				}
+			},
 			views: {
 				'headerContainer': {
 					templateUrl: 'views/commons/header-container.html',
@@ -117,16 +127,13 @@
 		});
 	}
 
-	function runBlock($rootScope, $state, editableOptions, localStorageService, LOCAL_STORAGE_KEYS){
+	function runBlock($rootScope, $state, editableOptions){
 		$rootScope.$state = $state;
 		editableOptions.theme = 'bs3';
+		/*
 		$rootScope.$on('$stateChangeStart', function (event, current) {
-			var loggedIn = localStorageService.get(LOCAL_STORAGE_KEYS.CURRENT_USER);
-			if(current.authenticate && !loggedIn) {
-				$state.transitionTo('login');
-				event.preventDefault();
-			}
 		});
+		*/
 	}
 
 })();

@@ -18,9 +18,13 @@
 			var vm = this;
 			vm.updateUserData = updateUserData;
 			vm.openEditPasswordModal = openEditPasswordModal;
+			vm.openCreateUserModal = openCreateUserModal;
 			vm.userList = [];
-			vm.currentUser = null;
-			vm.myUser = null;
+
+			/* Current logged in user */
+			vm.currentUser = userservice.currentUser;
+			/* User selected on list */
+			vm.user = null;
 
 			activate();
 
@@ -32,7 +36,20 @@
 					size: 'md'
 				});
 				modalInstance.result.then(function (newPassword) {
-					userservice.updateUserPassword(vm.currentUser.id, newPassword);
+					userservice.updateUserPassword(vm.user.id, newPassword);
+				}, function () {
+				});
+			}
+
+			function openCreateUserModal() {
+				var modalInstance = $modal.open({
+					animation: true,
+					templateUrl: 'views/profile/modals/create-user.html',
+					controller: 'CreateUserModalController as vm',
+					size: 'md'
+				});
+				modalInstance.result.then(function (data) {
+					userservice.createUser(data);
 				}, function () {
 				});
 			}
@@ -40,17 +57,13 @@
 			function updateUserData(key, value) {
 				var data = {};
 				data[key] = value;
-				return userservice.updateUser(vm.currentUser.id, data);
+				return userservice.updateUser(vm.user.id, data);
 			}
 
 			function activate() {
-				userservice.getUserDetail().then(function(data){
-					vm.myUser = data;
-				});
-
-				userservice.getUserList().then(function(data){
+				userservice.getUserList().then(function (data){
 					vm.userList = data;
-					vm.currentUser = data.length > 0 ? data[0] : null;
+					vm.user = data.length > 0 ? data[0] : null;
 				});
 			}
 		}

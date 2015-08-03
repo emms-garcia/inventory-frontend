@@ -55,7 +55,15 @@
 					UPDATE_USER_FAILED: 'No se pudo actualizar la información',
 					UPDATE_USER_SUCCESS: 'Información actualizada exitosamente',
 					UPDATE_PASSWORD_SUCCESS: 'Contraseña actualizada exitosamente',
-					UPDATE_PASSWORD_ERROR: 'No se pudo actualizar la contraseña'
+					UPDATE_PASSWORD_ERROR: 'No se pudo actualizar la contraseña',
+					ADD_NEW_USER: 'Agregar usuario',
+					REPEAT_PASSWORD: 'Repetir contraseña',
+					CREATE_USER: 'Crear usuario',
+					CREATE: 'Crear',
+					CREATE_USER_MISSING_DATA: 'Falta información',
+					READ_ONLY_ACCOUNT: 'Solo lectura',
+					CREATE_USER_SUCCESS: 'El usuario se creó exitosamente',
+					CREATE_USER_FAILED: 'No se pudo crear un nuevo usuario'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -93,7 +101,15 @@
 					UPDATE_USER_FAILED: 'Failed to update user data',
 					UPDATE_USER_SUCCESS: 'User data updated successfully',
 					UPDATE_PASSWORD_SUCCESS: 'Password updated successfully',
-					UPDATE_PASSWORD_ERROR: 'Failed to update password'
+					UPDATE_PASSWORD_ERROR: 'Failed to update password',
+					ADD_NEW_USER: 'Agregar usuario',
+					REPEAT_PASSWORD: 'Repeat password',
+					CREATE_USER: 'Create user',
+					CREATE: 'Create',
+					CREATE_USER_MISSING_DATA: 'Missing information',
+					READ_ONLY_ACCOUNT: 'Solo lectura',
+					CREATE_USER_SUCCESS: 'User created successfully',
+					CREATE_USER_FAILED: 'Failed to create user'
 				};
 			}
 			$timeout(function(){

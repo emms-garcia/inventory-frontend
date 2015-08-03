@@ -10,16 +10,17 @@
 	angular.module('inventoryApp')
 		.service('userservice', userservice);
 
-	userservice.$inject = ['$http', '$translate', 'utilsservice', 'localStorageService', 'LOCAL_STORAGE_KEYS'];
+	userservice.$inject = ['$http', '$state', '$translate', 'utilsservice', 'localStorageService', 'LOCAL_STORAGE_KEYS'];
 
-	function userservice($http, $translate, utilsservice, localStorageService, LOCAL_STORAGE_KEYS) {
+	function userservice($http, $state, $translate, utilsservice, localStorageService, LOCAL_STORAGE_KEYS) {
 		var service = {
 			logIn: logIn,
 			logOut: logOut,
 			currentUser: {},
 			userList: [],
-			getUserDetail: getUserDetail,
+			getCurrentUser: getCurrentUser,
 			getUserList: getUserList,
+			createUser: createUser,
 			updateUser: updateUser,
 			updateUserPassword: updateUserPassword
 		};
@@ -71,8 +72,8 @@
 			}
 		}
 
-		function getUserDetail(id) {
-			id = id || localStorageService.get(LOCAL_STORAGE_KEYS.CURRENT_USER);
+		function getCurrentUser() {
+			var id = localStorageService.get(LOCAL_STORAGE_KEYS.CURRENT_USER);
 			return $http({
 				method: 'GET',
 				url: 'api/inventory/account/' + id + '/'
@@ -86,7 +87,9 @@
 			}
 
 			function getUserFailed(error) {
-				console.log('XHR Failed for getUserDetail' + error.data);
+				console.log('XHR Failed for getCurrentUser' + error.data);
+				localStorageService.remove(LOCAL_STORAGE_KEYS.CURRENT_USER);
+				$state.go('login');
 				return {};
 			}
 		}
@@ -111,6 +114,27 @@
 			}
 		}
 
+		function createUser(data) {
+			return $http({
+				method: 'POST',
+				url: 'api/inventory/account/',
+				data: data
+			})
+			.then(createUserSuccess)
+			.catch(createUserFailed);
+
+			function createUserSuccess(response) {
+				utilsservice.notifySuccess($translate.instant('CREATE_USER_SUCCESS'));
+				return response.data;
+			}
+
+			function createUserFailed(error) {
+				console.log('XHR Failed for createUserFailed' + error.data);
+				utilsservice.notifyError($translate.instant('CREATE_USER_FAILED'));
+				return false;
+			}
+		}
+
 		function updateUser(id, data) {
 			return $http({
 				method: 'PATCH',
@@ -121,9 +145,8 @@
 			.catch(updateUserFailed);
 
 			function updateUserSuccess(response) {
-				service.currentUser = response.data;
 				utilsservice.notifySuccess($translate.instant('UPDATE_USER_SUCCESS'));
-				return true;
+				return response.data;
 			}
 
 			function updateUserFailed(error) {

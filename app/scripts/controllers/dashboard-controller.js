@@ -12,11 +12,11 @@
 	angular.module('inventoryApp')
 		.controller('DashboardController', DashboardController);
 
-	DashboardController.$inject = [];
+	DashboardController.$inject = ['userservice'];
 
-	function DashboardController () {
+	function DashboardController (userservice) {
 		var vm = this;
-		vm.test = 1;
+		vm.currentUser = userservice.currentUser;
 
 		activate();
 

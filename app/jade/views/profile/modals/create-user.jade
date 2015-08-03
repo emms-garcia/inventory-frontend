@@ -1,0 +1,33 @@
+form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
+	.modal-header
+		h3.modal-title {{ 'CREATE_USER' | translate }}
+	.modal-body
+		.row
+			.col-sm-12
+				.row.form-group
+					label.col-sm-5(for="username") *{{ 'USERNAME' | translate }}:
+					.col-sm-5
+						input#username.form-control(required, ng-model='vm.username', type='email', placeholder="{{ 'USERNAME' | translate }}")
+				.row.form-group
+					label.col-sm-5(for="firstName") *{{ 'FIRST_NAME' | translate }}:
+					.col-sm-5
+						input#firstName.form-control(required, ng-model='vm.firstName', type='text', placeholder="{{ 'FIRST_NAME' | translate }}")		
+				.row.form-group
+					label.col-sm-5(for="lastName") {{ 'LAST_NAME' | translate }}:
+					.col-sm-5
+						input#lastName.form-control(ng-model='vm.lastName', type='text', placeholder="{{ 'LAST_NAME' | translate }}")		
+				.row.form-group
+					label.col-sm-5(for="newPassword1") *{{ 'PASSWORD' | translate }}:
+					.col-sm-5
+						input#newPassword1.form-control(required, ng-model='vm.password1', type='password', placeholder="{{ 'PASSWORD' | translate }}")
+				.row.form-group
+					label.col-sm-5(for="newPassword2") *{{ 'REPEAT_PASSWORD' | translate }}:
+					.col-sm-5
+						input#newPassword2.form-control(required, ng-model='vm.password2', type='password', placeholder="{{ 'PASSWORD' | translate }}")
+				.checkbox
+					label
+						input(ng-model='vm.readOnly', type='checkbox')
+						| {{ 'READ_ONLY_ACCOUNT' | translate }}
+	.modal-footer
+		button.btn.btn-primary(type='submit') {{ 'CREATE' | translate }}
+		button.btn.btn-warning(ng-click='vm.cancel()') {{ 'CANCEL' | translate }}
