@@ -104,8 +104,8 @@
 				 },
 			}
 		})
-		.state('profile', {
-			url:'/profile',
+		.state('users', {
+			url:'/users',
 			authenticate : true,
 			resolve: {
 				currentUser: function(userservice) {
@@ -119,8 +119,8 @@
 					controllerAs: 'vm'
 				},
 				'mainView': {
-					templateUrl: 'views/profile/profile.html',
-					controller : 'ProfileController',
+					templateUrl: 'views/users/users.html',
+					controller : 'UsersController',
 					controllerAs: 'vm'
 				 },
 			}

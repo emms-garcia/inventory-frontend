@@ -1,6 +1,6 @@
 .row
 	ul.nav.nav-sidebar.col-sm-3.col-md-2.sidebar
-		li(ng-class='{ active: user.id === vm.selectedUser.id }', ng-repeat="user in vm.userList | orderBy: '-first_name'")
+		li(ng-class='{ active: user.id === vm.selectedUser.id }', ng-repeat="user in vm.userList")
 			a(href='', ng-click='vm.changeUser(user)') {{ (user.first_name + ' ' + user.last_name) || user.username }}
 		li(ng-if='vm.currentUser.is_superuser')
 			a.editable.editable-click(href='', ng-click='vm.openCreateUserModal()') {{ 'ADD_NEW_USER' | translate }} &nbsp;
@@ -8,7 +8,7 @@
 	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 		.row
 			.col-sm-12
-				h1.page-header {{ 'PROFILE' | translate }}
+				h1.page-header {{ 'USERS' | translate }}
 		.row
 			.col-sm-6
 				h2.sub-header {{ 'PERSONAL_DATA' | translate }}
@@ -39,8 +39,11 @@
 							th {{ 'LAST_LOGIN' | translate }}:
 							th
 								p
-									{{ vm.selectedUser.last_login * 1000 | date }}
+									{{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
 						tr
 							th {{ 'PERMISSIONS' | translate }}:
 							th
 								p {{ vm.selectedUser.permissions | translate }}
+		.row(ng-if='vm.currentUser.is_superuser')
+			.col-sm-5
+				button.btn.btn-block.btn-danger(type='button', ng-click='vm.deleteUser(vm.selectedUser)') {{ 'DELETE_USER' | translate }}

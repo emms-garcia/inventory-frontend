@@ -64,7 +64,16 @@
 					READ_ONLY_ACCOUNT: 'Solo lectura',
 					CREATE_USER_SUCCESS: 'El usuario se creó exitosamente',
 					CREATE_USER_FAILED: 'No se pudo crear un nuevo usuario',
-					EMAIL: 'Correo'
+					EMAIL: 'Correo',
+					NEVER_LOGGED_IN: 'No ha iniciado sesión',
+					DELETE_USER: 'Borrar usuario',
+					USERS: 'Usuarios',
+					DELETE_USER_SUCCESS: 'El usuario fue borrado exitosamente',
+					DELETE_USER_FAILED: 'No se pudo borrar el usuario',
+					CONFIRMATION_TITLE: 'Confirmación',
+					CONFIRMATION_BODY: 'Confirmar acción',
+					CONFIRMATION_CONFIRM: 'Confirmar',
+					CONFIRMATION_CANCEL: 'Cancelar'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -111,7 +120,16 @@
 					READ_ONLY_ACCOUNT: 'Solo lectura',
 					CREATE_USER_SUCCESS: 'User created successfully',
 					CREATE_USER_FAILED: 'Failed to create user',
-					EMAIL: 'Email'
+					EMAIL: 'Email',
+					NEVER_LOGGED_IN: 'Not logged in yet',
+					DELETE_USER: 'Delete user',
+					USERS: 'Users',
+					DELETE_USER_SUCCESS: 'User deleted successfully',
+					DELETE_USER_FAILED: 'Failed to delete user',
+					CONFIRMATION_TITLE: 'Confirmation',
+					CONFIRMATION_BODY: 'Confirm action',
+					CONFIRMATION_CONFIRM: 'Confirm',
+					CONFIRMATION_CANCEL: 'Cancel'
 				};
 			}
 			$timeout(function(){

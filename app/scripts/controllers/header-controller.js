@@ -17,6 +17,7 @@
 		function HeaderController($state, userservice) {
 			var vm = this;
 			vm.logOut = logOut;
+			vm.currentUser = userservice.currentUser;
 
 			activate();
 

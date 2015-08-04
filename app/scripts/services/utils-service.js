@@ -1,5 +1,5 @@
 /**
- * @ngdoc service
+ * @ngdoc factory
  * @name inventoryApp.utilsservice
  * @description
  * # utilsservice
@@ -8,15 +8,17 @@
 (function() {
 	'use strict';
 	angular.module('inventoryApp')
-		.service('utilsservice', utilsservice);
+		.factory('utilsservice', utilsservice);
 
-	utilsservice.$inject = ['Notification'];
+	utilsservice.$inject = ['Notification', '$modal'];
 
-	function utilsservice(Notification) {
+	function utilsservice(Notification, $modal) {
 		var service = {
 			notifySuccess: notifySuccess,
 			notifyError: notifyError,
-			notifyInformation: notifyInformation
+			notifyInformation: notifyInformation,
+			notifyWarning: notifyWarning,
+			confirmationDialog: confirmationDialog
 		};
 
 		function notifySuccess(message) {
@@ -29,6 +31,25 @@
 
 		function notifyInformation(message) {
 			Notification.info(message);
+		}
+		function notifyWarning(message) {
+			Notification.warning(message);
+		}
+
+		function confirmationDialog(successCallback, errorCallback, config) {
+			config = config ? config : {};
+			var modalInstance = $modal.open({
+				animation: config.animation || true,
+				templateUrl: 'views/commons/confirmation-dialog.html',
+				controller: 'ConfirmationDialogModalController as vm',
+				size: config.size || 'md',
+				resolve: {
+					config: function() {
+						return config;
+					}
+				}
+			});
+			modalInstance.result.then(successCallback, errorCallback);
 		}
 
 		return service;

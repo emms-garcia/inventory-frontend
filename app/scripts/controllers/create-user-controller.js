@@ -12,9 +12,9 @@
 	angular.module('inventoryApp')
 		.controller('CreateUserModalController', CreateUserModalController);
 
-		CreateUserModalController.$inject = ['$modalInstance', '$translate', 'utilsservice'];
+		CreateUserModalController.$inject = ['$modalInstance', '$translate', 'userservice', 'utilsservice'];
 
-		function CreateUserModalController($modalInstance, $translate, utilsservice) {
+		function CreateUserModalController($modalInstance, $translate, userservice, utilsservice) {
 			var vm = this;
 			vm.password1 = null;
 			vm.password2 = null;
@@ -33,10 +33,12 @@
 							password: vm.password1,
 							first_name: vm.firstName,
 							last_name: vm.lastName,
-							is_staff: !vm.readOnly,
-							is_superuser: false
+							is_staff: !vm.readOnly
 						};
-						$modalInstance.close(data);
+						userservice.createUser(data).then(function(data){
+							$modalInstance.close(data);
+						}).catch(function(){
+						});
 					} else {
 						utilsservice.notifyError($translate.instant('PASSWORDS_DONT_MATCH'));
 					}

@@ -8,7 +8,7 @@
 (function() {
 	'use strict';
 	angular.module('inventoryApp')
-		.service('userservice', userservice);
+		.factory('userservice', userservice);
 
 	userservice.$inject = ['$http', '$state', '$translate', 'utilsservice', 'localStorageService', 'LOCAL_STORAGE_KEYS'];
 
@@ -21,8 +21,9 @@
 			getCurrentUser: getCurrentUser,
 			getUserList: getUserList,
 			createUser: createUser,
-			updateUser: updateUser,
-			updateUserPassword: updateUserPassword
+			updateUserData: updateUserData,
+			updateUserPassword: updateUserPassword,
+			deleteUser: deleteUser
 		};
 
 		function logIn(username, password) {
@@ -46,7 +47,7 @@
 
 			function loginFailed(error) {
 				utilsservice.notifyError($translate.instant('LOGIN_FAILED'));
-				console.log('XHR Failed for logIn.' + error.data);
+				console.log('XHR Failed for logIn ' + error.data);
 				return false;
 			}
 		}
@@ -67,7 +68,7 @@
 			}
 
 			function logoutFailed(error) {
-				console.log('XHR Failed for logOut.' + error.data);
+				console.log('XHR Failed for logOut ' + error.data);
 				return false;
 			}
 		}
@@ -87,7 +88,7 @@
 			}
 
 			function getUserFailed(error) {
-				console.log('XHR Failed for getCurrentUser' + error.data);
+				console.log('XHR Failed for getCurrentUser ' + error.data);
 				localStorageService.remove(LOCAL_STORAGE_KEYS.CURRENT_USER);
 				$state.go('login');
 				return {};
@@ -108,7 +109,7 @@
 			}
 
 			function getUserListFailed(error) {
-				console.log('XHR Failed for getUserList' + error.data);
+				console.log('XHR Failed for getUserList ' + error.data);
 				utilsservice.notifyError($translate.instant('GET_USER_LIST_FAILED'));
 				return [service.currentUser];
 			}
@@ -129,13 +130,13 @@
 			}
 
 			function createUserFailed(error) {
-				console.log('XHR Failed for createUserFailed' + error.data);
+				console.log('XHR Failed for createUserFailed ' + error.data);
 				utilsservice.notifyError($translate.instant('CREATE_USER_FAILED'));
 				return false;
 			}
 		}
 
-		function updateUser(id, data) {
+		function updateUserData(id, data) {
 			return $http({
 				method: 'PATCH',
 				url: 'api/inventory/account/' + id + '/',
@@ -150,8 +151,28 @@
 			}
 
 			function updateUserFailed(error) {
-				console.log('XHR Failed for updateUser' + error.data);
+				console.log('XHR Failed for updateUserData ' + error.data);
 				utilsservice.notifyError($translate.instant('UPDATE_USER_FAILED'));
+				return false;
+			}
+		}
+
+		function deleteUser(id) {
+			return $http({
+				method: 'DELETE',
+				url: 'api/inventory/account/' + id + '/'
+			})
+			.then(deleteUserSuccess)
+			.catch(deleteUserFailed);
+
+			function deleteUserSuccess() {
+				utilsservice.notifySuccess($translate.instant('DELETE_USER_SUCCESS'));
+				return true;
+			}
+
+			function deleteUserFailed(error) {
+				console.log('XHR Failed for deleteUser ' + error.data);
+				utilsservice.notifyError($translate.instant('DELETE_USER_FAILED'));
 				return false;
 			}
 		}
@@ -173,7 +194,7 @@
 			}
 
 			function updateUserPasswordFailed(error) {
-				console.log('XHR Failed for updateUser' + error.data);
+				console.log('XHR Failed for updateUser ' + error.data);
 				utilsservice.notifyError($translate.instant('UPDATE_PASSWORD_FAILED'));
 				return false;
 			}
