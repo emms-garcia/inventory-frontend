@@ -19,14 +19,19 @@
 			vm.updateUserData = updateUserData;
 			vm.openEditPasswordModal = openEditPasswordModal;
 			vm.openCreateUserModal = openCreateUserModal;
+			vm.changeUser = changeUser;
 			vm.userList = [];
 
 			/* Current logged in user */
 			vm.currentUser = userservice.currentUser;
 			/* User selected on list */
-			vm.user = null;
+			vm.selectedUser = null;
 
 			activate();
+
+			function changeUser(user) {
+				vm.selectedUser = user;
+			}
 
 			function openEditPasswordModal() {
 				var modalInstance = $modal.open({
@@ -36,7 +41,7 @@
 					size: 'md'
 				});
 				modalInstance.result.then(function (newPassword) {
-					userservice.updateUserPassword(vm.user.id, newPassword);
+					userservice.updateUserPassword(vm.selectedUser.id, newPassword);
 				}, function () {
 				});
 			}
@@ -57,13 +62,13 @@
 			function updateUserData(key, value) {
 				var data = {};
 				data[key] = value;
-				return userservice.updateUser(vm.user.id, data);
+				return userservice.updateUser(vm.selectedUser.id, data);
 			}
 
 			function activate() {
 				userservice.getUserList().then(function (data){
 					vm.userList = data;
-					vm.user = data.length > 0 ? data[0] : null;
+					vm.selectedUser = data.length > 0 ? data[0] : null;
 				});
 			}
 		}

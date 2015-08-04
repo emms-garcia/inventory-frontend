@@ -63,7 +63,8 @@
 					CREATE_USER_MISSING_DATA: 'Falta información',
 					READ_ONLY_ACCOUNT: 'Solo lectura',
 					CREATE_USER_SUCCESS: 'El usuario se creó exitosamente',
-					CREATE_USER_FAILED: 'No se pudo crear un nuevo usuario'
+					CREATE_USER_FAILED: 'No se pudo crear un nuevo usuario',
+					EMAIL: 'Correo'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -109,7 +110,8 @@
 					CREATE_USER_MISSING_DATA: 'Missing information',
 					READ_ONLY_ACCOUNT: 'Solo lectura',
 					CREATE_USER_SUCCESS: 'User created successfully',
-					CREATE_USER_FAILED: 'Failed to create user'
+					CREATE_USER_FAILED: 'Failed to create user',
+					EMAIL: 'Email'
 				};
 			}
 			$timeout(function(){

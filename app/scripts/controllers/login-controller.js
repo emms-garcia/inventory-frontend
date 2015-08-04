@@ -26,7 +26,7 @@
 		/////////////////
 
 		function logIn() {
-			if(vm.username && vm.password) {
+			if(vm.username) {
 				userservice.logIn(vm.username, vm.password).then(function(loggedIn){
 					if(loggedIn) {
 						$state.go('dashboard');

@@ -1,7 +1,0 @@
-
-<div ng-class="[$classes, $position === 'center' ? 'cg-notify-message-center' : '',$position === 'left' ? 'cg-notify-message-left' : '',$position === 'right' ? 'cg-notify-message-right' : '']" ng-style="{'margin-left': $centerMargin}" class="cg-notify-message">
-  <div ng-show="!$messageTemplate">{{$message}}
-    <div ng-show="$messageTemplate" class="cg-notify-message-template"></div>
-    <button type="button" ng-click="$close()" class="cg-notify-close"><span aria-hidden="true">×</span><span class="cg-notify-sr-only">Close</span></button>
-  </div>
-</div>
