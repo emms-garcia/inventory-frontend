@@ -7,7 +7,7 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 				.row.form-group
 					label.col-sm-5(for="username") *{{ 'USERNAME' | translate }}:
 					.col-sm-5
-						input#username.form-control(required, ng-model='vm.username', type='email', placeholder="{{ 'USERNAME' | translate }}")
+						input#username.form-control(required, ng-model='vm.username', type='text', placeholder="{{ 'USERNAME' | translate }}")
 				.row.form-group
 					label.col-sm-5(for="firstName") *{{ 'FIRST_NAME' | translate }}:
 					.col-sm-5
@@ -30,4 +30,4 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 						| {{ 'READ_ONLY_ACCOUNT' | translate }}
 	.modal-footer
 		button.btn.btn-primary(type='submit') {{ 'CREATE' | translate }}
-		button.btn.btn-warning(ng-click='vm.cancel()') {{ 'CANCEL' | translate }}
+		button.btn.btn-warning(type='button', ng-click='vm.cancel()') {{ 'CANCEL' | translate }}

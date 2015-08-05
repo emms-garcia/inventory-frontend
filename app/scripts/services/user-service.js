@@ -22,7 +22,6 @@
 			getUserList: getUserList,
 			createUser: createUser,
 			updateUserData: updateUserData,
-			updateUserPassword: updateUserPassword,
 			deleteUser: deleteUser
 		};
 
@@ -132,6 +131,13 @@
 			function createUserFailed(error) {
 				console.log('XHR Failed for createUserFailed ' + error.data);
 				utilsservice.notifyError($translate.instant('CREATE_USER_FAILED'));
+				if(error.data.account) {
+					for(var key in data) {
+						if(error.data.account[key]) {
+							utilsservice.notifyError(error.data.account[key][0]);
+						}
+					}				
+				}
 				return false;
 			}
 		}
@@ -153,6 +159,13 @@
 			function updateUserFailed(error) {
 				console.log('XHR Failed for updateUserData ' + error.data);
 				utilsservice.notifyError($translate.instant('UPDATE_USER_FAILED'));
+				if(error.data.account) {
+					for(var key in data) {
+						if(error.data.account[key]) {
+							utilsservice.notifyError(error.data.account[key][0]);
+						}
+					}				
+				}
 				return false;
 			}
 		}
@@ -173,29 +186,6 @@
 			function deleteUserFailed(error) {
 				console.log('XHR Failed for deleteUser ' + error.data);
 				utilsservice.notifyError($translate.instant('DELETE_USER_FAILED'));
-				return false;
-			}
-		}
-
-		function updateUserPassword(id, newPassword) {
-			return $http({
-				method: 'PATCH',
-				url: 'api/inventory/account/' + id + '/change_password/',
-				data: {
-					password: newPassword
-				}
-			})
-			.then(updateUserPasswordSuccess)
-			.catch(updateUserPasswordFailed);
-
-			function updateUserPasswordSuccess() {
-				utilsservice.notifySuccess($translate.instant('UPDATE_PASSWORD_SUCCESS'));
-				return true;
-			}
-
-			function updateUserPasswordFailed(error) {
-				console.log('XHR Failed for updateUser ' + error.data);
-				utilsservice.notifyError($translate.instant('UPDATE_PASSWORD_FAILED'));
 				return false;
 			}
 		}

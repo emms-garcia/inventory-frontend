@@ -12,9 +12,9 @@
 	angular.module('inventoryApp')
 		.controller('EditPasswordModalController', EditPasswordModalController);
 
-		EditPasswordModalController.$inject = ['$modalInstance', '$translate', 'utilsservice'];
+		EditPasswordModalController.$inject = ['$modalInstance', '$translate', 'userservice', 'user', 'utilsservice'];
 
-		function EditPasswordModalController($modalInstance, $translate, utilsservice) {
+		function EditPasswordModalController($modalInstance, $translate, userservice, user, utilsservice) {
 			var vm = this;
 			vm.password1 = null;
 			vm.password2 = null;
@@ -23,7 +23,14 @@
 
 			function confirm() {
 				if(vm.password1 && (vm.password1 === vm.password2)) {
-					$modalInstance.close(vm.password1);
+					userservice.updateUserData(user.id, {
+						password: vm.password1
+					}).then(function(data) {
+						if (data) {
+							$modalInstance.close();
+						}
+						
+					});
 				} else {
 					if(!vm.password1 && !vm.password2) {
 						utilsservice.notifyError($translate.instant('EMPTY_PASSWORDS'));

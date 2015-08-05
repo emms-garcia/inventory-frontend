@@ -35,15 +35,16 @@
 							last_name: vm.lastName,
 							is_staff: !vm.readOnly
 						};
-						userservice.createUser(data).then(function(data){
-							$modalInstance.close(data);
-						}).catch(function(){
+						userservice.createUser(data).then(function(data) {
+							if (data) {
+								$modalInstance.close(data);
+							}
 						});
 					} else {
 						utilsservice.notifyError($translate.instant('PASSWORDS_DONT_MATCH'));
 					}
 				} else {
-					utilsservice.notifyError($translate.instant('CREATE_USER_MISSING_DATA'));
+					utilsservice.notifyError($translate.instant('MISSING_DATA'));
 				}
 			}
 

@@ -39,11 +39,12 @@
 					animation: true,
 					templateUrl: 'views/users/modals/edit-password.html',
 					controller: 'EditPasswordModalController as vm',
-					size: 'md'
-				});
-				modalInstance.result.then(function (newPassword) {
-					userservice.updateUserPassword(vm.selectedUser.id, newPassword);
-				}, function () {
+					size: 'md',
+					resolve: {
+						user: function () {
+							return vm.selectedUser;
+						}
+					}
 				});
 			}
 
