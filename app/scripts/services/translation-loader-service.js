@@ -73,7 +73,24 @@
 					CONFIRMATION_TITLE: 'Confirmación',
 					CONFIRMATION_BODY: 'Confirmar acción',
 					CONFIRMATION_CONFIRM: 'Confirmar',
-					CONFIRMATION_CANCEL: 'Cancelar'
+					CONFIRMATION_CANCEL: 'Cancelar',
+					DIRECTORY: 'Directorio',
+					DIRECTORY_LIST: 'Listado de clientes',
+					ID: 'Id',
+					NAME: 'Nombre',
+					COMPANY: 'Compañía',
+					RFC: 'RFC',
+					PHONE: 'Teléfono',
+					CELLPHONE: 'Celular',
+					ADDRESS: 'Dirección',
+					GEOLOCATION: 'Geolocalización',
+					OPEN_ON_GMAPS: 'Abrir en GoogleMaps',
+					DIRECTORY_LIST_FAILED: 'No se pudo obtener la lista de clientes',
+					DIRECTORY_DETAIL_FAILED: 'No se pudo obtener la información del cliente',
+					CLIENT_DATA: 'Información del cliente',
+					DIRECTORY_UPDATE_FAILED: 'No se pudo actualizar la información del cliente',
+					DIRECTORY_UPDATE_SUCCESS: 'La información del cliente se actualizó exitosamente',
+					LOCATION: 'Ubicación'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -129,7 +146,24 @@
 					CONFIRMATION_TITLE: 'Confirmation',
 					CONFIRMATION_BODY: 'Confirm action',
 					CONFIRMATION_CONFIRM: 'Confirm',
-					CONFIRMATION_CANCEL: 'Cancel'
+					CONFIRMATION_CANCEL: 'Cancel',
+					DIRECTORY: 'Directory',
+					DIRECTORY_LIST: 'Client list',
+					ID: 'Id',
+					NAME: 'Name',
+					COMPANY: 'Company',
+					RFC: 'RFC',
+					PHONE: 'Phone',
+					CELLPHONE: 'Cellphone',
+					ADDRESS: 'Address',
+					GEOLOCATION: 'Geolocation',
+					OPEN_ON_GMAPS: 'OPEN_ON_GMAPS',
+					DIRECTORY_LIST_FAILED: 'Failed to load client list',
+					DIRECTORY_DETAIL_FAILED: 'Failed to load client information',
+					CLIENT_DATA: 'Client data',
+					DIRECTORY_UPDATE_FAILED: 'Failed to update client data',
+					DIRECTORY_UPDATE_SUCCESS: 'Client data updated successfully',
+					LOCATION: 'Location'
 				};
 			}
 			$timeout(function(){

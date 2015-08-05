@@ -19,14 +19,15 @@
 			'ui.router',
 			'pascalprecht.translate',
 			'xeditable',
-			'ui-notification'
+			'ui-notification',
+			'uiGmapgoogle-maps'
 		]);
 
 	angular
 		.module('inventoryApp')
 		.config(configure);
 
-		configure.$inject = ['$httpProvider', '$stateProvider', '$urlRouterProvider', '$translateProvider', 'NotificationProvider'];
+		configure.$inject = ['$httpProvider', '$stateProvider', '$urlRouterProvider', '$translateProvider', 'NotificationProvider', 'uiGmapGoogleMapApiProvider'];
 
 	angular
 		.module('inventoryApp')
@@ -34,11 +35,17 @@
 
 		runBlock.$inject = ['$rootScope', '$state', 'editableOptions'];
 
-	function configure($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, NotificationProvider) {
+	function configure($httpProvider, $stateProvider, $urlRouterProvider, $translateProvider, NotificationProvider, uiGmapGoogleMapApiProvider) {
 
 		$translateProvider.useLoader('translationLoader');
 		$translateProvider.useSanitizeValueStrategy(null);
 		$translateProvider.preferredLanguage('es-mx');
+
+		uiGmapGoogleMapApiProvider.configure({
+			//    key: 'your api key',
+			v: '3.17',
+			libraries: 'visualization'
+		});
 
 		NotificationProvider.setOptions({
 			delay: 5000, 
@@ -100,6 +107,42 @@
 				'mainView': {
 					templateUrl: 'views/dashboard/dashboard.html',
 					controller : 'DashboardController',
+					controllerAs: 'vm'
+				 },
+			}
+		})
+		.state('inventory', {
+			url:'/inventory',
+			authenticate : true,
+			parent: 'template',
+			views: {
+				'mainView': {
+					templateUrl: 'views/inventory/inventory.html',
+					controller : 'InventoryController',
+					controllerAs: 'vm'
+				 },
+			}
+		})
+		.state('directory', {
+			url:'/directory',
+			authenticate : true,
+			parent: 'template',
+			views: {
+				'mainView': {
+					templateUrl: 'views/directory/directory.html',
+					controller : 'DirectoryController',
+					controllerAs: 'vm'
+				 },
+			}
+		})
+		.state('directory.detail', {
+			url:'/directory/:clientId',
+			authenticate : true,
+			parent: 'template',
+			views: {
+				'mainView': {
+					templateUrl: 'views/directory/directory-detail.html',
+					controller : 'DirectoryDetailController',
 					controllerAs: 'vm'
 				 },
 			}

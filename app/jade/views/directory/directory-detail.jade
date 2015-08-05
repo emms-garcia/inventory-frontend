@@ -1,0 +1,40 @@
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+	h1.page-header {{ 'DIRECTORY' | translate }}
+	
+	.row
+		.col-sm-5
+			h2.sub-header {{ 'CLIENT_DATA' | translate }}
+			table.table.table-striped
+				tbody
+					tr
+						th {{ 'NAME' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.name', onbeforesave="vm.updateClientData('name', $data)") {{ vm.currentClient.name || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'EMAIL' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.email', onbeforesave="vm.updateClientData('email', $data)") {{ vm.currentClient.email || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'COMPANY' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.company', onbeforesave="vm.updateClientData('company', $data)") {{ vm.currentClient.company || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'RFC' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.rfc', onbeforesave="vm.updateClientData('rfc', $data)") {{ vm.currentClient.rfc || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'PHONE' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.phone', onbeforesave="vm.updateClientData('phone', $data)") {{ vm.currentClient.phone || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'CELLPHONE' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.cellphone', onbeforesave="vm.updateClientData('cellphone', $data)") {{ vm.currentClient.cellphone || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'ADDRESS' | translate }}:
+						th
+							a(href='', editable-text='vm.currentClient.address', onbeforesave="vm.updateClientData('address', $data)") {{ vm.currentClient.address || 'NOT_SPECIFIED' }}
+		.col-sm-7
+			h2.sub-header {{ 'LOCATION' | translate }}
+			ui-gmap-google-map(center='map.center', zoom='map.zoom', dragable='true')
+				ui-gmap-marker(coords="marker.coords", idkey="marker.id", options='marker.options')

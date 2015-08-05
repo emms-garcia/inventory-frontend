@@ -1,0 +1,37 @@
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+	h1.page-header {{ 'DIRECTORY' | translate }}
+
+	.table-responsive
+		table.table.table-striped.table-hover
+			thead
+				tr
+					th {{ 'ID' | translate }}
+					th {{ 'NAME' | translate }}
+					th {{ 'EMAIL' | translate }}
+					th {{ 'COMPANY' | translate }}
+					th {{ 'RFC' | translate }}
+					th {{ 'PHONE' | translate }}
+					th {{ 'CELLPHONE' | translate }}
+					th {{ 'ADDRESS' | translate }}
+					th {{ 'GEOLOCATION' | translate }}
+
+			tbody
+				tr(ng-repeat='client in vm.clients', ui-sref='directory.detail({"clientId": client.id})')
+					td
+						p {{ client.id }}
+					td
+						p {{ client.name || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.email || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.company || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.rfc || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.phone || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.cellphone || ('NOT_SPECIFIED' | translate ) }}
+					td
+						p {{ client.address || ('NOT_SPECIFIED' | translate ) }}
+					td
+						a(ng-click='$event.stopPropagation()', ng-if='client.latitude && client.longitude', target='_blank', ng-href='https://maps.google.com/maps?q=loc:{{client.latitude}},{{client.longitude}}') {{ 'OPEN_ON_GMAPS' | translate }}

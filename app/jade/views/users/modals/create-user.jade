@@ -11,11 +11,11 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 				.row.form-group
 					label.col-sm-5(for="firstName") *{{ 'FIRST_NAME' | translate }}:
 					.col-sm-5
-						input#firstName.form-control(required, ng-model='vm.firstName', type='text', placeholder="{{ 'FIRST_NAME' | translate }}")		
+						input#firstName.form-control(required, ng-model='vm.firstName', type='text', placeholder="{{ 'FIRST_NAME' | translate }}")
 				.row.form-group
 					label.col-sm-5(for="lastName") {{ 'LAST_NAME' | translate }}:
 					.col-sm-5
-						input#lastName.form-control(ng-model='vm.lastName', type='text', placeholder="{{ 'LAST_NAME' | translate }}")		
+						input#lastName.form-control(ng-model='vm.lastName', type='text', placeholder="{{ 'LAST_NAME' | translate }}")
 				.row.form-group
 					label.col-sm-5(for="newPassword1") *{{ 'PASSWORD' | translate }}:
 					.col-sm-5

@@ -35,7 +35,7 @@
 			}
 
 			function openEditPasswordModal() {
-				var modalInstance = $modal.open({
+				$modal.open({
 					animation: true,
 					templateUrl: 'views/users/modals/edit-password.html',
 					controller: 'EditPasswordModalController as vm',

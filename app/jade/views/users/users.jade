@@ -12,7 +12,7 @@
 		.row
 			.col-sm-6
 				h2.sub-header {{ 'PERSONAL_DATA' | translate }}
-				table.table
+				table.table.table-striped
 					tbody
 						tr
 							th {{ 'USERNAME' | translate }}:
@@ -33,13 +33,11 @@
 						tr
 							th {{ 'CREATED_AT' | translate }}:
 							th
-								p
-									{{ vm.selectedUser.created_at * 1000 | date }}
+								p {{ vm.selectedUser.created_at * 1000 | date }}
 						tr
 							th {{ 'LAST_LOGIN' | translate }}:
 							th
-								p
-									{{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
+								p {{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
 						tr
 							th {{ 'PERMISSIONS' | translate }}:
 							th

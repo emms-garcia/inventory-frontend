@@ -103,3 +103,9 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+table.table-hover tbody tr:hover {
+  cursor: pointer;
+}
+
+.angular-google-map-container { height: 400px; }

@@ -32,6 +32,8 @@ module.exports = function(config) {
       'bower_components/angular-xeditable/dist/js/xeditable.js',
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/angular-ui-notification/dist/angular-ui-notification.min.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/angular-google-maps/dist/angular-google-maps.js',
       // endbower
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
