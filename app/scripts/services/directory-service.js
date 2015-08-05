@@ -16,7 +16,9 @@
 		var service = {
 			getClientList: getClientList,
 			getClientDetail: getClientDetail,
-			updateClientData: updateClientData
+			updateClientData: updateClientData,
+			createClient: createClient,
+			deleteClient: deleteClient
 		};
 
 		function getClientList() {
@@ -76,8 +78,54 @@
 						if(error.data.client[key]) {
 							utilsservice.notifyError(error.data.client[key][0]);
 						}
-					}				
+					}
 				}
+				return false;
+			}
+		}
+
+		function createClient(data) {
+			return $http({
+				method: 'POST',
+				data: data,
+				url: '/api/inventory/client/'
+			}).then(createClientSuccess)
+			.catch(createClientError);
+
+			function createClientSuccess(response) {
+				utilsservice.notifySuccess($translate.instant('DIRECTORY_CREATE_SUCCESS'));
+				return response.data;
+			}
+
+			function createClientError(error) {
+				console.log('XHR failed on createClientError ' + error);
+				utilsservice.notifyError($translate.instant('DIRECTORY_CREATE_FAILED'));
+				if(error.data.client) {
+					for(var key in data) {
+						if(error.data.client[key]) {
+							utilsservice.notifyError(error.data.client[key][0]);
+						}
+					}
+				}
+				return false;
+			}
+		}
+
+		function deleteClient(id) {
+			return $http({
+				method: 'DELETE',
+				url: '/api/inventory/client/' + id + '/'
+			}).then(deleteClientSuccess)
+			.catch(deleteClientError);
+
+			function deleteClientSuccess() {
+				utilsservice.notifySuccess($translate.instant('DIRECTORY_DELETE_SUCCESS'));
+				return true;
+			}
+
+			function deleteClientError(error) {
+				console.log('XHR failed on deleteClientError ' + error);
+				utilsservice.notifyError($translate.instant('DIRECTORY_DELETE_FAILED'));
 				return false;
 			}
 		}

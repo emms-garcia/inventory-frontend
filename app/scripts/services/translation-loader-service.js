@@ -90,7 +90,15 @@
 					CLIENT_DATA: 'Información del cliente',
 					DIRECTORY_UPDATE_FAILED: 'No se pudo actualizar la información del cliente',
 					DIRECTORY_UPDATE_SUCCESS: 'La información del cliente se actualizó exitosamente',
-					LOCATION: 'Ubicación'
+					LOCATION: 'Ubicación',
+					ADD_DIRECTORY_CLIENT: 'Agregar cliente',
+					CREATE_CLIENT: 'Crear cliente',
+					DIRECTORY_CREATE_SUCCESS: 'El cliente se creó exitosamente',
+					DIRECTORY_CREATE_FAILED: 'No se pudo crear el cliente',
+					REMOVE_DIRECTORY_CLIENT: 'Borrar cliente',
+					UPDATE_GEOLOCATION: 'Actualizar ubicación',
+					DIRECTORY_DELETE_SUCCESS: 'El cliente se borró exitosamente',
+					DIRECTORY_DELETE_FAILED: 'No se pudo borrar al cliente'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -163,7 +171,15 @@
 					CLIENT_DATA: 'Client data',
 					DIRECTORY_UPDATE_FAILED: 'Failed to update client data',
 					DIRECTORY_UPDATE_SUCCESS: 'Client data updated successfully',
-					LOCATION: 'Location'
+					LOCATION: 'Location',
+					ADD_DIRECTORY_CLIENT: 'Add client',
+					CREATE_CLIENT: 'Create client',
+					DIRECTORY_CREATE_SUCCESS: 'Client created successfully',
+					DIRECTORY_CREATE_FAILED: 'Failed to create client',
+					REMOVE_DIRECTORY_CLIENT: 'Delete client',
+					UPDATE_GEOLOCATION: 'Update geolocation',
+					DIRECTORY_DELETE_SUCCESS: 'Client deleted successfully',
+					DIRECTORY_DELETE_FAILED: 'Failed to delete client'
 				};
 			}
 			$timeout(function(){

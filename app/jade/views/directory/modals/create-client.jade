@@ -1,0 +1,40 @@
+form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
+	.modal-header
+		h3.modal-title {{ 'CREATE_CLIENT' | translate }}
+	.modal-body
+		.row
+			.col-sm-6
+				.row.form-group
+					label.col-sm-4(for="name") {{ 'NAME' | translate }}:
+					.col-sm-7
+						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="email") {{ 'EMAIL' | translate }}:
+					.col-sm-7
+						input#email.form-control(ng-model='vm.email', type='text', placeholder="{{ 'EMAIL' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="company") {{ 'COMPANY' | translate }}:
+					.col-sm-7
+						input#company.form-control(required, ng-model='vm.company', type='text', placeholder="{{ 'COMPANY' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="rfc") {{ 'RFC' | translate }}:
+					.col-sm-7
+						input#rfc.form-control(ng-model='vm.rfc', type='text', placeholder="{{ 'RFC' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="phone") {{ 'PHONE' | translate }}:
+					.col-sm-7
+						input#phone.form-control(ng-model='vm.phone', type='text', placeholder="{{ 'PHONE' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="cellphone") {{ 'CELLPHONE' | translate }}:
+					.col-sm-7
+						input#cellphone.form-control(required, ng-model='vm.cellphone', type='text', placeholder="{{ 'CELLPHONE' | translate }}")
+				.row.form-group
+					label.col-sm-4(for="address") {{ 'ADDRESS' | translate }}:
+					.col-sm-7
+						input#address.form-control(ng-model='vm.address', type='text', placeholder="{{ 'ADDRESS' | translate }}")
+			.col-sm-6
+				ui-gmap-google-map(center='map.center', zoom='map.zoom', dragable='true')
+					ui-gmap-marker(coords="marker.coords", idkey="marker.id", options='marker.options')
+	.modal-footer
+		button.btn.btn-primary(type='submit') {{ 'CREATE' | translate }}
+		button.btn.btn-warning(type='button', ng-click='vm.cancel()') {{ 'CANCEL' | translate }}

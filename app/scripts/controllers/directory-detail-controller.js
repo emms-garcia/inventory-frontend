@@ -18,14 +18,14 @@
 		var vm = this;
 		vm.currentClient = {};
 		vm.updateClientData = updateClientData;
+		vm.updateGeolocation = updateGeolocation;
 
 		/* Scope, needed for GoogleMaps directives */
 		$scope.map = {};
 		$scope.marker = {
-			options: {
-				draggable: true
-			},
-			coords: {}
+			id: 1,
+			coords: {},
+			options: { draggable: true }
 		};
 
 		activate();
@@ -34,6 +34,18 @@
 			var data = {};
 			data[key] = value;
 			return directoryservice.updateClientData(vm.currentClient.id, data);
+		}
+
+		function updateGeolocation() {
+			var data = {};
+			data.latitude = $scope.marker.coords.latitude;
+			data.longitude = $scope.marker.coords.longitude;
+			return directoryservice.updateClientData(vm.currentClient.id, data).then(function (data) {
+				if (data) {
+					vm.currentClient.latitude = data.latitude;
+					vm.currentClient.longitude = data.longitude;
+				}
+			});
 		}
 
 		function activate() {
@@ -49,8 +61,7 @@
 							},
 							zoom: 16
 						};
-						$scope.marker.coords = angular.copy($scope.map.center);
-						$scope.marker.id = 1;
+						$scope.marker.coords = $scope.map.center;
 					} else {
 						$state.go('directory');
 					}

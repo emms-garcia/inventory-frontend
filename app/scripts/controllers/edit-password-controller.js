@@ -29,7 +29,6 @@
 						if (data) {
 							$modalInstance.close();
 						}
-						
 					});
 				} else {
 					if(!vm.password1 && !vm.password2) {

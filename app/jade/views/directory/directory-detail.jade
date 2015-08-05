@@ -1,6 +1,5 @@
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 	h1.page-header {{ 'DIRECTORY' | translate }}
-	
 	.row
 		.col-sm-5
 			h2.sub-header {{ 'CLIENT_DATA' | translate }}
@@ -34,7 +33,16 @@
 						th {{ 'ADDRESS' | translate }}:
 						th
 							a(href='', editable-text='vm.currentClient.address', onbeforesave="vm.updateClientData('address', $data)") {{ vm.currentClient.address || 'NOT_SPECIFIED' }}
+					tr
+						th {{ 'GEOLOCATION' | translate }}:
+						th
+							a(ng-if='vm.currentClient.latitude && vm.currentClient.longitude', target='_blank', ng-href='https://maps.google.com/maps?q=loc:{{vm.currentClient.latitude}},{{vm.currentClient.longitude}}') {{ vm.currentClient.latitude + ', ' + vm.currentClient.longitude }}
 		.col-sm-7
-			h2.sub-header {{ 'LOCATION' | translate }}
-			ui-gmap-google-map(center='map.center', zoom='map.zoom', dragable='true')
-				ui-gmap-marker(coords="marker.coords", idkey="marker.id", options='marker.options')
+			.row
+				.col-sm-12
+					h2.sub-header {{ 'LOCATION' | translate }}
+					ui-gmap-google-map(center='map.center', zoom='map.zoom', dragable='true')
+						ui-gmap-marker(coords="marker.coords", idkey="marker.id", options='marker.options')
+			.row
+				.col-sm-12
+					button(type='button', ng-click='vm.updateGeolocation()').btn.btn-block.btn-primary {{ 'UPDATE_GEOLOCATION' | translate }}
