@@ -12,11 +12,12 @@
 	angular.module('inventoryApp')
 		.controller('DirectoryDetailController', DirectoryDetailController);
 
-	DirectoryDetailController.$inject = ['$scope', 'uiGmapGoogleMapApi', 'directoryservice', '$state', '$stateParams'];
+	DirectoryDetailController.$inject = ['$scope', '$state', '$stateParams', 'uiGmapGoogleMapApi', 'directoryservice', utilsservice];
 
-	function DirectoryDetailController ($scope, uiGmapGoogleMapApi, directoryservice, $state, $stateParams) {
+	function DirectoryDetailController ($scope, $state, $stateParams, uiGmapGoogleMapApi, directoryservice, utilsservice) {
 		var vm = this;
-		vm.currentClient = {};
+		vm.currentClient = null;
+		vm.deleteClient = deleteClient;
 		vm.updateClientData = updateClientData;
 		vm.updateGeolocation = updateGeolocation;
 
@@ -45,6 +46,16 @@
 					vm.currentClient.latitude = data.latitude;
 					vm.currentClient.longitude = data.longitude;
 				}
+			});
+		}
+
+		function deleteClient(id) {
+			utilsservice.confirmationDialog(function () {
+				directoryservice.deleteClient(id).then(function (data){
+					if (data) {
+						$state.go('directory');
+					}
+				});
 			});
 		}
 

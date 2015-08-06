@@ -37,6 +37,9 @@
 						th {{ 'GEOLOCATION' | translate }}:
 						th
 							a(ng-if='vm.currentClient.latitude && vm.currentClient.longitude', target='_blank', ng-href='https://maps.google.com/maps?q=loc:{{vm.currentClient.latitude}},{{vm.currentClient.longitude}}') {{ vm.currentClient.latitude + ', ' + vm.currentClient.longitude }}
+					tr
+						th(colspan='2')
+							button(type='button', ng-click='vm.deleteClient()').btn.btn-block.btn-danger {{ 'REMOVE_DIRECTORY_CLIENT' | translate }}
 		.col-sm-7
 			.row
 				.col-sm-12
