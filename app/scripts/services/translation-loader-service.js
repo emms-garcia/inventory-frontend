@@ -98,7 +98,8 @@
 					REMOVE_DIRECTORY_CLIENT: 'Borrar cliente',
 					UPDATE_GEOLOCATION: 'Actualizar ubicación',
 					DIRECTORY_DELETE_SUCCESS: 'El cliente se borró exitosamente',
-					DIRECTORY_DELETE_FAILED: 'No se pudo borrar al cliente'
+					DIRECTORY_DELETE_FAILED: 'No se pudo borrar al cliente',
+					SEARCH: 'Buscar'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -179,7 +180,8 @@
 					REMOVE_DIRECTORY_CLIENT: 'Delete client',
 					UPDATE_GEOLOCATION: 'Update geolocation',
 					DIRECTORY_DELETE_SUCCESS: 'Client deleted successfully',
-					DIRECTORY_DELETE_FAILED: 'Failed to delete client'
+					DIRECTORY_DELETE_FAILED: 'Failed to delete client',
+					SEARCH: 'Search'
 				};
 			}
 			$timeout(function(){

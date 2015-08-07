@@ -108,4 +108,10 @@ table.table-hover tbody tr:hover {
   cursor: pointer;
 }
 
+@media (max-height: 1080px) {
+  .table-list  {
+    max-height: 700px;
+  }
+}
+
 .angular-google-map-container { height: 400px; }
