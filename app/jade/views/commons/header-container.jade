@@ -10,7 +10,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
 		.navbar-collapse.collapse
 			ul.nav.navbar-nav.navbar-right
 				li
-				li(ng-class="{ active : $state.current.name == 'dashboard' }")
+				li(ng-class="{ active : $state.current.parent == 'template'}")
 					a(href="", ui-sref="dashboard") {{ 'DASHBOARD' | translate }}
 				li(ng-class="{ active : $state.current.name == 'users' }")
 					a(href="", ui-sref="users") {{ 'USERS' | translate }}
