@@ -1,42 +1,77 @@
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-	h1.page-header {{ 'INVENTORY' | translate }}
-	.row.placeholders
-		.col-xs-6.col-sm-3.placeholder
-			img.img-responsive(data-src='holder.js/200x200/auto/sky', alt='Generic placeholder thumbnail')
-			h4 Label
-			span.text-muted Something else
-		.col-xs-6.col-sm-3.placeholder
-			img.img-responsive(data-src='holder.js/200x200/auto/vine', alt='Generic placeholder thumbnail')
-			h4 Label
-			span.text-muted Something else
-		.col-xs-6.col-sm-3.placeholder
-			img.img-responsive(data-src='holder.js/200x200/auto/sky', alt='Generic placeholder thumbnail')
-			h4 Label
-			span.text-muted Something else
-		.col-xs-6.col-sm-3.placeholder
-			img.img-responsive(data-src='holder.js/200x200/auto/vine', alt='Generic placeholder thumbnail')
-			h4 Label
-			span.text-muted Something else
-	h2.sub-header Section title
+	h1.page-header {{ 'INVENTORY' | translate }} 
+	h2.sub-header {{ 'UOMS' | translate }}
+		button.btn.btn-primary(ng-click="vm.openCreateUOMModal()", type="button")
+			span.glyphicon.glyphicon-plus
 	.table-responsive
 		table.table.table-striped
 			thead
 				tr
-					th #
-					th Header
-					th Header
-					th Header
-					th Header
+					th {{ 'ID' | translate }}
+					th {{ 'NAME' | translate }}
+					th(colspan="3") {{ 'DESCRIPTION' | translate }}
 			tbody
+				tr(ng-repeat="uom in vm.uoms")
+					td {{ uom.id }}
+					td {{ uom.name }}
+					td {{ uom.description }}
+					td(style="width:5%;")
+						button.btn.btn-info
+							span.glyphicon.glyphicon-pencil
+					td(style="width:5%;")
+						button.btn.btn-danger
+							span.glyphicon.glyphicon-remove
+
+
+	h2.sub-header {{ 'PRODUCTS' | translate }}
+		button.btn.btn-primary(ng-click="vm.openCreateProductModal()", type="button")
+			span.glyphicon.glyphicon-plus
+	.table-responsive
+		table.table.table-striped
+			thead
 				tr
-					td 1,001
-					td Lorem
-					td ipsum
-					td dolor
-					td sit
-				tr
-					td 1,002
-					td amet
-					td consectetur
-					td adipiscing
-					td elit
+					th {{ 'ID' | translate }}
+					th {{ 'NAME' | translate }}
+					th {{ 'DESCRIPTION' | translate }}
+					th {{ 'UOM' | translate }}
+					th(colspan="3") {{ 'PRICE_PER_UOM' | translate }}
+			tbody
+				tr(ng-repeat="product in vm.products")
+					td {{ product.id }}
+					td {{ product.name }}
+					td {{ product.description }}
+					td {{ product.uom.name }}
+					td {{ product.price_per_uom }}
+					td(style="width:5%;")
+						button.btn.btn-info
+							span.glyphicon.glyphicon-pencil
+					td(style="width:5%;")
+						button.btn.btn-danger
+							span.glyphicon.glyphicon-remove
+
+	//-
+		h2.sub-header {{ 'PRODUCT_GROUPS' | translate }}
+			button.btn.btn-primary(ng-click="vm.openCreateProductGroupModal()", type="button")
+				span.glyphicon.glyphicon-plus
+		.table-responsive
+			table.table.table-striped
+				thead
+					tr
+						th #
+						th Header
+						th Header
+						th Header
+						th Header
+				tbody
+					tr
+						td 1,001
+						td Lorem
+						td ipsum
+						td dolor
+						td sit
+					tr
+						td 1,002
+						td amet
+						td consectetur
+						td adipiscing
+						td elit

@@ -77,6 +77,17 @@
 				 },
 			}
 		})
+		.state('signup', {
+			url:'/signup',
+			authenticate : false,
+			views: {
+				'mainContainer': {
+					templateUrl: 'views/commons/signup.html',
+					controller : 'SignUpController',
+					controllerAs: 'vm'
+				 },
+			}
+		})
 		.state('template', {
 			abstract: true,
 			authenticate : true,

@@ -23,11 +23,9 @@
 
 		activate();
 
-		/////////////////
-
 		function logIn() {
 			if(vm.username) {
-				userservice.logIn(vm.username, vm.password).then(function(loggedIn){
+				userservice.logIn(vm.username, vm.password).then(function (loggedIn) {
 					if(loggedIn) {
 						$state.go('dashboard');
 					}

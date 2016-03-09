@@ -2,6 +2,8 @@
 	.row
 		.col-sm-12
 			h1.page-header {{ 'DIRECTORY' | translate }}
+				button.btn.btn-primary(type='button', ng-click='vm.openCreateClientModal()')
+					span.glyphicon.glyphicon-plus
 	.row
 		.col-sm-3
 			.input-group
@@ -47,6 +49,3 @@
 								a(ng-click='$event.stopPropagation()', ng-if='client.latitude && client.longitude', target='_blank', ng-href='https://maps.google.com/maps?q=loc:{{client.latitude}},{{client.longitude}}') {{ 'OPEN_ON_GMAPS' | translate }}
 							td
 								button.btn.btn-block.btn-danger(type='button', ng-click='$event.stopPropagation(); vm.deleteClient(client.id)') &times;
-	.row
-		.col-sm-12
-			button.btn.btn-block.btn-primary(type='button', ng-click='vm.openCreateClientModal()') + {{ 'ADD_DIRECTORY_CLIENT' | translate }}

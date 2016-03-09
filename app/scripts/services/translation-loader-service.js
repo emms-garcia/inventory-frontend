@@ -99,7 +99,10 @@
 					UPDATE_GEOLOCATION: 'Actualizar ubicación',
 					DIRECTORY_DELETE_SUCCESS: 'El cliente se borró exitosamente',
 					DIRECTORY_DELETE_FAILED: 'No se pudo borrar al cliente',
-					SEARCH: 'Buscar'
+					SEARCH: 'Buscar',
+					SIGN_UP: 'Crear cuenta',
+					FIELD_REQUIRED: 'Este campo es requerido',
+					FIELD_EMAIL: 'Este campo debe ser un email'
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
@@ -181,7 +184,10 @@
 					UPDATE_GEOLOCATION: 'Update geolocation',
 					DIRECTORY_DELETE_SUCCESS: 'Client deleted successfully',
 					DIRECTORY_DELETE_FAILED: 'Failed to delete client',
-					SEARCH: 'Search'
+					SEARCH: 'Search',
+					SIGN_UP: 'Sign Up',
+					FIELD_REQUIRED: 'This field is required',
+					FIELD_EMAIL: 'This field must be an email'
 				};
 			}
 			$timeout(function(){

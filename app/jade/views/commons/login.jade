@@ -1,12 +1,19 @@
-.row
-	.col-sm-3.col-sm-offset-4
-		h1 {{ 'APP_NAME' | translate }}
+div(class="row")
+	div(class="col-sm-6 col-sm-offset-3")
+		div(class="jumbotron")
+			div(class="row")
+				div(class="col-sm-8 col-sm-offset-2")
+					h1 {{ 'APP_NAME' | translate }}
 
-		form
-			.form-group
-				label(for='email') {{ 'USERNAME' | translate }}:
-				input#email.form-control(tabindex="1", type='email', placeholder="{{ 'EMAIL' | translate }}", ng-model="vm.username")
-			.form-group
-				label(for='password') {{ 'PASSWORD' | translate }}:
-				input#password.form-control(tabindex="2", type='password', placeholder="{{ 'PASSWORD' | translate }}", ng-model="vm.password")
-			button.btn.btn-primary.btn-block(type="submit", ng-click="vm.logIn()")  {{ 'LOG_IN' | translate }}
+					form
+						div(class="form-group")
+							label(for="email") {{ 'USERNAME' | translate }}:
+							input(class="form-control", id="email", tabindex="1", type="email", placeholder="{{ 'EMAIL' | translate }}", ng-model="vm.username")
+						div(class="form-group")
+							label(for="password") {{ 'PASSWORD' | translate }}:
+							input(class="form-control", id="password", tabindex="2", type="password", placeholder="{{ 'PASSWORD' | translate }}", ng-model="vm.password")
+						button(class="btn btn-primary btn-block", type="submit", ng-click="vm.logIn()")  {{ 'LOG_IN' | translate }}
+			br
+			div(class="row")
+				div(class="col-sm-8 col-sm-offset-2")
+					button(class="btn btn-default btn-block", ui-sref="signup") {{ 'SIGN_UP' | translate }}

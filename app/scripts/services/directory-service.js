@@ -24,7 +24,7 @@
 		function getClientList() {
 			return $http({
 				method: 'GET',
-				url: '/api/inventory/client/'
+				url: '/api/inventory/clients/'
 			}).then(getClientListSuccess)
 			.catch(getClientListError);
 
@@ -42,7 +42,7 @@
 		function getClientDetail(id) {
 			return $http({
 				method: 'GET',
-				url: '/api/inventory/client/' + id + '/'
+				url: '/api/inventory/clients/' + id + '/'
 			}).then(getClientDetailSuccess)
 			.catch(getClientDetailError);
 
@@ -61,7 +61,7 @@
 			return $http({
 				method: 'PATCH',
 				data: data,
-				url: '/api/inventory/client/' + id + '/'
+				url: '/api/inventory/clients/' + id + '/'
 			}).then(updateClientDataSuccess)
 			.catch(updateClientDataError);
 
@@ -88,7 +88,7 @@
 			return $http({
 				method: 'POST',
 				data: data,
-				url: '/api/inventory/client/'
+				url: '/api/inventory/clients/'
 			}).then(createClientSuccess)
 			.catch(createClientError);
 
@@ -114,7 +114,7 @@
 		function deleteClient(id) {
 			return $http({
 				method: 'DELETE',
-				url: '/api/inventory/client/' + id + '/'
+				url: '/api/inventory/clients/' + id + '/'
 			}).then(deleteClientSuccess)
 			.catch(deleteClientError);
 

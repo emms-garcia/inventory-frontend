@@ -1,0 +1,43 @@
+div(class="row")
+	div(class="col-sm-6 col-sm-offset-3")
+		div(class="jumbotron")
+			div(class="row")
+				div(class="col-sm-8 col-sm-offset-2")
+					form(class="form-horizonal", name="form", ng-submit='vm.create()', novalidate)
+
+						h1 {{ 'SIGN_UP' | translate }}
+						br
+						div(class="row")
+							div(class="col-sm-12")
+								div(class="row form-group", ng-class="{ 'has-error': (form.username.$touched && form.username.$error.required || form.username.$error.email) }")
+									label(class="col-sm-5", for="username") *{{ 'USERNAME' | translate }}:
+									div(class="col-sm-6")
+										input(class="form-control", id="username", name="username", required, ng-model='vm.username', type='email', placeholder="{{ 'USERNAME' | translate }}")
+										span(class="help-block", ng-show="form.username.$touched && form.username.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+										span(class="help-block", ng-show="form.username.$touched && form.username.$error.email") *{{ 'FIELD_EMAIL' | translate }}
+								
+								div(class="row form-group", ng-class="{ 'has-error': (form.firstName.$touched && form.firstName.$error.required) }")
+									label(class="col-sm-5", for="firstName") *{{ 'FIRST_NAME' | translate }}:
+									div(class="col-sm-6")
+										input(class="form-control", id="firstName", name="firstName", required, ng-model='vm.firstName', type='text', placeholder="{{ 'FIRST_NAME' | translate }}")
+										span(class="help-block", ng-show="form.firstName.$touched && form.firstName.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+								
+								div(class="row form-group")
+									label(class="col-sm-5", for="lastName") {{ 'LAST_NAME' | translate }}:
+									div(class="col-sm-6")
+										input(class="form-control", id="lastName", ng-model='vm.lastName', type='text', placeholder="{{ 'LAST_NAME' | translate }}")
+
+								div(class="row form-group", ng-class="{ 'has-error': (form.password1.$touched && form.password1.$error.required || (form.password1.$touched && form.password2.$touched && (vm.password1 !== vm.password2))) }")
+									label(class="col-sm-5", for="password1") *{{ 'PASSWORD' | translate }}:
+									div(class="col-sm-6")
+										input(class="form-control", id="password1", name="password1", required, ng-model='vm.password1', type='password', placeholder="{{ 'PASSWORD' | translate }}")
+										span(class="help-block", ng-show="form.password1.$touched && form.password1.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+
+								div(class="row form-group", ng-class="{ 'has-error': (form.password2.$touched && form.password2.$error.required || (form.password1.$touched && form.password2.$touched && (vm.password1 !== vm.password2))) }")
+									label(class="col-sm-5", for="password2") *{{ 'REPEAT_PASSWORD' | translate }}:
+									div(class="col-sm-6")
+										input(class="form-control", id="password2", name="password2", required, ng-model='vm.password2', type='password', placeholder="{{ 'PASSWORD' | translate }}")
+										span(class="help-block", ng-show="form.password2.$touched && form.password2.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+										span(class="help-block", ng-show="form.password1.$touched && form.password2.$touched && (vm.password1 !== vm.password2)") *{{ 'PASSWORDS_DONT_MATCH' | translate }}
+
+						button(class="btn btn-primary", type="submit", ng-disabled="form.$invalid") {{ 'SIGN_UP' | translate }}
