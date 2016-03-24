@@ -20,6 +20,22 @@
 
 			if(options.key === 'es-mx') {
 				translations = {
+					SALES: 'Ventas',
+					PRODUCTS: 'Productos',
+					UOM: 'Unidad de Medida',
+					UOMS: 'Unidades de Medida',
+					DESCRIPTION: 'Descripción',
+					EDIT_UOM: 'Editar Unidad de Medida',
+					EDIT_PRODUCT: 'Editar Producto',
+					EDIT_PRODUCT_GROUP: 'Editar Grupo de Productos',
+					DELETE_UOM: 'Borrar Unidad de Medida',
+					DELETE_PRODUCT: 'Borrar Producto',
+					DELETE_PRODUCT_GROUP: 'Borrar Grupo de Productos',
+					PRICE_PER_UOM: 'Precio por Unidad de Medida',
+					PURCHASES: 'Compras',
+					CREATE_UOM: 'Create Unit of Measure',
+					DELETE_CLIENT: 'Borrar Cliente',
+
 					DELETE_CLIENT_CONFIRM_TITLE: 'Borrar Cliente',
 					DELETE_CLIENT_CONFIRM_BODY: '¿Estás seguro que deseas borrar al cliente?',
 					ADD_CLIENT_CLIENT: 'Agregar cliente',
@@ -108,6 +124,22 @@
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
+					SALES: 'Sales',
+					PRODUCTS: 'Products',
+					UOM: 'Unit of Measure',
+					DESCRIPTION: 'Description',
+					EDIT_UOM: 'Edit Unit of Measure',
+					EDIT_PRODUCT: 'Edit Product',
+					EDIT_PRODUCT_GROUP: 'Edit Product Group',
+					DELETE_UOM: 'Delete Unit of Measure',
+					DELETE_PRODUCT: 'Delete Product',
+					DELETE_PRODUCT_GROUP: 'Delete Product Group',
+					PRICE_PER_UOM: 'Price per Unit of Measure',
+					PURCHASES: 'Purchases',
+					UOMS: 'Units of Measure',
+					CREATE_UOM: 'Create Unit of Measure',
+					DELETE_CLIENT: 'Delete Client',
+
 					DELETE_CLIENT_CONFIRM_TITLE: 'Delete Client',
 					DELETE_CLIENT_CONFIRM_BODY: 'Are you sure you want to remove this client?',
 					ADD_CLIENT_CLIENT: 'Add client',

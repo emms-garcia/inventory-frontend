@@ -19,7 +19,9 @@
 			createProduct: createProduct,
 			deleteProduct: deleteProduct,
 			getUOMList: getUOMList,
+			getUOMDetail: getUOMDetail,
 			createUOM: createUOM,
+			deleteUOM: deleteUOM,
 			filterUOMS: filterUOMS
 		};
 
@@ -119,6 +121,43 @@
 			function getUOMListError(error) {
 				console.log('XHR failed on getUOMListError ' + error);
 				utilsservice.notifyError($translate.instant('UOM_LIST_FAILED'));
+				return false;
+			}
+		}
+
+		function getUOMDetail(id) {
+			return $http({
+				method: 'GET',
+				url: '/api/inventory/uoms/' + id + '/'
+			}).then(getUOMDetailSuccess)
+			.catch(getUOMDetailError);
+
+			function getUOMDetailSuccess(response) {
+				return response.data;
+			}
+
+			function getUOMDetailError(error) {
+				console.log('XHR failed on getUOMDetailError ' + error);
+				utilsservice.notifyError($translate.instant('UOM_DETAIL_FAILED'));
+				return false;
+			}
+		}
+
+		function deleteUOM(id) {
+			return $http({
+				method: 'DELETE',
+				url: '/api/inventory/uoms/' + id + '/'
+			}).then(deleteUOMSuccess)
+			.catch(deleteUOMError);
+
+			function deleteUOMSuccess() {
+				utilsservice.notifySuccess($translate.instant('UOM_DELETE_SUCCESS'));
+				return true;
+			}
+
+			function deleteUOMError(error) {
+				console.log('XHR failed on deleteUOMError ' + error);
+				utilsservice.notifyError($translate.instant('UOM_DELETE_FAILED'));
 				return false;
 			}
 		}

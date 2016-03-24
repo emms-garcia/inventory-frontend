@@ -21,10 +21,20 @@
 		vm.products = [];
 		vm.uoms = [];
 
+		vm.deleteProduct = deleteProduct;
+		vm.deleteUOM = deleteUOM;
 		vm.openCreateUOMModal = openCreateUOMModal;
 		vm.openCreateProductModal = openCreateProductModal;
 
 		activate();
+
+		function deleteProduct(productID) {
+			productservice.deleteProduct(productID).then(getProducts);
+		}
+
+		function deleteUOM(uomID) {
+			productservice.deleteUOM(uomID).then(getUOMS);
+		}
 
 		function getProducts() {
 			productservice.getProductList().then(function (data) {

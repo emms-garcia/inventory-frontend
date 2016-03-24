@@ -1,7 +1,7 @@
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 	h1.page-header {{ 'INVENTORY' | translate }} 
 	h2.sub-header {{ 'UOMS' | translate }}
-		button.btn.btn-primary(ng-click="vm.openCreateUOMModal()", type="button")
+		button.btn.btn-primary(ng-click="vm.openCreateUOMModal()", type="button", tooltip="{{ 'CREATE_UOM' | translate}}")
 			span.glyphicon.glyphicon-plus
 	.table-responsive
 		table.table.table-striped
@@ -16,10 +16,10 @@
 					td {{ uom.name }}
 					td {{ uom.description }}
 					td(style="width:5%;")
-						button.btn.btn-info
+						button.btn.btn-info(ng-click="vm.editUOM(uom)", tooltip="{{ 'EDIT_UOM' | translate }}")
 							span.glyphicon.glyphicon-pencil
 					td(style="width:5%;")
-						button.btn.btn-danger
+						button.btn.btn-danger(ng-click="vm.deleteUOM(uom.id)", tooltip="{{ 'DELETE_UOM' | translate }}")
 							span.glyphicon.glyphicon-remove
 
 
@@ -43,10 +43,10 @@
 					td {{ product.uom.name }}
 					td {{ product.price_per_uom }}
 					td(style="width:5%;")
-						button.btn.btn-info
+						button.btn.btn-info(ng-click="vm.editProduct(product)", tooltip="{{ 'EDIT_PRODUCT' | translate }}")
 							span.glyphicon.glyphicon-pencil
 					td(style="width:5%;")
-						button.btn.btn-danger
+						button.btn.btn-danger(ng-click="vm.deleteProduct(product.id)", tooltip="{{ 'DELETE_PRODUCT' | translate }}")
 							span.glyphicon.glyphicon-remove
 
 	//-
