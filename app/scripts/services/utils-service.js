@@ -10,16 +10,21 @@
 	angular.module('inventoryApp')
 		.factory('utilsservice', utilsservice);
 
-	utilsservice.$inject = ['Notification', '$modal'];
+	utilsservice.$inject = ['Notification', '$modal', '$translate'];
 
-	function utilsservice(Notification, $modal) {
+	function utilsservice(Notification, $modal, $translate) {
 		var service = {
 			notifySuccess: notifySuccess,
 			notifyError: notifyError,
 			notifyInformation: notifyInformation,
 			notifyWarning: notifyWarning,
-			confirmationDialog: confirmationDialog
+			confirmationDialog: confirmationDialog,
+			translate: translate
 		};
+
+		function translate(tag) {
+			return $translate.instant(tag);
+		}
 
 		function notifySuccess(message) {
 			Notification.success(message);

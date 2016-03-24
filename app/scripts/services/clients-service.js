@@ -1,18 +1,18 @@
 /**
  * @ngdoc factory
- * @name inventoryApp.directoryservice
+ * @name inventoryApp.clientsservice
  * @description
- * # directoryservice
+ * # clientsservice
  * Service in the inventoryApp.
  */
 (function() {
 	'use strict';
 	angular.module('inventoryApp')
-		.factory('directoryservice', directoryservice);
+		.factory('clientsservice', clientsservice);
 
-	directoryservice.$inject = ['$http', '$translate', 'utilsservice'];
+	clientsservice.$inject = ['$http', '$translate', 'utilsservice'];
 
-	function directoryservice($http, $translate, utilsservice) {
+	function clientsservice($http, $translate, utilsservice) {
 		var service = {
 			getClientList: getClientList,
 			getClientDetail: getClientDetail,
@@ -34,7 +34,7 @@
 
 			function getClientListError(error) {
 				console.log('XHR failed on getClientListError ' + error);
-				utilsservice.notifyError($translate.instant('DIRECTORY_LIST_FAILED'));
+				utilsservice.notifyError($translate.instant('CLIENT_LIST_FAILED'));
 				return false;
 			}
 		}
@@ -52,7 +52,7 @@
 
 			function getClientDetailError(error) {
 				console.log('XHR failed on getClientDetailError ' + error);
-				utilsservice.notifyError($translate.instant('DIRECTORY_DETAIL_FAILED'));
+				utilsservice.notifyError($translate.instant('CLIENT_DETAIL_FAILED'));
 				return false;
 			}
 		}
@@ -66,13 +66,13 @@
 			.catch(updateClientDataError);
 
 			function updateClientDataSuccess(response) {
-				utilsservice.notifySuccess($translate.instant('DIRECTORY_UPDATE_SUCCESS'));
+				utilsservice.notifySuccess($translate.instant('CLIENT_UPDATE_SUCCESS'));
 				return response.data;
 			}
 
 			function updateClientDataError(error) {
 				console.log('XHR failed on updateClientDataError ' + error);
-				utilsservice.notifyError($translate.instant('DIRECTORY_UPDATE_FAILED'));
+				utilsservice.notifyError($translate.instant('CLIENT_UPDATE_FAILED'));
 				if(error.data.client) {
 					for(var key in data) {
 						if(error.data.client[key]) {
@@ -93,13 +93,13 @@
 			.catch(createClientError);
 
 			function createClientSuccess(response) {
-				utilsservice.notifySuccess($translate.instant('DIRECTORY_CREATE_SUCCESS'));
+				utilsservice.notifySuccess($translate.instant('CLIENT_CREATE_SUCCESS'));
 				return response.data;
 			}
 
 			function createClientError(error) {
 				console.log('XHR failed on createClientError ' + error);
-				utilsservice.notifyError($translate.instant('DIRECTORY_CREATE_FAILED'));
+				utilsservice.notifyError($translate.instant('CLIENT_CREATE_FAILED'));
 				if(error.data.client) {
 					for(var key in data) {
 						if(error.data.client[key]) {
@@ -119,13 +119,13 @@
 			.catch(deleteClientError);
 
 			function deleteClientSuccess() {
-				utilsservice.notifySuccess($translate.instant('DIRECTORY_DELETE_SUCCESS'));
+				utilsservice.notifySuccess($translate.instant('CLIENT_DELETE_SUCCESS'));
 				return true;
 			}
 
 			function deleteClientError(error) {
 				console.log('XHR failed on deleteClientError ' + error);
-				utilsservice.notifyError($translate.instant('DIRECTORY_DELETE_FAILED'));
+				utilsservice.notifyError($translate.instant('CLIENT_DELETE_FAILED'));
 				return false;
 			}
 		}

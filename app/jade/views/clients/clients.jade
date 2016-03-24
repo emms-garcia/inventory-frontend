@@ -1,7 +1,7 @@
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
 	.row
 		.col-sm-12
-			h1.page-header {{ 'DIRECTORY' | translate }}
+			h1.page-header {{ 'CLIENTS' | translate }}
 				button.btn.btn-primary(type='button', ng-click='vm.openCreateClientModal()')
 					span.glyphicon.glyphicon-plus
 	.row
@@ -28,7 +28,7 @@
 							th {{ 'GEOLOCATION' | translate }}
 							th
 					tbody
-						tr(ng-repeat='client in vm.clients | filter: vm.query', ui-sref='directory.detail({"clientId": client.id})')
+						tr(ng-repeat='client in vm.clients | filter: vm.query', ui-sref='clients.detail({"clientId": client.id})')
 							td
 								p {{ client.id }}
 							td

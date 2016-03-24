@@ -122,38 +122,38 @@
 				 },
 			}
 		})
-		.state('inventory', {
-			url:'/inventory',
+		.state('products', {
+			url:'/products',
 			authenticate : true,
 			parent: 'template',
 			views: {
 				'mainView': {
-					templateUrl: 'views/inventory/inventory.html',
-					controller : 'InventoryController',
+					templateUrl: 'views/products/products.html',
+					controller : 'ProductsController',
 					controllerAs: 'vm'
 				 },
 			}
 		})
-		.state('directory', {
-			url:'/directory',
+		.state('clients', {
+			url:'/clients',
 			authenticate : true,
 			parent: 'template',
 			views: {
 				'mainView': {
-					templateUrl: 'views/directory/directory.html',
-					controller : 'DirectoryController',
+					templateUrl: 'views/clients/clients.html',
+					controller : 'ClientsController',
 					controllerAs: 'vm'
 				 },
 			}
 		})
-		.state('directory.detail', {
-			url:'/directory/:clientId',
+		.state('clients.detail', {
+			url:'/clients/:clientId',
 			authenticate : true,
 			parent: 'template',
 			views: {
 				'mainView': {
-					templateUrl: 'views/directory/directory-detail.html',
-					controller : 'DirectoryDetailController',
+					templateUrl: 'views/clients/clients-detail.html',
+					controller : 'ClientsDetailController',
 					controllerAs: 'vm'
 				 },
 			}

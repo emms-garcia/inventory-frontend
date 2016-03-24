@@ -1,8 +1,8 @@
 /**
  * @ngdoc function
- * @name inventoryApp.controller:DirectoryDetailController
+ * @name inventoryApp.controller:ClientsDetailController
  * @description
- * # DirectoryDetailController
+ * # ClientsDetailController
  * Controller of the inventoryApp
  */
 
@@ -10,11 +10,11 @@
 	'use strict';
 	
 	angular.module('inventoryApp')
-		.controller('DirectoryDetailController', DirectoryDetailController);
+		.controller('ClientsDetailController', ClientsDetailController);
 
-	DirectoryDetailController.$inject = ['$scope', '$state', '$stateParams', 'uiGmapGoogleMapApi', 'directoryservice', 'utilsservice'];
+	ClientsDetailController.$inject = ['$scope', '$state', '$stateParams', 'uiGmapGoogleMapApi', 'clientsservice', 'utilsservice'];
 
-	function DirectoryDetailController ($scope, $state, $stateParams, uiGmapGoogleMapApi, directoryservice, utilsservice) {
+	function ClientsDetailController ($scope, $state, $stateParams, uiGmapGoogleMapApi, clientsservice, utilsservice) {
 		var vm = this;
 		vm.currentClient = null;
 		vm.deleteClient = deleteClient;
@@ -34,14 +34,14 @@
 		function updateClientData(key, value) {
 			var data = {};
 			data[key] = value;
-			return directoryservice.updateClientData(vm.currentClient.id, data);
+			return clientsservice.updateClientData(vm.currentClient.id, data);
 		}
 
 		function updateGeolocation() {
 			var data = {};
 			data.latitude = $scope.marker.coords.latitude;
 			data.longitude = $scope.marker.coords.longitude;
-			return directoryservice.updateClientData(vm.currentClient.id, data).then(function (data) {
+			return clientsservice.updateClientData(vm.currentClient.id, data).then(function (data) {
 				if (data) {
 					vm.currentClient.latitude = data.latitude;
 					vm.currentClient.longitude = data.longitude;
@@ -51,9 +51,9 @@
 
 		function deleteClient() {
 			utilsservice.confirmationDialog(function () {
-				directoryservice.deleteClient(vm.currentClient.id).then(function (data){
+				clientsservice.deleteClient(vm.currentClient.id).then(function (data){
 					if (data) {
-						$state.go('directory');
+						$state.go('clients');
 					}
 				});
 			});
@@ -62,7 +62,7 @@
 		function activate() {
 			console.log('DirectoryController activated.');
 			if ($stateParams.clientId) {
-				directoryservice.getClientDetail($stateParams.clientId).then(function (data){
+				clientsservice.getClientDetail($stateParams.clientId).then(function (data){
 					if (data) {
 						vm.currentClient = data;
 						$scope.map = {
@@ -74,11 +74,11 @@
 						};
 						$scope.marker.coords = $scope.map.center;
 					} else {
-						$state.go('directory');
+						$state.go('clients');
 					}
 				});
 			} else {
-				$state.go('directory');
+				$state.go('clients');
 			}
 		}
 	}

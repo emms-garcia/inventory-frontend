@@ -19,7 +19,7 @@
 			vm.confirm = $modalInstance.close;
 			vm.cancel = $modalInstance.dismiss;
 			vm.titleMsg = config.titleMsg || $translate.instant('CONFIRMATION_TITLE');
-			vm.bodyMessage = config.bodyMessage || $translate.instant('CONFIRMATION_BODY');
+			vm.bodyMsg = config.bodyMsg || $translate.instant('CONFIRMATION_BODY');
 			vm.confirmBtnMsg = config.confirmBtnMsg || $translate.instant('CONFIRMATION_CONFIRM');
 			vm.cancelBtnMsg = config.cancelBtnMsg || $translate.instant('CONFIRMATION_CANCEL');
 		}

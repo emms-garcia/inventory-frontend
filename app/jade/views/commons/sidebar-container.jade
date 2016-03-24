@@ -3,5 +3,11 @@ ul.nav.nav-sidebar.col-sm-3.col-md-2.sidebar
 		a(href='') {{ 'DASHBOARD' | translate }}
 	li(ng-class="{ active : $state.current.name == 'inventory' }", ui-sref='inventory')
 		a(href='') {{ 'INVENTORY' | translate }}
-	li(ng-class="{ active : $state.current.name == 'directory' || $state.current.name == 'directory.detail' }", ui-sref='directory')
+	li(ng-class="{ active : $state.current.name == 'products' }", ui-sref='products')
+		a(href='') {{ 'PRODUCTS' | translate }}
+	li(ng-class="{ active : $state.current.name == 'sales' }", ui-sref='inventory')
+		a(href='') {{ 'SALES' | translate }}
+	li(ng-class="{ active : $state.current.name == 'purchases' }", ui-sref='inventory')
+		a(href='') {{ 'PURCHASES' | translate }}
+	li(ng-class="{ active : $state.current.name == 'clients' || $state.current.name == 'clients.detail' }", ui-sref='clients')
 		a(href='') {{ 'DIRECTORY' | translate }}

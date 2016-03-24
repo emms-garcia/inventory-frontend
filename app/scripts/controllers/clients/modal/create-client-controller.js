@@ -12,9 +12,9 @@
 	angular.module('inventoryApp')
 		.controller('CreateClientModalController', CreateClientModalController);
 
-		CreateClientModalController.$inject = ['$scope', '$modalInstance', 'directoryservice'];
+		CreateClientModalController.$inject = ['$scope', '$modalInstance', 'clientsservice'];
 
-		function CreateClientModalController($scope, $modalInstance, directoryservice) {
+		function CreateClientModalController($scope, $modalInstance, clientsservice) {
 			var vm = this;
 			vm.create = create;
 			vm.cancel = cancel;
@@ -39,7 +39,7 @@
 			activate();
 
 			function create() {
-				directoryservice.createClient({
+				clientsservice.createClient({
 					name: vm.name,
 					email: vm.email,
 					company: vm.company,

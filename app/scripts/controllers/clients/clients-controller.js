@@ -1,8 +1,8 @@
 /**
  * @ngdoc function
- * @name inventoryApp.controller:DirectoryController
+ * @name inventoryApp.controller:ClientsController
  * @description
- * # DirectoryController
+ * # ClientsController
  * Controller of the inventoryApp
  */
 
@@ -10,11 +10,11 @@
 	'use strict';
 	
 	angular.module('inventoryApp')
-		.controller('DirectoryController', DirectoryController);
+		.controller('ClientsController', ClientsController);
 
-	DirectoryController.$inject = ['$modal', 'userservice', 'directoryservice', 'utilsservice'];
+	ClientsController.$inject = ['$modal', 'userservice', 'clientsservice', 'utilsservice'];
 
-	function DirectoryController ($modal, userservice, directoryservice, utilsservice) {
+	function ClientsController ($modal, userservice, clientsservice, utilsservice) {
 		var vm = this;
 		vm.currentUser = userservice.currentUser;
 		vm.openCreateClientModal = openCreateClientModal;
@@ -26,12 +26,12 @@
 		function openCreateClientModal() {
 			var modalInstance = $modal.open({
 				animation: true,
-				templateUrl: 'views/directory/modals/create-client.html',
+				templateUrl: 'views/clients/modals/create-client.html',
 				controller: 'CreateClientModalController as vm',
 				size: 'lg'
 			});
 			modalInstance.result.then(function () {
-				directoryservice.getClientList().then(function (data){
+				clientsservice.getClientList().then(function (data){
 					vm.clients = data;
 				});
 			});
@@ -39,19 +39,22 @@
 
 		function deleteClient(id) {
 			utilsservice.confirmationDialog(function () {
-				directoryservice.deleteClient(id).then(function (data){
+				clientsservice.deleteClient(id).then(function (data){
 					if (data) {
-						directoryservice.getClientList().then(function (data){
+						clientsservice.getClientList().then(function (data){
 							vm.clients = data;
 						});
 					}
 				});
+			}, null, {
+				bodyMsg: utilsservice.translate('DELETE_CLIENT_CONFIRM_BODY'),
+				titleMsg: utilsservice.translate('DELETE_CLIENT_CONFIRM_TITLE'),
 			});
 		}
 
 		function activate() {
-			console.log('DirectoryController activated.');
-			directoryservice.getClientList().then(function (data){
+			console.log('ClientsController activated.');
+			clientsservice.getClientList().then(function (data){
 				vm.clients = data;
 			});
 		}

@@ -1,8 +1,8 @@
 /**
  * @ngdoc function
- * @name inventoryApp.controller:InventoryController
+ * @name inventoryApp.controller:ProductsController
  * @description
- * # InventoryController
+ * # ProductsController
  * Controller of the inventoryApp
  */
 
@@ -10,11 +10,11 @@
 	'use strict';
 	
 	angular.module('inventoryApp')
-		.controller('InventoryController', InventoryController);
+		.controller('ProductsController', ProductsController);
 
-	InventoryController.$inject = ['$modal', 'userservice', 'productservice'];
+	ProductsController.$inject = ['$modal', 'userservice', 'productservice'];
 
-	function InventoryController ($modal, userservice, productservice) {
+	function ProductsController ($modal, userservice, productservice) {
 		var vm = this;
 		vm.currentUser = userservice.currentUser;
 		vm.product_groups = [];
@@ -45,7 +45,7 @@
 		function openCreateUOMModal() {
 			var modalInstance = $modal.open({
 				animation: true,
-				templateUrl: 'views/inventory/modals/create-uom.html',
+				templateUrl: 'views/products/modals/create-uom.html',
 				controller: 'CreateUOMModalController as vm',
 				size: 'lg'
 			});
@@ -58,7 +58,7 @@
 		function openCreateProductModal() {
 			var modalInstance = $modal.open({
 				animation: true,
-				templateUrl: 'views/inventory/modals/create-product.html',
+				templateUrl: 'views/products/modals/create-product.html',
 				controller: 'CreateProductModalController as vm',
 				size: 'lg'
 			});
@@ -69,7 +69,7 @@
 		}
 
 		function activate() {
-			console.log('InventoryController activated.');
+			console.log('ProductsController activated.');
 
 			getProducts();
 			getUOMS();
