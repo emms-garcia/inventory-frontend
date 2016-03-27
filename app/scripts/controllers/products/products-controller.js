@@ -12,9 +12,9 @@
 	angular.module('inventoryApp')
 		.controller('ProductsController', ProductsController);
 
-	ProductsController.$inject = ['$modal', 'userservice', 'productservice'];
+	ProductsController.$inject = ['$modal', '$translate', 'userservice', 'productservice', 'utilsservice'];
 
-	function ProductsController ($modal, userservice, productservice) {
+	function ProductsController ($modal, $translate, userservice, productservice, utilsservice) {
 		var vm = this;
 		vm.currentUser = userservice.currentUser;
 		vm.product_groups = [];
@@ -29,11 +29,15 @@
 		activate();
 
 		function deleteProduct(productID) {
-			productservice.deleteProduct(productID).then(getProducts);
+			utilsservice.confirmationDialog(function () {
+				productservice.deleteProduct(productID).then(getProducts);
+			});
 		}
 
 		function deleteUOM(uomID) {
-			productservice.deleteUOM(uomID).then(getUOMS);
+			utilsservice.confirmationDialog(function () {
+				productservice.deleteUOM(uomID).then(getUOMS);
+			});
 		}
 
 		function getProducts() {
@@ -66,6 +70,11 @@
 		}
 
 		function openCreateProductModal() {
+			if(vm.uoms.length === 0) {
+				utilsservice.notifyInformation($translate.instant('CANT_CREATE_PRODUCT_NO_UOM'));
+				return;
+			}
+
 			var modalInstance = $modal.open({
 				animation: true,
 				templateUrl: 'views/products/modals/create-product.html',

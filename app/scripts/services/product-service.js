@@ -157,7 +157,11 @@
 
 			function deleteUOMError(error) {
 				console.log('XHR failed on deleteUOMError ' + error);
-				utilsservice.notifyError($translate.instant('UOM_DELETE_FAILED'));
+				if(error.status === 400) {
+					utilsservice.notifyError(error.data.error);
+				} else {
+					utilsservice.notifyError($translate.instant('UOM_DELETE_FAILED'));
+				}
 				return false;
 			}
 		}

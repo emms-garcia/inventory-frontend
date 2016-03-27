@@ -20,6 +20,11 @@
 
 			if(options.key === 'es-mx') {
 				translations = {
+					NO_RESULTS: 'No se encontró información',
+					CREATE_PRODUCT: 'Crear Producto',
+					NO_UOMS_DEFINED: 'No se han agregado unidades de medida',
+					NO_PRODUCTS_DEFINED: 'No se han agregado productos',
+					CANT_CREATE_PRODUCT_NO_UOMS: 'No se puede crear un producto. No existen unidades de medida.',
 					SALES: 'Ventas',
 					PRODUCTS: 'Productos',
 					UOM: 'Unidad de Medida',
@@ -124,6 +129,11 @@
 				};
 			} else if(options.key === 'en-us') {
 				translations = {
+					NO_RESULTS: 'No data found',
+					CREATE_PRODUCT: 'Create Product',
+					NO_UOMS_DEFINED: 'No unit of measures defined',
+					NO_PRODUCTS_DEFINED: 'No products defined yet',
+					CANT_CREATE_PRODUCT_NO_UOMS: 'Cannot create product. No units of measures defined yet.',
 					SALES: 'Sales',
 					PRODUCTS: 'Products',
 					UOM: 'Unit of Measure',

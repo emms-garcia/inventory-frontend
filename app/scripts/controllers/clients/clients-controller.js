@@ -31,7 +31,7 @@
 				size: 'lg'
 			});
 			modalInstance.result.then(function () {
-				clientsservice.getClientList().then(function (data){
+				clientsservice.getClientList().then(function (data) {
 					vm.clients = data;
 				});
 			});
@@ -39,9 +39,9 @@
 
 		function deleteClient(id) {
 			utilsservice.confirmationDialog(function () {
-				clientsservice.deleteClient(id).then(function (data){
+				clientsservice.deleteClient(id).then(function (data) {
 					if (data) {
-						clientsservice.getClientList().then(function (data){
+						clientsservice.getClientList().then(function (data) {
 							vm.clients = data;
 						});
 					}

@@ -5,11 +5,11 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 		.row
 			.col-sm-6
 				.row.form-group
-					label.col-sm-4(for="name") {{ 'NAME' | translate }}:
+					label.col-sm-5(for="name") {{ 'NAME' | translate }}:
 					.col-sm-7
 						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
 				.row.form-group
-					label.col-sm-4(for="description") {{ 'DESCRIPTION' | translate }}:
+					label.col-sm-5(for="description") {{ 'DESCRIPTION' | translate }}:
 					.col-sm-7
 						textarea#description.form-control(ng-model='vm.description', type='text', placeholder="{{ 'DESCRIPTION' | translate }}")
 	.modal-footer
