@@ -158,9 +158,30 @@
 				 },
 			}
 		})
-		.state('users', {
-			url:'/users',
+		.state('settings', {
+			url:'/settings',
 			authenticate : true,
+			resolve: {
+				currentUser: function(userservice) {
+					return userservice.getCurrentUser();
+				}
+			},
+			views: {
+				'headerContainer': {
+					templateUrl: 'views/commons/header-container.html',
+					controller : 'HeaderController',
+					controllerAs: 'vm'
+				},
+				'mainView': {
+					templateUrl: 'views/settings/settings.html',
+					controller : 'SettingsController',
+					controllerAs: 'vm'
+				 }
+			 }
+		})
+		.state('users', {
+			url: '/users',
+			authenticate: true,
 			resolve: {
 				currentUser: function(userservice) {
 					return userservice.getCurrentUser();

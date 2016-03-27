@@ -21,7 +21,6 @@
 			vm.firstName = null;
 			vm.lastName = null;
 			vm.username = null;
-			vm.readOnly = false;
 			vm.create = create;
 			vm.cancel = cancel;
 
@@ -30,8 +29,7 @@
 					username: vm.username,
 					password: vm.password1,
 					first_name: vm.firstName,
-					last_name: vm.lastName,
-					is_staff: !vm.readOnly
+					last_name: vm.lastName
 				};
 
 				userservice.createUser(data).then(function(data) {

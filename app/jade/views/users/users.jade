@@ -9,9 +9,11 @@
 		.row
 			.col-sm-12
 				h1.page-header {{ 'USERS' | translate }}
+					button.btn.btn-sm.btn-primary(ng-click="vm.openCreateUserModal()", type="button", tooltip="{{ 'CREATE_USER' | translate}}")
+						span.glyphicon.glyphicon-plus
 		.row
-			.col-sm-6
-				h2.sub-header {{ 'PERSONAL_DATA' | translate }}
+			.col-sm-10.col-sm-offset-1
+				h3.sub-header {{ 'PERSONAL_DATA' | translate }}
 				table.table.table-striped
 					tbody
 						tr
@@ -38,10 +40,6 @@
 							th {{ 'LAST_LOGIN' | translate }}:
 							th
 								p {{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
-						tr
-							th {{ 'PERMISSIONS' | translate }}:
-							th
-								p {{ vm.selectedUser.permissions | translate }}
 		.row(ng-if='vm.currentUser.is_superuser')
 			.col-sm-5
 				button.btn.btn-block.btn-danger(type='button', ng-click='vm.deleteUser(vm.selectedUser)') {{ 'DELETE_USER' | translate }}

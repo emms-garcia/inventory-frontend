@@ -16,19 +16,22 @@
 
 		function SignUpController($state, $translate, userservice) {
 			var vm = this;
-			vm.password1 = null;
-			vm.password2 = null;
+			vm.company = null;
 			vm.firstName = null;
 			vm.lastName = null;
+			vm.password1 = null;
+			vm.password2 = null;
 			vm.username = null;
+
 			vm.create = create;
 
 			function create() {
 				var data = {
-					username: vm.username,
-					password: vm.password1,
+					company: vm.company,
 					first_name: vm.firstName,
-					last_name: vm.lastName
+					last_name: vm.lastName,
+					password: vm.password1,
+					username: vm.username
 				};
 
 				userservice.createUser(data).then(function (success) {

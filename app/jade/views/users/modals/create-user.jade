@@ -24,10 +24,6 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 					label.col-sm-5(for="newPassword2") *{{ 'REPEAT_PASSWORD' | translate }}:
 					.col-sm-5
 						input#newPassword2.form-control(required, ng-model='vm.password2', type='password', placeholder="{{ 'PASSWORD' | translate }}")
-				.checkbox
-					label
-						input(ng-model='vm.readOnly', type='checkbox')
-						| {{ 'READ_ONLY_ACCOUNT' | translate }}
 	.modal-footer
 		button.btn.btn-primary(type='submit') {{ 'CREATE' | translate }}
 		button.btn.btn-warning(type='button', ng-click='vm.cancel()') {{ 'CANCEL' | translate }}

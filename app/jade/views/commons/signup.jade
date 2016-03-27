@@ -8,6 +8,12 @@ div(class="row")
 						br
 						div(class="row")
 							div(class="col-sm-12")
+								div(class="row form-group", ng-class="{ 'has-error': (form.company.$touched && form.company.$error.required) }")
+									label(class="col-sm-5", for="company") *{{ 'COMPANY' | translate }}:
+									div(class="col-sm-7")
+										input(class="form-control", id="company", name="company", required, ng-model='vm.company', type='text', placeholder="{{ 'COMPANY' | translate }}")
+										span(class="help-block", ng-show="form.company.$touched && form.company.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+
 								div(class="row form-group", ng-class="{ 'has-error': (form.username.$touched && form.username.$error.required || form.username.$error.email) }")
 									label(class="col-sm-5", for="username") *{{ 'USERNAME' | translate }}:
 									div(class="col-sm-7")
