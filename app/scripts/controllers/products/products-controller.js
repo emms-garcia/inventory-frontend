@@ -22,9 +22,11 @@
 		vm.uoms = [];
 
 		vm.deleteProduct = deleteProduct;
+		vm.deleteProductGroup = deleteProductGroup;
 		vm.deleteUOM = deleteUOM;
 		vm.openCreateUOMModal = openCreateUOMModal;
 		vm.openCreateProductModal = openCreateProductModal;
+		vm.openCreateProductGroupModal = openCreateProductGroupModal;
 
 		activate();
 
@@ -40,12 +42,26 @@
 			});
 		}
 
+		function deleteProductGroup(productGroupID) {
+			utilsservice.confirmationDialog(function () {
+				productservice.deleteProductGroup(productGroupID).then(getProductGroups);
+			});
+		}
+
 		function getProducts() {
 			productservice.getProductList().then(function (data) {
 				if(data) {
 					vm.products = data;
 				}
 			});
+		}
+
+		function getProductGroups() {
+			productservice.getProductGroupList().then(function(data) {
+				if(data) {
+					vm.product_groups = data;
+				}
+			})
 		}
 
 		function getUOMS() {
@@ -87,9 +103,33 @@
 			});
 		}
 
+		function openCreateProductGroupModal() {
+			if(vm.uoms.length === 0) {
+				utilsservice.notifyInformation($translate.instant('CANT_CREATE_PRODUCT_GROUP_NO_PRODUCTS'));
+				return;
+			}
+
+			var modalInstance = $modal.open({
+				animation: true,
+				templateUrl: 'views/products/modals/create-product-group.html',
+				controller: 'CreateProductGroupModalController as vm',
+				size: 'lg',
+				resolve: {
+					products: function () {
+						return vm.products;
+					}
+				}
+			});
+
+			modalInstance.result.then(function () {
+				getProductGroups();
+			});
+		}
+
 		function activate() {
 			console.log('ProductsController activated.');
 
+			getProductGroups();
 			getProducts();
 			getUOMS();
 		}

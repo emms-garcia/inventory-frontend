@@ -5,7 +5,7 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 		.row
 			.col-sm-6
 				.row.form-group
-					label.col-sm-5(for="name") {{ 'NAME' | translate }}:
+					label.col-sm-5(for="name") *{{ 'NAME' | translate }}:
 					.col-sm-7
 						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
 				.row.form-group
@@ -13,7 +13,7 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 					.col-sm-7
 						textarea#description.form-control(ng-model='vm.description', type='text', placeholder="{{ 'DESCRIPTION' | translate }}")
 				.row.form-group
-					label.col-sm-5(for="uom") {{ 'UOM' | translate }}:
+					label.col-sm-5(for="uom") *{{ 'UOM' | translate }}:
 					.col-sm-7
 						input.form-control(required, type='text', ng-model='vm.uom', typeahead='uom as uom.name for uom in vm.filterUOMS($viewValue)', typeahead-loading='vm.loading', typeahead-no-results='vm.noResults', typeahead-input-formatter="vm.formatUOM($model)")
 						i.glyphicon.glyphicon-refresh(ng-show='vm.loading')
@@ -22,7 +22,7 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
 							span{{ 'NO_RESULTS' | translate }}
 
 				.row.form-group
-					label.col-sm-5(for="price-per-uom") {{ 'PRICE_PER_UOM' | translate }}:
+					label.col-sm-5(for="price-per-uom") *{{ 'PRICE_PER_UOM' | translate }}:
 					div(class="col-sm-7")
 						input#price-per-uom.form-control(required, ng-model='vm.pricePerUOM', type='number', placeholder="{{ 'PRICE_PER_UOM' | translate }}")
 	.modal-footer

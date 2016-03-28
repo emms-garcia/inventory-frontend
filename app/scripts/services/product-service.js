@@ -22,8 +22,75 @@
 			getUOMDetail: getUOMDetail,
 			createUOM: createUOM,
 			deleteUOM: deleteUOM,
-			filterUOMS: filterUOMS
+			filterUOMS: filterUOMS,
+			getProductGroupList: getProductGroupList,
+			createProductGroup: createProductGroup,
+			deleteProductGroup: deleteProductGroup
 		};
+
+		function deleteProductGroup(id) {
+			return $http({
+				method: 'DELETE',
+				url: '/api/inventory/product_groups/' + id + '/'
+			}).then(deleteProductGroupSuccess)
+			.catch(deleteProductGroupError);
+
+			function deleteProductGroupSuccess() {
+				utilsservice.notifySuccess($translate.instant('PRODUCT_GROUP_DELETE_SUCCESS'));
+				return true;
+			}
+
+			function deleteProductGroupError(error) {
+				console.log('XHR failed on deleteProductGroupError ' + error);
+				utilsservice.notifyError($translate.instant('PRODUCT_GROUP_DELETE_FAILED'));
+				return false;
+			}
+		}
+
+		function createProductGroup(data) {
+			return $http({
+				method: 'POST',
+				data: data,
+				url: '/api/inventory/product_groups/'
+			}).then(createProductGroupSuccess)
+			.catch(createProductGroupError);
+
+			function createProductGroupSuccess() {
+				utilsservice.notifySuccess($translate.instant('PRODUCT_GROUP_CREATE_SUCCESS'));
+				return true;
+			}
+
+			function createProductGroupError(error) {
+				console.log('XHR failed on createProductGroupError ' + error);
+				utilsservice.notifyError($translate.instant('PRODUCT_GROUP_CREATE_FAILED'));
+				if(error.data.product_groups) {
+					for(var key in data) {
+						if(error.data.product_groups[key]) {
+							utilsservice.notifyError(error.data.product_groups[key][0]);
+						}
+					}
+				}
+				return false;
+			}
+		}
+
+		function getProductGroupList() {
+			return $http({
+				method: 'GET',
+				url: '/api/inventory/product_groups/'
+			}).then(getProductGroupListSuccess)
+			.catch(getProductGroupListError);
+
+			function getProductGroupListSuccess(response) {
+				return response.data.objects;
+			}
+
+			function getProductGroupListError(error) {
+				console.log('XHR failed on getProductGroupListError ' + error);
+				utilsservice.notifyError($translate.instant('PRODUCT_GROUP_LIST_FAILED'));
+				return false;
+			}
+		}
 
 		function getProductList() {
 			return $http({
@@ -102,7 +169,11 @@
 
 			function deleteProductError(error) {
 				console.log('XHR failed on deleteProductError ' + error);
-				utilsservice.notifyError($translate.instant('PRODUCT_DELETE_FAILED'));
+				if(error.status === 400) {
+					utilsservice.notifyError(error.data.error);
+				} else {
+					utilsservice.notifyError($translate.instant('PRODUCT_DELETE_FAILED'));
+				}
 				return false;
 			}
 		}

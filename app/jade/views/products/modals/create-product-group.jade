@@ -1,0 +1,53 @@
+form.form-horizonal(name='form', ng-submit='vm.create()', novalidate, editable-form)
+	.modal-header
+		h3.modal-title {{ 'CREATE_PRODUCT_GROUP' | translate }}
+	.modal-body
+		.row
+			.col-sm-6
+				.row.form-group
+					label.col-sm-5(for="name") *{{ 'NAME' | translate }}:
+					.col-sm-7
+						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
+				.row.form-group
+					label.col-sm-5(for="description") {{ 'DESCRIPTION' | translate }}:
+					.col-sm-7
+						textarea#description.form-control(ng-model='vm.description', type='text', placeholder="{{ 'DESCRIPTION' | translate }}")
+		.row
+			.col-sm-12
+				h4 {{ 'SELECT_PRODUCTS' | translate }}:
+
+		.row
+			.col-sm-12
+				.table-responsive
+					table.table.table-striped
+						thead
+							tr
+								th(style="width: 5%;") {{ 'ID' | translate }}
+								th(style="width: 10%;") {{ 'NAME' | translate }}
+								th {{ 'DESCRIPTION' | translate }}
+								th {{ 'UOM' | translate }}
+								th {{ 'PRICE_PER_UOM' | translate }}
+								th {{ 'USE' | translate }}
+						tbody
+							tr(ng-repeat="product in vm.products")
+								td {{ product.id }}
+								td {{ product.name }}
+								td {{ product.description }}
+								td {{ product.uom.name }}
+								td
+									div(class="col-sm-5")
+										input(class="form-control", type="number", ng-model="product.quantity", min="1", value="1", ng-change="vm.updateProductsInUse()")
+								td ${{ product.price_per_uom }}
+								td(style="width:5%;")
+									input(type="checkbox", ng-model="product.use", ng-change="vm.updateProductsInUse()")
+						tfoot
+							tr
+								td(colspan="4")
+								td
+									b {{ 'TOTAL' | translate }}: &nbsp;
+									span ${{ vm.productPriceSum }}
+								td 
+
+	.modal-footer
+		button.btn.btn-primary(type='submit', ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}
+		button.btn.btn-warning(type='button', ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

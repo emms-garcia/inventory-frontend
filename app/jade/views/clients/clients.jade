@@ -28,6 +28,9 @@
 							th {{ "GEOLOCATION" | translate }}
 							th
 					tbody
+						tr(ng-if="vm.clients.length === 0")
+							td(class="text-center", colspan="10")
+								p {{ 'NO_CLIENTS_DEFINED' | translate }}
 						tr(ng-repeat="client in vm.clients | filter: vm.query", ui-sref="clients.detail({'clientId': client.id})")
 							td
 								p {{ client.id }}
