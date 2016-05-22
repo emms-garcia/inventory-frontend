@@ -18,11 +18,6 @@
       getProductDetail: getProductDetail,
       createProduct: createProduct,
       deleteProduct: deleteProduct,
-      getUOMList: getUOMList,
-      getUOMDetail: getUOMDetail,
-      createUOM: createUOM,
-      deleteUOM: deleteUOM,
-      filterUOMS: filterUOMS,
       getProductGroupList: getProductGroupList,
       createProductGroup: createProductGroup,
       deleteProductGroup: deleteProductGroup
@@ -174,113 +169,6 @@
         } else {
           utilsservice.notifyError($translate.instant('PRODUCT_DELETE_FAILED'));
         }
-        return false;
-      }
-    }
-
-    function getUOMList() {
-      return $http({
-        method: 'GET',
-        url: '/api/inventory/uoms/'
-      }).then(getUOMListSuccess)
-      .catch(getUOMListError);
-
-      function getUOMListSuccess(response) {
-        return response.data.objects;
-      }
-
-      function getUOMListError(error) {
-        console.log('XHR failed on getUOMListError ' + error);
-        utilsservice.notifyError($translate.instant('UOM_LIST_FAILED'));
-        return false;
-      }
-    }
-
-    function getUOMDetail(id) {
-      return $http({
-        method: 'GET',
-        url: '/api/inventory/uoms/' + id + '/'
-      }).then(getUOMDetailSuccess)
-      .catch(getUOMDetailError);
-
-      function getUOMDetailSuccess(response) {
-        return response.data;
-      }
-
-      function getUOMDetailError(error) {
-        console.log('XHR failed on getUOMDetailError ' + error);
-        utilsservice.notifyError($translate.instant('UOM_DETAIL_FAILED'));
-        return false;
-      }
-    }
-
-    function deleteUOM(id) {
-      return $http({
-        method: 'DELETE',
-        url: '/api/inventory/uoms/' + id + '/'
-      }).then(deleteUOMSuccess)
-      .catch(deleteUOMError);
-
-      function deleteUOMSuccess() {
-        utilsservice.notifySuccess($translate.instant('UOM_DELETE_SUCCESS'));
-        return true;
-      }
-
-      function deleteUOMError(error) {
-        console.log('XHR failed on deleteUOMError ' + error);
-        if(error.status === 400) {
-          utilsservice.notifyError(error.data.error);
-        } else {
-          utilsservice.notifyError($translate.instant('UOM_DELETE_FAILED'));
-        }
-        return false;
-      }
-    }
-
-    function createUOM(data) {
-      return $http({
-        method: 'POST',
-        data: data,
-        url: '/api/inventory/uoms/'
-      }).then(createUOMSuccess)
-      .catch(createUOMError);
-
-      function createUOMSuccess() {
-        utilsservice.notifySuccess($translate.instant('UOM_CREATE_SUCCESS'));
-        return true;
-      }
-
-      function createUOMError(error) {
-        console.log('XHR failed on createUOMError ' + error);
-        utilsservice.notifyError($translate.instant('UOM_CREATE_FAILED'));
-        if(error.data.uoms) {
-          for(var key in data) {
-            if(error.data.uoms[key]) {
-              utilsservice.notifyError(error.data.uoms[key][0]);
-            }
-          }
-        }
-        return false;
-      }
-    }
-
-    function filterUOMS(string) {
-      return $http({
-        params: {
-          name__icontains: string
-        },
-        method: 'GET',
-        url: '/api/inventory/uoms/'
-      }).then(filterUOMSSuccess)
-      .catch(filterUOMSError);
-
-      function filterUOMSSuccess(response) {
-        return response.data.objects;
-      }
-
-      function filterUOMSError(error) {
-        console.log('XHR failed on filterUOMSError ' + error);
-        utilsservice.notifyError($translate.instant('UOM_FILTER_FAILED'));
         return false;
       }
     }

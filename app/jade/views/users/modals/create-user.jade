@@ -35,5 +35,5 @@ form(name="form", ng-submit="vm.create()", novalidate)
       span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password2.$valid && vm.passwordsMatch()")
 
   div(class="modal-footer")
-    button(class="btn btn-primary", ng-disabled="form.$invalid", type="submit") {{ 'CREATE' | translate }}
-    button(class="btn btn-warning", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}
+    button(class="btn btn-primary btn-lg", ng-disabled="form.$invalid", type="submit") {{ 'CREATE' | translate }}
+    button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

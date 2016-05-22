@@ -12,19 +12,16 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
           label(class="col-sm-5", for="description") {{ 'DESCRIPTION' | translate }}:
           div(class="col-sm-7")
             textarea(class="form-control", id="description", ng-model="vm.description", type="text", placeholder="{{ 'DESCRIPTION' | translate }}")
-        div(class="row form-group")
-          label(class="col-sm-5", for="uom") *{{ 'UOM' | translate }}:
-          div(class="col-sm-7")
-            input(class="form-control", required, type="text", ng-model="vm.uom", typeahead="uom as uom.name for uom in vm.filterUOMS($viewValue)", typeahead-loading="vm.loading", typeahead-no-results="vm.noResults", typeahead-input-formatter="vm.formatUOM($model)")
-            i(class="glyphicon glyphicon-refresh", ng-show="vm.loading")
-            div(ng-show="vm.noResults")
-              i(class="glyphicon glyphicon-remove")
-              span {{ 'NO_RESULTS' | translate }}
 
         div(class="row form-group")
-          label(class="col-sm-5", for="price-per-uom") *{{ 'PRICE_PER_UOM' | translate }}:
+          label(class="col-sm-5", for="quantity") *{{ 'QUANTITIES' | translate }}:
           div(class="col-sm-7")
-            input(class="form-control", id="price-per-uom", required, ng-model="vm.pricePerUOM", type="number", placeholder="{{ 'PRICE_PER_UOM' | translate }}")
+            input(class="form-control", id="quantity", required, ng-model="vm.quantity", type="number", placeholder="{{ 'QUANTITIES' | translate }}", min="1", value="1")
+
+        div(class="row form-group")
+          label(class="col-sm-5", for="price-per-unit") *{{ 'PRICE_PER_PRODUCT' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="price-per-unit", required, ng-model="vm.pricePerUnit", type="number", placeholder="{{ 'PRICE_PER_PRODUCT' | translate }}")
   div(class="modal-footer")
-    button(class="btn btn-primary", type="submit", ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
-    button(class="btn btn-warning", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}
+    button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
+    button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

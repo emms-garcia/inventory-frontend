@@ -149,9 +149,13 @@
           PRODUCT_GROUP_CREATE_ERROR: 'No se pudo crear el Grupo de Productos',
           QUANTITIES: 'Cantidades',
           GO_BACK: 'Volver',
+          PRICE_PER_PRODUCT: 'Precio por Producto',
+          QUANTITY: 'Cantidad'
         };
       } else if(options.key === 'en-us') {
         translations = {
+          QUANTITY: 'Quantity',
+          PRICE_PER_PRODUCT: 'Price per Product',
           GO_BACK: 'Go Back',
           QUANTITIES: 'Quantities',
           TOTAL: 'Total',

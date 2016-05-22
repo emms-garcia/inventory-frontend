@@ -33,9 +33,9 @@
       vm.productPriceSum = 0.0;
       vm.productsInUse = false;
       angular.forEach(vm.products, function (product) {
-        product.quantity = product.quantity || 1;
+        product.quantity_in_group = product.quantity_in_group || 1;
         if(product.use) {
-          vm.productPriceSum += product.price_per_uom * product.quantity;
+          vm.productPriceSum += product.price_per_unit * product.quantity_in_group;
           vm.productsInUse = true;
         }
       });
@@ -46,7 +46,7 @@
       angular.forEach(vm.products, function (product) {
         if(product.use) {
           products.push({
-            quantity: product.quantity,
+            quantity: product.quantity_in_group,
             resource_uri: product.resource_uri
           });
         }

@@ -22,30 +22,17 @@
 
     vm.name = null;
     vm.description = null;
-    vm.uom = { id: null };
-    vm.pricePerUOM = 0.0;
-
-    vm.filterUOMS = filterUOMS;
-    vm.formatUOM = formatUOM;
+    vm.pricePerUnit = 0.0;
+    vm.quantity = 1;
 
     activate();
-
-    function formatUOM(value) {
-      if(value.id) {
-        return value.name;
-      }
-    }
-
-    function filterUOMS(string) {
-      return productservice.filterUOMS(string);
-    }
 
     function create() {
       productservice.createProduct({
         name: vm.name,
         description: vm.description,
-        uom: vm.uom.resource_uri,
-        price_per_uom: vm.pricePerUOM
+        price_per_unit: vm.pricePerUnit,
+        quantity: vm.quantity
       }).then(function (data) {
         if(data) {
           $modalInstance.close(data);
