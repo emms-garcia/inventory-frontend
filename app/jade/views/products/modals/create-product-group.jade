@@ -22,22 +22,21 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate, editable-f
 					table.table.table-striped
 						thead
 							tr
-								th(style="width: 5%;") {{ 'ID' | translate }}
-								th(style="width: 10%;") {{ 'NAME' | translate }}
+								th {{ 'NAME' | translate }}
 								th {{ 'DESCRIPTION' | translate }}
 								th {{ 'UOM' | translate }}
 								th {{ 'PRICE_PER_UOM' | translate }}
+								th {{ 'QUANTITIES' | translate }}
 								th {{ 'USE' | translate }}
 						tbody
 							tr(ng-repeat="product in vm.products")
-								td {{ product.id }}
 								td {{ product.name }}
 								td {{ product.description }}
 								td {{ product.uom.name }}
+								td ${{ product.price_per_uom }}
 								td
 									div(class="col-sm-5")
 										input(class="form-control", type="number", ng-model="product.quantity", min="1", value="1", ng-change="vm.updateProductsInUse()")
-								td ${{ product.price_per_uom }}
 								td(style="width:5%;")
 									input(type="checkbox", ng-model="product.use", ng-change="vm.updateProductsInUse()")
 						tfoot
@@ -46,7 +45,7 @@ form.form-horizonal(name='form', ng-submit='vm.create()', novalidate, editable-f
 								td
 									b {{ 'TOTAL' | translate }}: &nbsp;
 									span ${{ vm.productPriceSum }}
-								td 
+								td
 
 	.modal-footer
 		button.btn.btn-primary(type='submit', ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}

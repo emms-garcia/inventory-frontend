@@ -1,5 +1,5 @@
 .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-	h1.page-header {{ 'PRODUCTS' | translate }} 
+	h1.page-header {{ 'PRODUCTS' | translate }}
 	h3.sub-header {{ 'UOMS' | translate }}
 		button.btn.btn-sm.btn-primary(ng-click="vm.openCreateUOMModal()", type="button", tooltip="{{ 'CREATE_UOM' | translate}}")
 			span.glyphicon.glyphicon-plus
@@ -7,14 +7,12 @@
 		table.table.table-striped
 			thead
 				tr
-					th(style="width: 5%;") {{ 'ID' | translate }}
 					th(style="width: 10%;") {{ 'NAME' | translate }}
 					th(colspan="2") {{ 'DESCRIPTION' | translate }}
 			tbody
 				tr(ng-if="vm.uoms.length === 0")
 					td(class="text-center", colspan="5") {{ 'NO_UOMS_DEFINED' | translate }}
 				tr(ng-repeat="uom in vm.uoms")
-					td {{ uom.id }}
 					td {{ uom.name }}
 					td {{ uom.description }}
 					//-td(style="width:5%;")
@@ -28,11 +26,11 @@
 	h3.sub-header {{ 'PRODUCTS' | translate }}
 		button.btn.btn-sm.btn-primary(ng-click="vm.openCreateProductModal()", ng-disabled="vm.uoms.length === 0", type="button")
 			span.glyphicon.glyphicon-plus
+	div(class="alert alert-warning", ng-show="vm.uoms.length === 0") {{ 'CANNOT_ADD_PRODUCT_NEED_UOM' | translate }}
 	.table-responsive
 		table.table.table-striped
 			thead
 				tr
-					th(style="width: 5%;") {{ 'ID' | translate }}
 					th(style="width: 10%;") {{ 'NAME' | translate }}
 					th {{ 'DESCRIPTION' | translate }}
 					th {{ 'UOM' | translate }}
@@ -42,7 +40,6 @@
 				tr(ng-if="vm.products.length === 0")
 					td(class="text-center", colspan="5") {{ 'NO_PRODUCTS_DEFINED' | translate }}
 				tr(ng-repeat="product in vm.products")
-					td {{ product.id }}
 					td {{ product.name }}
 					td {{ product.description }}
 					td {{ product.uom.name }}
@@ -57,21 +54,21 @@
 		h3.sub-header {{ 'PRODUCT_GROUPS' | translate }}
 			button.btn.btn-primary.btn-sm(ng-click="vm.openCreateProductGroupModal()", type="button", ng-disabled="vm.products.length === 0")
 				span.glyphicon.glyphicon-plus
-		.table-responsive
-			table.table.table-striped
-				thead
-					tr
-						th(style="width: 5%;") {{ 'ID' | translate }}
-						th(style="width: 10%;") {{ 'NAME' | translate }}
-						th {{ 'DESCRIPTION' | translate }}
-						th
-				tbody
-					tr(ng-if="vm.product_groups.length === 0")
-						td(class="text-center", colspan="5") {{ 'NO_PRODUCTS_DEFINED' | translate }}
-					tr(ng-repeat="product_group in vm.product_groups")
-						td {{ product_group.id }}
-						td {{ product_group.name }}
-						td {{ product_group.description }}
-						td(style="width:5%;")
-							button.btn.btn-danger(ng-click="vm.deleteProductGroup(product_group.id)", tooltip="{{ 'DELETE_PRODUCT_GROUP' | translate }}")
-								span.glyphicon.glyphicon-remove
+
+	div(class="alert alert-warning", ng-show="vm.products.length === 0") {{ 'CANNOT_ADD_PRODUCT_GROUP_NEED_PRODUCT' | translate }}
+	.table-responsive
+		table.table.table-striped
+			thead
+				tr
+					th(style="width: 10%;") {{ 'NAME' | translate }}
+					th {{ 'DESCRIPTION' | translate }}
+					th
+			tbody
+				tr(ng-if="vm.product_groups.length === 0")
+					td(class="text-center", colspan="5") {{ 'NO_PRODUCTS_DEFINED' | translate }}
+				tr(ng-repeat="product_group in vm.product_groups")
+					td {{ product_group.name }}
+					td {{ product_group.description }}
+					td(style="width:5%;")
+						button.btn.btn-danger(ng-click="vm.deleteProductGroup(product_group.id)", tooltip="{{ 'DELETE_PRODUCT_GROUP' | translate }}")
+							span.glyphicon.glyphicon-remove

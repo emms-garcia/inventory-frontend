@@ -41,5 +41,5 @@
 							th
 								p {{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
 		.row(ng-if='vm.currentUser.is_superuser')
-			.col-sm-5
+			.col-sm-10.col-sm-offset-1
 				button.btn.btn-block.btn-danger(type='button', ng-click='vm.deleteUser(vm.selectedUser)') {{ 'DELETE_USER' | translate }}

@@ -8,7 +8,7 @@
 
 (function () {
 	'use strict';
-	
+
 	angular.module('inventoryApp')
 		.controller('ClientsDetailController', ClientsDetailController);
 

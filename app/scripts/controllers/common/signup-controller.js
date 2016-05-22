@@ -23,7 +23,12 @@
 			vm.password2 = null;
 			vm.username = null;
 
+			vm.passwordsMatch = passwordsMatch;
 			vm.create = create;
+
+			function passwordsMatch() {
+				return vm.password1 && vm.password2 && vm.password1 === vm.password2;
+			}
 
 			function create() {
 				var data = {
