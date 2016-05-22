@@ -1,30 +1,30 @@
-form.form-horizonal(name='form', ng-submit='vm.create()', novalidate)
-	.modal-header
-		h3.modal-title {{ 'CREATE_PRODUCT' | translate }}
-	.modal-body
-		.row
-			.col-sm-6
-				.row.form-group
-					label.col-sm-5(for="name") *{{ 'NAME' | translate }}:
-					.col-sm-7
-						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
-				.row.form-group
-					label.col-sm-5(for="description") {{ 'DESCRIPTION' | translate }}:
-					.col-sm-7
-						textarea#description.form-control(ng-model='vm.description', type='text', placeholder="{{ 'DESCRIPTION' | translate }}")
-				.row.form-group
-					label.col-sm-5(for="uom") *{{ 'UOM' | translate }}:
-					.col-sm-7
-						input.form-control(required, type='text', ng-model='vm.uom', typeahead='uom as uom.name for uom in vm.filterUOMS($viewValue)', typeahead-loading='vm.loading', typeahead-no-results='vm.noResults', typeahead-input-formatter="vm.formatUOM($model)")
-						i.glyphicon.glyphicon-refresh(ng-show='vm.loading')
-						div(ng-show='vm.noResults')
-							i.glyphicon.glyphicon-remove
-							span {{ 'NO_RESULTS' | translate }}
+form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
+  div(class="modal-header")
+    h3(class="modal-title") {{ 'CREATE_PRODUCT' | translate }}
+  div(class="modal-body")
+    div(class="row")
+      div(class="col-sm-6")
+        div(class="row form-group")
+          label(class="col-sm-5", for="name") *{{ 'NAME' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="name", required, ng-model="vm.name", type="text", placeholder="{{ 'NAME' | translate }}")
+        div(class="row form-group")
+          label(class="col-sm-5", for="description") {{ 'DESCRIPTION' | translate }}:
+          div(class="col-sm-7")
+            textarea(class="form-control", id="description", ng-model="vm.description", type="text", placeholder="{{ 'DESCRIPTION' | translate }}")
+        div(class="row form-group")
+          label(class="col-sm-5", for="uom") *{{ 'UOM' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", required, type="text", ng-model="vm.uom", typeahead="uom as uom.name for uom in vm.filterUOMS($viewValue)", typeahead-loading="vm.loading", typeahead-no-results="vm.noResults", typeahead-input-formatter="vm.formatUOM($model)")
+            i(class="glyphicon glyphicon-refresh", ng-show="vm.loading")
+            div(ng-show="vm.noResults")
+              i(class="glyphicon glyphicon-remove")
+              span {{ 'NO_RESULTS' | translate }}
 
-				.row.form-group
-					label.col-sm-5(for="price-per-uom") *{{ 'PRICE_PER_UOM' | translate }}:
-					div(class="col-sm-7")
-						input#price-per-uom.form-control(required, ng-model='vm.pricePerUOM', type='number', placeholder="{{ 'PRICE_PER_UOM' | translate }}")
-	.modal-footer
-		button.btn.btn-primary(type='submit', ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
-		button.btn.btn-warning(type='button', ng-click="vm.cancel()") {{ 'CANCEL' | translate }}
+        div(class="row form-group")
+          label(class="col-sm-5", for="price-per-uom") *{{ 'PRICE_PER_UOM' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="price-per-uom", required, ng-model="vm.pricePerUOM", type="number", placeholder="{{ 'PRICE_PER_UOM' | translate }}")
+  div(class="modal-footer")
+    button(class="btn btn-primary", type="submit", ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
+    button(class="btn btn-warning", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

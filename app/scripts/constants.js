@@ -7,12 +7,12 @@
  * Main module of the application.
  */
 (function() {
-	'use strict';
+  'use strict';
 
-	angular
-		.module('inventoryApp')
-		.constant('LOCAL_STORAGE_KEYS', {
-			CURRENT_USER: 'CURRENT_USER'
-		});
+  angular
+    .module('inventoryApp')
+    .constant('LOCAL_STORAGE_KEYS', {
+      CURRENT_USER: 'CURRENT_USER'
+    });
 
 })();

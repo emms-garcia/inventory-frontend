@@ -115,3 +115,7 @@ table.table-hover tbody tr:hover {
 }
 
 .angular-google-map-container { height: 400px; }
+
+a {
+  cursor: pointer;
+}

@@ -1,105 +1,115 @@
 doctype html
-html.no-js
-	head
-		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		meta(name='viewport', content='width=device-width, initial-scale=1')
-		title Inventory Web
-		meta(name='description', content='')
-		meta(name='author', content='')
-		// Place favicon.ico and apple-touch-icon.png in the root directory
-		// build:css(.) styles/vendor.css
-		// bower:css
-		link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.css')
-		link(rel='stylesheet', href='bower_components/angular-xeditable/dist/css/xeditable.css')
-		link(rel='stylesheet', href='bower_components/angular-ui-notification/dist/angular-ui-notification.min.css')
-		// endbower
-		// endbuild
-		// build:css(.tmp) styles/main.css
-		link(rel='stylesheet', href='styles/main.css')
-		link(rel='stylesheet', href='styles/overwrites.css')
-		// endbuild
-	body(ng-app='inventoryApp')
-		//if lt IE 7
-			p.browsehappy
-				| You are using an 
-				strong outdated
-				|  browser. Please 
-				a(href='http://browsehappy.com/') upgrade your browser
-				|  to improve your experience.
-		// Add your site or application content here
-		div(ui-view="headerContainer")
-		.container-fluid
-			.row
-				div(ui-view="sidebarContainer")
-				div(ui-view="mainContainer")
-					div(ui-view="mainView")
-		// Google Analytics: change UA-XXXXX-X to be your site's ID
-		script.
-			!function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-			(A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-			r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-			}(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			ga('create', 'UA-XXXXX-X');
-			ga('send', 'pageview');
-		// build:js(.) scripts/vendor.js
-		// bower:js
-		script(src='bower_components/jquery/dist/jquery.js')
-		script(src='bower_components/angular/angular.js')
-		script(src='bower_components/angular-animate/angular-animate.js')
-		script(src='bower_components/angular-resource/angular-resource.js')
-		script(src='bower_components/angular-route/angular-route.js')
-		script(src='bower_components/angular-local-storage/dist/angular-local-storage.js')
-		script(src='bower_components/ui-router/release/angular-ui-router.js')
-		script(src='bower_components/angular-translate/angular-translate.js')
-		script(src='bower_components/angular-bootstrap/ui-bootstrap.js')
-		script(src='bower_components/angular-bootstrap/ui-bootstrap-tpls.js')
-		script(src='bower_components/angular-xeditable/dist/js/xeditable.js')
-		script(src='bower_components/angular-ui-notification/dist/angular-ui-notification.min.js')
-		script(src='bower_components/lodash/lodash.js')
-		script(src='bower_components/angular-google-maps/dist/angular-google-maps.js')
-		// endbower
-		// endbuild
-		// build:js({.tmp,app}) scripts/scripts.js
-		script(src='scripts/app.js')
-		script(src="scripts/constants.js")
+html(class="no-js")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Inventory Web
+    meta(name="description", content="")
+    meta(name="author", content="")
+    // Place favicon.ico and apple-touch-icon.png in the root directory
+    // build:css(.) styles/vendor.css
+    // bower:css
+    link(rel="stylesheet", href="bower_components/bootstrap/dist/css/bootstrap.css")
+    link(rel="stylesheet", href="bower_components/angular-xeditable/dist/css/xeditable.css")
+    link(rel="stylesheet", href="bower_components/angular-ui-notification/dist/angular-ui-notification.min.css")
+    // endbower
+    // endbuild
+    // build:css(.tmp) styles/main.css
+    link(rel="stylesheet", href="styles/main.css")
+    link(rel="stylesheet", href="styles/overwrites.css")
+    // endbuild
+  body(ng-app="inventoryApp")
+    //if lt IE 7
+      p.browsehappy
+        | You are using an
+        strong outdated
+        |  browser. Please
+        a(href="http://browsehappy.com/") upgrade your browser
+        |  to improve your experience.
+    // Add your site or application content here
+    div(ui-view="headerContainer")
+    div(class="container-fluid")
+      div(class="row")
+        div(ui-view="sidebarContainer")
+        div(ui-view="mainContainer")
+          div(ui-view="mainView")
+    // Google Analytics: change UA-XXXXX-X to be your site's ID
+    script.
+      !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+      (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+      r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+      }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');
+    // build:js(.) scripts/vendor.js
+    // bower:js
+    script(src="bower_components/jquery/dist/jquery.js")
+    script(src="bower_components/angular/angular.js")
+    script(src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js")
+    script(src="bower_components/angular-animate/angular-animate.js")
+    script(src="bower_components/angular-resource/angular-resource.js")
+    script(src="bower_components/angular-route/angular-route.js")
+    script(src="bower_components/angular-local-storage/dist/angular-local-storage.js")
+    script(src="bower_components/ui-router/release/angular-ui-router.js")
+    script(src="bower_components/angular-translate/angular-translate.js")
+    script(src="bower_components/angular-bootstrap/ui-bootstrap.js")
+    script(src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js")
+    script(src="bower_components/angular-xeditable/dist/js/xeditable.js")
+    script(src="bower_components/angular-ui-notification/dist/angular-ui-notification.min.js")
+    script(src="bower_components/lodash/lodash.js")
 
-		// Controllers
+    script(src="bower_components/angular-google-maps/dist/angular-google-maps.min.js")
+    // endbower
+    // endbuild
+    // build:js({.tmp,app}) scripts/scripts.js
+    script(src="scripts/app.js")
+    script(src="scripts/constants.js")
 
-		// Common
-		script(src='scripts/controllers/common/header-controller.js')
-		script(src='scripts/controllers/common/login-controller.js')
-		script(src='scripts/controllers/common/modal/confirmation-dialog-controller.js')
-		script(src='scripts/controllers/common/sidebar-controller.js')
-		script(src='scripts/controllers/common/signup-controller.js')
-	
-		// Clients
-		script(src='scripts/controllers/clients/clients-controller.js')
-		script(src='scripts/controllers/clients/clients-detail-controller.js')
-		script(src='scripts/controllers/clients/modal/create-client-controller.js')
+    // Controllers
 
-		// Dashboard
-		script(src='scripts/controllers/dashboard/dashboard-controller.js')
+    // Common
+    script(src="scripts/controllers/common/header-controller.js")
+    script(src="scripts/controllers/common/login-controller.js")
+    script(src="scripts/controllers/common/modal/confirmation-dialog-controller.js")
+    script(src="scripts/controllers/common/sidebar-controller.js")
+    script(src="scripts/controllers/common/signup-controller.js")
 
-		// Products
-		script(src='scripts/controllers/products/modals/create-product-controller.js')
-		script(src='scripts/controllers/products/modals/create-product-group-controller.js')
-		script(src='scripts/controllers/products/modals/create-uom-controller.js')
-		script(src='scripts/controllers/products/products-controller.js')
+    // Clients
+    script(src="scripts/controllers/clients/clients-controller.js")
+    script(src="scripts/controllers/clients/clients-detail-controller.js")
+    script(src="scripts/controllers/clients/modal/create-client-controller.js")
 
-		// Users
-		script(src='scripts/controllers/users/modal/create-user-controller.js')
-		script(src='scripts/controllers/users/modal/edit-password-controller.js')
-		script(src='scripts/controllers/users/users-controller.js')
+    // Dashboard
+    script(src="scripts/controllers/dashboard/dashboard-controller.js")
 
-		// Settings
-		script(src='scripts/controllers/settings/settings-controller.js')
+    // Inventory
+    script(src="scripts/controllers/inventory/inventory-controller.js")
 
-		// Services
-		script(src="scripts/services/clients-service.js")
-		script(src="scripts/services/product-service.js")
-		script(src="scripts/services/user-service.js")
-		script(src="scripts/services/utils-service.js")
-		script(src='scripts/services/translation-loader-service.js')
+    // Products
+    script(src="scripts/controllers/products/modals/create-product-controller.js")
+    script(src="scripts/controllers/products/modals/create-product-group-controller.js")
+    script(src="scripts/controllers/products/modals/create-uom-controller.js")
+    script(src="scripts/controllers/products/products-controller.js")
 
-		// endbuild
+    // Purchases
+    script(src="scripts/controllers/purchases/purchases-controller.js")
+
+    // Sales
+    script(src="scripts/controllers/sales/sales-controller.js")
+
+    // Settings
+    script(src="scripts/controllers/settings/settings-controller.js")
+
+    // Services
+    script(src="scripts/services/clients-service.js")
+    script(src="scripts/services/product-service.js")
+    script(src="scripts/services/user-service.js")
+    script(src="scripts/services/utils-service.js")
+    script(src="scripts/services/translation-loader-service.js")
+
+    // Users
+    script(src="scripts/controllers/users/modal/create-user-controller.js")
+    script(src="scripts/controllers/users/modal/edit-password-controller.js")
+    script(src="scripts/controllers/users/users-controller.js")
+    // endbuild

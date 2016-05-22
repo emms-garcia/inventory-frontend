@@ -7,23 +7,23 @@
  */
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('inventoryApp')
-		.controller('DashboardController', DashboardController);
+  angular.module('inventoryApp')
+    .controller('DashboardController', DashboardController);
 
-	DashboardController.$inject = ['userservice'];
+  DashboardController.$inject = ['userservice'];
 
-	function DashboardController (userservice) {
-		var vm = this;
-		vm.currentUser = userservice.currentUser;
+  function DashboardController (userservice) {
+    var vm = this;
+    vm.currentUser = userservice.currentUser;
 
-		activate();
+    activate();
 
-		function activate() {
-			console.log('DashboardController activated.');
-		}
+    function activate() {
+      console.log('DashboardController activated.');
+    }
 
-	}
+  }
 
 })();

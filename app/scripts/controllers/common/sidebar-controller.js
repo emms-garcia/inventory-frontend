@@ -7,18 +7,18 @@
  */
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('inventoryApp')
-		.controller('SidebarController', SidebarController);
+  angular.module('inventoryApp')
+    .controller('SidebarController', SidebarController);
 
-		SidebarController.$inject = [];
+  SidebarController.$inject = [];
 
-		function SidebarController() {
-			activate();
+  function SidebarController() {
+    activate();
 
-			function activate() {
-				console.log('SidebarController activated.');
-			}
-		}
+    function activate() {
+      console.log('SidebarController activated.');
+    }
+  }
 })();

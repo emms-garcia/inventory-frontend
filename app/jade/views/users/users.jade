@@ -1,45 +1,45 @@
-.row
-	ul.nav.nav-sidebar.col-sm-3.col-md-2.sidebar
-		li(ng-class='{ active: user.id === vm.selectedUser.id }', ng-repeat="user in vm.userList")
-			a(href='', ng-click='vm.changeUser(user)') {{ (user.first_name + ' ' + user.last_name) || user.username }}
-		li(ng-if='vm.currentUser.is_superuser')
-			a.editable.editable-click(href='', ng-click='vm.openCreateUserModal()') {{ 'ADD_NEW_USER' | translate }} &nbsp;
-				span.glyphicon.glyphicon-plus(aria-hidden="true")
-	.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-		.row
-			.col-sm-12
-				h1.page-header {{ 'USERS' | translate }}
-					button.btn.btn-sm.btn-primary(ng-click="vm.openCreateUserModal()", type="button", tooltip="{{ 'CREATE_USER' | translate}}")
-						span.glyphicon.glyphicon-plus
-		.row
-			.col-sm-10.col-sm-offset-1
-				h3.sub-header {{ 'PERSONAL_DATA' | translate }}
-				table.table.table-striped
-					tbody
-						tr
-							th {{ 'USERNAME' | translate }}:
-							th
-								p {{ vm.selectedUser.username }}
-						tr
-							th {{ 'PASSWORD' | translate }}:
-							th
-								a.editable.editable-click(href='', ng-click="vm.openEditPasswordModal()") {{ 'EDIT_PASSWORD' | translate }}
-						tr
-							th {{ 'FIRST_NAME' | translate }}:
-							th
-								a(href='', editable-text='vm.selectedUser.first_name', onbeforesave="vm.updateUserData('first_name', $data)") {{ vm.selectedUser.first_name || 'NO_FIRST_NAME' }}
-						tr
-							th {{ 'LAST_NAME' | translate }}:
-							th
-								a(href='', editable-text='vm.selectedUser.last_name', onbeforesave="vm.updateUserData('last_name', $data)") {{ vm.selectedUser.last_name || 'NO_LAST_NAME' }}
-						tr
-							th {{ 'CREATED_AT' | translate }}:
-							th
-								p {{ vm.selectedUser.created_at * 1000 | date }}
-						tr
-							th {{ 'LAST_LOGIN' | translate }}:
-							th
-								p {{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
-		.row(ng-if='vm.currentUser.is_superuser')
-			.col-sm-10.col-sm-offset-1
-				button.btn.btn-block.btn-danger(type='button', ng-click='vm.deleteUser(vm.selectedUser)') {{ 'DELETE_USER' | translate }}
+div(class="row")
+  ul(class="nav nav-sidebar col-sm-3 col-md-2 sidebar")
+    li(ng-class="{ active: user.id === vm.selectedUser.id }", ng-repeat="user in vm.userList")
+      a(href="", ng-click="vm.changeUser(user)") {{ (user.first_name + ' ' + user.last_name) || user.username }}
+    li(ng-if="vm.currentUser.is_superuser")
+      a(class="editable editable-click", href="", ng-click="vm.openCreateUserModal()") {{ 'ADD_NEW_USER' | translate }} &nbsp;
+        span(class="glyphicon.glyphicon-plus", aria-hidden="true")
+  div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+    div(class="row")
+      div(class="col-sm-12")
+        h1(class="page-header") {{ 'USERS' | translate }}
+          button(class="btn btn-sm btn-primary", ng-click="vm.openCreateUserModal()", type="button", tooltip="{{ 'CREATE_USER' | translate}}")
+            span(class="glyphicon glyphicon-plus")
+    div(class="row")
+      div(class="col-sm-10 col-sm-offset-1")
+        h3(class="sub-header") {{ 'PERSONAL_DATA' | translate }}
+        table(class="table table-striped")
+          tbody
+            tr
+              th {{ 'USERNAME' | translate }}:
+              th
+                p {{ vm.selectedUser.username }}
+            tr
+              th {{ 'PASSWORD' | translate }}:
+              th
+                a(class="editable.editable-click", href="", ng-click="vm.openEditPasswordModal()") {{ 'EDIT_PASSWORD' | translate }}
+            tr
+              th {{ 'FIRST_NAME' | translate }}:
+              th
+                a(href="", editable-text="vm.selectedUser.first_name", onbeforesave="vm.updateUserData('first_name', $data)") {{ vm.selectedUser.first_name || 'NO_FIRST_NAME' }}
+            tr
+              th {{ 'LAST_NAME' | translate }}:
+              th
+                a(href="", editable-text="vm.selectedUser.last_name", onbeforesave="vm.updateUserData('last_name', $data)") {{ vm.selectedUser.last_name || 'NO_LAST_NAME' }}
+            tr
+              th {{ 'CREATED_AT' | translate }}:
+              th
+                p {{ vm.selectedUser.created_at * 1000 | date }}
+            tr
+              th {{ 'LAST_LOGIN' | translate }}:
+              th
+                p {{ vm.selectedUser.last_login ? (vm.selectedUser.last_login * 1000 | date) : ('NEVER_LOGGED_IN' | translate) }}
+    div(class="row", ng-if="vm.currentUser.is_superuser")
+      div(class="col-sm-10 col-sm-offset-1")
+        button(class="btn btn-block btn-danger", type="button", ng-click="vm.deleteUser(vm.selectedUser)") {{ 'DELETE_USER' | translate }}

@@ -7,41 +7,41 @@
  */
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('inventoryApp')
-		.controller('CreateUOMModalController', CreateUOMModalController);
+  angular.module('inventoryApp')
+    .controller('CreateUOMModalController', CreateUOMModalController);
 
-		CreateUOMModalController.$inject = ['$modalInstance', 'productservice'];
+  CreateUOMModalController.$inject = ['$modalInstance', 'productservice'];
 
-		function CreateUOMModalController($modalInstance, productservice) {
-			var vm = this;
-			vm.create = create;
-			vm.cancel = cancel;
-			vm.activate = activate;
+  function CreateUOMModalController($modalInstance, productservice) {
+    var vm = this;
+    vm.create = create;
+    vm.cancel = cancel;
+    vm.activate = activate;
 
-			vm.name = null;
-			vm.description = null;
+    vm.name = null;
+    vm.description = null;
 
-			activate();
+    activate();
 
-			function create() {
-				productservice.createUOM({
-					name: vm.name,
-					description: vm.description
-				}).then(function (data) {
-					if(data) {
-						$modalInstance.close(data);
-					}
-				});
-			}
+    function create() {
+      productservice.createUOM({
+        name: vm.name,
+        description: vm.description
+      }).then(function (data) {
+        if(data) {
+          $modalInstance.close(data);
+        }
+      });
+    }
 
-			function cancel() {
-				$modalInstance.dismiss('cancel');
-			}
+    function cancel() {
+      $modalInstance.dismiss('cancel');
+    }
 
-			function activate() {
-				console.log('CreateUOMModalController activated.');
-			}
-		}
+    function activate() {
+      console.log('CreateUOMModalController activated.');
+    }
+  }
 })();

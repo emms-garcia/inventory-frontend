@@ -7,20 +7,20 @@
  */
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('inventoryApp')
-		.controller('SettingsController', SettingsController);
+  angular.module('inventoryApp')
+    .controller('SettingsController', SettingsController);
 
-		SettingsController.$inject = ['userservice'];
+  SettingsController.$inject = ['userservice'];
 
-		function SettingsController(userservice) {
-			var vm = this;
+  function SettingsController(userservice) {
+    var vm = this;
 
-			vm.currentUser = userservice.currentUser;
+    vm.currentUser = userservice.currentUser;
 
-			function activate() {
-				console.log('Activate SettingsController');
-			}
-		}
+    function activate() {
+      console.log('Activate SettingsController');
+    }
+  }
 })();

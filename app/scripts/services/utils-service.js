@@ -6,57 +6,56 @@
  * Service in the inventoryApp.
  */
 (function() {
-	'use strict';
-	angular.module('inventoryApp')
-		.factory('utilsservice', utilsservice);
+  'use strict';
+  angular.module('inventoryApp')
+    .factory('utilsservice', utilsservice);
 
-	utilsservice.$inject = ['Notification', '$modal', '$translate'];
+  utilsservice.$inject = ['Notification', '$modal', '$translate'];
 
-	function utilsservice(Notification, $modal, $translate) {
-		var service = {
-			notifySuccess: notifySuccess,
-			notifyError: notifyError,
-			notifyInformation: notifyInformation,
-			notifyWarning: notifyWarning,
-			confirmationDialog: confirmationDialog,
-			translate: translate
-		};
+  function utilsservice(Notification, $modal, $translate) {
+    var service = {
+      notifySuccess: notifySuccess,
+      notifyError: notifyError,
+      notifyInformation: notifyInformation,
+      notifyWarning: notifyWarning,
+      confirmationDialog: confirmationDialog,
+      translate: translate
+    };
 
-		function translate(tag) {
-			return $translate.instant(tag);
-		}
+    function translate(tag) {
+      return $translate.instant(tag);
+    }
 
-		function notifySuccess(message) {
-			Notification.success(message);
-		}
+    function notifySuccess(message) {
+      Notification.success(message);
+    }
 
-		function notifyError(message) {
-			Notification.error(message);
-		}
+    function notifyError(message) {
+      Notification.error(message);
+    }
 
-		function notifyInformation(message) {
-			Notification.info(message);
-		}
-		function notifyWarning(message) {
-			Notification.warning(message);
-		}
+    function notifyInformation(message) {
+      Notification.info(message);
+    }
+    function notifyWarning(message) {
+      Notification.warning(message);
+    }
 
-		function confirmationDialog(successCallback, errorCallback, config) {
-			config = config ? config : {};
-			var modalInstance = $modal.open({
-				animation: config.animation || true,
-				templateUrl: 'views/commons/confirmation-dialog.html',
-				controller: 'ConfirmationDialogModalController as vm',
-				size: config.size || 'md',
-				resolve: {
-					config: function() {
-						return config;
-					}
-				}
-			});
-			modalInstance.result.then(successCallback, errorCallback);
-		}
-
-		return service;
-	}
+    function confirmationDialog(successCallback, errorCallback, config) {
+      config = config ? config : {};
+      var modalInstance = $modal.open({
+        animation: config.animation || true,
+        templateUrl: 'views/commons/confirmation-dialog.html',
+        controller: 'ConfirmationDialogModalController as vm',
+        size: config.size || 'md',
+        resolve: {
+          config: function() {
+            return config;
+          }
+        }
+      });
+      modalInstance.result.then(successCallback, errorCallback);
+    }
+    return service;
+  }
 })();

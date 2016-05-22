@@ -1,54 +1,51 @@
-.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-	.row
-		.col-sm-12
-			h1.page-header {{ "CLIENTS" | translate }}
-				button.btn.btn-primary(type="button", ng-click="vm.openCreateClientModal()", tooltip="{{ 'CREATE_CLIENT' | translate }}")
-					span.glyphicon.glyphicon-plus
-	.row
-		.col-sm-3
-			.input-group
-				input.form-control.col-sm-4(ng-model="vm.query", type="text", placeholder="{{ 'SEARCH' | translate }}")
-				span.input-group-btn
-					button.btn
-						span.glyphicon.glyphicon-search
-	.row
-		.col-sm-12
-			.table-responsive.table-list
-				table.table.table-striped.table-hover
-					thead
-						tr
-							th {{ "ID" | translate }}
-							th {{ "NAME" | translate }}
-							th {{ "EMAIL" | translate }}
-							th {{ "COMPANY" | translate }}
-							th {{ "RFC" | translate }}
-							th {{ "PHONE" | translate }}
-							th {{ "CELLPHONE" | translate }}
-							th {{ "ADDRESS" | translate }}
-							th {{ "GEOLOCATION" | translate }}
-							th
-					tbody
-						tr(ng-if="vm.clients.length === 0")
-							td(class="text-center", colspan="10")
-								p {{ 'NO_CLIENTS_DEFINED' | translate }}
-						tr(ng-repeat="client in vm.clients | filter: vm.query", ui-sref="clients.detail({'clientId': client.id})")
-							td
-								p {{ client.id }}
-							td
-								p {{ client.name || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.email || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.company || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.rfc || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.phone || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.cellphone || ("NOT_SPECIFIED" | translate ) }}
-							td
-								p {{ client.address || ("NOT_SPECIFIED" | translate ) }}
-							td
-								a(ng-click="$event.stopPropagation()", ng-if="client.latitude && client.longitude", target="_blank", ng-href="https://maps.google.com/maps?q=loc:{{client.latitude}},{{client.longitude}}") {{ "OPEN_ON_GMAPS" | translate }}
-							td
-								button.btn.btn-block.btn-danger(type="button", ng-click="$event.stopPropagation(); vm.deleteClient(client.id)", tooltip="{{ 'DELETE_CLIENT' | translate }}") &times;
+div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+  div(class="row")
+    div(class="col-sm-12")
+      h1(class="page-header") {{ 'CLIENTS' | translate }}
+        button(class="btn btn-primary", type="button", ng-click="vm.openCreateClientModal()", tooltip="{{ 'CREATE_CLIENT' | translate }}")
+          span(class="glyphicon glyphicon-plus")
+  div(class="row")
+    div(class="col-sm-3")
+      div(class="input-group")
+        input(class="form-control col-sm-4", ng-model="vm.query", type="text", placeholder="{{ 'SEARCH' | translate }}")
+        span(class="input-group-btn")
+          button(class="btn")
+            span(class="glyphicon glyphicon-search")
+  div(class="row")
+    div(class="col-sm-12")
+      div(class="table-responsive table-list")
+        table(class="table table-striped table-hover")
+          thead
+            tr
+              th {{ "NAME" | translate }}
+              th {{ "EMAIL" | translate }}
+              th {{ "COMPANY" | translate }}
+              th {{ "RFC" | translate }}
+              th {{ "PHONE" | translate }}
+              th {{ "CELLPHONE" | translate }}
+              th {{ "ADDRESS" | translate }}
+              th {{ "GEOLOCATION" | translate }}
+              th
+          tbody
+            tr(ng-if="vm.clients.length === 0")
+              td(class="text-center", colspan="10")
+                p {{ 'NO_CLIENTS_DEFINED' | translate }}
+            tr(ng-repeat="client in vm.clients | filter: vm.query", ui-sref="clients.detail({'clientId': client.id})")
+              td
+                p {{ client.name || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.email || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.company || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.rfc || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.phone || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.cellphone || ("NOT_SPECIFIED" | translate ) }}
+              td
+                p {{ client.address || ("NOT_SPECIFIED" | translate ) }}
+              td
+                a(ng-click="$event.stopPropagation()", ng-if="client.latitude && client.longitude", target="_blank", ng-href="https://maps.google.com/maps?q=loc:{{client.latitude}},{{client.longitude}}") {{ "OPEN_ON_GMAPS" | translate }}
+              td
+                button(class="btn btn-block btn-danger", type="button", ng-click="$event.stopPropagation(); vm.deleteClient(client.id)", tooltip="{{ 'DELETE_CLIENT' | translate }}") &times;

@@ -6,36 +6,36 @@
  * Controller of the inventoryApp
  */
 (function() {
-	'use strict';
+  'use strict';
 
-	angular
-		.module('inventoryApp')
-		.controller('LoginController', LoginController);
+  angular
+    .module('inventoryApp')
+    .controller('LoginController', LoginController);
 
-	LoginController.$inject = ['$state', 'userservice'];
+  LoginController.$inject = ['$state', 'userservice'];
 
-	function LoginController($state, userservice) {
-		var vm = this;
+  function LoginController($state, userservice) {
+    var vm = this;
 
-		vm.username = null;
-		vm.password = null;
-		vm.logIn = logIn;
+    vm.username = null;
+    vm.password = null;
+    vm.logIn = logIn;
 
-		activate();
+    activate();
 
-		function logIn() {
-			if(vm.username) {
-				userservice.logIn(vm.username, vm.password).then(function (loggedIn) {
-					if(loggedIn) {
-						$state.go('dashboard');
-					}
-				});
-			}
-		}
+    function logIn() {
+      if(vm.username) {
+        userservice.logIn(vm.username, vm.password).then(function (loggedIn) {
+          if(loggedIn) {
+            $state.go('dashboard');
+          }
+        });
+      }
+    }
 
-		function activate() {
-			console.log('Login Controller activated.');
-		}
-	}
+    function activate() {
+      console.log('Login Controller activated.');
+    }
+  }
 
 })();

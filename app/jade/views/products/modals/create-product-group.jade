@@ -1,52 +1,52 @@
-form.form-horizonal(name='form', ng-submit='vm.create()', novalidate, editable-form)
-	.modal-header
-		h3.modal-title {{ 'CREATE_PRODUCT_GROUP' | translate }}
-	.modal-body
-		.row
-			.col-sm-6
-				.row.form-group
-					label.col-sm-5(for="name") *{{ 'NAME' | translate }}:
-					.col-sm-7
-						input#name.form-control(required, ng-model='vm.name', type='text', placeholder="{{ 'NAME' | translate }}")
-				.row.form-group
-					label.col-sm-5(for="description") {{ 'DESCRIPTION' | translate }}:
-					.col-sm-7
-						textarea#description.form-control(ng-model='vm.description', type='text', placeholder="{{ 'DESCRIPTION' | translate }}")
-		.row
-			.col-sm-12
-				h4 {{ 'SELECT_PRODUCTS' | translate }}:
+form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate, editable-form)
+  div(class="modal-header")
+    h3(class="modal-title") {{ 'CREATE_PRODUCT_GROUP' | translate }}
+  div(class="modal-body")
+    div(class="row")
+      div(class="col-sm-6")
+        div(class="row form-group")
+          label(class="col-sm-5", for="name") *{{ 'NAME' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="name", required, ng-model="vm.name", type="text", placeholder="{{ 'NAME' | translate }}")
+        div(class="row form-group")
+          label(class="col-sm-5", for="description") {{ 'DESCRIPTION' | translate }}:
+          div(class="col-sm-7")
+            textarea(class="form-control", ng-model="vm.description", type="text", placeholder="{{ 'DESCRIPTION' | translate }}")
+    div(class="row")
+      div(class="col-sm-12")
+        h4 {{ 'SELECT_PRODUCTS' | translate }}:
 
-		.row
-			.col-sm-12
-				.table-responsive
-					table.table.table-striped
-						thead
-							tr
-								th {{ 'NAME' | translate }}
-								th {{ 'DESCRIPTION' | translate }}
-								th {{ 'UOM' | translate }}
-								th {{ 'PRICE_PER_UOM' | translate }}
-								th {{ 'QUANTITIES' | translate }}
-								th {{ 'USE' | translate }}
-						tbody
-							tr(ng-repeat="product in vm.products")
-								td {{ product.name }}
-								td {{ product.description }}
-								td {{ product.uom.name }}
-								td ${{ product.price_per_uom }}
-								td
-									div(class="col-sm-5")
-										input(class="form-control", type="number", ng-model="product.quantity", min="1", value="1", ng-change="vm.updateProductsInUse()")
-								td(style="width:5%;")
-									input(type="checkbox", ng-model="product.use", ng-change="vm.updateProductsInUse()")
-						tfoot
-							tr
-								td(colspan="4")
-								td
-									b {{ 'TOTAL' | translate }}: &nbsp;
-									span ${{ vm.productPriceSum }}
-								td
+    div(class="row")
+      div(class="col-sm-12")
+        div(class="table-responsive")
+          table(class="table table-striped")
+            thead
+              tr
+                th {{ 'NAME' | translate }}
+                th {{ 'DESCRIPTION' | translate }}
+                th {{ 'UOM' | translate }}
+                th {{ 'PRICE_PER_UOM' | translate }}
+                th {{ 'QUANTITIES' | translate }}
+                th {{ 'USE' | translate }}
+            tbody
+              tr(ng-repeat="product in vm.products")
+                td {{ product.name }}
+                td {{ product.description }}
+                td {{ product.uom.name }}
+                td ${{ product.price_per_uom }}
+                td
+                  div(class="col-sm-5")
+                    input(class="form-control", type="number", ng-model="product.quantity", min="1", value="1", ng-change="vm.updateProductsInUse()")
+                td(style="width:5%;")
+                  input(type="checkbox", ng-model="product.use", ng-change="vm.updateProductsInUse()")
+            tfoot
+              tr
+                td(colspan="4")
+                td
+                  strong {{ 'TOTAL' | translate }}: &nbsp;
+                  span ${{ vm.productPriceSum }}
+                td
 
-	.modal-footer
-		button.btn.btn-primary(type='submit', ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}
-		button.btn.btn-warning(type='button', ng-click="vm.cancel()") {{ 'CANCEL' | translate }}
+  div(class="modal-footer")
+    button(class="btn btn-primary", type="submit", ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}
+    button(class="btn btn-warning", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

@@ -7,30 +7,30 @@
  */
 
 (function () {
-	'use strict';
+  'use strict';
 
-	angular.module('inventoryApp')
-		.controller('HeaderController', HeaderController);
+  angular.module('inventoryApp')
+    .controller('HeaderController', HeaderController);
 
-		HeaderController.$inject = ['$state', 'userservice'];
+  HeaderController.$inject = ['$state', 'userservice'];
 
-		function HeaderController($state, userservice) {
-			var vm = this;
-			vm.logOut = logOut;
-			vm.currentUser = userservice.currentUser;
+  function HeaderController($state, userservice) {
+    var vm = this;
+    vm.logOut = logOut;
+    vm.currentUser = userservice.currentUser;
 
-			activate();
+    activate();
 
-			function logOut() {
-				userservice.logOut().then(function(loggedOut) {
-					if(loggedOut) {
-						$state.go('login');
-					}
-				});
-			}
+    function logOut() {
+      userservice.logOut().then(function(loggedOut) {
+        if(loggedOut) {
+          $state.go('login');
+        }
+      });
+    }
 
-			function activate() {
-				console.log('HeaderController activated.');
-			}
-		}
+    function activate() {
+      console.log('HeaderController activated.');
+    }
+  }
 })();

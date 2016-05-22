@@ -439,7 +439,8 @@ module.exports = function (grunt) {
       'autoprefixer:server',
       'connect:livereload',
       'watch',
-      'jade'
+      'jade',
+      'jshint'
     ]);
   });
 

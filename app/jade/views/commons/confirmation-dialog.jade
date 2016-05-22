@@ -1,10 +1,10 @@
-form.form-horizonal(name='form', ng-submit='vm.confirm()')
-	.modal-header
-		h3.modal-title {{ vm.titleMsg }}
-	.modal-body
-		.row
-			.col-sm-12
-				h4 {{ vm.bodyMsg }}
-	.modal-footer
-		button.btn.btn-primary(type='submit') {{ vm.confirmBtnMsg }}
-		button.btn.btn-default(ng-click='vm.cancel()') {{ vm.cancelBtnMsg }}
+form(class="form-horizonal", name="form", ng-submit="vm.confirm()")
+  div(class="modal-header")
+    h3(class="modal-title") {{ vm.titleMsg }}
+  div(class="modal-body")
+    div(class="row")
+      div(class="col-sm-12")
+        h4 {{ vm.bodyMsg }}
+  div(class="modal-footer")
+    button(class="btn btn-primary", type="submit") {{ vm.confirmBtnMsg }}
+    button(class="btn btn-default", ng-click="vm.cancel()") {{ vm.cancelBtnMsg }}
