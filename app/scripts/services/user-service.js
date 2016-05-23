@@ -146,7 +146,7 @@
         console.log('XHR Failed for createUserFailed ' + error.data);
         utilsservice.notifyError($translate.instant('CREATE_USER_FAILED'));
         if(error.data.users) {
-          for(var key in data) {
+          for(var key in error.data.users) {
             if(error.data.users[key]) {
               utilsservice.notifyError(error.data.users[key][0]);
             }
@@ -176,7 +176,7 @@
         console.log('XHR Failed for updateUserData ' + error.data);
         utilsservice.notifyError($translate.instant('UPDATE_USER_FAILED'));
         if(error.data.users) {
-          for(var key in data) {
+          for(var key in error.data.users) {
             if(error.data.users[key]) {
               utilsservice.notifyError(error.data.users[key][0]);
             }

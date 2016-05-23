@@ -10,33 +10,39 @@
   angular.module('inventoryApp')
     .factory('productservice', productservice);
 
-  productservice.$inject = ['$http', '$translate', 'utilsservice'];
+  productservice.$inject = ['$http', '$translate', 'utilsservice', 'Upload'];
 
-  function productservice($http, $translate, utilsservice) {
+  function productservice($http, $translate, utilsservice, Upload) {
     var service = {
       getProductList: getProductList,
       getProductDetail: getProductDetail,
       createProduct: createProduct,
-      deleteProduct: deleteProduct,
+      deleteProducts: deleteProducts,
       getProductGroupList: getProductGroupList,
       createProductGroup: createProductGroup,
-      deleteProductGroup: deleteProductGroup
+      deleteProductGroups: deleteProductGroups,
+      updateProductData: updateProductData,
+      importProducts: importProducts
     };
 
-    function deleteProductGroup(id) {
+    function deleteProductGroups(objects) {
       return $http({
-        method: 'DELETE',
-        url: '/api/inventory/product_groups/' + id + '/'
-      }).then(deleteProductGroupSuccess)
-      .catch(deleteProductGroupError);
+        data: {
+          deleted_objects: objects,
+          objects: []
+        },
+        method: 'PATCH',
+        url: '/api/inventory/product_groups/'
+      }).then(deleteProductGroupsSuccess)
+      .catch(deleteProductGroupsError);
 
-      function deleteProductGroupSuccess() {
+      function deleteProductGroupsSuccess() {
         utilsservice.notifySuccess($translate.instant('PRODUCT_GROUP_DELETE_SUCCESS'));
         return true;
       }
 
-      function deleteProductGroupError(error) {
-        console.log('XHR failed on deleteProductGroupError ' + error);
+      function deleteProductGroupsError(error) {
+        console.log('XHR failed on deleteProductGroupsError ' + error);
         utilsservice.notifyError($translate.instant('PRODUCT_GROUP_DELETE_FAILED'));
         return false;
       }
@@ -150,15 +156,19 @@
       }
     }
 
-    function deleteProduct(id) {
+    function deleteProducts(objects) {
       return $http({
-        method: 'DELETE',
-        url: '/api/inventory/products/' + id + '/'
+        data: {
+          deleted_objects: objects,
+          objects: []
+        },
+        method: 'PATCH',
+        url: '/api/inventory/products/'
       }).then(deleteProductSuccess)
       .catch(deleteProductError);
 
       function deleteProductSuccess() {
-        utilsservice.notifySuccess($translate.instant('PRODUCT_DELETE_SUCCESS'));
+        utilsservice.notifySuccess($translate.instant('PRODUCTS_DELETE_SUCCESS'));
         return true;
       }
 
@@ -167,10 +177,48 @@
         if(error.status === 400) {
           utilsservice.notifyError(error.data.error);
         } else {
-          utilsservice.notifyError($translate.instant('PRODUCT_DELETE_FAILED'));
+          utilsservice.notifyError($translate.instant('PRODUCTS_DELETE_FAILED'));
         }
         return false;
       }
+    }
+
+    function updateProductData(id, data) {
+      return $http({
+        method: 'PATCH',
+        url: 'api/inventory/products/' + id + '/',
+        data: data
+      })
+      .then(updateProductDataSuccess)
+      .catch(updateProductDataFailed);
+
+      function updateProductDataSuccess() {
+        utilsservice.notifySuccess($translate.instant('UPDATE_PRODUCT_SUCCESS'));
+        return true;
+      }
+
+      function updateProductDataFailed(error) {
+        console.log('XHR Failed for updateProductData ' + error.data);
+        utilsservice.notifyError($translate.instant('UPDATE_PRODUCT_FAILED'));
+        if(error.data.products) {
+          for(var key in error.data.products) {
+            if(error.data.products[key]) {
+              utilsservice.notifyError(error.data.products[key][0]);
+            }
+          }
+        }
+        return false;
+      }
+    }
+
+    function importProducts(file) {
+      return Upload.upload({
+          url: 'api/inventory/products/import/',
+          data: { file: file }
+      }).then(function (response) {
+        utilsservice.notifySuccess($translate.instant('IMPORT_PRODUCTS_SUCCESS'));
+        return response;
+      });
     }
 
     return service;

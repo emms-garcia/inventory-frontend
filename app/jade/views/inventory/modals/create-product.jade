@@ -14,11 +14,6 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
             textarea(class="form-control", id="description", ng-model="vm.description", type="text", placeholder="{{ 'DESCRIPTION' | translate }}")
 
         div(class="row form-group")
-          label(class="col-sm-5", for="quantity") *{{ 'QUANTITIES' | translate }}:
-          div(class="col-sm-7")
-            input(class="form-control", id="quantity", required, ng-model="vm.quantity", type="number", placeholder="{{ 'QUANTITIES' | translate }}", min="1", value="1")
-
-        div(class="row form-group")
           label(class="col-sm-5", for="price-per-unit") *{{ 'PRICE_PER_PRODUCT' | translate }}:
           div(class="col-sm-7")
             input(class="form-control", id="price-per-unit", required, ng-model="vm.pricePerUnit", type="number", placeholder="{{ 'PRICE_PER_PRODUCT' | translate }}")

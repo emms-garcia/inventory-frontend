@@ -20,8 +20,9 @@
       'pascalprecht.translate',
       'xeditable',
       'ui-notification',
-      'uiGmapgoogle-maps'
-    ]);
+      'uiGmapgoogle-maps',
+      'ngFileUpload'
+    ]).constant('_', window._);
 
   angular
     .module('inventoryApp')
@@ -143,18 +144,6 @@
         'mainView': {
           templateUrl: 'views/inventory/inventory.html',
           controller : 'InventoryController',
-          controllerAs: 'vm'
-         },
-      }
-    })
-    .state('products', {
-      url:'/products',
-      authenticate : true,
-      parent: 'template',
-      views: {
-        'mainView': {
-          templateUrl: 'views/products/products.html',
-          controller : 'ProductsController',
           controllerAs: 'vm'
          },
       }

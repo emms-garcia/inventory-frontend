@@ -1,4 +1,84 @@
 div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
-  div(class="row")
-    div(class="col-sm-12")
-      h1(class="page-header") {{ 'INVENTORY' | translate }}
+  h1(class="page-header") {{ 'INVENTORY' | translate }}
+
+  tabset(active="active")
+    tab(index="1" heading="{{ 'PRODUCTS' | translate }}")
+      h3(class="sub-header") {{ 'PRODUCTS' | translate }}
+        div(class="btn-group pull-right", dropdown)
+          button(id="single-button", type="button", class="btn btn-primary", dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+            span(class="caret")
+          ul(class="dropdown-menu", dropdown-menu, role="menu", aria-labelledby="single-button")
+            li(role="menuitem")
+              a(href="", ng-click="vm.openCreateProductModal()") {{ 'CREATE_PRODUCT' | translate }}
+              a(href="", ng-click="vm.deleteSelectedProducts()") {{ 'DELETE_SELECTED_PRODUCTS' | translate }}
+              a(href="", ng-click="vm.importProductsModal()") {{ 'IMPORT_PRODUCTS' | translate }}
+
+      div(class="row")
+        div(class="col-sm-3")
+          div(class="input-group")
+            input(class="form-control col-sm-4", ng-model="vm.queryProducts", type="text", placeholder="{{ 'SEARCH' | translate }}")
+            span(class="input-group-btn")
+              button(class="btn")
+                span(class="glyphicon glyphicon-search")
+
+      div(class="table-responsive")
+        table(class="table table-striped")
+          thead
+            tr
+              th
+              th(style="width: 20%;") {{ 'NAME' | translate }}
+              th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
+              th {{ 'PRICE_PER_PRODUCT' | translate }}
+              th {{ 'QUANTITIES' | translate }}
+          tbody
+            tr(ng-if="vm.products.length === 0")
+              td(class="text-center", colspan="5") {{ 'NO_PRODUCTS_DEFINED' | translate }}
+            tr(ng-repeat="product in vm.products | filter: vm.queryProducts")
+              td
+                input(type="checkbox", ng-model="product.selected")
+              td
+                a(href="", editable-text="product.name", onbeforesave="vm.updateProductData(product.id, 'name', $data)") {{ product.name || 'NO_PRODUCT_NAME' }}
+              td
+                a(href="", editable-textarea="product.description", onbeforesave="vm.updateProductData(product.id, 'description', $data)") {{ product.description || 'N/A' }}
+              td
+                a(href="", editable-number="product.price_per_unit", e-step="0.01", onbeforesave="vm.updateProductData(product.id, 'price_per_unit', $data)") ${{ product.price_per_unit }}
+              th {{ product.quantity }}
+
+    tab(index="2" heading="{{ 'PRODUCT_GROUPS' | translate }}")
+      h3(class="sub-header") {{ 'PRODUCT_GROUPS' | translate }}
+        div(class="btn-group pull-right", dropdown)
+          button(id="single-button", type="button", class="btn btn-primary", dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+            span(class="caret")
+          ul(class="dropdown-menu", dropdown-menu, role="menu", aria-labelledby="single-button")
+            li(role="menuitem")
+              a(href="", ng-click="vm.openCreateProductGroupModal()") {{ 'CREATE_PRODUCT_GROUP' | translate }}
+              a(href="", ng-click="vm.deleteSelectedProductGroups()") {{ 'DELETE_SELECTED_PRODUCT_GROUPS' | translate }}
+
+
+      div(class="alert alert-warning", ng-show="vm.products.length === 0") {{ 'CANNOT_ADD_PRODUCT_GROUP_NEED_PRODUCT' | translate }}
+
+      div(class="row")
+        div(class="col-sm-3")
+          div(class="input-group")
+            input(class="form-control col-sm-4", ng-model="vm.queryProducts", type="text", placeholder="{{ 'SEARCH' | translate }}")
+            span(class="input-group-btn")
+              button(class="btn")
+                span(class="glyphicon glyphicon-search")
+
+      div(class="table-responsive")
+        table(class="table table-striped")
+          thead
+            tr
+              th
+              th(style="width: 20%;") {{ 'NAME' | translate }}
+              th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
+              th {{ 'TOTAL' | translate }}
+          tbody
+            tr(ng-if="vm.productGroups.length === 0")
+              td(class="text-center", colspan="4") {{ 'NO_PRODUCTS_DEFINED' | translate }}
+            tr(ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")
+              td
+                input(type="checkbox", ng-model="group.selected")
+              td {{ group.name }}
+              td {{ group.description }}
+              td ${{ group.total }}
