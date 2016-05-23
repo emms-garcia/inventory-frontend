@@ -161,9 +161,13 @@
           DELETE_SELECTED_PRODUCTS: 'Borrar productos seleccionados',
           ACTIONS: 'Acciones',
           DELETE_SELECTED_PRODUCT_GROUPS: 'Borrar grupos seleccionados',
+          NO_PRODUCT_GROUPS: 'No se han agregado grupos',
+          BUILD: 'Construir'
         };
       } else if(options.key === 'en-us') {
         translations = {
+          BUILD: 'Build',
+          NO_PRODUCT_GROUPS: 'No product groups added',
           DELETE_SELECTED_PRODUCT_GROUPS: 'Delete selected groups',
           ACTIONS: 'Actions',
           DELETE_SELECTED_PRODUCTS: 'Delete selected products',

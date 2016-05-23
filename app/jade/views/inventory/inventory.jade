@@ -57,28 +57,16 @@ div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
 
       div(class="alert alert-warning", ng-show="vm.products.length === 0") {{ 'CANNOT_ADD_PRODUCT_GROUP_NEED_PRODUCT' | translate }}
 
-      div(class="row")
+      div(class="row", ng-hide="vm.productGroups.length === 0")
         div(class="col-sm-3")
           div(class="input-group")
-            input(class="form-control col-sm-4", ng-model="vm.queryProducts", type="text", placeholder="{{ 'SEARCH' | translate }}")
+            input(class="form-control col-sm-4", ng-model="vm.queryProductGroups", type="text", placeholder="{{ 'SEARCH' | translate }}")
             span(class="input-group-btn")
               button(class="btn")
                 span(class="glyphicon glyphicon-search")
 
-      div(class="table-responsive")
-        table(class="table table-striped")
-          thead
-            tr
-              th
-              th(style="width: 20%;") {{ 'NAME' | translate }}
-              th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
-              th {{ 'TOTAL' | translate }}
-          tbody
-            tr(ng-if="vm.productGroups.length === 0")
-              td(class="text-center", colspan="4") {{ 'NO_PRODUCTS_DEFINED' | translate }}
-            tr(ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")
-              td
-                input(type="checkbox", ng-model="group.selected")
-              td {{ group.name }}
-              td {{ group.description }}
-              td ${{ group.total }}
+      div(class="row-fluid")
+        div(class="col-sm-6", ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")
+          product-group-card(group="group")
+        div(class="col-sm-12", ng-show="vm.productGroups.length === 0")
+          p(class="lead text-center") {{ 'NO_PRODUCT_GROUPS' | translate }}

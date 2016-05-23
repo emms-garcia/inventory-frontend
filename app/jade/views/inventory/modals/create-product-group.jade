@@ -22,29 +22,28 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate, e
           table(class="table table-striped")
             thead
               tr
+                th
                 th {{ 'NAME' | translate }}
-                th {{ 'DESCRIPTION' | translate }}
+                th(style="width: 30%;") {{ 'DESCRIPTION' | translate }}
+                th(style="width: 20%;") {{ 'QUANTITIES' | translate }}
                 th {{ 'PRICE_PER_PRODUCT' | translate }}
-                th {{ 'QUANTITIES' | translate }}
-                th {{ 'USE' | translate }}
             tbody
               tr(ng-repeat="product in vm.products")
-                td {{ product.name }}
-                td {{ product.description }}
-                td ${{ product.price_per_unit }}
-                td
-                  div(class="col-sm-5")
-                    input(class="form-control", type="number", ng-model="product.quantity_in_group", min="1", value="1", ng-change="vm.updateProductsInUse()")
                 td(style="width:5%;")
                   input(type="checkbox", ng-model="product.use", ng-change="vm.updateProductsInUse()")
+                td {{ product.name }}
+                td {{ product.description }}
+                td
+                  div(class="col-sm-12")
+                    input(class="form-control", type="number", ng-model="product.quantity_in_group", min="1", value="1", ng-change="vm.updateProductsInUse()")
+                td ${{ product.price_per_unit }}
             tfoot
               tr
                 td(colspan="4")
                 td
-                  strong {{ 'TOTAL' | translate }}: &nbsp;
-                  span ${{ vm.productPriceSum }}
-                td
-
+                  p(class="lead")
+                    strong {{ 'TOTAL' | translate }}: &nbsp;
+                    span ${{ vm.productPriceSum }}
   div(class="modal-footer")
     button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}
     button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

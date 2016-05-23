@@ -62,10 +62,9 @@
     }
 
     function openCreateProductModal() {
-
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: 'views/products/modals/create-product.html',
+        templateUrl: 'views/inventory/modals/create-product.html',
         controller: 'CreateProductModalController as vm',
         size: 'lg'
       });
@@ -76,7 +75,7 @@
     function openCreateProductGroupModal() {
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: 'views/products/modals/create-product-group.html',
+        templateUrl: 'views/inventory/modals/create-product-group.html',
         controller: 'CreateProductGroupModalController as vm',
         size: 'lg',
         resolve: {
@@ -85,7 +84,6 @@
           }
         }
       });
-
       modalInstance.result.then(getProductGroups);
     }
 
@@ -126,7 +124,6 @@
         controller: 'ImportProductsController as vm',
         size: 'lg'
       });
-
       modalInstance.result.then(getProducts);
     }
 
@@ -138,10 +135,8 @@
 
     function activate() {
       console.log('InventoryController activated.');
-
       getProductGroups();
       getProducts();
     }
   }
-
 })();
