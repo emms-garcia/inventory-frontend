@@ -41,8 +41,7 @@
     vm.importProductsModal = importProductsModal;
     vm.openCreateProductModal = openCreateProductModal;
     vm.openCreateProductGroupModal = openCreateProductGroupModal;
-    vm.updateProductData = updateProductData;
-
+    vm.openEditProductModal = openEditProductModal;
     activate();
 
     function getProducts() {
@@ -87,6 +86,20 @@
       modalInstance.result.then(getProductGroups);
     }
 
+    function openEditProductModal(product) {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'views/inventory/modals/edit-product.html',
+        controller: 'EditProductModalController as vm',
+        size: 'md',
+        resolve: {
+          product: function () {
+            return product;
+          }
+        }
+      });
+    }
+
     function deleteSelectedProducts() {
       var data = [];
       _.forEach(vm.products, function (product) {
@@ -125,12 +138,6 @@
         size: 'lg'
       });
       modalInstance.result.then(getProducts);
-    }
-
-    function updateProductData(productId, key, value) {
-      var data = {};
-      data[key] = value;
-      return productservice.updateProductData(productId, data);
     }
 
     function activate() {

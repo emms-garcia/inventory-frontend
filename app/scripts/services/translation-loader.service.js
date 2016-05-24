@@ -158,14 +158,25 @@
           SELECT_FILE: 'Selecciona un archivo',
           IMPORT: 'Importar',
           IMPORT_PRODUCTS_SUCCESS: 'Importación exitosa',
-          DELETE_SELECTED_PRODUCTS: 'Borrar productos seleccionados',
+          DELETE_SELECTED_PRODUCTS: 'Borrar Productos seleccionados',
           ACTIONS: 'Acciones',
-          DELETE_SELECTED_PRODUCT_GROUPS: 'Borrar grupos seleccionados',
+          DELETE_SELECTED_PRODUCT_GROUPS: 'Borrar Grupos seleccionados',
           NO_PRODUCT_GROUPS: 'No se han agregado grupos',
-          BUILD: 'Construir'
+          BUILD: 'Construir',
+          REQUIRED_QUANTITY: 'Cantidad Requerida',
+          REAL_QUANTITY: 'Cantidad en Inventorio',
+          PRODUCT_GROUP_BUILD_WARNING: 'Solo se pueden construir 3 o menos de este grupo',
+          PRODUCT_GROUP_BUILD_DANGER: 'No se puede construir este grupo. No hay suficientes productos en inventorio',
+          PRODUCT_GROUP_BUILD_SUCCESS: 'Se pueden construir más de 3 de este grupo',
+          WAREHOUSE: 'Almacén',
+          PRODUCT: 'Producto'
         };
       } else if(options.key === 'en-us') {
         translations = {
+          PRODUCT: 'Product',
+          WAREHOUSE: 'Warehouse',
+          REQUIRED_QUANTITY: 'Required Quantity',
+          REAL_QUANTITY: 'Quantity in Inventory',
           BUILD: 'Build',
           NO_PRODUCT_GROUPS: 'No product groups added',
           DELETE_SELECTED_PRODUCT_GROUPS: 'Delete selected groups',

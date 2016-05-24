@@ -22,7 +22,8 @@
       createProductGroup: createProductGroup,
       deleteProductGroups: deleteProductGroups,
       updateProductData: updateProductData,
-      importProducts: importProducts
+      importProducts: importProducts,
+      getWarehouseProductStock: getWarehouseProductStock
     };
 
     function deleteProductGroups(objects) {
@@ -219,6 +220,27 @@
         utilsservice.notifySuccess($translate.instant('IMPORT_PRODUCTS_SUCCESS'));
         return response;
       });
+    }
+
+    function getWarehouseProductStock(productId) {
+      return $http({
+        method: 'GET',
+        params: {
+          product: productId
+        },
+        url: '/api/inventory/warehouse_stocks/'
+      }).then(getWarehouseProductStockSuccess)
+      .catch(getWarehouseProductStockError);
+
+      function getWarehouseProductStockSuccess(response) {
+        return response.data.objects;
+      }
+
+      function getWarehouseProductStockError(error) {
+        console.log('XHR failed on getWarehouseProductStock ' + error);
+        utilsservice.notifyError($translate.instant('WAREHOUSE_PRODUCT_STOCK_LIST_FAILED'));
+        return false;
+      }
     }
 
     return service;

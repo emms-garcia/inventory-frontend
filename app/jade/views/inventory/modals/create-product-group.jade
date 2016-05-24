@@ -36,7 +36,7 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate, e
                 td
                   div(class="col-sm-12")
                     input(class="form-control", type="number", ng-model="product.quantity_in_group", min="1", value="1", ng-change="vm.updateProductsInUse()")
-                td ${{ product.price_per_unit }}
+                td ${{ product.price }}
             tfoot
               tr
                 td(colspan="4")

@@ -30,7 +30,7 @@
       productservice.createProduct({
         name: vm.name,
         description: vm.description,
-        price_per_unit: vm.pricePerUnit
+        price: vm.pricePerUnit
       }).then(function (data) {
         if(data) {
           $modalInstance.close(data);

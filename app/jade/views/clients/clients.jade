@@ -2,8 +2,7 @@ div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
   div(class="row")
     div(class="col-sm-12")
       h1(class="page-header") {{ 'CLIENTS' | translate }}
-        button(class="btn btn-primary", type="button", ng-click="vm.openCreateClientModal()", tooltip="{{ 'CREATE_CLIENT' | translate }}")
-          span(class="glyphicon glyphicon-plus")
+
   div(class="row")
     div(class="col-sm-3")
       div(class="input-group")
@@ -11,6 +10,13 @@ div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
         span(class="input-group-btn")
           button(class="btn")
             span(class="glyphicon glyphicon-search")
+    div(class="col-sm-9")
+      div(class="btn-group pull-right", dropdown)
+        button(id="single-button", type="button", class="btn btn-primary", dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+          span(class="caret")
+        ul(class="dropdown-menu", dropdown-menu, role="menu", aria-labelledby="single-button")
+          li(role="menuitem")
+            a(href="", ng-click="vm.openCreateClientModal()") {{ 'CREATE_CLIENT' | translate }}
   div(class="row")
     div(class="col-sm-12")
       div(class="table-responsive table-list")

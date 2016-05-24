@@ -27,15 +27,16 @@
     return directive;
   }
 
-  ProductGroupCardController.$inject = ['$scope'];
+  ProductGroupCardController.$inject = ['$scope', '_'];
 
-  function ProductGroupCardController($scope) {
+  function ProductGroupCardController($scope, _) {
     var vm = this;
 
     activate();
 
     function activate() {
       console.log('ProductGroupCardController activated.');
+
     }
   }
 })();
