@@ -1,36 +1,13 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:HeaderController
- * @description
- * # HeaderController
- * Controller of the inventoryApp
- */
+export default class HeaderController {
+  constructor(userservice) {
+    this.currentUser = userservice.currentUser;
 
-(function () {
-  'use strict';
+    this.activate();
 
-  angular.module('inventoryApp')
-    .controller('HeaderController', HeaderController);
-
-  HeaderController.$inject = ['$state', 'userservice'];
-
-  function HeaderController($state, userservice) {
-    var vm = this;
-    vm.logOut = logOut;
-    vm.currentUser = userservice.currentUser;
-
-    activate();
-
-    function logOut() {
-      userservice.logOut().then(function(loggedOut) {
-        if(loggedOut) {
-          $state.go('login');
-        }
-      });
-    }
-
-    function activate() {
-      console.log('HeaderController activated.');
-    }
+    this.$inject = ['$state', 'userservice'];
   }
-})();
+
+  activate() {
+    console.log('HeaderController activated.');
+  }
+}

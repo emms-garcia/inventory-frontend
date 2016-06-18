@@ -1,11 +1,41 @@
-ul(class="nav nav-sidebar col-sm-3 col-md-2 sidebar")
-  li(ng-class="{ active : $state.current.name == 'dashboard' }", ui-sref="dashboard")
-    a(href="") {{ 'DASHBOARD' | translate }}
-  li(ng-class="{ active : $state.current.name == 'inventory' }", ui-sref="inventory")
-    a(href="") {{ 'INVENTORY' | translate }}
-  li(ng-class="{ active : $state.current.name == 'sales' }", ui-sref="sales")
-    a(href="") {{ 'SALES' | translate }}
-  li(ng-class="{ active : $state.current.name == 'purchases' }", ui-sref="purchases")
-    a(href="") {{ 'PURCHASES' | translate }}
-  li(ng-class="{ active : $state.current.name == 'clients' || $state.current.name == 'clients.detail' }", ui-sref="clients")
-    a(href="") {{ 'CLIENTS' | translate }}
+div(class="row")
+  div(class="col-sm-12")
+    img(class="img-responsive img-circle logo", src="images/logo.png", alt="Generic placeholder thumbnail")
+div(class="row")
+  div(class="col-sm-12")
+    ul(class="nav nav-sidebar")
+      li(ui-sref-active="active")
+        a(ui-sref="dashboard")
+          span(class="glyphicon glyphicon-th glyphicon-white")
+          | &nbsp; {{ 'DASHBOARD' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="warehouses")
+          span(class="glyphicon glyphicon-home glyphicon-white")
+          | &nbsp; {{ 'WAREHOUSES' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="inventory")
+          span(class="glyphicon glyphicon-list glyphicon-white")
+          | &nbsp; {{ 'INVENTORY' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="sales")
+          span(class="glyphicon glyphicon-usd glyphicon-white")
+          | &nbsp; {{ 'SALES' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="purchases")
+          span(class="glyphicon glyphicon-shopping-cart glyphicon-white")
+          | &nbsp; {{ 'PURCHASES' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="clients")
+          span(class="glyphicon glyphicon-user glyphicon-white")
+          | &nbsp; {{ 'CLIENTS' | translate }}
+div(class="row sidebar-bottom")
+  div(class="col-sm-12")
+    ul(class="nav nav-sidebar")
+      li(ui-sref-active="active")
+        a(ui-sref="settings")
+          span(class="glyphicon glyphicon-cog glyphicon-white")
+          | &nbsp; {{ 'SETTINGS' | translate }}
+      li
+        a(href="", ng-click="vm.logOut()")
+          span(class="glyphicon glyphicon-off glyphicon-white")
+          | &nbsp; {{ 'LOGOUT' | translate }}

@@ -1,99 +1,57 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:ClientsDetailController
- * @description
- * # ClientsDetailController
- * Controller of the inventoryApp
- */
+export default class ClientsDetailController {
+  constructor($state, $stateParams, clientsservice, utilsservice) {
+    this.$state = $state;
+    this.$stateParams = $stateParams;
+    this.clientsservice = clientsservice;
+    this.utilsservice = utilsservice;
 
-(function () {
-  'use strict';
+    this.currentClient = null;
 
-  angular.module('inventoryApp')
-    .controller('ClientsDetailController', ClientsDetailController);
+    this.activate();
 
-  ClientsDetailController.$inject = [
-    '$scope',
-    '$state',
-    '$stateParams',
-    'uiGmapGoogleMapApi',
-    'clientsservice',
-    'utilsservice'
-  ];
+    this.$inject = [
+      '$state',
+      '$stateParams',
+      'clientsservice',
+      'utilsservice'
+    ];
+  }
 
-  function ClientsDetailController (
-      $scope,
-      $state,
-      $stateParams,
-      uiGmapGoogleMapApi,
-      clientsservice,
-      utilsservice) {
-
-    var vm = this;
-    vm.currentClient = null;
-    vm.deleteClient = deleteClient;
-    vm.updateClientData = updateClientData;
-    vm.updateGeolocation = updateGeolocation;
-
-    /* Scope, needed for GoogleMaps directives */
-    $scope.map = {};
-    $scope.marker = {
-      id: 1,
-      coords: {},
-      options: { draggable: true }
-    };
-
-    activate();
-
-    function updateClientData(key, value) {
-      var data = {};
-      data[key] = value;
-      return clientsservice.updateClientData(vm.currentClient.id, data);
-    }
-
-    function updateGeolocation() {
-      var data = {};
-      data.latitude = $scope.marker.coords.latitude;
-      data.longitude = $scope.marker.coords.longitude;
-      return clientsservice.updateClientData(vm.currentClient.id, data).then(function (data) {
+  deleteClient() {
+    this.utilsservice.confirmationDialog(() => {
+      this.clientsservice.deleteClient(this.currentClient.id).then((data) => {
         if (data) {
-          vm.currentClient.latitude = data.latitude;
-          vm.currentClient.longitude = data.longitude;
+          this.$state.go('clients');
         }
       });
-    }
+    });
+  }
 
-    function deleteClient() {
-      utilsservice.confirmationDialog(function () {
-        clientsservice.deleteClient(vm.currentClient.id).then(function (data){
-          if (data) {
-            $state.go('clients');
-          }
-        });
-      });
-    }
+  updateClientData(key, value) {
+    return this.clientsservice.updateClientData(this.currentClient.id, {[key]: value});
+  }
 
-    function activate() {
-      console.log('DirectoryController activated.');
-      if ($stateParams.clientId) {
-        clientsservice.getClientDetail($stateParams.clientId).then(function (data){
-          if (data) {
-            vm.currentClient = data;
-            $scope.map = {
-              center: {
-                latitude: data.latitude,
-                longitude: data.longitude
-              },
-              zoom: 16
-            };
-            $scope.marker.coords = $scope.map.center;
-          } else {
-            $state.go('clients');
-          }
-        });
-      } else {
-        $state.go('clients');
+  updateGeolocation() {
+    return this.clientsservice.updateClientData(this.currentClient.id, {}).then((data) => {
+      if (data) {
+        this.currentClient.latitude = data.latitude;
+        this.currentClient.longitude = data.longitude;
       }
+    });
+  }
+
+  activate() {
+    console.log('ClientsDetailController activated.');
+    if (this.$stateParams.clientId) {
+      this.clientsservice.getClientDetail(this.$stateParams.clientId).then((data) => {
+        if (data) {
+          this.currentClient = data;
+        } else {
+          this.$state.go('clients');
+        }
+      });
+    } else {
+      this.$state.go('clients');
     }
   }
-})();
+}

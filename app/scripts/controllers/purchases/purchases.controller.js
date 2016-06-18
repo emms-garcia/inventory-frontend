@@ -1,29 +1,13 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:PurchasesController
- * @description
- * # PurchasesController
- * Controller of the inventoryApp
- */
+export default class PurchasesController {
+  constructor(userservice) {
+    this.currentUser = userservice.currentUser;
 
-(function () {
-  'use strict';
+    this.activate();
 
-  angular.module('inventoryApp')
-    .controller('PurchasesController', PurchasesController);
-
-  PurchasesController.$inject = ['userservice'];
-
-  function PurchasesController (userservice) {
-    var vm = this;
-    vm.currentUser = userservice.currentUser;
-
-    activate();
-
-    function activate() {
-      console.log('PurchasesController activated.');
-    }
-
+    this.$inject = ['userservice'];
   }
 
-})();
+  activate() {
+    console.log('PurchasesController activated.');
+  }
+}

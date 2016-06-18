@@ -1,49 +1,34 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:CreateProductModalController
- * @description
- * # CreateProductModalController
- * Controller of the inventoryApp
- */
+export default class CreateProductModalController {
+  constructor($uibModalInstance, productservice) {
+    this.$uibModalInstance = $uibModalInstance;
+    this.productservice = productservice;
 
-(function () {
-  'use strict';
+    this.description = null;
+    this.name = null;
+    this.pricePerUnit = 0.0;
 
-  angular.module('inventoryApp')
-    .controller('CreateProductModalController', CreateProductModalController);
+    this.activate();
 
-  CreateProductModalController.$inject = ['$modalInstance', 'productservice'];
-
-  function CreateProductModalController($modalInstance, productservice) {
-    var vm = this;
-    vm.create = create;
-    vm.cancel = cancel;
-    vm.activate = activate;
-
-    vm.name = null;
-    vm.description = null;
-    vm.pricePerUnit = 0.0;
-
-    activate();
-
-    function create() {
-      productservice.createProduct({
-        name: vm.name,
-        description: vm.description,
-        price: vm.pricePerUnit
-      }).then(function (data) {
-        if(data) {
-          $modalInstance.close(data);
-        }
-      });
-    }
-
-    function cancel() {
-      $modalInstance.dismiss('cancel');
-    }
-
-    function activate() {
-      console.log('CreateProductModalController activated.');
-    }
+    this.$inject = ['$uibModalInstance', 'productservice'];
   }
-})();
+
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
+  }
+
+  create() {
+    this.productservice.createProduct({
+      description: this.description,
+      name: this.name,
+      price: this.pricePerUnit
+    }).then((data) => {
+      if(data) {
+        this.$uibModalInstance.close(data);
+      }
+    });
+  }
+
+  activate() {
+    console.log('CreateProductModalController activated.');
+  }
+}

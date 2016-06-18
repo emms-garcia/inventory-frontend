@@ -3,11 +3,11 @@ div(class="login-view")
     div(class="col-sm-6 col-sm-offset-3")
       div(class="jumbotron")
         div(class="row")
-          div(class="col-sm-12")
+          div(class="col-sm-12 text-center")
             img(src="http://placehold.it/350x150")
         br
         div(class="row")
-          div(class="col-sm-10 col-sm-offset-1")
+          div(class="col-sm-10 col-sm-offset-1 text-center")
             form(name="form", ng-submit="vm.logIn()", novalidate)
               div(class="form-group has-feedback", ng-class="{ 'has-error': (form.email.$invalid && form.email.$touched), 'has-success': form.email.$valid }")
                 input(class="form-control input-lg", id="email", tabindex="1", type="email", placeholder="{{ 'USERNAME' | translate }}", ng-model="vm.username", name="email", required)
@@ -19,6 +19,6 @@ div(class="login-view")
               div(class="form-group")
                 p
                   a(ui-sref="password-reset") {{ 'FORGOT_PASSWORD' | translate }}
-              div(class="form-group")
+              div(class="btn-group")
                 button(class="btn btn-lg btn-primary", ng-disabled="form.$invalid", type="submit")  {{ 'LOG_IN' | translate }}
                 button(class="btn btn-lg btn-default", ui-sref="signup") {{ 'SIGN_UP' | translate }}

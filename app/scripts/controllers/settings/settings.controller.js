@@ -1,26 +1,13 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:SettingsController
- * @description
- * # SettingsController
- * Controller of the inventoryApp
- */
+export default class SettingsController {
+  constructor(userservice) {
+    this.currentUser = userservice.currentUser;
 
-(function () {
-  'use strict';
+    this.activate();
 
-  angular.module('inventoryApp')
-    .controller('SettingsController', SettingsController);
-
-  SettingsController.$inject = ['userservice'];
-
-  function SettingsController(userservice) {
-    var vm = this;
-
-    vm.currentUser = userservice.currentUser;
-
-    function activate() {
-      console.log('Activate SettingsController');
-    }
+    this.$inject = ['userservice'];
   }
-})();
+
+  activate() {
+    console.log('Activate SettingsController');
+  }
+}

@@ -1,0 +1,7 @@
+$color-primary: #662528;
+$color-bg: #A89589;
+
+// Bootstrap overwrites
+$brand-primary: $color-primary !default;
+$body-bg: $color-bg;
+$table-bg-accent: darken($color-bg, 1%) !default;

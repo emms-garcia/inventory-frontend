@@ -1,75 +1,59 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:CreateProductGroupModalController
- * @description
- * # CreateProductGroupModalController
- * Controller of the inventoryApp
- */
+export default class CreateProductGroupModalController {
+  constructor($uibModalInstance, products, productservice) {
+    this.$uibModalInstance = $uibModalInstance;
+    this.productservice = productservice;
 
-(function () {
-  'use strict';
+    this.description = null;
+    this.name = null;
+    this.productPriceSum = 0.0;
+    this.products = products;
+    this.productsInUse = false;
 
-  angular.module('inventoryApp')
-    .controller('CreateProductGroupModalController', CreateProductGroupModalController);
+    this.activate();
 
-  CreateProductGroupModalController.$inject = ['$modalInstance', 'products', 'productservice'];
-
-  function CreateProductGroupModalController($modalInstance, products, productservice) {
-    var vm = this;
-    vm.activate = activate;
-    vm.cancel = cancel;
-    vm.create = create;
-    vm.updateProductsInUse = updateProductsInUse;
-
-    vm.name = null;
-    vm.description = null;
-    vm.products = products;
-    vm.productPriceSum = 0.0;
-    vm.productsInUse = false;
-
-    activate();
-
-    function updateProductsInUse() {
-      vm.productPriceSum = 0.0;
-      vm.productsInUse = false;
-      angular.forEach(vm.products, function (product) {
-        product.quantity_in_group = product.quantity_in_group || 1;
-        if(product.use) {
-          vm.productPriceSum += product.price * product.quantity_in_group;
-          vm.productsInUse = true;
-        }
-      });
-    }
-
-    function create() {
-      var products = [];
-      angular.forEach(vm.products, function (product) {
-        if(product.use) {
-          products.push({
-            quantity: product.quantity_in_group,
-            resource_uri: product.resource_uri
-          });
-        }
-      });
-
-      productservice.createProductGroup({
-        name: vm.name,
-        description: vm.description,
-        products: products
-      }).then(function (data) {
-        if(data) {
-          $modalInstance.close(data);
-        }
-      });
-    }
-
-    function cancel() {
-      $modalInstance.dismiss('cancel');
-    }
-
-    function activate() {
-      console.log('CreateProductGroupModalController activated.');
-      updateProductsInUse();
-    }
+    this.$inject = ['$uibModalInstance', 'products', 'productservice'];
   }
-})();
+
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
+  }
+
+  create() {
+    const products = [];
+    this.products.forEach(function (product) {
+      if(product.use) {
+        products.push({
+          quantity: product.quantity_in_group,
+          resource_uri: product.resource_uri
+        });
+      }
+    });
+
+    this.productservice.createProductGroup({
+      description: this.description,
+      name: this.name,
+      products: products,
+    }).then((data) => {
+      if(data) {
+        this.$uibModalInstance.close(data);
+      }
+    });
+  }
+
+  updateProductsInUse() {
+    this.productPriceSum = 0.0;
+    this.productsInUse = false;
+    this.products.forEach((product) => {
+      product.quantity_in_group = product.quantity_in_group || 1;
+      if(product.use) {
+        this.productPriceSum += product.price * product.quantity_in_group;
+        this.productsInUse = true;
+      }
+    });
+  }
+
+  activate() {
+    console.log('CreateProductGroupModalController activated.');
+    this.updateProductsInUse();
+  }
+}

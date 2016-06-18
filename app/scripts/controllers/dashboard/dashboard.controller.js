@@ -1,29 +1,13 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:DashboardController
- * @description
- * # DashboardController
- * Controller of the inventoryApp
- */
+export default class DashboardController {
+  constructor(userservice) {
+    this.currentUser = userservice.currentUser;
 
-(function () {
-  'use strict';
+    this.activate();
 
-  angular.module('inventoryApp')
-    .controller('DashboardController', DashboardController);
-
-  DashboardController.$inject = ['userservice'];
-
-  function DashboardController (userservice) {
-    var vm = this;
-    vm.currentUser = userservice.currentUser;
-
-    activate();
-
-    function activate() {
-      console.log('DashboardController activated.');
-    }
-
+    this.$inject = ['userservice'];
   }
 
-})();
+  activate() {
+    console.log('DashboardController activated.');
+  }
+}

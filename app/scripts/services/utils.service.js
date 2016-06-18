@@ -1,61 +1,45 @@
-/**
- * @ngdoc factory
- * @name inventoryApp.utilsservice
- * @description
- * # utilsservice
- * Service in the inventoryApp.
- */
-(function() {
-  'use strict';
-  angular.module('inventoryApp')
-    .factory('utilsservice', utilsservice);
+export default class utilsservice {
+  constructor($translate, $uibModal, Notification) {
+    this.$translate = $translate;
+    this.$uibModal = $uibModal;
+    this.Notification = Notification;
 
-  utilsservice.$inject = ['Notification', '$modal', '$translate'];
-
-  function utilsservice(Notification, $modal, $translate) {
-    var service = {
-      notifySuccess: notifySuccess,
-      notifyError: notifyError,
-      notifyInformation: notifyInformation,
-      notifyWarning: notifyWarning,
-      confirmationDialog: confirmationDialog,
-      translate: translate
-    };
-
-    function translate(tag) {
-      return $translate.instant(tag);
-    }
-
-    function notifySuccess(message) {
-      Notification.success(message);
-    }
-
-    function notifyError(message) {
-      Notification.error(message);
-    }
-
-    function notifyInformation(message) {
-      Notification.info(message);
-    }
-    function notifyWarning(message) {
-      Notification.warning(message);
-    }
-
-    function confirmationDialog(successCallback, errorCallback, config) {
-      config = config ? config : {};
-      var modalInstance = $modal.open({
-        animation: config.animation || true,
-        templateUrl: 'views/commons/confirmation-dialog.html',
-        controller: 'ConfirmationDialogModalController as vm',
-        size: config.size || 'md',
-        resolve: {
-          config: function() {
-            return config;
-          }
-        }
-      });
-      modalInstance.result.then(successCallback, errorCallback);
-    }
-    return service;
+    this.$inject = ['$translate', '$uibModal', 'Notification'];
   }
-})();
+
+  translate(tag) {
+    return this.$translate.instant(tag);
+  }
+
+  notifySuccess(message) {
+    this.Notification.success(message);
+  }
+
+  notifyError(message) {
+    this.Notification.error(message);
+  }
+
+  notifyInformation(message) {
+    this.Notification.info(message);
+  }
+
+  notifyWarning(message) {
+    this.Notification.warning(message);
+  }
+
+  confirmationDialog(successCallback, errorCallback, config) {
+    config = config ? config : {};
+    const modalInstance = this.$uibModal.open({
+      animation: config.animation || true,
+      templateUrl: 'views/commons/confirmation-dialog.html',
+      controller: 'ConfirmationDialogModalController as vm',
+      size: config.size || 'md',
+      resolve: {
+        config: () => {
+          return config;
+        }
+      }
+    });
+    modalInstance.result.then(successCallback, errorCallback);
+  }
+}

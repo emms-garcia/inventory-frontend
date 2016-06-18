@@ -3,7 +3,7 @@ div(class="signup-view")
     div(class="col-sm-6 col-sm-offset-3")
       div(class="jumbotron")
         div(class="row")
-          div(class="col-sm-10 col-sm-offset-1")
+          div(class="col-sm-10 col-sm-offset-1 text-center")
             h2 {{ 'SIGN_UP' | translate }}
             form(name="form", ng-submit="vm.create()", novalidate)
               div(class="form-group has-feedback", ng-class="{ 'has-error': (form.company.$touched && form.company.$error.required), 'has-success': form.company.$valid }")
@@ -44,5 +44,6 @@ div(class="signup-view")
                 span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.password2.$invalid && form.password2.$touched || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch())")
                 span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password2.$valid && vm.passwordsMatch()")
 
-              button(class="btn btn-primary", type="submit", ng-disabled="form.$invalid") {{ 'SIGN_UP' | translate }}
-              button(class="btn", ui-sref="login") {{ 'GO_BACK' | translate }}
+              div(class="btn-group")
+                button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid") {{ 'SIGN_UP' | translate }}
+                button(class="btn btn-lg", ui-sref="login") {{ 'GO_BACK' | translate }}

@@ -1,0 +1,9 @@
+.main {
+  background: lighten($color-bg, 20%);
+  color: $color-primary;
+  height: 100vh;
+
+  .section {
+    padding-left: 20px;
+  }
+}

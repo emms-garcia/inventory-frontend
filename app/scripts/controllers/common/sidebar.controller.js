@@ -1,24 +1,27 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:SidebarController
- * @description
- * # SidebarController
- * Controller of the inventoryApp
- */
+export default class SidebarController {
+  constructor($state, userservice, utilsservice) {
+    this.$state = $state;
+    this.userservice = userservice;
+    this.utilsservice = utilsservice;
 
-(function () {
-  'use strict';
+    this.currentUser = userservice.currentUser;
 
-  angular.module('inventoryApp')
-    .controller('SidebarController', SidebarController);
+    this.activate();
 
-  SidebarController.$inject = [];
-
-  function SidebarController() {
-    activate();
-
-    function activate() {
-      console.log('SidebarController activated.');
-    }
+    this.$inject = ['$state', 'userservice', 'utilsservice'];
   }
-})();
+
+  logOut() {
+    this.utilsservice.confirmationDialog(() => {
+      this.userservice.logOut().then((loggedOut) => {
+        if(loggedOut) {
+          this.$state.go('login');
+        }
+      });
+    });
+  }
+
+  activate() {
+    console.log('SidebarController activated.');
+  }
+}

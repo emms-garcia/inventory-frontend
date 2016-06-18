@@ -1,46 +1,33 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:EditProductModalController
- * @description
- * # EditProductModalController
- * Controller of the inventoryApp
- */
+export default class EditProductModalController {
+  constructor($uibModalInstance, product, productservice) {
+    this.$uibModalInstance = $uibModalInstance;
+    this.productservice = productservice;
 
-(function () {
-  'use strict';
+    this.product = product;
+    this.stocks = [];
+    this.total = 0;
 
-  angular.module('inventoryApp')
-    .controller('EditProductModalController', EditProductModalController);
+    this.activate();
 
-  EditProductModalController.$inject = ['$modalInstance', 'product', 'productservice', '_'];
-
-  function EditProductModalController($modalInstance, product, productservice, _) {
-    var vm = this;
-    vm.product = product;
-    vm.stocks = [];
-    vm.total = 0;
-
-    vm.cancel = cancel;
-    vm.updateProductData = updateProductData;
-
-    activate();
-
-    function cancel() {
-      $modalInstance.dismiss('cancel');
-    }
-
-    function updateProductData(key, value) {
-      var data = {};
-      data[key] = value;
-      return productservice.updateProductData(vm.product.id, data);
-    }
-
-    function activate() {
-      console.log('EditProductModalController activated.');
-      productservice.getWarehouseProductStock(vm.product.id).then(function (data) {
-        vm.stocks = data;
-        vm.total = _.sumBy(vm.stocks, 'product.quantity');
-      });
-    }
+    this.$inject = ['$uibModalInstance', 'product', 'productservice'];
   }
-})();
+
+  cancel() {
+    this.$uibModalInstance.dismiss('cancel');
+  }
+
+  updateProductData(key, value) {
+    return this.productservice.updateProductData(this.product.id, { [key]: value});
+  }
+
+  activate() {
+    console.log('EditProductModalController activated.');
+    this.productservice.getWarehouseProductStock(this.product.id).then((data) => {
+      this.stocks = data;
+      this.total = 0.0;
+      this.stocks.forEach((stock) => {
+        this.total += stock.product.quantity;
+      });
+    });
+  }
+}

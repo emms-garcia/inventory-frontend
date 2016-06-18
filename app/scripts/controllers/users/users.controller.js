@@ -1,92 +1,73 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:UsersController
- * @description
- * # UsersController
- * Controller of the inventoryApp
- */
+export default class UsersController {
+  constructor($uibModal, userservice, utilsservice) {
+    this.$uibModal = $uibModal;
+    this.userservice = userservice;
+    this.utilsservice = utilsservice;
 
-(function () {
-  'use strict';
+    this.currentUser = userservice.currentUser;
+    this.selectedUser = null;
+    this.userList = [];
 
-  angular.module('inventoryApp')
-    .controller('UsersController', UsersController);
+    this.activate();
 
-  UsersController.$inject = ['userservice', '$modal', 'utilsservice'];
-
-  function UsersController(userservice, $modal, utilsservice) {
-    var vm = this;
-    vm.updateUserData = updateUserData;
-    vm.deleteUser = deleteUser;
-    vm.openEditPasswordModal = openEditPasswordModal;
-    vm.openCreateUserModal = openCreateUserModal;
-    vm.changeUser = changeUser;
-    vm.userList = [];
-
-    /* Current logged in user */
-    vm.currentUser = userservice.currentUser;
-    /* User selected on list */
-    vm.selectedUser = null;
-
-    activate();
-
-    function changeUser(user) {
-      vm.selectedUser = user;
-    }
-
-    function openEditPasswordModal() {
-      $modal.open({
-        animation: true,
-        templateUrl: 'views/users/modals/edit-password.html',
-        controller: 'EditPasswordModalController as vm',
-        size: 'md',
-        resolve: {
-          user: function () {
-            return vm.selectedUser;
-          }
-        }
-      });
-    }
-
-    function openCreateUserModal() {
-      var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: 'views/users/modals/create-user.html',
-        controller: 'CreateUserModalController as vm',
-        size: 'md'
-      });
-      modalInstance.result.then(function (newUser) {
-        loadUserList(newUser);
-      });
-    }
-
-    function updateUserData(key, value) {
-      var data = {};
-      data[key] = value;
-      return userservice.updateUserData(vm.selectedUser.id, data);
-    }
-
-    function deleteUser(user) {
-      utilsservice.confirmationDialog(function () {
-        userservice.deleteUser(user.id).then(function (){
-          loadUserList();
-        });
-      });
-    }
-
-    function loadUserList(selectedUser) {
-      userservice.getUserList().then(function (data){
-        vm.userList = data;
-        if(selectedUser) {
-          vm.selectedUser = selectedUser;
-        } else {
-          vm.selectedUser = data.length > 0 ? data[0] : null;
-        }
-      });
-    }
-
-    function activate() {
-      loadUserList();
-    }
+    this.$inject = ['$uibModal', 'userservice', 'utilsservice'];
   }
-})();
+
+  changeUser(user) {
+    this.selectedUser = user;
+  }
+
+  deleteUser(user) {
+    this.utilsservice.confirmationDialog(() => {
+      this.userservice.deleteUser(user.id).then(() => {
+        this.loadUserList();
+      });
+    });
+  }
+
+  loadUserList(selectedUser) {
+    this.userservice.getUserList().then((data) => {
+      this.userList = data;
+      if(selectedUser) {
+        this.selectedUser = selectedUser;
+      } else {
+        this.selectedUser = data.length > 0 ? data[0] : null;
+      }
+    });
+  }
+
+  openCreateUserModal() {
+    const modalInstance = this.$uibModal.open({
+      animation: true,
+      templateUrl: 'views/users/modals/create-user.html',
+      controller: 'CreateUserModalController as vm',
+      size: 'md'
+    });
+    modalInstance.result.then((newUser) => {
+      this.loadUserList(newUser);
+    });
+  }
+
+  openEditPasswordModal() {
+    this.$uibModal.open({
+      animation: true,
+      templateUrl: 'views/users/modals/edit-password.html',
+      controller: 'EditPasswordModalController as vm',
+      size: 'md',
+      resolve: {
+        user: () => {
+          return this.selectedUser;
+        }
+      }
+    });
+  }
+
+  updateUserData(key, value) {
+    return this.userservice.updateUserData(this.selectedUser.id, { [key]: value });
+  }
+
+  activate() {
+    console.log('UsersController activated.');
+    this.loadUserList();
+  }
+}

@@ -1,41 +1,27 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:LoginCtrl
- * @description
- * # LoginCtrl
- * Controller of the inventoryApp
- */
-(function() {
-  'use strict';
+export default class LoginController {
+  constructor($state, userservice) {
+    this.$state = $state;
+    this.userservice = userservice;
 
-  angular
-    .module('inventoryApp')
-    .controller('LoginController', LoginController);
+    this.password = null;
+    this.username = null;
 
-  LoginController.$inject = ['$state', 'userservice'];
+    this.activate();
 
-  function LoginController($state, userservice) {
-    var vm = this;
+    this.$inject = ['$state', 'userservice'];
+  }
 
-    vm.username = null;
-    vm.password = null;
-    vm.logIn = logIn;
-
-    activate();
-
-    function logIn() {
-      if(vm.username) {
-        userservice.logIn(vm.username, vm.password).then(function (loggedIn) {
-          if(loggedIn) {
-            $state.go('dashboard');
-          }
-        });
-      }
-    }
-
-    function activate() {
-      console.log('Login Controller activated.');
+  logIn() {
+    if(this.username) {
+      this.userservice.logIn(this.username, this.password).then((loggedIn) => {
+        if(loggedIn) {
+          this.$state.go('dashboard');
+        }
+      });
     }
   }
 
-})();
+  activate() {
+    console.log('Login Controller activated.');
+  }
+}

@@ -1,29 +1,13 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:SalesController
- * @description
- * # SalesController
- * Controller of the inventoryApp
- */
+export default class SalesController {
+  constructor(userservice) {
+    this.currentUser = userservice.currentUser;
 
-(function () {
-  'use strict';
+    this.activate();
 
-  angular.module('inventoryApp')
-    .controller('SalesController', SalesController);
-
-  SalesController.$inject = ['userservice'];
-
-  function SalesController (userservice) {
-    var vm = this;
-    vm.currentUser = userservice.currentUser;
-
-    activate();
-
-    function activate() {
-      console.log('SalesController activated.');
-    }
-
+    this.$inject = ['userservice'];
   }
 
-})();
+  activate() {
+    console.log('SalesController activated.');
+  }
+}

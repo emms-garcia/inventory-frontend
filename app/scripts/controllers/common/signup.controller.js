@@ -1,55 +1,40 @@
-/**
- * @ngdoc function
- * @name inventoryApp.controller:SignUpController
- * @description
- * # SignUpController
- * Controller of the inventoryApp
- */
+export default class SignUpController {
+  constructor($state, $translate, userservice) {
+    this.$state = $state;
+    this.$translate = $translate;
+    this.userservice = userservice;
 
-(function () {
-  'use strict';
+    this.company = null;
+    this.firstName = null;
+    this.lastName = null;
+    this.password1 = null;
+    this.password2 = null;
+    this.username = null;
 
-  angular.module('inventoryApp')
-    .controller('SignUpController', SignUpController);
+    this.activate();
 
-  SignUpController.$inject = ['$state', '$translate', 'userservice'];
-
-  function SignUpController($state, $translate, userservice) {
-    var vm = this;
-    vm.company = null;
-    vm.firstName = null;
-    vm.lastName = null;
-    vm.password1 = null;
-    vm.password2 = null;
-    vm.username = null;
-
-    vm.passwordsMatch = passwordsMatch;
-    vm.create = create;
-
-    activate();
-
-    function passwordsMatch() {
-      return vm.password1 && vm.password2 && vm.password1 === vm.password2;
-    }
-
-    function create() {
-      var data = {
-        company: vm.company,
-        first_name: vm.firstName,
-        last_name: vm.lastName,
-        password: vm.password1,
-        username: vm.username
-      };
-
-      userservice.createUser(data).then(function (success) {
-        if(success) {
-          $state.go('login');
-        }
-      });
-    }
-
-    function activate() {
-      console.log('SignUpController activated');
-    }
+    this.$inject = ['$state', '$translate', 'userservice'];
   }
-})();
+
+  create() {
+    this.userservice.createUser({
+      company: this.company,
+      first_name: this.firstName,
+      last_name: this.lastName,
+      password: this.password1,
+      username: this.username
+    }).then((success) => {
+      if(success) {
+        this.$state.go('login');
+      }
+    });
+  }
+
+  passwordsMatch() {
+    return this.password1 && this.password2 && this.password1 === this.password2;
+  }
+
+  activate() {
+    console.log('SignUpController activated');
+  }
+}

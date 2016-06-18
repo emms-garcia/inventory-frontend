@@ -1,0 +1,33 @@
+.sidebar {
+  background-color: $color-primary;
+  display: inline-block;
+  float: left;
+  height: 100vh;
+  min-width: 170px;
+  padding: 20px 0px 0px 0px;
+  position: relative;
+
+  .sidebar-bottom {
+    bottom: 20px;
+    position: absolute;
+  }
+
+  .logo {
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    width: 150px;
+  }
+
+  li {
+    text-align: center;
+    font-size: 15px;
+
+    a {
+      color: $color-bg;
+      span {
+        margin: 0;
+      }
+    }
+  }
+}
