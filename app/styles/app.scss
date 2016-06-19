@@ -4,8 +4,9 @@
 @import "main";
 @import "sidebar";
 
-.container-fluid {
+.container {
   padding: 0px;
+  padding-left: 10px;
 }
 
 ul.dropdown-menu > li > a {
