@@ -170,9 +170,15 @@ export default function translationloaderservice($q, $timeout) {
         DELETE_PRODUCTS_MODAL_BODY: 'Estás seguro que deseas borrar éstos productos?',
         DELETE_PRODUCT_GROUPS_MODAL_TITLE: 'Borrar grupos',
         DELETE_PRODUCT_GROUPS_MODAL_BODY: 'Estás seguro que deseas borrar éstos grupos?',
+        DELETE_SELECTED_UOMS: 'Borrar unidades seleccionadas',
+        SHORT_NAME: 'Abreviación',
+        NO_OPTION_SELECTED: 'Sin seleccionar',
       };
     } else if(options.key === 'en-us') {
       translations = {
+        NO_OPTION_SELECTED: 'Not selected',
+        SHORT_NAME: 'Short name',
+        DELETE_SELECTED_UOMS: 'Delete selected uoms',
         DELETE_PRODUCTS_MODAL_TITLE: 'Delete products',
         DELETE_PRODUCTS_MODAL_BODY: 'Are you sure you want to delete these products?',
         DELETE_PRODUCT_GROUPS_MODAL_TITLE: 'Delete groups',

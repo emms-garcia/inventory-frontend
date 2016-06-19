@@ -2,7 +2,7 @@ div(class="inventory-section section")
   h2(class="page-header") {{ 'INVENTORY' | translate }}
 
   uib-tabset(active="active")
-    uib-tab(index="1" heading="{{ 'PRODUCTS' | translate }}")
+    uib-tab(index="1", heading="{{ 'PRODUCTS' | translate }}")
       br
       div(class="row")
         div(class="col-sm-3")
@@ -32,7 +32,7 @@ div(class="inventory-section section")
                 input(type="checkbox", ng-model="vm.allProductsSelected", ng-change="vm.toggleAllProducts()", ng-show="vm.products.length > 0")
               th(style="width: 20%;") {{ 'NAME' | translate }}
               th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
-              th {{ 'PRICE_PER_PRODUCT' | translate }}
+              //- th {{ 'PRICE_PER_PRODUCT' | translate }}
               th {{ 'QUANTITIES' | translate }}
               th
           tbody
@@ -44,13 +44,55 @@ div(class="inventory-section section")
                 input(type="checkbox", ng-model="product.selected")
               td {{ product.name || 'NO_PRODUCT_NAME' }}
               td {{ product.description || 'N/A' }}
-              td(class="text-center") ${{ product.price }}
-              th(class="text-center") {{ product.quantity }}
-              th
+              //- td(class="text-center") ${{ product.price }}
+              td {{ product.quantity + ' ' + product.uom.short_name }}
+              td
                 button(class="btn btn-primary btn-xs")
                   span(class="glyphicon glyphicon-pencil", ng-click="vm.openEditProductModal(product)")
 
-    //- uib-tab(index="2" heading="{{ 'PRODUCT_GROUPS' | translate }}")
+    uib-tab(index="2", heading="{{ 'UOMS' | translate }}")
+      br
+      div(class="row")
+        div(class="col-md-3")
+          div(class="input-group")
+            input(class="form-control col-md-4", ng-model="vm.queryUOMs", type="text", placeholder="{{ 'SEARCH' | translate }}")
+            span(class="input-group-btn")
+              button(class="btn")
+                span(class="glyphicon glyphicon-search")
+        div(class="col-sm-9")
+          div(class="btn-group pull-right", uib-dropdown)
+            button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+              span(class="caret")
+            ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
+              li(role="menuitem")
+                a(ng-click="vm.openCreateUOMModal()") {{ 'CREATE_UOM' | translate }}
+                a(ng-click="vm.deleteSelectedUOMs()") {{ 'DELETE_SELECTED_UOMS' | translate }}
+
+      div(class="table-responsive")
+        table(class="table table-striped")
+          thead
+            tr
+              th
+                input(type="checkbox", ng-model="vm.allUOMsSelected", ng-change="vm.toggleAllUOMs()", ng-show="vm.uoms.length > 0")
+              th {{ 'NAME' | translate }}
+              th {{ 'DESCRIPTION' | translate }}
+              th {{ 'SHORT_NAME' | translate }}
+              th
+          tbody
+            tr(ng-if="vm.uoms.length === 0")
+              td(class="text-center", colspan="5")
+                p(class="lead") {{ 'NO_UOMS_DEFINED' | translate }}
+            tr(ng-repeat="uom in vm.uoms | filter: vm.queryUOMs")
+              td
+                input(type="checkbox", ng-model="uom.selected")
+              td {{ uom.name }}
+              td {{ uom.short_name }}
+              td {{ uom.description || 'N/A' }}
+              td
+                button(class="btn btn-primary btn-xs")
+                  span(class="glyphicon glyphicon-pencil", ng-click="vm.openEditUOMModal(uom)")
+
+    //- uib-tab(index="3", heading="{{ 'PRODUCT_GROUPS' | translate }}")
       br
       div(class="row")
         div(class="col-sm-3")

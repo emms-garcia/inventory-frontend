@@ -16,6 +16,7 @@ import DashboardController from './dashboard/dashboard.controller.js';
 import ProductGroupCardController from './inventory/directives/product-group-card.controller.js';
 import CreateProductGroupModalController from './inventory/modals/create-product-group.controller.js';
 import CreateProductModalController from './inventory/modals/create-product.controller.js';
+import CreateUOMModalController from './inventory/modals/create-uom.controller.js';
 import EditProductModalController from './inventory/modals/edit-product.controller.js';
 import ImportProductsModalController from './inventory/modals/import-products.controller.js';
 import InventoryController from './inventory/inventory.controller.js';
@@ -46,6 +47,7 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('ProductGroupCardController', ProductGroupCardController)
   .controller('CreateProductGroupModalController', CreateProductGroupModalController)
   .controller('CreateProductModalController', CreateProductModalController)
+  .controller('CreateUOMModalController', CreateUOMModalController)
   .controller('EditProductModalController', EditProductModalController)
   .controller('ImportProductsModalController', ImportProductsModalController)
   .controller('InventoryController', InventoryController)

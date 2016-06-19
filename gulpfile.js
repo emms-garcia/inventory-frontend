@@ -66,7 +66,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('webserver', function () {
-  gulp.src('public')
+  gulp.src('./public')
     .pipe(webserver({
       directoryListing: false,
       open: true,

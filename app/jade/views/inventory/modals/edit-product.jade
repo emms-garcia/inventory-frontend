@@ -9,15 +9,15 @@ div(class="modal-body")
             tr
               th {{ 'NAME' | translate }}
               td
-                a(href="", editable-text="vm.product.name", onbeforesave="vm.updateProductData('name', $data)") {{ vm.product.name || 'NO_PRODUCT_NAME' }}
-            tr
+                a(editable-text="vm.product.name", onbeforesave="vm.updateProductData('name', $data)") {{ vm.product.name || 'NO_PRODUCT_NAME' }}
+            //-tr
               th {{ 'PRICE_PER_PRODUCT' | translate }}
               td
                 a(href="", editable-number="vm.product.price", e-step="0.01", onbeforesave="vm.updateProductData('price', $data)") ${{ vm.product.price }}
             tr
               th {{ 'DESCRIPTION' | translate }}
               td
-                a(href="", editable-textarea="vm.product.description", onbeforesave="vm.updateProductData('description', $data)") {{ vm.product.description || 'N/A' }}
+                a(editable-textarea="vm.product.description", onbeforesave="vm.updateProductData('description', $data)") {{ vm.product.description || 'N/A' }}
 
       div(class="table-responsive")
         table(class="table table-condensed")
@@ -30,13 +30,13 @@ div(class="modal-body")
             tr(ng-repeat="stock in vm.stocks")
               td {{ stock.warehouse.name }}
               td {{ stock.warehouse.description || 'N/A' }}
-              td {{ stock.product.quantity }}
+              td {{ stock.product.quantity + ' ' + vm.product.uom.short_name }}
           tfoot
             tr
               td
               td
-              td
+              th
                 strong {{ 'TOTAL' | translate }}: &nbsp;
-                | {{ vm.total }}
+                | {{ vm.total + ' ' + vm.product.uom.short_name }}
 div(class="modal-footer")
   button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

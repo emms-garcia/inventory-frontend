@@ -6,12 +6,15 @@ export default class InventoryController {
     this.userservice = userservice;
     this.utilsservice = utilsservice;
 
+    this.allProductsSelected = false;
+    this.allUOMsSelected = false;
+
     this.currentUser = userservice.currentUser;
     this.productGroups = [];
     this.products = [];
     this.queryProductGroups = '';
     this.queryProducts = '';
-    this.allProductsSelected = false;
+    this.uoms = [];
 
     this.activate();
 
@@ -40,6 +43,27 @@ export default class InventoryController {
     })
   }
 
+  getUOMs() {
+    this.productservice.getUOMList().then((data) => {
+      if(data) {
+        this.uoms = data;
+      }
+    });
+  }
+
+  openCreateUOMModal() {
+    const modalInstance = this.$uibModal.open({
+      animation: true,
+      templateUrl: 'views/inventory/modals/create-uom.html',
+      controller: 'CreateUOMModalController as vm',
+      size: 'md'
+    });
+
+    modalInstance.result.then(() => {
+      this.getUOMs();
+    });
+  }
+
   openCreateProductGroupModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
@@ -62,7 +86,12 @@ export default class InventoryController {
       animation: true,
       templateUrl: 'views/inventory/modals/create-product.html',
       controller: 'CreateProductModalController as vm',
-      size: 'md'
+      size: 'md',
+      resolve: {
+        uoms: () => {
+          return this.uoms;
+        }
+      }
     });
 
     modalInstance.result.then(() => {
@@ -148,5 +177,6 @@ export default class InventoryController {
     console.log('InventoryController activated.');
     this.getProductGroups();
     this.getProducts();
+    this.getUOMs();
   }
 }

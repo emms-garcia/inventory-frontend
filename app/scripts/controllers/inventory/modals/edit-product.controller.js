@@ -17,7 +17,7 @@ export default class EditProductModalController {
   }
 
   updateProductData(key, value) {
-    return this.productservice.updateProductData(this.product.id, { [key]: value});
+    return this.productservice.updateProduct(this.product.id, { [key]: value});
   }
 
   activate() {
