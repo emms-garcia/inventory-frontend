@@ -25,7 +25,7 @@ div(class="warehouses-section section")
           thead
             tr
               th
-                input(type="checkbox", ng-model="vm.allWarehousesSelected", ng-change="vm.toggleAllWarehouses()", ng-show="vm.warehouses > 0")
+                input(type="checkbox", ng-model="vm.allWarehousesSelected", ng-change="vm.toggleAllWarehouses()", ng-show="vm.warehouses.length > 0")
               th {{ 'NAME' | translate }}
               th {{ 'DESCRIPTION' | translate }}
               th {{ 'ADDRESS' | translate }}
@@ -36,7 +36,7 @@ div(class="warehouses-section section")
 
           tbody
             tr(ng-if="vm.warehouses.length === 0")
-              td(class="text-center", colspan="3")
+              td(class="text-center", colspan="8")
                 p(class="lead") {{ 'NO_WAREHOUSES_DEFINED' | translate }}
             tr(ng-repeat="warehouse in vm.warehouses | filter: vm.queryWarehouses")
               td

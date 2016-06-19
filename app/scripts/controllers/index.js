@@ -31,6 +31,7 @@ import EditPasswordModalController from './users/modals/edit-password.controller
 import UsersController from './users/users.controller.js';
 /* warehouses */
 import WarehousesController from './warehouses/warehouses.controller';
+import CreateWarehouseModalController from './warehouses/modals/create-warehouse.controller';
 
 export default angular.module('inventoryApp.controllers', [])
   .controller('CreateClientModalController', CreateClientModalController)
@@ -54,4 +55,5 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('CreateUserModalController', CreateUserModalController)
   .controller('EditPasswordModalController', EditPasswordModalController)
   .controller('UsersController', UsersController)
-  .controller('WarehousesController', WarehousesController);
+  .controller('WarehousesController', WarehousesController)
+  .controller('CreateWarehouseModalController', CreateWarehouseModalController);

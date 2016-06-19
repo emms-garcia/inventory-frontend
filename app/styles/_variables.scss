@@ -1,7 +1,9 @@
-$color-primary: #662528;
-$color-bg: #A89589;
+$color-primary: #333;
+$color-bg: lighten(#A89589, 30%);
 
 // Bootstrap overwrites
 $brand-primary: $color-primary !default;
-$body-bg: $color-bg;
-$table-bg-accent: darken($color-bg, 1%) !default;
+$body-bg: $color-bg !default;
+$nav-tabs-border-color: $color-primary !default;
+$text-color: $color-primary !default;
+$table-bg-accent: darken($color-bg, 10%) !default;

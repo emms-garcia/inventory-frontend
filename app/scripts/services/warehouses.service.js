@@ -44,18 +44,26 @@ export default class warehousesservice {
     });
   }
 
-  deleteWarehouse(id) {
+  deleteWarehouses(objects) {
     return this.$http({
-      method: 'DELETE',
-      url: `/api/inventory/warehouses/${id}/`
+      data: {
+        deleted_objects: objects,
+        objects: []
+      },
+      method: 'PATCH',
+      url: '/api/inventory/warehouses/'
     })
     .then(() => {
-      this.utilsservice.notifySuccess(this.$translate.instant('WAREHOUSE_DELETE_SUCCESS'));
+      this.utilsservice.notifySuccess(this.$translate.instant('WAREHOUSES_DELETE_SUCCESS'));
       return true;
     })
     .catch((error) => {
-      console.log('XHR failed on deleteWarehouse ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('WAREHOUSE_DELETE_FAILED'));
+      console.log('XHR failed on deleteWarehouses ' + error);
+      if(error.status === 400) {
+        this.utilsservice.notifyError(error.data.error);
+      } else {
+        this.utilsservice.notifyError(this.$translate.instant('WAREHOUSES_DELETE_FAILED'));
+      }
       return false;
     });
   }

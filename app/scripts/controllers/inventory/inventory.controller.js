@@ -1,7 +1,7 @@
 export default class InventoryController {
-  constructor($uibModal, $translate, productservice, userservice, utilsservice) {
-    this.$uibModal = $uibModal;
+  constructor($translate, $uibModal, productservice, userservice, utilsservice) {
     this.$translate = $translate;
+    this.$uibModal = $uibModal;
     this.productservice = productservice;
     this.userservice = userservice;
     this.utilsservice = utilsservice;
@@ -16,8 +16,8 @@ export default class InventoryController {
     this.activate();
 
     this.$inject = [
-      '$uibModal',
       '$translate',
+      '$uibModal',
       'productservice',
       'userservice',
       'utilsservice'
@@ -62,7 +62,7 @@ export default class InventoryController {
       animation: true,
       templateUrl: 'views/inventory/modals/create-product.html',
       controller: 'CreateProductModalController as vm',
-      size: 'lg'
+      size: 'md'
     });
 
     modalInstance.result.then(() => {
@@ -93,11 +93,15 @@ export default class InventoryController {
     });
 
     if(data.length > 0) {
+      const config = {
+        bodyMsg: this.$translate.instant('DELETE_PRODUCT_GROUPS_MODAL_BODY'),
+        titleMsg: this.$translate.instant('DELETE_PRODUCT_GROUPS_MODAL_TITLE')
+      };
       this.utilsservice.confirmationDialog(() => {
         this.productservice.deleteProductGroups(data).then(() => {
           this.getProductGroups();
         });
-      });
+      }, null, config);
     }
   }
 
@@ -110,11 +114,15 @@ export default class InventoryController {
     })
 
     if(data.length > 0) {
+      const config = {
+        bodyMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_BODY'),
+        titleMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_TITLE')
+      };
       this.utilsservice.confirmationDialog(() => {
         this.productservice.deleteProducts(data).then(() => {
           this.getProducts();
         });
-      });
+      }, null, config);
     }
   }
 

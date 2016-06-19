@@ -1,0 +1,41 @@
+form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
+  div(class="modal-header")
+    h3(class="modal-title") {{ 'CREATE_WAREHOUSE' | translate }}
+  div(class="modal-body")
+    div(class="row")
+      div(class="col-md-12")
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="name") *{{ 'NAME' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="name", required, ng-model="vm.name", type="text", placeholder="{{ 'NAME' | translate }}")
+
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="description") {{ 'DESCRIPTION' | translate }}:
+          div(class="col-sm-7")
+            textarea(class="form-control", id="description", ng-model="vm.description", type="text", placeholder="{{ 'DESCRIPTION' | translate }}")
+
+        hr
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="address") {{ 'ADDRESS' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="address", ng-model="vm.address", type="text", placeholder="{{ 'ADDRESS' | translate }}")
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="city") {{ 'CITY' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="city", ng-model="vm.city", type="text", placeholder="{{ 'CITY' | translate }}")
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="state") {{ 'STATE' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="state", ng-model="vm.state", type="text", placeholder="{{ 'STATE' | translate }}")
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="country") {{ 'CODE' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="country", ng-model="vm.country", type="text", placeholder="{{ 'COUNTRY' | translate }}")
+        div(class="form-group row")
+          label(class="col-sm-3 control-label", for="code") {{ 'CODE' | translate }}:
+          div(class="col-sm-7")
+            input(class="form-control", id="code", ng-model="vm.code", type="text", placeholder="{{ 'CODE' | translate }}")
+
+  div(class="modal-footer")
+    button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
+    button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

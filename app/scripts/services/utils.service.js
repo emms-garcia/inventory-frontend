@@ -28,7 +28,7 @@ export default class utilsservice {
   }
 
   confirmationDialog(successCallback, errorCallback, config) {
-    config = config ? config : {};
+    config = config || {};
     const modalInstance = this.$uibModal.open({
       animation: config.animation || true,
       templateUrl: 'views/commons/confirmation-dialog.html',
