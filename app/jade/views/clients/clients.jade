@@ -6,7 +6,7 @@ div(class="clients-section section")
   div(class="row")
     div(class="col-sm-3")
       div(class="input-group")
-        input(class="form-control col-sm-4", ng-model="vm.query", type="text", placeholder="{{ 'SEARCH' | translate }}")
+        input(class="form-control col-sm-4", ng-model="vm.queryClients", type="text", placeholder="{{ 'SEARCH' | translate }}")
         span(class="input-group-btn")
           button(class="btn")
             span(class="glyphicon glyphicon-search")
@@ -16,7 +16,13 @@ div(class="clients-section section")
           span(class="caret")
         ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
           li(role="menuitem")
-            a(href="", ng-click="vm.openCreateClientModal()") {{ 'CREATE_CLIENT' | translate }}
+            a(href="", ng-click="vm.openCreateClientModal()")
+              span(class="glyphicon glyphicon-plus")
+              | &nbsp; {{ 'CREATE_CLIENT' | translate }}
+          li(role="menuitem")
+            a(href="", ng-click="vm.deleteSelectedClients()")
+              span(class="glyphicon glyphicon-trash")
+              | &nbsp; {{ 'DELETE_SELECTED_CLIENT' | translate }}
 
   div(class="row")
     div(class="col-sm-12")
@@ -24,6 +30,10 @@ div(class="clients-section section")
         table(class="table table-striped")
           thead
             tr
+              th
+                input(type="checkbox", ng-model="vm.allClientsSelected", ng-change="vm.toggleAllClients()", ng-show="vm.clients.length > 0")
+              th {{ 'ID' | translate }}
+              th {{ 'CREATED_AT' | translate }}
               th {{ "NAME" | translate }}
               th {{ "EMAIL" | translate }}
               th {{ "COMPANY" | translate }}
@@ -36,20 +46,18 @@ div(class="clients-section section")
             tr(ng-if="vm.clients.length === 0")
               td(class="text-center", colspan="10")
                 p {{ 'NO_CLIENTS_DEFINED' | translate }}
-            tr(ng-repeat="client in vm.clients | filter: vm.query", ui-sref="clients.detail({'clientId': client.id})")
+            tr(ng-repeat="client in vm.clients | filter: vm.queryClients")
               td
-                p {{ client.name || ("NOT_SPECIFIED" | translate ) }}
+                input(type="checkbox", ng-model="client.selected")
+              td {{ client.id }}
+              td {{ (client.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
+              td {{ client.name || 'N/A' }}
+              td {{ client.email || 'N/A' }}
+              td {{ client.company || 'N/A' }}
+              td {{ client.rfc || 'N/A' }}
+              td {{ client.phone || 'N/A' }}
+              td {{ client.cellphone || 'N/A' }}
+              td {{ client.address || 'N/A' }}
               td
-                p {{ client.email || ("NOT_SPECIFIED" | translate ) }}
-              td
-                p {{ client.company || ("NOT_SPECIFIED" | translate ) }}
-              td
-                p {{ client.rfc || ("NOT_SPECIFIED" | translate ) }}
-              td
-                p {{ client.phone || ("NOT_SPECIFIED" | translate ) }}
-              td
-                p {{ client.cellphone || ("NOT_SPECIFIED" | translate ) }}
-              td
-                p {{ client.address || ("NOT_SPECIFIED" | translate ) }}
-              td
-                button(class="btn btn-danger btn-sm", type="button", ng-click="$event.stopPropagation(); vm.deleteClient(client.id)", tooltip="{{ 'DELETE_CLIENT' | translate }}") &times;
+                button(class="btn btn-primary btn-xs", ui-sref="clients.detail({'clientId': client.id})")
+                  span(class="glyphicon glyphicon-pencil")

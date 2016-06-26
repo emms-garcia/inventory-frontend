@@ -10,7 +10,7 @@ export default class warehousesservice {
   getWarehouseList() {
     return this.$http({
       method: 'GET',
-      url: '/api/inventory/warehouses/'
+      url: '/v1/inventory/warehouses/'
     })
     .then((response) => {
       return response.data.objects;
@@ -26,7 +26,7 @@ export default class warehousesservice {
     return this.$http({
       method: 'POST',
       data: data,
-      url: '/api/inventory/warehouses/'
+      url: '/v1/inventory/warehouses/'
     })
     .then((response) => {
       this.utilsservice.notifySuccess(this.$translate.instant('WAREHOUSE_CREATE_SUCCESS'));
@@ -51,7 +51,7 @@ export default class warehousesservice {
         objects: []
       },
       method: 'PATCH',
-      url: '/api/inventory/warehouses/'
+      url: '/v1/inventory/warehouses/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('WAREHOUSES_DELETE_SUCCESS'));

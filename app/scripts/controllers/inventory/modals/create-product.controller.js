@@ -23,7 +23,7 @@ export default class CreateProductModalController {
     this.productservice.createProduct({
       description: this.description,
       name: this.name,
-      price: this.pricePerUnit,
+      price_per_unit: this.pricePerUnit,
       quantity: this.quantity,
       uom: this.selectedUOM
     }).then((data) => {

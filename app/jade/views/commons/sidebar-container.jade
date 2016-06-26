@@ -9,10 +9,6 @@ div(class="row")
         a(ui-sref="dashboard")
           span(class="glyphicon glyphicon-th glyphicon-white")
           | &nbsp; {{ 'DASHBOARD' | translate }}
-      //-li(ui-sref-active="active")
-        a(ui-sref="warehouses")
-          span(class="glyphicon glyphicon-home glyphicon-white")
-          | &nbsp; {{ 'WAREHOUSES' | translate }}
       li(ui-sref-active="active")
         a(ui-sref="inventory")
           span(class="glyphicon glyphicon-list glyphicon-white")
@@ -25,7 +21,7 @@ div(class="row")
         a(ui-sref="purchases")
           span(class="glyphicon glyphicon-shopping-cart glyphicon-white")
           | &nbsp; {{ 'PURCHASES' | translate }}
-      li(ui-sref-active="active")
+      li(ui-sref-active="active", ng-class="{ active: vm.$state.current.name === 'clients.detail' }")
         a(ui-sref="clients")
           span(class="glyphicon glyphicon-user glyphicon-white")
           | &nbsp; {{ 'CLIENTS' | translate }}

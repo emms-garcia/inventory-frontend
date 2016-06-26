@@ -17,12 +17,18 @@ div(class="inventory-section section")
               span(class="caret")
             ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
               li(role="menuitem")
-                a(ng-click="vm.openCreateProductModal()") {{ 'CREATE_PRODUCT' | translate }}
+                a(ng-click="vm.openCreateProductModal()")
+                  span(class="glyphicon glyphicon-plus")
+                  | &nbsp; {{ 'CREATE_PRODUCT' | translate }}
               li(role="menuitem")
-                a(ng-click="vm.deleteSelectedProducts()") {{ 'DELETE_SELECTED_PRODUCTS' | translate }}
+                a(ng-click="vm.deleteSelectedProducts()")
+                  span(class="glyphicon glyphicon-trash")
+                  | &nbsp; {{ 'DELETE_SELECTED_PRODUCTS' | translate }}
               li(class="divider")
               li(role="menuitem")
-                a(ng-click="vm.importProductsModal()") {{ 'IMPORT_PRODUCTS' | translate }}
+                a(ng-click="vm.importProductsModal()")
+                  span(class="glyphicon glyphicon-upload")
+                  | &nbsp; {{ 'IMPORT_PRODUCTS' | translate }}
 
       div(class="table-responsive")
         table(class="table table-striped")
@@ -30,22 +36,26 @@ div(class="inventory-section section")
             tr
               th
                 input(type="checkbox", ng-model="vm.allProductsSelected", ng-change="vm.toggleAllProducts()", ng-show="vm.products.length > 0")
+              th {{ 'ID' | translate }}
+              th {{ 'CREATED_AT' | translate }}
               th(style="width: 20%;") {{ 'NAME' | translate }}
               th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
-              //- th {{ 'PRICE_PER_PRODUCT' | translate }}
               th {{ 'QUANTITIES' | translate }}
+              th {{ 'PRICE_PER_UNIT' | translate }}
               th
           tbody
             tr(ng-if="vm.products.length === 0")
-              td(class="text-center", colspan="5")
+              td(class="text-center", colspan="7")
                 p(class="lead") {{ 'NO_PRODUCTS_DEFINED' | translate }}
             tr(ng-repeat="product in vm.products | filter: vm.queryProducts")
               td
                 input(type="checkbox", ng-model="product.selected")
+              td {{ product.id }}
+              td {{ (product.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
               td {{ product.name || 'NO_PRODUCT_NAME' }}
               td {{ product.description || 'N/A' }}
-              //- td(class="text-center") ${{ product.price }}
               td {{ product.quantity + ' ' + product.uom.short_name }}
+              td ${{ product.price_per_unit }}
               td
                 button(class="btn btn-primary btn-xs")
                   span(class="glyphicon glyphicon-pencil", ng-click="vm.openEditProductModal(product)")
@@ -65,8 +75,12 @@ div(class="inventory-section section")
               span(class="caret")
             ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
               li(role="menuitem")
-                a(ng-click="vm.openCreateUOMModal()") {{ 'CREATE_UOM' | translate }}
-                a(ng-click="vm.deleteSelectedUOMs()") {{ 'DELETE_SELECTED_UOMS' | translate }}
+                a(ng-click="vm.openCreateUOMModal()")
+                  span(class="glyphicon glyphicon-plus")
+                  | &nbsp; {{ 'CREATE_UOM' | translate }}
+                a(ng-click="vm.deleteSelectedUOMs()")
+                  span(class="glyphicon glyphicon-trash")
+                  | &nbsp; {{ 'DELETE_SELECTED_UOMS' | translate }}
 
       div(class="table-responsive")
         table(class="table table-striped")
@@ -74,17 +88,19 @@ div(class="inventory-section section")
             tr
               th
                 input(type="checkbox", ng-model="vm.allUOMsSelected", ng-change="vm.toggleAllUOMs()", ng-show="vm.uoms.length > 0")
+              th {{ 'ID' | translate }}
               th {{ 'NAME' | translate }}
               th {{ 'DESCRIPTION' | translate }}
               th {{ 'SHORT_NAME' | translate }}
               th
           tbody
             tr(ng-if="vm.uoms.length === 0")
-              td(class="text-center", colspan="5")
+              td(class="text-center", colspan="6")
                 p(class="lead") {{ 'NO_UOMS_DEFINED' | translate }}
             tr(ng-repeat="uom in vm.uoms | filter: vm.queryUOMs")
               td
                 input(type="checkbox", ng-model="uom.selected")
+              td {{ uom.id }}
               td {{ uom.name }}
               td {{ uom.short_name }}
               td {{ uom.description || 'N/A' }}

@@ -22,7 +22,7 @@ export default class userservice {
   logIn(username, password) {
     return this.$http({
       method: 'POST',
-      url: 'api/inventory/users/login/',
+      url: '/v1/inventory/users/login/',
       data: {
         username: username,
         password: password
@@ -44,7 +44,7 @@ export default class userservice {
   logOut() {
     return this.$http({
       method: 'POST',
-      url: 'api/inventory/users/logout/'
+      url: '/v1/inventory/users/logout/'
     })
     .then(() => {
       this.currentUser = {};
@@ -62,7 +62,7 @@ export default class userservice {
     const id = this.localStorageService.get(this.CURRENT_USER);
     return this.$http({
       method: 'GET',
-      url: 'api/inventory/users/' + id + '/'
+      url: '/v1/inventory/users/' + id + '/'
     })
     .then((response) => {
       this.currentUser = response.data;
@@ -79,7 +79,7 @@ export default class userservice {
   getUserList() {
     return this.$http({
       method: 'GET',
-      url: 'api/inventory/users/'
+      url: '/v1/inventory/users/'
     })
     .then((response) => {
       this.userList = response.data.objects;
@@ -95,7 +95,7 @@ export default class userservice {
   createUser(data) {
     return this.$http({
       method: 'POST',
-      url: 'api/inventory/users/signup/',
+      url: '/v1/inventory/users/signup/',
       data: data
     })
     .then((response) => {
@@ -121,7 +121,7 @@ export default class userservice {
   updateUserData(id, data) {
     return this.$http({
       method: 'PATCH',
-      url: 'api/inventory/users/' + id + '/',
+      url: '/v1/inventory/users/' + id + '/',
       data: data
     })
     .then((response) => {
@@ -145,7 +145,7 @@ export default class userservice {
   deleteUser(id) {
     return this.$http({
       method: 'DELETE',
-      url: 'api/inventory/users/' + id + '/'
+      url: '/v1/inventory/users/' + id + '/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('DELETE_USER_SUCCESS'));

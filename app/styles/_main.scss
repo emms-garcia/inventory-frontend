@@ -1,4 +1,15 @@
 .main {
+  .table-responsive {
+    padding: 10px;
+    table {
+      thead {
+        tr:first-child {
+          background: $color-primary;
+          color: $color-bg;
+        }
+      }
+    }
+  }
 
   .section {
     margin-top: -20px;
@@ -6,6 +17,7 @@
 
     .nav-tabs > li > a {
       font-size: 17px;
+      font-weight: bold;
     }
 
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
@@ -19,9 +31,14 @@
       color: lighten($color-primary, 20%);
     }
 
-    h2, h3 {
+    h2 {
       border-bottom: 1px solid $color-primary;
       margin: 40px 0 20px;
+      padding-bottom: 9px;
+    }
+
+    h3 {
+      border-bottom: 1px solid $color-primary;
       padding-bottom: 9px;
     }
 

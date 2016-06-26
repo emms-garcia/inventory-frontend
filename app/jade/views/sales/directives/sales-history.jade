@@ -1,0 +1,43 @@
+div(class="sales-history col-md-12")
+  div(class="table-responsive")
+    table(class="table table-striped")
+      thead
+        tr
+          th {{ 'ID' | translate }}
+          th {{ 'CREATED_AT' | translate }}
+          th {{ 'NAME' | translate }}
+          th {{ 'DESCRIPTION' | translate }}
+          th {{ 'CLIENT' | translate }}
+          th {{ 'TOTAL' | translate }}
+          th
+      tbody
+        tr
+          th {{ vm.sale.id }}
+          th {{ (vm.sale.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
+          th {{ vm.sale.name }}
+          th {{ vm.sale.description || 'N/A' }}
+          th
+            a(ui-sref="clients.detail({'clientId': vm.sale.client.id})") {{ vm.sale.client.name }}
+          th {{ vm.sale.voucher.total }}
+          th
+            button(class="btn-sm btn btn-default", ng-click="vm.toggleDetails()")
+              span(class="glyphicon", ng-class="{ 'glyphicon-eye-open': !vm.showDetails, 'glyphicon-eye-close': vm.showDetails }")
+      tbody
+        tr(ng-show="vm.showDetails")
+          td(colspan="7")
+            div(class="table-responsive")
+              table(class="table table-striped")
+                thead
+                  tr
+                    th {{ 'NAME' | translate }}
+                    th {{ 'PRICE' | translate }}
+                    th {{ 'QUANTITY' | translate }}
+                    th {{ 'TOTAL' | translate }}
+                    th {{ 'PRICE_WAS_MODIFIED' | translate }}
+                tbody
+                  tr(ng-repeat="product in vm.sale.voucher.cart")
+                    td {{ product.name }}
+                    td ${{ product.price }}
+                    td {{ product.quantity }}
+                    td ${{ product.total }}
+                    td {{ (product.priceChanged ? 'YES' : 'NO') | translate }}

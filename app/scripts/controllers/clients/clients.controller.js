@@ -1,31 +1,17 @@
 export default class ClientsController {
-  constructor($uibModal, clientsservice, userservice, utilsservice) {
+  constructor($translate, $uibModal, clientsservice, utilsservice) {
+    this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.clientsservice = clientsservice;
-    this.userservice = userservice;
     this.utilsservice = utilsservice;
 
+    this.allClientsSelected = false;
     this.clients = [];
-    this.currentUser = userservice.currentUser;
+    this.queryClients = '';
 
     this.activate();
 
-    this.$inject = ['$uibModal', 'clientsservice', 'userservice', 'utilsservice'];
-  }
-
-  deleteClient(id) {
-    this.utilsservice.confirmationDialog(() => {
-      this.clientsservice.deleteClient(id).then((data) => {
-        if (data) {
-          this.clientsservice.getClientList().then((data) => {
-            this.clients = data;
-          });
-        }
-      });
-    }, null, {
-      bodyMsg: this.utilsservice.translate('DELETE_CLIENT_CONFIRM_BODY'),
-      titleMsg: this.utilsservice.translate('DELETE_CLIENT_CONFIRM_TITLE'),
-    });
+    this.$inject = ['$translate', '$uibModal', 'clientsservice', 'utilsservice'];
   }
 
   openCreateClientModal() {
@@ -42,10 +28,41 @@ export default class ClientsController {
     });
   }
 
-  activate() {
-    console.log('ClientsController activated.');
+  deleteSelectedClients() {
+    const data = [];
+    this.clients.forEach((client) => {
+      if(client.selected) {
+        data.push(client.resource_uri);
+      }
+    })
+
+    if(data.length > 0) {
+      const config = {
+        bodyMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_BODY'),
+        titleMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_TITLE')
+      };
+      this.utilsservice.confirmationDialog(() => {
+        this.clientsservice.deleteClients(data).then(() => {
+          this.getClients();
+        });
+      }, null, config);
+    }
+  }
+
+  toggleAllClients() {
+    this.clients.forEach((client) => {
+      client.selected = this.allClientsSelected;
+    });
+  }
+
+  getClients() {
     this.clientsservice.getClientList().then((data) => {
       this.clients = data;
     });
+  }
+
+  activate() {
+    console.log('ClientsController activated.');
+    this.getClients();
   }
 }

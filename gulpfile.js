@@ -69,8 +69,9 @@ gulp.task('webserver', function () {
   gulp.src('./public')
     .pipe(webserver({
       directoryListing: false,
+      livereload: true,
       open: true,
       port: 4000,
-      proxies: [{source: '/api', target: 'http://localhost:8000/api'}]
+      proxies: [{source: '/v1', target: 'http://localhost:8000/v1'}]
     }));
 });

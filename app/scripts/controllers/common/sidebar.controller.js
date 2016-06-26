@@ -5,8 +5,6 @@ export default class SidebarController {
     this.userservice = userservice;
     this.utilsservice = utilsservice;
 
-    this.currentUser = userservice.currentUser;
-
     this.activate();
 
     this.$inject = ['$state', '$translate', 'userservice', 'utilsservice'];

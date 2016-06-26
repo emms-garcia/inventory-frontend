@@ -13,7 +13,7 @@ export default class productservice {
     return this.$http({
       method: 'POST',
       data: data,
-      url: '/api/inventory/products/'
+      url: '/v1/inventory/products/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('PRODUCT_CREATE_SUCCESS'));
@@ -40,7 +40,7 @@ export default class productservice {
         objects: []
       },
       method: 'PATCH',
-      url: '/api/inventory/products/'
+      url: '/v1/inventory/products/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('PRODUCTS_DELETE_SUCCESS'));
@@ -60,7 +60,7 @@ export default class productservice {
   getProductDetail(id) {
     return this.$http({
       method: 'GET',
-      url: '/api/inventory/products/' + id + '/'
+      url: '/v1/inventory/products/' + id + '/'
     })
     .then((response) => {
       return response.data;
@@ -75,7 +75,7 @@ export default class productservice {
   getProductList() {
     return this.$http({
       method: 'GET',
-      url: '/api/inventory/products/'
+      url: '/v1/inventory/products/'
     }).then((response) => {
       return response.data.objects;
     })
@@ -88,7 +88,7 @@ export default class productservice {
 
   importProducts(file) {
     return this.Upload.upload({
-        url: 'api/inventory/products/import/',
+        url: '/v1/inventory/products/import/',
         data: { file: file }
     }).then((response) => {
       this.utilsservice.notifySuccess(this.$translate.instant('IMPORT_PRODUCTS_SUCCESS'));
@@ -99,7 +99,7 @@ export default class productservice {
   updateProduct(id, data) {
     return this.$http({
       method: 'PATCH',
-      url: 'api/inventory/products/' + id + '/',
+      url: '/v1/inventory/products/' + id + '/',
       data: data
     })
     .then(() => {
@@ -125,7 +125,7 @@ export default class productservice {
     return this.$http({
       method: 'POST',
       data: data,
-      url: '/api/inventory/product_groups/'
+      url: '/v1/inventory/product_groups/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('PRODUCT_GROUP_CREATE_SUCCESS'));
@@ -152,7 +152,7 @@ export default class productservice {
         objects: []
       },
       method: 'PATCH',
-      url: '/api/inventory/product_groups/'
+      url: '/v1/inventory/product_groups/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('PRODUCT_GROUP_DELETE_SUCCESS'));
@@ -168,7 +168,7 @@ export default class productservice {
   getProductGroupList() {
     return this.$http({
       method: 'GET',
-      url: '/api/inventory/product_groups/'
+      url: '/v1/inventory/product_groups/'
     })
     .then((response) => {
       return response.data.objects;
@@ -187,7 +187,7 @@ export default class productservice {
     return this.$http({
       method: 'POST',
       data: data,
-      url: '/api/inventory/uoms/'
+      url: '/v1/inventory/uoms/'
     })
     .then(() => {
       this.utilsservice.notifySuccess(this.$translate.instant('UOM_CREATE_SUCCESS'));
@@ -210,7 +210,7 @@ export default class productservice {
   getUOMList() {
     return this.$http({
       method: 'GET',
-      url: '/api/inventory/uoms/'
+      url: '/v1/inventory/uoms/'
     }).then((response) => {
       return response.data.objects;
     })
@@ -228,7 +228,7 @@ export default class productservice {
       params: {
         product: productId
       },
-      url: '/api/inventory/warehouse_stocks/'
+      url: '/v1/inventory/warehouse_stocks/'
     })
     .then((response) => {
       return response.data.objects;

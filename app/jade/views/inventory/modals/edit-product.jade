@@ -18,8 +18,12 @@ div(class="modal-body")
               th {{ 'DESCRIPTION' | translate }}
               td
                 a(editable-textarea="vm.product.description", onbeforesave="vm.updateProductData('description', $data)") {{ vm.product.description || 'N/A' }}
+            tr
+              th {{ 'QUANTITY' | translate }}
+              td
+                a(editable-textarea="vm.product.quantity", onbeforesave="vm.updateProductData('quantity', $data)") {{ vm.product.quantity || 0.0 }}
 
-      div(class="table-responsive")
+      //-div(class="table-responsive")
         table(class="table table-condensed")
           thead
             tr

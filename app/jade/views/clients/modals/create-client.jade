@@ -5,17 +5,17 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
     div(class="row")
       div(class="col-sm-6")
         div(class="row form-group")
-          label(class="col-sm-4", for="name") {{ 'NAME' | translate }}:
+          label(class="col-sm-4", for="name") *{{ 'NAME' | translate }}:
           div(class="col-sm-7")
             input(class="form-control", id="name", required, ng-model="vm.name", type="text", placeholder="{{ 'NAME' | translate }}")
         div(class="row form-group")
           label(class="col-sm-4", for="email") {{ 'EMAIL' | translate }}:
           div(class="col-sm-7")
-            input(class="form-control", id="email", ng-model="vm.email", type="text", placeholder="{{ 'EMAIL' | translate }}")
+            input(class="form-control", id="email", ng-model="vm.email", type="email", placeholder="{{ 'EMAIL' | translate }}")
         div(class="row form-group")
           label(class="col-sm-4", for="company") {{ 'COMPANY' | translate }}:
           div(class="col-sm-7")
-            input(class="form-control", id="company", required, ng-model="vm.company", type="text", placeholder="{{ 'COMPANY' | translate }}")
+            input(class="form-control", id="company", ng-model="vm.company", type="text", placeholder="{{ 'COMPANY' | translate }}")
         div(class="row form-group")
           label(class="col-sm-4", for="rfc") {{ 'RFC' | translate }}:
           div(class="col-sm-7")
@@ -27,7 +27,7 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
         div(class="row form-group")
           label(class="col-sm-4", for="cellphone") {{ 'CELLPHONE' | translate }}:
           div(class="col-sm-7")
-            input(class="form-control", id="cellphone", required, ng-model="vm.cellphone", type="text", placeholder="{{ 'CELLPHONE' | translate }}")
+            input(class="form-control", id="cellphone", ng-model="vm.cellphone", type="text", placeholder="{{ 'CELLPHONE' | translate }}")
         div(class="row form-group")
           label(class="col-sm-4", for="address") {{ 'ADDRESS' | translate }}:
           div(class="col-sm-7")
@@ -36,5 +36,5 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
         ui-gmap-google-map(center="map.center", zoom="map.zoom", dragable="true")
           ui-gmap-marker(coords="marker.coords", idkey="marker.id", options="marker.options")
   div(class="modal-footer")
-    button(class="btn btn-primary btn-lg", type="submit") {{ 'CREATE' | translate }}
+    button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid") {{ 'CREATE' | translate }}
     button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}
