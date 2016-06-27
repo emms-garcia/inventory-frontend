@@ -1,0 +1,38 @@
+div(class="sidebar col-md-2")
+    div(class="row")
+      div(class="col-sm-12")
+        img(class="img-responsive img-circle logo", src="images/logo.png", alt="Generic placeholder thumbnail")
+    hr
+    div(class="row")
+      div(class="col-sm-12")
+        ul(class="nav nav-sidebar")
+          li(ui-sref-active="active")
+            a(ui-sref="dashboard")
+              span(class="glyphicon glyphicon-th glyphicon-white")
+              | &nbsp; {{ 'DASHBOARD' | translate }}
+          li(ui-sref-active="active")
+            a(ui-sref="inventory")
+              span(class="glyphicon glyphicon-list glyphicon-white")
+              | &nbsp; {{ 'INVENTORY' | translate }}
+          li(ui-sref-active="active")
+            a(ui-sref="transactions")
+              span(class="glyphicon glyphicon-usd glyphicon-white")
+              | &nbsp; {{ 'TRANSACTIONS' | translate }}
+          li(ui-sref-active="active", ng-class="{ active: vm.$state.current.name === 'clients.detail' }")
+            a(ui-sref="clients")
+              span(class="glyphicon glyphicon-user glyphicon-white")
+              | &nbsp; {{ 'CLIENTS' | translate }}
+    hr
+    div(class="row")
+      div(class="col-sm-12")
+        ul(class="nav nav-sidebar")
+          li(ui-sref-active="active")
+            a(ui-sref="settings")
+              span(class="glyphicon glyphicon-cog glyphicon-white")
+              | &nbsp; {{ 'SETTINGS' | translate }}
+          li
+            a(href="", ng-click="vm.logOut()")
+              span(class="glyphicon glyphicon-off glyphicon-white")
+              | &nbsp; {{ 'LOGOUT' | translate }}
+
+div(class="main col-md-10", ui-view="mainContainer")

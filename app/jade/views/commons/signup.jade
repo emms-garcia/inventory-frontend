@@ -1,6 +1,6 @@
 div(class="signup-section section")
   div(class="row")
-    div(class="col-md-6 col-md-offset-2")
+    div(class="col-md-6", style="margin: 0 auto; float: none;")
       div(class="jumbotron")
         div(class="row")
           div(class="col-sm-10 col-sm-offset-1 text-center")
@@ -25,7 +25,7 @@ div(class="signup-section section")
                 span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.lastName.$valid")
 
               div(class="form-group has-feedback", ng-class="{ 'has-error': (form.username.$touched && form.username.$error.required || form.username.$error.email), 'has-success': form.username.$valid }")
-                input(class="form-control input-lg", id="username", name="username", required, ng-model="vm.username", type="email", placeholder="{{ 'USERNAME' | translate }}")
+                input(class="form-control input-lg", id="username", name="username", required, ng-model="vm.username", type="email", placeholder="{{ 'EMAIL' | translate }}")
                 span(class="help-block", ng-show="form.username.$touched && form.username.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
                 span(class="help-block", ng-show="form.username.$touched && form.username.$error.email") *{{ 'FIELD_EMAIL' | translate }}
                 span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.username.$invalid && form.username.$touched")

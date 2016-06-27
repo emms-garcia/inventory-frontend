@@ -54,7 +54,7 @@ export default function translationloaderservice($q, $timeout) {
         EDIT_PRODUCT: 'Editar Producto',
         EDIT_PRODUCT_GROUP: 'Editar Grupo de Productos',
         EDIT_UOM: 'Editar Unidad de Medida',
-        EMAIL: 'Correo',
+        EMAIL: 'Email',
         EMPTY_PASSWORDS: 'No se especificaron contraseñas',
         FIELD_EMAIL: 'Este campo debe ser un email',
         FIELD_REQUIRED: 'Este campo es requerido',
@@ -80,9 +80,9 @@ export default function translationloaderservice($q, $timeout) {
         NO_CLIENTS_DEFINED: 'No se han agregado clientes',
         NO_FIRST_NAME: 'No especificado',
         NO_LAST_NAME: 'No especificado',
-        NO_PRODUCTS_DEFINED: 'No se han agregado productos',
+        NO_PRODUCTS_FOUND: 'No se han encontrado productos',
         NO_RESULTS: 'No se encontró información',
-        NO_UOMS_DEFINED: 'No se han agregado unidades de medida',
+        NO_UOMS_FOUND: 'No se han encontrado unidades de medida',
         OPEN_ON_GMAPS: 'Abrir en GoogleMaps',
         PASSWORD: 'Contraseña',
         PASSWORDS_DONT_MATCH: 'Las contraseñas no coinciden',
@@ -204,6 +204,7 @@ export default function translationloaderservice($q, $timeout) {
       };
     } else if(options.key === 'en-us') {
       translations = {
+        NO_UOMS_FOUND: 'No unit of measure found',
         NO_TRANSACTIONS_FOUND: 'No transactions found',
         TRANSACTION_CREATE_FAILED: 'Failed to do transaction',
         TRANSACTION_CREATE_SUCCESS: 'Transaction realized successfully',
@@ -364,7 +365,7 @@ export default function translationloaderservice($q, $timeout) {
         NO_CLIENTS_DEFINED: 'No clients defined',
         NO_FIRST_NAME: 'Not specified',
         NO_LAST_NAME: 'Not specified',
-        NO_PRODUCTS_DEFINED: 'No products defined',
+        NO_PRODUCTS_FOUND: 'No products found',
         NO_RESULTS: 'No data found',
         NO_UOMS_DEFINED: 'No unit of measures defined',
         OPEN_ON_GMAPS: 'OPEN_ON_GMAPS',

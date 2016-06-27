@@ -5,10 +5,10 @@ import CreateClientModalController from './clients/modals/create-client.controll
 import ClientsDetailController from './clients/clients-detail.controller';
 import ClientsController from './clients/clients.controller';
 /* common */
+import BaseController from './common/base.controller';
 import ConfirmationDialogModalController from './common/modals/confirmation-dialog.controller';
 import HeaderController from './common/header.controller';
 import LoginController from './common/login.controller';
-import SidebarController from './common/sidebar.controller';
 import SignUpController from './common/signup.controller';
 /* dashboard */
 import DashboardController from './dashboard/dashboard.controller';
@@ -37,10 +37,10 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('CreateClientModalController', CreateClientModalController)
   .controller('ClientsDetailController', ClientsDetailController)
   .controller('ClientsController', ClientsController)
+  .controller('BaseController', BaseController)
   .controller('ConfirmationDialogModalController', ConfirmationDialogModalController)
   .controller('HeaderController', HeaderController)
   .controller('LoginController', LoginController)
-  .controller('SidebarController', SidebarController)
   .controller('SignUpController', SignUpController)
   .controller('DashboardController', DashboardController)
   .controller('ProductGroupCardController', ProductGroupCardController)

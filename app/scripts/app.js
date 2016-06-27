@@ -63,49 +63,35 @@ function configure(
   .state('login', {
     authenticate : false,
     url:'/login',
-    views: {
-      mainContainer: {
-        controller : 'LoginController',
-        controllerAs: 'vm',
-        templateUrl: 'views/commons/login.html'
-      }
-    }
+    controller : 'LoginController',
+    controllerAs: 'vm',
+    templateUrl: 'views/commons/login.html'
   })
   .state('signup', {
     authenticate : false,
     url:'/signup',
-    views: {
-      mainContainer: {
-        controller : 'SignUpController',
-        controllerAs: 'vm',
-        templateUrl: 'views/commons/signup.html'
-      }
-    }
+    controller : 'SignUpController',
+    controllerAs: 'vm',
+    templateUrl: 'views/commons/signup.html'
   })
   .state('base', {
     abstract: true,
     authenticate : true,
+    controller: 'BaseController',
+    controllerAs: 'vm',
     resolve: {
       currentUser: function(userservice) {
         return userservice.getCurrentUser();
       }
     },
-    template: '<ui-view/>',
-    views: {
-      mainContainer: {},
-      sidebarContainer: {
-        controller: 'SidebarController',
-        controllerAs: 'vm',
-        templateUrl: 'views/commons/sidebar-container.html'
-      }
-    }
+    templateUrl: 'views/commons/base.html'
   })
   .state('dashboard', {
     authenticate : true,
     parent: 'base',
     url:'/dashboard',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'DashboardController',
         controllerAs: 'vm',
         templateUrl: 'views/dashboard/dashboard.html'
@@ -117,7 +103,7 @@ function configure(
     parent: 'base',
     url:'/warehouses',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'WarehousesController',
         controllerAs: 'vm',
         templateUrl: 'views/warehouses/warehouses.html'
@@ -129,7 +115,7 @@ function configure(
     parent: 'base',
     url:'/inventory',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'InventoryController',
         controllerAs: 'vm',
         templateUrl: 'views/inventory/inventory.html'
@@ -141,7 +127,7 @@ function configure(
     parent: 'base',
     url:'/transactions',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'TransactionsController',
         controllerAs: 'vm',
         templateUrl: 'views/transactions/transactions.html'
@@ -153,7 +139,7 @@ function configure(
     parent: 'base',
     url:'/purchases',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'PurchasesController',
         controllerAs: 'vm',
         templateUrl: 'views/purchases/purchases.html'
@@ -165,7 +151,7 @@ function configure(
     parent: 'base',
     url:'/clients',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'ClientsController',
         controllerAs: 'vm',
         templateUrl: 'views/clients/clients.html'
@@ -177,7 +163,7 @@ function configure(
     parent: 'base',
     url:'/clients/:clientId',
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'ClientsDetailController',
         controllerAs: 'vm',
         templateUrl: 'views/clients/clients-detail.html'
@@ -194,7 +180,7 @@ function configure(
       }
     },
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'SettingsController',
         controllerAs: 'vm',
         templateUrl: 'views/settings/settings.html'
@@ -210,7 +196,7 @@ function configure(
       }
     },
     views: {
-      mainView: {
+      mainContainer: {
         controller : 'UsersController',
         controllerAs: 'vm',
         templateUrl: 'views/users/users.html'

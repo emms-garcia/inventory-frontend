@@ -1,4 +1,4 @@
-export default class SidebarController {
+export default class BaseController {
   constructor($state, $translate, userservice, utilsservice) {
     this.$state = $state;
     this.$translate = $translate;
@@ -25,6 +25,6 @@ export default class SidebarController {
   }
 
   activate() {
-    console.log('SidebarController activated.');
+    console.log('BaseController activated.');
   }
 }
