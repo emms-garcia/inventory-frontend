@@ -13,7 +13,7 @@ div(class="inventory-section section")
                 span(class="glyphicon glyphicon-search")
         div(class="col-sm-9")
           div(class="btn-group pull-right", uib-dropdown)
-            button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+            button(id="single-button", type="button", class="btn btn-primary btn-lg", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
               span(class="caret")
             ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
               li(role="menuitem")
@@ -42,7 +42,6 @@ div(class="inventory-section section")
               th(style="width: 40%;") {{ 'DESCRIPTION' | translate }}
               th {{ 'QUANTITIES' | translate }}
               th {{ 'PRICE_PER_UNIT' | translate }}
-              th
           tbody
             tr(ng-if="vm.products.length === 0")
               td(class="text-center", colspan="7")
@@ -52,14 +51,14 @@ div(class="inventory-section section")
                 input(type="checkbox", ng-model="product.selected")
               td {{ product.id }}
               td {{ (product.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
-              td {{ product.name || 'NO_PRODUCT_NAME' }}
-              td {{ product.description || 'N/A' }}
-              td {{ product.quantity + ' ' + product.uom.short_name }}
-              td ${{ product.price_per_unit }}
               td
-                button(class="btn btn-primary btn-xs")
-                  span(class="glyphicon glyphicon-pencil", ng-click="vm.openEditProductModal(product)")
-
+                a(editable-text="product.name", onbeforesave="vm.updateProductData(product, 'name', $data)") {{ product.name || 'NO_PRODUCT_NAME' }}
+              td
+                a(editable-textarea="product.description", onbeforesave="vm.updateProductData(product, 'description', $data)") {{ product.description || 'N/A' }}
+              td
+                a(editable-number="product.quantity", onbeforesave="vm.updateProductData(product, 'quantity', $data)", e-min="0", e-step="any") {{ product.quantity + ' ' + product.uom.short_name }}
+              td
+                a(editable-number="product.price_per_unit", onbeforesave="vm.updateProductData(product, 'price_per_unit', $data)", e-min="0", e-step="any") ${{ product.price_per_unit }}
     uib-tab(index="2", heading="{{ 'UOMS' | translate }}")
       br
       div(class="row")
@@ -92,7 +91,6 @@ div(class="inventory-section section")
               th {{ 'NAME' | translate }}
               th {{ 'DESCRIPTION' | translate }}
               th {{ 'SHORT_NAME' | translate }}
-              th
           tbody
             tr(ng-if="vm.uoms.length === 0")
               td(class="text-center", colspan="6")
@@ -101,12 +99,12 @@ div(class="inventory-section section")
               td
                 input(type="checkbox", ng-model="uom.selected")
               td {{ uom.id }}
-              td {{ uom.name }}
-              td {{ uom.short_name }}
-              td {{ uom.description || 'N/A' }}
               td
-                button(class="btn btn-primary btn-xs")
-                  span(class="glyphicon glyphicon-pencil", ng-click="vm.openEditUOMModal(uom)")
+                a(editable-text="uom.name", onbeforesave="vm.updateUOMData(uom, 'name', $data)") {{ uom.name || 'NO_PRODUCT_NAME' }}
+              td
+                a(editable-textarea="uom.description", onbeforesave="vm.updateUOMData(uom, 'description', $data)") {{ uom.description || 'N/A' }}
+              td
+                a(editable-text="uom.short_name", onbeforesave="vm.updateUOMData(uom, 'short_name', $data)") {{ uom.short_name || 'NO_PRODUCT_NAME' }}
 
     //- uib-tab(index="3", heading="{{ 'PRODUCT_GROUPS' | translate }}")
       br

@@ -1,4 +1,4 @@
-export default class salesservice {
+export default class transactionsservice {
   constructor($http, $translate, utilsservice) {
     this.$http = $http;
     this.$translate = $translate;
@@ -7,12 +7,9 @@ export default class salesservice {
     this.$inject = ['$http', '$translate', 'utilsservice'];
   }
 
-  getSaleList() {
+  getTransactionList(type) {
     return this.$http({
       method: 'GET',
-      params: {
-        type: 'sale'
-      },
       url: '/v1/inventory/transactions/'
     })
     .then((response) => {
@@ -20,12 +17,12 @@ export default class salesservice {
     })
     .catch((error) => {
       console.log('XHR failed on getSaleList ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('SALE_LIST_FAILED'));
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_LIST_FAILED'));
       return false;
     });
   }
 
-  getSaleDetail(id) {
+  getTransactionDetail(id) {
     return this.$http({
       method: 'GET',
       url: `/v1/inventory/transactions/${id}/`
@@ -35,32 +32,25 @@ export default class salesservice {
     })
     .catch((error) => {
       console.log('XHR failed on getSaleDetail ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('SALE_DETAIL_FAILED'));
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_DETAIL_FAILED'));
       return false;
     });
   }
 
-  createSale(data) {
-    data.type = 'sale';
+  createTransaction(data) {
     return this.$http({
       method: 'POST',
       data: data,
       url: '/v1/inventory/transactions/'
     })
     .then((response) => {
-      this.utilsservice.notifySuccess(this.$translate.instant('SALE_CREATE_SUCCESS'));
+      this.utilsservice.notifySuccess(this.$translate.instant('TRANSACTION_CREATE_SUCCESS'));
       return true;
     })
     .catch((error) => {
       console.log('XHR failed on createSale ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('SALE_CREATE_FAILED'));
-      if(error.data.transactions) {
-        for(const data of error.data.transactions) {
-          if(data) {
-            this.utilsservice.notifyError(data[0]);
-          }
-        }
-      }
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_CREATE_FAILED'));
+      this.utilsservice.notifyError(error.data.error);
       return false;
     });
   }

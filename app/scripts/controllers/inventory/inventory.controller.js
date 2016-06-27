@@ -155,6 +155,27 @@ export default class InventoryController {
     }
   }
 
+  deleteSelectedUOMs() {
+    const data = [];
+    this.uoms.forEach((uom) => {
+      if(uom.selected) {
+        data.push(uom.resource_uri);
+      }
+    })
+
+    if(data.length > 0) {
+      const config = {
+        bodyMsg: this.$translate.instant('DELETE_UOMS_MODAL_BODY'),
+        titleMsg: this.$translate.instant('DELETE_UOMS_MODAL_TITLE')
+      };
+      this.utilsservice.confirmationDialog(() => {
+        this.productservice.deleteUOMs(data).then(() => {
+          this.getUOMs();
+        });
+      }, null, config);
+    }
+  }
+
   importProductsModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
@@ -171,6 +192,14 @@ export default class InventoryController {
     this.products.forEach((product) => {
       product.selected = this.allProductsSelected;
     });
+  }
+
+  updateProductData(product, key, value) {
+    return this.productservice.updateProduct(product.id, { [key]: value });
+  }
+
+  updateUOMData(uom, key, value) {
+    return this.productservice.updateUOM(uom.id, { [key]: value });
   }
 
   activate() {

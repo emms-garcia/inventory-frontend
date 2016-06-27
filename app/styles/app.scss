@@ -11,3 +11,8 @@
 ul.dropdown-menu > li > a {
   cursor: pointer;
 }
+
+.modal-header {
+  color: $color-bg;
+  background-color: $color-primary;
+}

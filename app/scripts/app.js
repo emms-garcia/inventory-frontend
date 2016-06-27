@@ -136,15 +136,15 @@ function configure(
       }
     }
   })
-  .state('sales', {
+  .state('transactions', {
     authenticate : true,
     parent: 'base',
-    url:'/sales',
+    url:'/transactions',
     views: {
       mainView: {
-        controller : 'SalesController',
+        controller : 'TransactionsController',
         controllerAs: 'vm',
-        templateUrl: 'views/sales/sales.html'
+        templateUrl: 'views/transactions/transactions.html'
       }
     }
   })

@@ -14,13 +14,9 @@ div(class="row")
           span(class="glyphicon glyphicon-list glyphicon-white")
           | &nbsp; {{ 'INVENTORY' | translate }}
       li(ui-sref-active="active")
-        a(ui-sref="sales")
+        a(ui-sref="transactions")
           span(class="glyphicon glyphicon-usd glyphicon-white")
-          | &nbsp; {{ 'SALES' | translate }}
-      li(ui-sref-active="active")
-        a(ui-sref="purchases")
-          span(class="glyphicon glyphicon-shopping-cart glyphicon-white")
-          | &nbsp; {{ 'PURCHASES' | translate }}
+          | &nbsp; {{ 'TRANSACTIONS' | translate }}
       li(ui-sref-active="active", ng-class="{ active: vm.$state.current.name === 'clients.detail' }")
         a(ui-sref="clients")
           span(class="glyphicon glyphicon-user glyphicon-white")

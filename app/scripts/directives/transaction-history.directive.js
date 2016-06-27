@@ -1,4 +1,4 @@
-class SalesHistoryController {
+class TransactionHistoryController {
   constructor() {
     this.showDetails = false;
 
@@ -11,20 +11,20 @@ class SalesHistoryController {
   }
 
   activate() {
-    console.log('SalesHistoryController activated.');
+    console.log('TransactionHistoryController activated.');
   }
 }
 
 
 export default function salesHistory() {
   return {
-    controller: SalesHistoryController,
+    controller: TransactionHistoryController,
     controllerAs: 'vm',
     bindToController: true,
     restrict: 'E',
     scope: {
-      sale: '='
+      transaction: '='
     },
-    templateUrl: 'views/sales/directives/sales-history.html'
+    templateUrl: 'views/transactions/directives/transaction-history.html'
   };
 }

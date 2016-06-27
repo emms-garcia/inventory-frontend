@@ -196,13 +196,26 @@ export default class productservice {
     .catch((error) => {
       console.log('XHR failed on createUOM ' + error);
       this.utilsservice.notifyError(this.$translate.instant('UOM_CREATE_FAILED'));
-      if(error.data.uoms) {
-        error.data.uoms.forEach(function (data) {
-          if(data) {
-            this.utilsservice.notifyError(data[0]);
-          }
-        });
-      }
+      return false;
+    });
+  }
+
+  deleteUOMs(objects) {
+    return this.$http({
+      data: {
+        deleted_objects: objects,
+        objects: []
+      },
+      method: 'PATCH',
+      url: '/v1/inventory/uoms/'
+    })
+    .then(() => {
+      this.utilsservice.notifySuccess(this.$translate.instant('UOM_DELETE_SUCCESS'));
+      return true;
+    })
+    .catch((error) => {
+      console.log('XHR failed on deleteUOMs ' + error);
+      this.utilsservice.notifyError(this.$translate.instant('UOM_DELETE_FAILED'));
       return false;
     });
   }
@@ -217,6 +230,23 @@ export default class productservice {
     .catch((error) => {
       console.log('XHR failed on getUOMList ' + error);
       this.utilsservice.notifyError(this.$translate.instant('UOM_LIST_FAILED'));
+      return false;
+    });
+  }
+
+  updateUOM(id, data) {
+    return this.$http({
+      method: 'PATCH',
+      url: '/v1/inventory/uoms/' + id + '/',
+      data: data
+    })
+    .then(() => {
+      this.utilsservice.notifySuccess(this.$translate.instant('UPDATE_UOM_SUCCESS'));
+      return true;
+    })
+    .catch((error) => {
+      console.log('XHR Failed for updateUOM ' + error.data);
+      this.utilsservice.notifyError(this.$translate.instant('UPDATE_UOM_FAILED'));
       return false;
     });
   }

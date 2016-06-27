@@ -1,4 +1,4 @@
-div(class="sales-history col-md-12")
+div(class="transactions-history col-md-12")
   div(class="table-responsive")
     table(class="table table-striped")
       thead
@@ -7,18 +7,20 @@ div(class="sales-history col-md-12")
           th {{ 'CREATED_AT' | translate }}
           th {{ 'NAME' | translate }}
           th {{ 'DESCRIPTION' | translate }}
+          th {{ 'TYPE' |  translate }}
           th {{ 'CLIENT' | translate }}
           th {{ 'TOTAL' | translate }}
           th
       tbody
         tr
-          th {{ vm.sale.id }}
-          th {{ (vm.sale.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
-          th {{ vm.sale.name }}
-          th {{ vm.sale.description || 'N/A' }}
+          th {{ vm.transaction.id }}
+          th {{ (vm.transaction.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
+          th {{ vm.transaction.name }}
+          th {{ vm.transaction.description || 'N/A' }}
+          th {{ (vm.transaction.type === 'sale' ? 'SALE' : 'PURCHASE') | translate }}
           th
-            a(ui-sref="clients.detail({'clientId': vm.sale.client.id})") {{ vm.sale.client.name }}
-          th {{ vm.sale.voucher.total }}
+            a(ui-sref="clients.detail({'clientId': vm.transaction.client.id})") {{ vm.transaction.client.name }}
+          th ${{ vm.transaction.voucher.total || 0.0 }}
           th
             button(class="btn-sm btn btn-default", ng-click="vm.toggleDetails()")
               span(class="glyphicon", ng-class="{ 'glyphicon-eye-open': !vm.showDetails, 'glyphicon-eye-close': vm.showDetails }")
@@ -35,9 +37,9 @@ div(class="sales-history col-md-12")
                     th {{ 'TOTAL' | translate }}
                     th {{ 'PRICE_WAS_MODIFIED' | translate }}
                 tbody
-                  tr(ng-repeat="product in vm.sale.voucher.cart")
+                  tr(ng-repeat="product in vm.transaction.voucher.cart")
                     td {{ product.name }}
-                    td ${{ product.price }}
-                    td {{ product.quantity }}
+                    td ${{ product.price || 0.0 }}
+                    td {{ product.quantity || 0.0 }}
                     td ${{ product.total }}
-                    td {{ (product.priceChanged ? 'YES' : 'NO') | translate }}
+                    td {{ ((product.price !== product.real_price) ? 'YES' : 'NO') | translate }}
