@@ -1,6 +1,24 @@
+class ProductGroupCardController {
+  constructor() {
+    this.activate();
+
+    this.showDetails = false;
+
+    this.$inject = [];
+  }
+
+  toggleShowDetails() {
+    this.showDetails = !this.showDetails;
+  }
+
+  activate() {
+    console.log('ProductGroupCardController activated.');
+  }
+}
+
 export default function productGroupCard() {
   return {
-    controller: 'ProductGroupCardController',
+    controller: ProductGroupCardController,
     controllerAs: 'vm',
     bindToController: true,
     restrict: 'E',

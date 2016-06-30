@@ -13,7 +13,6 @@ import SignUpController from './common/signup.controller';
 /* dashboard */
 import DashboardController from './dashboard/dashboard.controller';
 /* inventory */
-import ProductGroupCardController from './inventory/directives/product-group-card.controller';
 import CreateProductGroupModalController from './inventory/modals/create-product-group.controller';
 import CreateProductModalController from './inventory/modals/create-product.controller';
 import CreateUOMModalController from './inventory/modals/create-uom.controller';
@@ -43,7 +42,6 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('LoginController', LoginController)
   .controller('SignUpController', SignUpController)
   .controller('DashboardController', DashboardController)
-  .controller('ProductGroupCardController', ProductGroupCardController)
   .controller('CreateProductGroupModalController', CreateProductGroupModalController)
   .controller('CreateProductModalController', CreateProductModalController)
   .controller('CreateUOMModalController', CreateUOMModalController)

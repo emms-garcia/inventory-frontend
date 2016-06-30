@@ -34,16 +34,15 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate, e
                 td {{ product.name }}
                 td {{ product.description }}
                 td
-                  div(class="col-sm-6")
+                  div(class="col-sm-8")
                     input(class="form-control", type="number", ng-model="product.quantity_in_group", min="1", value="1", ng-change="vm.updateProductsInUse()")
-                td ${{ product.price }}
+                td ${{ product.price_per_unit * product.quantity_in_group }}
             tfoot
               tr
                 td(colspan="4")
                 td
-                  p(class="lead")
-                    strong {{ 'TOTAL' | translate }}: &nbsp;
-                    span ${{ vm.productPriceSum }}
+                  strong {{ 'TOTAL' | translate }}: &nbsp;
+                  span ${{ vm.productPriceSum }}
   div(class="modal-footer")
     button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid || !vm.productsInUse") {{ 'CREATE' | translate }}
     button(class="btn btn-lg", type="button", ng-click="vm.cancel()") {{ 'CANCEL' | translate }}

@@ -121,8 +121,12 @@ div(class="inventory-section section")
               span(class="caret")
             ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
               li(role="menuitem")
-                a(ng-click="vm.openCreateProductGroupModal()") {{ 'CREATE_PRODUCT_GROUP' | translate }}
-                a(ng-click="vm.deleteSelectedProductGroups()") {{ 'DELETE_SELECTED_PRODUCT_GROUPS' | translate }}
+                a(ng-click="vm.openCreateProductGroupModal()")
+                  span(class="glyphicon glyphicon-plus")
+                  | &nbsp; {{ 'CREATE_PRODUCT_GROUP' | translate }}
+                a(ng-click="vm.deleteSelectedProductGroups()")
+                  span(class="glyphicon glyphicon-trash")
+                  | &nbsp; {{ 'DELETE_SELECTED_PRODUCT_GROUPS' | translate }}
       br
       div(class="row-fluid")
         div(class="col-sm-6", ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")

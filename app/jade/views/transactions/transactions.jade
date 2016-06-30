@@ -33,11 +33,11 @@ div(class="transaction-section section")
               label(class="col-sm-3") {{ 'TYPE' | translate }}:
               div(class="col-sm-7")
                 label(class="radio-inline")
-                  input(type="radio", name="transactionType", ng-model="vm.transactionType", value="sale")
-                  | {{ 'SALE' | translate }}
-                label(class="radio-inline")
                   input(type="radio", name="transactionType", ng-model="vm.transactionType", value="purchase")
                   | {{ 'PURCHASE' | translate }}
+                label(class="radio-inline")
+                  input(type="radio", name="transactionType", ng-model="vm.transactionType", value="sale")
+                  | {{ 'SALE' | translate }}
             div(class="form-group row")
               label(class="col-sm-3", for="description") {{ 'DESCRIPTION' | translate }}:
               div(class="col-sm-7")

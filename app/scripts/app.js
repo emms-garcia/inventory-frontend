@@ -28,7 +28,8 @@ angular
     Services.name,
     Directives.name
   ])
-  .config(configure);
+  .config(configure)
+  .run(run);
 
 function configure(
   $httpProvider,
@@ -203,6 +204,10 @@ function configure(
       }
     }
   });
+}
+
+function run(editableOptions) {
+  editableOptions.theme = 'bs3';
 }
 
 configure.$inject = [

@@ -20,3 +20,21 @@ ul.dropdown-menu > li > a {
   color: $color-bg;
   background-color: $color-primary;
 }
+
+.table-responsive {
+  margin-top: 20px;
+  table {
+    thead {
+      tr:first-child {
+        background: $color-primary;
+        color: $color-bg;
+      }
+    }
+    tbody {
+      tr.header {
+        background: $color-primary;
+        color: $color-bg;
+      }
+    }
+  }
+}
