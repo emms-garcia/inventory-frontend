@@ -25,6 +25,6 @@ export default function salesHistory() {
     scope: {
       transaction: '='
     },
-    templateUrl: 'views/transactions/directives/transaction-history.html'
+    templateUrl: 'assets/views/transactions/directives/transaction-history.html'
   };
 }

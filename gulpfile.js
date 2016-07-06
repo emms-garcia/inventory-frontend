@@ -5,7 +5,6 @@ var babelify = require('babelify'),
   clean = require('gulp-clean'),
   gulp = require('gulp'),
   jade = require('gulp-jade'),
-  notify = require('gulp-notify'),
   runSequence = require('run-sequence'),
   sass = require('gulp-sass'),
   source = require('vinyl-source-stream'),
@@ -13,7 +12,7 @@ var babelify = require('babelify'),
 
 gulp.task('assets', function() {
   return gulp.src('./app/assets/**/*')
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./public/assets/'));
 });
 
 gulp.task('build', function(){
@@ -32,10 +31,12 @@ gulp.task('dev', function () {
 });
 
 gulp.task('jade', function() {
-  gulp.src('./app/jade/**/*.jade')
+  gulp.src('./app/jade/views/**/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('./public/assets/views'));
+  gulp.src('./app/jade/index.jade')
     .pipe(jade())
     .pipe(gulp.dest('./public'))
-    .pipe(notify('html compiled.'));
 });
 
 gulp.task('js', function() {
@@ -47,15 +48,13 @@ gulp.task('js', function() {
     })
     .bundle()
     .pipe(source('app.js'))
-    .pipe(gulp.dest('./public/js/'))
-    .pipe(notify('js compliled.'));
+    .pipe(gulp.dest('./public/assets/js'));
 });
 
 gulp.task('sass', function() {
   return gulp.src('./app/styles/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./public/css/'))
-    .pipe(notify('css compiled.'));
+    .pipe(gulp.dest('./public/assets/css/'));
 });
 
 gulp.task('watch', function() {

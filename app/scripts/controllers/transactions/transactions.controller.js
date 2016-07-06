@@ -83,7 +83,7 @@ export default class TransactionsController {
   openAddProductModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/transactions/modals/add-product.html',
+      templateUrl: 'assets/views/transactions/modals/add-product.html',
       controller: 'AddProductModalController as vm',
       size: 'md'
     });

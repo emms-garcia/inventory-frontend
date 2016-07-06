@@ -44,7 +44,7 @@ export default class WarehousesController {
   openCreateWarehouseModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/warehouses/modals/create-warehouse.html',
+      templateUrl: 'assets/views/warehouses/modals/create-warehouse.html',
       controller: 'CreateWarehouseModalController as vm',
       size: 'md'
     });

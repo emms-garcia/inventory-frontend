@@ -17,7 +17,7 @@ export default class ClientsController {
   openCreateClientModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/clients/modals/create-client.html',
+      templateUrl: 'assets/views/clients/modals/create-client.html',
       controller: 'CreateClientModalController as vm',
       size: 'lg'
     });

@@ -66,14 +66,14 @@ function configure(
     url:'/login',
     controller : 'LoginController',
     controllerAs: 'vm',
-    templateUrl: 'views/commons/login.html'
+    templateUrl: 'assets/views/commons/login.html'
   })
   .state('signup', {
     authenticate : false,
     url:'/signup',
     controller : 'SignUpController',
     controllerAs: 'vm',
-    templateUrl: 'views/commons/signup.html'
+    templateUrl: 'assets/views/commons/signup.html'
   })
   .state('base', {
     abstract: true,
@@ -85,7 +85,7 @@ function configure(
         return userservice.getCurrentUser();
       }
     },
-    templateUrl: 'views/commons/base.html'
+    templateUrl: 'assets/views/commons/base.html'
   })
   .state('dashboard', {
     authenticate : true,
@@ -95,7 +95,7 @@ function configure(
       mainContainer: {
         controller : 'DashboardController',
         controllerAs: 'vm',
-        templateUrl: 'views/dashboard/dashboard.html'
+        templateUrl: 'assets/views/dashboard/dashboard.html'
       }
     }
   })
@@ -107,7 +107,7 @@ function configure(
       mainContainer: {
         controller : 'WarehousesController',
         controllerAs: 'vm',
-        templateUrl: 'views/warehouses/warehouses.html'
+        templateUrl: 'assets/views/warehouses/warehouses.html'
       }
     }
   })
@@ -119,7 +119,7 @@ function configure(
       mainContainer: {
         controller : 'InventoryController',
         controllerAs: 'vm',
-        templateUrl: 'views/inventory/inventory.html'
+        templateUrl: 'assets/views/inventory/inventory.html'
       }
     }
   })
@@ -131,7 +131,7 @@ function configure(
       mainContainer: {
         controller : 'TransactionsController',
         controllerAs: 'vm',
-        templateUrl: 'views/transactions/transactions.html'
+        templateUrl: 'assets/views/transactions/transactions.html'
       }
     }
   })
@@ -143,7 +143,7 @@ function configure(
       mainContainer: {
         controller : 'PurchasesController',
         controllerAs: 'vm',
-        templateUrl: 'views/purchases/purchases.html'
+        templateUrl: 'assets/views/purchases/purchases.html'
       }
     }
   })
@@ -155,7 +155,7 @@ function configure(
       mainContainer: {
         controller : 'ClientsController',
         controllerAs: 'vm',
-        templateUrl: 'views/clients/clients.html'
+        templateUrl: 'assets/views/clients/clients.html'
       }
     }
   })
@@ -167,7 +167,7 @@ function configure(
       mainContainer: {
         controller : 'ClientsDetailController',
         controllerAs: 'vm',
-        templateUrl: 'views/clients/clients-detail.html'
+        templateUrl: 'assets/views/clients/clients-detail.html'
       }
     }
   })
@@ -184,7 +184,7 @@ function configure(
       mainContainer: {
         controller : 'SettingsController',
         controllerAs: 'vm',
-        templateUrl: 'views/settings/settings.html'
+        templateUrl: 'assets/views/settings/settings.html'
       }
     }
   })
@@ -200,7 +200,7 @@ function configure(
       mainContainer: {
         controller : 'UsersController',
         controllerAs: 'vm',
-        templateUrl: 'views/users/users.html'
+        templateUrl: 'assets/views/users/users.html'
       }
     }
   });

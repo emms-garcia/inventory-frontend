@@ -31,7 +31,7 @@ export default class utilsservice {
     config = config || {};
     const modalInstance = this.$uibModal.open({
       animation: config.animation || true,
-      templateUrl: 'views/commons/confirmation-dialog.html',
+      templateUrl: 'assets/views/commons/confirmation-dialog.html',
       controller: 'ConfirmationDialogModalController as vm',
       size: config.size || 'md',
       resolve: {

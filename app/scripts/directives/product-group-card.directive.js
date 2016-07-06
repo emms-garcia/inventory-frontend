@@ -25,6 +25,6 @@ export default function productGroupCard() {
     scope: {
       group: '='
     },
-    templateUrl: 'views/inventory/directives/product-group-card.html'
+    templateUrl: 'assets/views/inventory/directives/product-group-card.html'
   };
 }

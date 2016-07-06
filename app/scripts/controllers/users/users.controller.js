@@ -39,7 +39,7 @@ export default class UsersController {
   openCreateUserModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/users/modals/create-user.html',
+      templateUrl: 'assets/views/users/modals/create-user.html',
       controller: 'CreateUserModalController as vm',
       size: 'md'
     });
@@ -51,7 +51,7 @@ export default class UsersController {
   openEditPasswordModal() {
     this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/users/modals/edit-password.html',
+      templateUrl: 'assets/views/users/modals/edit-password.html',
       controller: 'EditPasswordModalController as vm',
       size: 'md',
       resolve: {

@@ -54,7 +54,7 @@ export default class InventoryController {
   openCreateUOMModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/inventory/modals/create-uom.html',
+      templateUrl: 'assets/views/inventory/modals/create-uom.html',
       controller: 'CreateUOMModalController as vm',
       size: 'md'
     });
@@ -67,7 +67,7 @@ export default class InventoryController {
   openCreateProductGroupModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/inventory/modals/create-product-group.html',
+      templateUrl: 'assets/views/inventory/modals/create-product-group.html',
       controller: 'CreateProductGroupModalController as vm',
       size: 'lg',
       resolve: {
@@ -84,7 +84,7 @@ export default class InventoryController {
   openCreateProductModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/inventory/modals/create-product.html',
+      templateUrl: 'assets/views/inventory/modals/create-product.html',
       controller: 'CreateProductModalController as vm',
       size: 'md',
       resolve: {
@@ -102,7 +102,7 @@ export default class InventoryController {
   openEditProductModal(product) {
     this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/inventory/modals/edit-product.html',
+      templateUrl: 'assets/views/inventory/modals/edit-product.html',
       controller: 'EditProductModalController as vm',
       size: 'md',
       resolve: {
@@ -179,7 +179,7 @@ export default class InventoryController {
   importProductsModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
-      templateUrl: 'views/inventory/modals/import-products.html',
+      templateUrl: 'assets/views/inventory/modals/import-products.html',
       controller: 'ImportProductsModalController as vm',
       size: 'lg'
     });
