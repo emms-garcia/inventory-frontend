@@ -123,6 +123,18 @@ function configure(
       }
     }
   })
+  .state('uom', {
+    authenticate : true,
+    parent: 'base',
+    url:'/uom',
+    views: {
+      mainContainer: {
+        controller : 'UOMController',
+        controllerAs: 'vm',
+        templateUrl: 'assets/views/inventory/uom.html'
+      }
+    }
+  })
   .state('transactions', {
     authenticate : true,
     parent: 'base',
@@ -132,6 +144,30 @@ function configure(
         controller : 'TransactionsController',
         controllerAs: 'vm',
         templateUrl: 'assets/views/transactions/transactions.html'
+      }
+    }
+  })
+  .state('transactions-purchase', {
+    authenticate : true,
+    parent: 'base',
+    url:'/transactions/purchase',
+    views: {
+      mainContainer: {
+        controller : 'PurchaseController',
+        controllerAs: 'vm',
+        templateUrl: 'assets/views/transactions/purchase.html'
+      }
+    }
+  })
+  .state('transactions-sale', {
+    authenticate : true,
+    parent: 'base',
+    url:'/transactions/sale',
+    views: {
+      mainContainer: {
+        controller : 'SaleController',
+        controllerAs: 'vm',
+        templateUrl: 'assets/views/transactions/sale.html'
       }
     }
   })

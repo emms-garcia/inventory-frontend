@@ -2,135 +2,94 @@ div(class="inventory-section")
   h2(class="page-title") {{ 'INVENTORY' | translate }}
   div(class="row")
     div(class="col-md-12")
-      uib-tabset(active="active")
-        uib-tab(index="1", heading="{{ 'PRODUCTS' | translate }}")
-          br
-          div(class="row")
-            div(class="col-sm-3")
-              div(class="input-group")
-                input(class="form-control col-sm-4", ng-model="vm.queryProducts", type="text", placeholder="{{ 'SEARCH' | translate }}")
-                span(class="input-group-btn")
-                  button(class="btn")
-                    span(class="glyphicon glyphicon-search")
-            div(class="col-sm-9")
-              div(class="btn-group pull-right", uib-dropdown)
-                button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
-                  span(class="caret")
-                ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
-                  li(role="menuitem")
-                    a(ng-click="vm.openCreateProductModal()")
-                      span(class="glyphicon glyphicon-plus")
-                      | &nbsp; {{ 'CREATE_PRODUCT' | translate }}
-                  li(role="menuitem")
-                    a(ng-click="vm.deleteSelectedProducts()")
-                      span(class="glyphicon glyphicon-trash")
-                      | &nbsp; {{ 'DELETE_SELECTED_PRODUCTS' | translate }}
-                  li(class="divider")
-                  li(role="menuitem")
-                    a(ng-click="vm.importProductsModal()")
-                      span(class="glyphicon glyphicon-upload")
-                      | &nbsp; {{ 'IMPORT_PRODUCTS' | translate }}
 
-          div(class="table-responsive")
-            table(class="table table-striped")
-              thead
-                tr
-                  th
-                    input(type="checkbox", ng-model="vm.allProductsSelected", ng-change="vm.toggleAllProducts()", ng-show="vm.products.length > 0")
-                  th {{ 'ID' | translate }}
-                  th {{ 'CREATED_AT' | translate }}
-                  th {{ 'NAME' | translate }}
-                  th {{ 'DESCRIPTION' | translate }}
-                  th {{ 'QUANTITIES' | translate }}
-                  th {{ 'PRICE_PER_UNIT' | translate }}
-              tbody
-                tr(ng-hide="vm.filteredProducts.length")
-                  td(class="text-center", colspan="7")
-                    p(class="lead") {{ 'NO_PRODUCTS_FOUND' | translate }}
-                tr(ng-repeat="product in vm.filteredProducts = (vm.products | filter: vm.queryProducts)")
-                  td
-                    input(type="checkbox", ng-model="product.selected")
-                  td {{ product.id }}
-                  td {{ (product.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
-                  td
-                    a(editable-text="product.name", onbeforesave="vm.updateProductData(product, 'name', $data)") {{ product.name || 'NO_PRODUCT_NAME' }}
-                  td
-                    a(editable-textarea="product.description", onbeforesave="vm.updateProductData(product, 'description', $data)") {{ product.description || 'N/A' }}
-                  td
-                    a(editable-number="product.quantity", onbeforesave="vm.updateProductData(product, 'quantity', $data)", e-min="0", e-step="any") {{ product.quantity + ' ' + product.uom.short_name }}
-                  td
-                    a(editable-number="product.price_per_unit", onbeforesave="vm.updateProductData(product, 'price_per_unit', $data)", e-min="0", e-step="any") ${{ product.price_per_unit }}
-        uib-tab(index="2", heading="{{ 'UOMS' | translate }}")
-          br
-          div(class="row")
-            div(class="col-md-3")
-              div(class="input-group")
-                input(class="form-control col-md-4", ng-model="vm.queryUOMs", type="text", placeholder="{{ 'SEARCH' | translate }}")
-                span(class="input-group-btn")
-                  button(class="btn")
-                    span(class="glyphicon glyphicon-search")
-            div(class="col-sm-9")
-              div(class="btn-group pull-right", uib-dropdown)
-                button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
-                  span(class="caret")
-                ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
-                  li(role="menuitem")
-                    a(ng-click="vm.openCreateUOMModal()")
-                      span(class="glyphicon glyphicon-plus")
-                      | &nbsp; {{ 'CREATE_UOM' | translate }}
-                    a(ng-click="vm.deleteSelectedUOMs()")
-                      span(class="glyphicon glyphicon-trash")
-                      | &nbsp; {{ 'DELETE_SELECTED_UOMS' | translate }}
+      div(class="row")
+        div(class="col-sm-3")
+          div(class="input-group")
+            input(class="form-control col-sm-4", ng-model="vm.queryProducts", type="text", placeholder="{{ 'SEARCH' | translate }}")
+            span(class="input-group-btn")
+              button(class="btn")
+                span(class="glyphicon glyphicon-search")
+        div(class="col-sm-9")
+          div(class="btn-group pull-right", uib-dropdown)
+            button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+              span(class="caret")
+            ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
+              li(role="menuitem")
+                a(ng-click="vm.openCreateProductModal()")
+                  span(class="glyphicon glyphicon-plus")
+                  | &nbsp; {{ 'CREATE_PRODUCT' | translate }}
+              li(role="menuitem")
+                a(ng-click="vm.deleteSelectedProducts()")
+                  span(class="glyphicon glyphicon-trash")
+                  | &nbsp; {{ 'DELETE_SELECTED_PRODUCTS' | translate }}
+              li(class="divider")
+              li(role="menuitem")
+                a(ng-click="vm.importProductsModal()")
+                  span(class="glyphicon glyphicon-upload")
+                  | &nbsp; {{ 'IMPORT_PRODUCTS' | translate }}
 
-          div(class="table-responsive")
-            table(class="table table-striped")
-              thead
-                tr
-                  th
-                    input(type="checkbox", ng-model="vm.allUOMsSelected", ng-change="vm.toggleAllUOMs()", ng-show="vm.uoms.length > 0")
-                  th {{ 'ID' | translate }}
-                  th {{ 'NAME' | translate }}
-                  th {{ 'DESCRIPTION' | translate }}
-                  th {{ 'SHORT_NAME' | translate }}
-              tbody
-                tr(ng-hide="vm.filteredUOMs.length")
-                  td(class="text-center", colspan="6")
-                    p(class="lead") {{ 'NO_UOMS_FOUND' | translate }}
-                tr(ng-repeat="uom in vm.filteredUOMs = (vm.uoms | filter: vm.queryUOMs)")
-                  td
-                    input(type="checkbox", ng-model="uom.selected")
-                  td {{ uom.id }}
-                  td
-                    a(editable-text="uom.name", onbeforesave="vm.updateUOMData(uom, 'name', $data)") {{ uom.name || 'NO_PRODUCT_NAME' }}
-                  td
-                    a(editable-textarea="uom.description", onbeforesave="vm.updateUOMData(uom, 'description', $data)") {{ uom.description || 'N/A' }}
-                  td
-                    a(editable-text="uom.short_name", onbeforesave="vm.updateUOMData(uom, 'short_name', $data)") {{ uom.short_name || 'NO_PRODUCT_NAME' }}
+      br
+      div(class="table-responsive")
+        table(class="table table-bordered table-striped")
+          thead
+            tr
+              th
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="vm.allProductsSelected", ng-change="vm.toggleAllProducts()", ng-show="vm.products.length > 0")
+                  span(class="check")
+                    i(class="fa fa-check")
+              th {{ 'ID' | translate }}
+              th {{ 'CREATED_AT' | translate }}
+              th {{ 'NAME' | translate }}
+              th {{ 'DESCRIPTION' | translate }}
+              th {{ 'QUANTITIES' | translate }}
+              th {{ 'PRICE_PER_UNIT' | translate }}
+          tbody
+            tr(ng-hide="vm.filteredProducts.length")
+              td(class="text-center", colspan="7")
+                p(class="lead") {{ 'NO_PRODUCTS_FOUND' | translate }}
+            tr(ng-repeat="product in vm.filteredProducts = (vm.products | filter: vm.queryProducts)")
+              td
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="product.selected")
+                  span(class="check")
+                    i(class="fa fa-check")
+              td {{ product.id }}
+              td {{ (product.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
+              td
+                a(editable-text="product.name", onbeforesave="vm.updateProductData(product, 'name', $data)") {{ product.name || 'NO_PRODUCT_NAME' }}
+              td
+                a(editable-textarea="product.description", onbeforesave="vm.updateProductData(product, 'description', $data)") {{ product.description || 'N/A' }}
+              td
+                a(editable-number="product.quantity", onbeforesave="vm.updateProductData(product, 'quantity', $data)", e-min="0", e-step="any") {{ product.quantity + ' ' + product.uom.short_name }}
+              td
+                a(editable-number="product.price_per_unit", onbeforesave="vm.updateProductData(product, 'price_per_unit', $data)", e-min="0", e-step="any") ${{ product.price_per_unit }}
 
-        //- uib-tab(index="3", heading="{{ 'PRODUCT_GROUPS' | translate }}")
-          br
-          div(class="row")
-            div(class="col-sm-3")
-              div(class="input-group", ng-hide="vm.productGroups.length === 0")
-                input(class="form-control col-sm-4", ng-model="vm.queryProductGroups", type="text", placeholder="{{ 'SEARCH' | translate }}")
-                span(class="input-group-btn")
-                  button(class="btn")
-                    span(class="glyphicon glyphicon-search")
-            div(class="col-sm-9")
-              div(class="btn-group pull-right", uib-dropdown, ng-hide="vm.products.length === 0")
-                button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
-                  span(class="caret")
-                ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
-                  li(role="menuitem")
-                    a(ng-click="vm.openCreateProductGroupModal()")
-                      span(class="glyphicon glyphicon-plus")
-                      | &nbsp; {{ 'CREATE_PRODUCT_GROUP' | translate }}
-                    a(ng-click="vm.deleteSelectedProductGroups()")
-                      span(class="glyphicon glyphicon-trash")
-                      | &nbsp; {{ 'DELETE_SELECTED_PRODUCT_GROUPS' | translate }}
-          br
-          div(class="row-fluid")
-            div(class="col-sm-6", ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")
-              product-group-card(group="group")
-            div(class="col-sm-12", ng-show="vm.productGroups.length === 0")
-              p(class="lead text-center") {{ 'NO_PRODUCT_GROUPS' | translate }}
+      //- uib-tab(index="3", heading="{{ 'PRODUCT_GROUPS' | translate }}")
+        br
+        div(class="row")
+          div(class="col-sm-3")
+            div(class="input-group", ng-hide="vm.productGroups.length === 0")
+              input(class="form-control col-sm-4", ng-model="vm.queryProductGroups", type="text", placeholder="{{ 'SEARCH' | translate }}")
+              span(class="input-group-btn")
+                button(class="btn")
+                  span(class="glyphicon glyphicon-search")
+          div(class="col-sm-9")
+            div(class="btn-group pull-right", uib-dropdown, ng-hide="vm.products.length === 0")
+              button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
+                span(class="caret")
+              ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
+                li(role="menuitem")
+                  a(ng-click="vm.openCreateProductGroupModal()")
+                    span(class="glyphicon glyphicon-plus")
+                    | &nbsp; {{ 'CREATE_PRODUCT_GROUP' | translate }}
+                  a(ng-click="vm.deleteSelectedProductGroups()")
+                    span(class="glyphicon glyphicon-trash")
+                    | &nbsp; {{ 'DELETE_SELECTED_PRODUCT_GROUPS' | translate }}
+        br
+        div(class="row-fluid")
+          div(class="col-sm-6", ng-repeat="group in vm.productGroups | filter:vm.queryProductGroups")
+            product-group-card(group="group")
+          div(class="col-sm-12", ng-show="vm.productGroups.length === 0")
+            p(class="lead text-center") {{ 'NO_PRODUCT_GROUPS' | translate }}

@@ -19,9 +19,12 @@ import CreateUOMModalController from './inventory/modals/create-uom.controller';
 import EditProductModalController from './inventory/modals/edit-product.controller';
 import ImportProductsModalController from './inventory/modals/import-products.controller';
 import InventoryController from './inventory/inventory.controller';
+import UOMController from './inventory/uom.controller';
 /* transactions */
 import TransactionsController from './transactions/transactions.controller';
 import AddProductModalController from './transactions/modals/add-product.controller';
+import PurchaseController from './transactions/purchase.controller';
+import SaleController from './transactions/sale.controller';
 /* settings */
 import SettingsController from './settings/settings.controller';
 /* users */
@@ -48,8 +51,11 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('EditProductModalController', EditProductModalController)
   .controller('ImportProductsModalController', ImportProductsModalController)
   .controller('InventoryController', InventoryController)
+  .controller('UOMController', UOMController)
   .controller('TransactionsController', TransactionsController)
   .controller('AddProductModalController', AddProductModalController)
+  .controller('PurchaseController', PurchaseController)
+  .controller('SaleController', SaleController)
   .controller('SettingsController', SettingsController)
   .controller('CreateUserModalController', CreateUserModalController)
   .controller('EditPasswordModalController', EditPasswordModalController)

@@ -1,5 +1,5 @@
 export default class CreateProductModalController {
-  constructor($uibModalInstance, productservice, uoms) {
+  constructor($uibModalInstance, productservice) {
     this.$uibModalInstance = $uibModalInstance;
     this.productservice = productservice;
 
@@ -8,11 +8,11 @@ export default class CreateProductModalController {
     this.pricePerUnit = 0.0;
     this.quantity = 0.0;
     this.selectedUOM = null;
-    this.uoms = uoms;
+    this.uoms = [];
 
     this.activate();
 
-    this.$inject = ['$uibModalInstance', 'productservice', 'uoms'];
+    this.$inject = ['$uibModalInstance', 'productservice'];
   }
 
   cancel() {
@@ -35,5 +35,10 @@ export default class CreateProductModalController {
 
   activate() {
     console.log('CreateProductModalController activated.');
+    this.productservice.getUOMList().then((data) => {
+      if(data) {
+        this.uoms = data;
+      }
+    });
   }
 }

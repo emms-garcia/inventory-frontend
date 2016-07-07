@@ -1,20 +1,16 @@
 export default class InventoryController {
-  constructor($translate, $uibModal, productservice, userservice, utilsservice) {
+  constructor($translate, $uibModal, productservice, utilsservice) {
     this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.productservice = productservice;
-    this.userservice = userservice;
     this.utilsservice = utilsservice;
 
     this.allProductsSelected = false;
-    this.allUOMsSelected = false;
 
-    this.currentUser = userservice.currentUser;
     this.productGroups = [];
     this.products = [];
     this.queryProductGroups = '';
     this.queryProducts = '';
-    this.uoms = [];
 
     this.activate();
 
@@ -22,7 +18,6 @@ export default class InventoryController {
       '$translate',
       '$uibModal',
       'productservice',
-      'userservice',
       'utilsservice'
     ];
   }
@@ -41,27 +36,6 @@ export default class InventoryController {
         this.productGroups = data;
       }
     })
-  }
-
-  getUOMs() {
-    this.productservice.getUOMList().then((data) => {
-      if(data) {
-        this.uoms = data;
-      }
-    });
-  }
-
-  openCreateUOMModal() {
-    const modalInstance = this.$uibModal.open({
-      animation: true,
-      templateUrl: 'assets/views/inventory/modals/create-uom.html',
-      controller: 'CreateUOMModalController as vm',
-      size: 'md'
-    });
-
-    modalInstance.result.then(() => {
-      this.getUOMs();
-    });
   }
 
   openCreateProductGroupModal() {
@@ -87,11 +61,6 @@ export default class InventoryController {
       templateUrl: 'assets/views/inventory/modals/create-product.html',
       controller: 'CreateProductModalController as vm',
       size: 'md',
-      resolve: {
-        uoms: () => {
-          return this.uoms;
-        }
-      }
     });
 
     modalInstance.result.then(() => {
@@ -155,27 +124,6 @@ export default class InventoryController {
     }
   }
 
-  deleteSelectedUOMs() {
-    const data = [];
-    this.uoms.forEach((uom) => {
-      if(uom.selected) {
-        data.push(uom.resource_uri);
-      }
-    })
-
-    if(data.length > 0) {
-      const config = {
-        bodyMsg: this.$translate.instant('DELETE_UOMS_MODAL_BODY'),
-        titleMsg: this.$translate.instant('DELETE_UOMS_MODAL_TITLE')
-      };
-      this.utilsservice.confirmationDialog(() => {
-        this.productservice.deleteUOMs(data).then(() => {
-          this.getUOMs();
-        });
-      }, null, config);
-    }
-  }
-
   importProductsModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
@@ -198,14 +146,9 @@ export default class InventoryController {
     return this.productservice.updateProduct(product.id, { [key]: value });
   }
 
-  updateUOMData(uom, key, value) {
-    return this.productservice.updateUOM(uom.id, { [key]: value });
-  }
-
   activate() {
     console.log('InventoryController activated.');
-    this.getProductGroups();
+    //this.getProductGroups();
     this.getProducts();
-    this.getUOMs();
   }
 }

@@ -200,10 +200,14 @@ export default function translationloaderservice($q, $timeout) {
         TAX: 'Impuesto',
         TRANSACTION_CREATE_FAILED: 'No se pudo realizar la transacción',
         TRANSACTION_CREATE_SUCCESS: 'La transacción se realizó exitosamente',
-        NO_TRANSACTIONS_FOUND: 'No se encontraron transacciones'
+        NO_TRANSACTIONS_FOUND: 'No se encontraron transacciones',
+        INVENTORY_LIST: 'Productos',
+        UOM_LIST: 'Unidades de Medida',
       };
     } else if(options.key === 'en-us') {
       translations = {
+        INVENTORY_LIST: 'Products',
+        UOM_LIST: 'Units of Measure',
         NO_UOMS_FOUND: 'No unit of measure found',
         NO_TRANSACTIONS_FOUND: 'No transactions found',
         TRANSACTION_CREATE_FAILED: 'Failed to do transaction',

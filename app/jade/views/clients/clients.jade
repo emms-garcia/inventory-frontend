@@ -22,14 +22,18 @@ div(class="clients-section")
               span(class="glyphicon glyphicon-trash")
               | &nbsp; {{ 'DELETE_SELECTED_CLIENT' | translate }}
 
+  br
   div(class="row")
     div(class="col-sm-12")
-      div(class="table-responsive table-list")
-        table(class="table table-striped")
+      div(class="table-responsive")
+        table(class="table table-striped table-bordered")
           thead
             tr
               th
-                input(type="checkbox", ng-model="vm.allClientsSelected", ng-change="vm.toggleAllClients()", ng-show="vm.clients.length > 0")
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="vm.allClientsSelected", ng-change="vm.toggleAllClients()", ng-show="vm.clients.length > 0")
+                  span(class="check")
+                    i(class="fa fa-check")
               th {{ 'ID' | translate }}
               th {{ 'CREATED_AT' | translate }}
               th {{ "NAME" | translate }}
@@ -42,11 +46,14 @@ div(class="clients-section")
               th
           tbody
             tr(ng-if="vm.clients.length === 0")
-              td(class="text-center", colspan="10")
-                p {{ 'NO_CLIENTS_DEFINED' | translate }}
+              td(class="text-center", colspan="11")
+                p(class="lead") {{ 'NO_CLIENTS_DEFINED' | translate }}
             tr(ng-repeat="client in vm.clients | filter: vm.queryClients")
               td
-                input(type="checkbox", ng-model="client.selected")
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="client.selected")
+                  span(class="check")
+                    i(class="fa fa-check")
               td {{ client.id }}
               td {{ (client.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
               td {{ client.name || 'N/A' }}
