@@ -5,6 +5,8 @@ export default class BaseController {
     this.userservice = userservice;
     this.utilsservice = utilsservice;
 
+    this.currentUser = this.userservice.currentUser;
+
     this.activate();
 
     this.$inject = ['$state', '$translate', 'userservice', 'utilsservice'];

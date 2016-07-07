@@ -1,38 +1,540 @@
-div(class="dashboard-section section")
-  h2(class="page-header") {{ 'DASHBOARD' | translate }}
-  div(class="row placeholders")
-    div(class="col-sm-3 col-md-3 placeholder")
-      h4 Label
-      span(class="text-muted") Something else
-    div(class="col-sm-3 col-md-3 placeholder")
-      h4 Label
-      span(class="text-muted") Something else
-    div(class="col-sm-3 col-md-3 placeholder")
-      h4 Label
-      span(class="text-muted") Something else
-    div(class="col-sm-3 col-md-3 placeholder")
-      h4 Label
-      span(class="text-muted") Something else
-  h3(class=".sub-header") Section title
-  div(class="table-responsive")
-    table(class="table table-striped")
-      thead
-        tr
-          th #
-          th Header
-          th Header
-          th Header
-          th Header
-      tbody
-        tr
-          td 1,001
-          td Lorem
-          td ipsum
-          td dolor
-          td sit
-        tr
-          td 1,002
-          td amet
-          td consectetur
-          td adipiscing
-          td elit
+div(class="dashboard-section")
+  h1(class="page-title") {{ 'DASHBOARD' | translate }}
+  .row
+    .col-lg-6
+      .row
+        .col-md-6
+          .panel.minimal.panel-default
+            .panel-heading.clearfix
+              .panel-title Signups
+              ul.panel-tool-options
+                li.dropdown
+                  a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                    i.icon-cog
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      a(href='#')
+                        i.icon-arrows-ccw
+                        |  Update data
+                    li
+                      a(href='#')
+                        i.icon-list
+                        |  Detailed log
+                    li
+                      a(href='#')
+                        i.icon-chart-pie
+                        |  Statistics
+                    li.divider
+                    li
+                      a(href='#')
+                        i.icon-cancel
+                        |  Clear list
+            // panel body
+            .panel-body
+              .row.col-with-divider
+                .col-xs-6.text-center.stack-order
+                  h1.no-margins 87
+                  small This week
+                .col-xs-6.text-center.stack-order
+                  h1.no-margins 53
+                  small Last week
+        .col-md-6
+          .panel.minimal.panel-default
+            .panel-heading.clearfix
+              .panel-title Last month sale
+              ul.panel-tool-options
+                li.dropdown
+                  a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                    i.icon-cog
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      a(href='#')
+                        i.icon-arrows-ccw
+                        |  Update data
+                    li
+                      a(href='#')
+                        i.icon-list
+                        |  Detailed log
+                    li
+                      a(href='#')
+                        i.icon-chart-pie
+                        |  Statistics
+                    li.divider
+                    li
+                      a(href='#')
+                        i.icon-cancel
+                        |  Clear list
+            // panel body
+            .panel-body
+              .stack-order
+                h1.no-margins $87,003
+                small Raised from 89 orders.
+              .bar-chart-icon
+      .row
+        .col-md-6
+          .panel.minimal.panel-default
+            .panel-heading.clearfix
+              .panel-title Visitors
+              ul.panel-tool-options
+                li.dropdown
+                  a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                    i.icon-cog
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      a(href='#')
+                        i.icon-arrows-ccw
+                        |  Update data
+                    li
+                      a(href='#')
+                        i.icon-list
+                        |  Detailed log
+                    li
+                      a(href='#')
+                        i.icon-chart-pie
+                        |  Statistics
+                    li.divider
+                    li
+                      a(href='#')
+                        i.icon-cancel
+                        |  Clear list
+            // panel body
+            .panel-body
+              .stack-order
+                h1.no-margins 823
+                small New visits this month
+              .bar-chart-icon
+        .col-md-6
+          .panel.minimal.panel-default
+            .panel-heading.no-border.clearfix
+              ul.panel-tool-options
+                li.dropdown
+                  a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                    i.icon-cog
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      a(href='#')
+                        i.icon-arrows-ccw
+                        |  Update data
+                    li
+                      a(href='#')
+                        i.icon-list
+                        |  Detailed log
+                    li
+                      a(href='#')
+                        i.icon-chart-pie
+                        |  Statistics
+                    li.divider
+                    li
+                      a(href='#')
+                        i.icon-cancel
+                        |  Clear list
+            // panel body
+            .panel-body.panel-content
+              .stack-order.text-center
+                h1 7856
+                h4 Products sold so far
+      .row
+        .col-lg-12
+          .panel.panel-default
+            .panel-body
+              h2 Recent comments from customers
+              ul.comments-list.removeable-list
+                li
+                  .comment-head
+                    a(href='#/') Jassica
+                    |  commented on 
+                    a(href='#/') 4 keys to make your business unique
+                  .comment-text
+                    p
+                      | Thank you for posting such a wonderful content. The writing was outstanding. Subscribed to latest from you as well :)
+                  .comment-footer
+                    button.btn.btn-sm.btn-success APPROVE
+                    button.btn.btn-sm.btn-red DELETE
+                  a.remove(href='#/')
+                    img(src='assets/images/icon-close.png', alt='Remove', title='Remove')
+                li
+                  .comment-head
+                    a(href='#/') Jassica
+                    |  commented on 
+                    a(href='#/') 4 keys to make your business unique
+                  .comment-text
+                    p
+                      | Thank you for posting such a wonderful content. The writing was outstanding. Subscribed to latest from you as well :)
+                  .comment-footer
+                    button.btn.btn-sm.btn-success APPROVE
+                    button.btn.btn-sm.btn-red DELETE
+                  a.remove(href='#/')
+                    img(src='assets/images/icon-close.png', alt='Remove', title='Remove')
+                li
+                  .comment-head
+                    a(href='#/') Jassica
+                    |  commented on 
+                    a(href='#/') 4 keys to make your business unique
+                  .comment-text
+                    p
+                      | Thank you for posting such a wonderful content. The writing was outstanding. Subscribed to latest from you as well :)
+                  .comment-footer
+                    button.btn.btn-sm.btn-success APPROVE
+                    button.btn.btn-sm.btn-red DELETE
+                  a.remove(href='#/')
+                    img(src='assets/images/icon-close.png', alt='Remove', title='Remove')
+      .row
+        .col-lg-12
+          .panel.panel-default
+            .panel-heading.no-border.clearfix
+              h3.panel-title VISIT STATS
+              ul.panel-tool-options
+                li.dropdown
+                  a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                    i.icon-cog.icon-2x
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      a(href='#')
+                        i.icon-arrows-ccw
+                        |  Update data
+                    li
+                      a(href='#')
+                        i.icon-list
+                        |  Detailed log
+                    li
+                      a(href='#')
+                        i.icon-chart-pie
+                        |  Statistics
+                    li.divider
+                    li
+                      a(href='#')
+                        i.icon-cancel
+                        |  Clear list
+            // panel body
+            .panel-body
+              .canvas-chart.has-doughnut-legend
+                canvas#doughnutChart(width='408', height='300')
+              .height-13
+    .col-lg-6
+      .panel-group
+        .panel.panel-invert
+          .panel-heading.no-border.clearfix
+            h2.panel-title Revenue
+            ul.panel-tool-options
+              li
+                a#Revenuelines(href='#')
+                  i.icon-chart-line.icon-2x
+              li.dropdown
+                a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                  i.icon-cog.icon-2x
+                ul.dropdown-menu.dropdown-menu-right
+                  li
+                    a(href='#')
+                      i.icon-arrows-ccw
+                      |  Update data
+                  li
+                    a(href='#')
+                      i.icon-list
+                      |  Detailed log
+                  li
+                    a(href='#')
+                      i.icon-chart-pie
+                      |  Statistics
+                  li.divider
+                  li
+                    a(href='#')
+                      i.icon-cancel
+                      |  Clear list
+          .panel-body
+            .flot-chart
+              #Revenue-lines.flot-chart-content
+            #placeholder_overview(style='width:100%; height:60px;')
+        .panel
+          .panel-body
+            .panel-update-content
+              .row-revenue.clearfix
+                .col-xs-6
+                  h5 Gross Revenue
+                  h1 9,362.74
+                .col-xs-6
+                  h5 Net Revenue
+                  h1 6,734.89
+      .panel.panel-default.no-border
+        .panel-heading.no-border.clearfix
+          h2.panel-title Latest Activities
+          ul.panel-tool-options
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                i.icon-cog.icon-2x
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href='#')
+                    i.icon-arrows-ccw
+                    |  Update data
+                li
+                  a(href='#')
+                    i.icon-list
+                    |  Detailed log
+                li
+                  a(href='#')
+                    i.icon-chart-pie
+                    |  Statistics
+                li.divider
+                li
+                  a(href='#')
+                    i.icon-cancel
+                    |  Clear list
+        .panel-body
+          ul.list-item
+            li
+              .feed-element
+                .feed-head
+                  a(href='#/') Jassica
+                  |  commented on 
+                  a(href='#/') 4 keys to make your business unique
+                .feed-content
+                  p
+                    | Thank you for posting such a wonderful content. The writing was outstanding. Subscribed to latest from you as well :)
+            li
+              .feed-element
+                .feed-head
+                  a(href='#/') Jassica
+                  |  commented on 
+                  a(href='#/') 4 keys to make your business unique
+                .feed-content
+                  p
+                    | Thank you for posting such a wonderful content. The writing was outstanding. Subscribed to latest from you as well :)
+            li
+              .feed-element
+                .feed-head
+                  a(href='#/') Morrise
+                  |  added 3 new photos to the gallery 
+                  a(href='#/') Australia Trip
+                .feed-content
+                  .media-inline
+                    img(src='assets/images/media-1.jpg', alt='Media', title='Media')
+                    img(src='assets/images/media-2.jpg', alt='Media', title='Media')
+                    img(src='assets/images/media-3.jpg', alt='Media', title='Media')
+            li
+              .feed-element
+                .feed-head
+                  a(href='#/') Stella Johnson
+                  |  is now connected with 
+                  a(href='#/') Tom Brown
+                .feed-content
+                  .connected-users
+                    img.pull-left.img-circle.avatar(src='assets/images/stella-johnson.png', alt='')
+                    i.pull-left.icon-shareable.icon-2x
+                    img.pull-left.img-circle.avatar(src='assets/images/man-3.jpg', alt='')
+            li
+              .feed-element
+                .feed-head
+                  a(href='#/') Domnic
+                  |  is feeling 
+                  a(href='#/') blessed
+                .feed-content
+                  p Today I’m blessed with a baby girl. Its not easy to express the feelings :)
+        button.btn.btn-primary.btn-block.btn-2x SHOW MORE
+      .panel.panel-default
+        .panel-body
+          .speed-analyzer
+            .speed-analyzer-text
+              h4 Download Speed Analyzer
+              p Speed test run on different anlayzers including google and YSlow.
+            .speed-score
+              strong.score 82
+              span.uppercase Google Score
+            .speed-score
+              strong.score 73
+              span.uppercase YSlow Score
+  .row
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading.no-border.clearfix
+          h2.panel-title TO-DOs for today
+          ul.panel-tool-options
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                i.icon-cog.icon-2x
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href='#')
+                    i.icon-arrows-ccw
+                    |  Update data
+                li
+                  a(href='#')
+                    i.icon-list
+                    |  Detailed log
+                li
+                  a(href='#')
+                    i.icon-chart-pie
+                    |  Statistics
+                li.divider
+                li
+                  a(href='#')
+                    i.icon-cancel
+                    |  Clear list
+        // panel body
+        .panel-body
+          ul.list-item.todo-list
+            li
+              .checkbox.checkbox-replace.checkbox-primary
+                input#task-1(type='checkbox')
+                label(for='task-1') Fresh look & feel to repaint the website according to the new brand logo.
+            li
+              .checkbox.checkbox-replace.checkbox-primary
+                input#task-2(type='checkbox', checked='')
+                label(for='task-2') Need some new responsive design for the wbesite.
+            li
+              .checkbox.checkbox-replace.checkbox-primary
+                input#task-3(type='checkbox')
+                label(for='task-3') Fresh look & feel to repaint the website according to the new brand logo. 
+            li
+              .checkbox.checkbox-replace.checkbox-primary
+                input#task-4(type='checkbox')
+                label(for='task-4') Fresh look & feel to repaint the website according to the new brand logo. 
+            li
+              .checkbox.checkbox-replace.checkbox-primary
+                input#task-5(type='checkbox')
+                label(for='task-5') Fresh look & feel to repaint the website according to the new brand logo. 
+          .more
+            button.btn.btn-primary Click More
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading.no-border.clearfix
+          h2.panel-title Recent Members
+          ul.panel-tool-options
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                i.icon-cog.icon-2x
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href='#')
+                    i.icon-arrows-ccw
+                    |  Update data
+                li
+                  a(href='#')
+                    i.icon-list
+                    |  Detailed log
+                li
+                  a(href='#')
+                    i.icon-chart-pie
+                    |  Statistics
+                li.divider
+                li
+                  a(href='#')
+                    i.icon-cancel
+                    |  Clear list
+        // panel body
+        .panel-body
+          ul.list-item.member-list
+            li
+              .user-avatar
+                img.img-circle.avatar(title='', alt='', src='assets/images/john-smith.png')
+              .user-detail
+                h5 John Smith
+                p Joined 15 mins ago.
+            li
+              .user-avatar
+                img.img-circle.avatar(title='', alt='', src='assets/images/domnic-brown.png')
+              .user-detail
+                h5 Domnic Brown
+                p Joined 2 days ago.
+            li
+              .user-avatar
+                img.img-circle.avatar(title='', alt='', src='assets/images/stella-johnson.png')
+              .user-detail
+                h5 Stella Johnson
+                p Joined 1 day ago.
+            li
+              .user-avatar
+                img.img-circle.avatar(title='', alt='', src='assets/images/alex-dolgove.png')
+              .user-detail
+                h5 Alex Dolgove
+                p Joined 5 days ago.
+          .more
+            button.btn.btn-primary Click More
+    .col-lg-4
+      .panel.panel-default
+        .panel-heading.no-border.clearfix
+          h2.panel-title New Messages
+          ul.panel-tool-options
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                i.icon-cog.icon-2x
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href='#')
+                    i.icon-arrows-ccw
+                    |  Update data
+                li
+                  a(href='#')
+                    i.icon-list
+                    |  Detailed log
+                li
+                  a(href='#')
+                    i.icon-chart-pie
+                    |  Statistics
+                li.divider
+                li
+                  a(href='#')
+                    i.icon-cancel
+                    |  Clear list
+        // panel body
+        .panel-body
+          ul.list-item.message-list
+            li
+              i.icon-mail.icon-2x
+              .message-body
+                h5 Interested in buying your pro
+                p Your product sounds interesting I would love to check this ne...
+            li
+              i.icon-mail.icon-2x
+              .message-body
+                h5 Interested in buying your pro
+                p Your product sounds interesting I would love to check this ne...
+            li
+              i.icon-mail.icon-2x
+              .message-body
+                h5 Interested in buying your pro
+                p Your product sounds interesting I would love to check this ne...
+            li
+              i.icon-mail.icon-2x
+              .message-body
+                h5 Interested in buying your pro
+                p Your product sounds interesting I would love to check this ne...
+          .more
+            button.btn.btn-primary Click More
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading.no-border.clearfix
+          h2.panel-title Site Traffic
+          ul.panel-tool-options
+            li
+              a#lines(href='#')
+                i.icon-chart-line.icon-2x
+            li
+              a#bars(href='#')
+                i.icon-chart-bar.icon-2x
+            li.dropdown
+              a.dropdown-toggle(data-toggle='dropdown', href='#', aria-expanded='false')
+                i.icon-cog.icon-2x
+              ul.dropdown-menu.dropdown-menu-right
+                li
+                  a(href='#')
+                    i.icon-arrows-ccw
+                    |  Update data
+                li
+                  a(href='#')
+                    i.icon-list
+                    |  Detailed log
+                li
+                  a(href='#')
+                    i.icon-chart-pie
+                    |  Statistics
+                li.divider
+                li
+                  a(href='#')
+                    i.icon-cancel
+                    |  Clear list
+        .panel-body
+          .flot-chart.float-chart-lg
+            #graph-lines.flot-chart-content
+            #graph-bars.flot-chart-content
+

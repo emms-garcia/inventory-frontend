@@ -1,38 +1,165 @@
-div(class="sidebar col-md-2")
-    div(class="row")
-      div(class="col-sm-12")
-        img(class="img-responsive img-circle logo", src="assets/images/logo.png", alt="Generic placeholder thumbnail")
-    hr
-    div(class="row")
-      div(class="col-sm-12")
-        ul(class="nav nav-sidebar")
+div(class="page-sidebar")
+  div(class="sidebar-fixed")
+    header(class="site-header")
+      div(class="site-logo")
+        a(ui-sref='dashboard')
+          img(src="https://placehold.it/160x28")
+      div(class="sidebar-collapse hidden-xs")
+        a(class="sidebar-collapse-icon", href='')
+          i(class="icon-menu")
+      div(class="sidebar-mobile-menu visible-xs")
+        a(class="mobile-menu-icon", data-target='#side-nav', data-toggle='collapse', href='#')
+          i(class="icon-menu")
+    ul#side-nav(class="main-menu navbar-collapse collapse")
+      li(ui-sref-active="active")
+        a(ui-sref="dashboard")
+          i(class="fa fa-desktop")
+          span(class="title") {{ 'DASHBOARD' | translate }}
           li(ui-sref-active="active")
-            a(ui-sref="dashboard")
-              span(class="glyphicon glyphicon-th glyphicon-white")
-              | &nbsp; {{ 'DASHBOARD' | translate }}
-          li(ui-sref-active="active")
-            a(ui-sref="inventory")
-              span(class="glyphicon glyphicon-list glyphicon-white")
-              | &nbsp; {{ 'INVENTORY' | translate }}
-          li(ui-sref-active="active")
-            a(ui-sref="transactions")
-              span(class="glyphicon glyphicon-usd glyphicon-white")
-              | &nbsp; {{ 'TRANSACTIONS' | translate }}
-          li(ui-sref-active="active", ng-class="{ active: vm.$state.current.name === 'clients.detail' }")
-            a(ui-sref="clients")
-              span(class="glyphicon glyphicon-user glyphicon-white")
-              | &nbsp; {{ 'CLIENTS' | translate }}
-    hr
-    div(class="row")
-      div(class="col-sm-12")
-        ul(class="nav nav-sidebar")
-          li(ui-sref-active="active")
-            a(ui-sref="settings")
-              span(class="glyphicon glyphicon-cog glyphicon-white")
-              | &nbsp; {{ 'SETTINGS' | translate }}
-          li
-            a(href="", ng-click="vm.logOut()")
-              span(class="glyphicon glyphicon-off glyphicon-white")
-              | &nbsp; {{ 'LOGOUT' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="inventory")
+          i(class="fa fa-bar-chart")
+          span(class="title") {{ 'INVENTORY' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="transactions")
+          i(class="fa fa-money")
+          span(class="title") {{ 'TRANSACTIONS' | translate }}
+      li(ui-sref-active="active")
+        a(ui-sref="clients")
+          i(class="fa fa-users")
+          span(class="title") {{ 'CLIENTS' | translate }}
 
-div(class="main col-md-10", ui-view="mainContainer")
+div(class="main-container")
+  div(class="main-header row")
+    div(class="col-sm-6 col-xs-7")
+      ul(class="user-info pull-left")
+        li(class="profile-info dropdown")
+          a(class="dropdown-toggle", data-toggle='dropdown', href='', aria-expanded='false')
+            img(class="img-circle avatar", width='44', alt='', src='http://placehold.it/250x250')
+            | {{ vm.currentUser.first_name + ' ' + vm.currentUser.last_name }}
+            span(class="caret")
+          ul(class="dropdown-menu")
+            li
+              a(href='')
+                i(class="icon-mail")
+                | Messages
+            li
+              a(href='')
+                i(class="icon-clipboard")
+                | Tasks
+            li(class="divider")
+            li
+              a(ui-sref="settings")
+                i(class="icon-cog")
+                | {{ 'SETTINGS' | translate }}
+            li
+              a(href='', ng-click="vm.logOut()")
+                i(class="icon-logout")
+                | {{ 'LOGOUT' | translate }}
+
+    div(class="col-sm-6 col-xs-5")
+      div(class="pull-right")
+        ul(class="user-info pull-left")
+          li(class="notifications dropdown")
+            a(class="dropdown-toggle", data-close-others='true', data-hover='dropdown', data-toggle='dropdown', href='#')
+              i(class="icon-attention")
+              span(class="badge badge-info") 6
+            ul(class="dropdown-menu pull-right")
+              li(class="first")
+                div(class="small")
+                  a(class="pull-right danger", href='#') Mark all Read
+                  |  You have 
+                  strong 3
+                  |  new notifications.
+              li
+                ul(class="dropdown-list")
+                  li(class="unread notification-success")
+                    a(href='#')
+                      i(class="icon-user-add pull-right")
+                      span(class="block-line strong") New user registered
+                      span(class="block-line small") 30 seconds ago
+                  li(class="unread notification-secondary")
+                    a(href='#')
+                      i(class="icon-heart pull-right")
+                      span(class="block-line strong") Someone special liked this
+                      span(class="block-line small") 60 seconds ago
+                  li(class="unread notification-primary")
+                    a(href='#')
+                      i(class="icon-user pull-right")
+                      span(class="block-line strong") Privacy settings have been changed
+                      span(class="block-line small") 2 hours ago
+                  li(class="notification-danger")
+                    a(href='#')
+                      i(class="icon-cancel-circled pull-right")
+                      span(class="block-line strong") Someone special liked this
+                      span(class="block-line small") 60 seconds ago
+                  li(class="notification-info")
+                    a(href='#')
+                      i(class="icon-info pull-right")
+                      span(class="block-line strong") Someone special liked this
+                      span(class="block-line small") 60 seconds ago
+                  li(class="notification-warning")
+                    a(href='#')
+                      i(class="icon-rss pull-right")
+                      span(class="block-line strong") Someone special liked this
+                      span(class="block-line small") 60 seconds ago
+              li(class="external-last")
+                a(class="danger", href='#') View all notifications
+
+          li(class="notifications dropdown")
+            a(class="dropdown-toggle", data-close-others='true', data-hover='dropdown', data-toggle='dropdown', href='#')
+              i(class="icon-mail")
+              span(class="badge badge-secondary") 12
+            ul(class="dropdown-menu pull-right")
+              li(class="first")
+                div(class="dropdown-content-header")
+                  i(class="fa fa-pencil-square-o pull-right")
+                  |  Messages
+              li
+                ul(class="media-list")
+                  li(class="media")
+                    div(class="media-left")
+                      img(class="img-circle img-sm", alt='', src='https://placehold.it/50x50')
+                    div(class="media-body")
+                      a(class="media-heading", href='#')
+                        span(class="text-semibold") Domnic Brown
+                        span(class="media-annotation pull-right") Tue
+                      span(class="text-muted") Your product sounds interesting I would love to check this ne...
+                  li(class="media")
+                    div(class="media-left")
+                      img(class="img-circle img-sm" alt='', src='https://placehold.it/50x50')
+                    div(class="media-body")
+                      a(class="media-heading", href='#')
+                        span(class="text-semibold") John Smith
+                        span(class="media-annotation pull-right") 12:30
+                      span(class="text-muted") Thank you for posting such a wonderful content. The writing was outstanding...
+                  li(class="media")
+                    div(class="media-left")
+                      img(class="img-circle img-sm", alt='', src='https://placehold.it/50x50')
+                    div(class="media-body")
+                      a(class="media-heading", href='#')
+                        span(class="text-semibold") Stella Johnson
+                        span(class="media-annotation pull-right") 2 days ago
+                      span(class="text-muted") Thank you for trusting us to be your source for top quality sporting goods...
+                  li(class="media")
+                    div(class="media-left")
+                      img(class="img-circle img-sm", alt='', src='https://placehold.it/50x50')
+                    div(class="media-body")
+                      a(class="media-heading", href='#')
+                        span(class="text-semibold") Alex Dolgove
+                        span(class="media-annotation pull-right") 10:45
+                      span(class="text-muted")
+                        | After our Friday meeting I was thinking about our business relationship and how fortunate...
+                  li(class="media")
+                    div(class="media-left")
+                      img(class="img-circle img-sm", alt='', src='https://placehold.it/50x50')
+                    div(class="media-body")
+                      a(class="media-heading", href='#')
+                        span(class="text-semibold") Domnic Brown
+                        span(class="media-annotation pull-right") 4:00
+                      span(class="text-muted")
+                        | I would like to take this opportunity to thank you for your cooperation in recently completing...
+              li(class="external-last")
+                a(class="danger", href='#') All Messages
+
+  div(class="main-content", ui-view="mainContainer")
