@@ -3,6 +3,8 @@
 var babelify = require('babelify'),
   browserify = require('browserify'),
   clean = require('gulp-clean'),
+  concat = require('gulp-concat'),
+  concatCss = require('gulp-concat-css'),
   gulp = require('gulp'),
   jade = require('gulp-jade'),
   runSequence = require('run-sequence'),
@@ -10,13 +12,24 @@ var babelify = require('babelify'),
   source = require('vinyl-source-stream'),
   webserver = require('gulp-webserver');
 
+var vendorDependencies = [
+  './app/assets/js/jquery.min.js',
+  './app/assets/js/bootstrap.min.js',
+  './app/assets/js/plugins/metismenu/jquery.metisMenu.js',
+  './app/assets/js/functions.js',
+];
+
 gulp.task('assets', function() {
-  return gulp.src('./app/assets/**/*')
+  runSequence('css', 'vendor');
+
+  gulp.src(['./app/assets/**/*',
+            '!./app/assets/css/', '!./app/assets/css/**',
+            '!./app/assets/js/', '!./app/assets/js/**'])
     .pipe(gulp.dest('./public/assets/'));
 });
 
 gulp.task('build', function(){
-  runSequence('clean', 'assets', 'jade', 'js', 'sass');
+  runSequence('clean', 'assets', 'jade', 'js');
 });
 
 gulp.task('clean', function() {
@@ -27,7 +40,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('dev', function () {
-  runSequence('clean', 'assets', 'jade', 'js', 'sass', 'webserver', 'watch');
+  runSequence('clean', 'assets', 'jade', 'js', 'webserver', 'watch');
 });
 
 gulp.task('jade', function() {
@@ -51,17 +64,29 @@ gulp.task('js', function() {
     .pipe(gulp.dest('./public/assets/js'));
 });
 
+gulp.task('css', function () {
+  gulp.src('./app/assets/css/*.css')
+    .pipe(concatCss("app.css"))
+    .pipe(gulp.dest('./public/assets/css'));
+});
+
+
 gulp.task('sass', function() {
-  //return gulp.src('./app/styles/**/*.scss')
-  //  .pipe(sass().on('error', sass.logError))
-  //  .pipe(gulp.dest('./public/assets/css/'));
+  return gulp.src('./app/styles/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('./public/assets/css/'));
+});
+
+gulp.task('vendor', function() {
+  gulp.src(vendorDependencies)
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest('./public/assets/js/'));
 });
 
 gulp.task('watch', function() {
   gulp.watch('app/assets/**/*', ['assets']);
   gulp.watch('app/scripts/**/*.js', ['js']);
   gulp.watch('app/jade/**/*.jade', ['jade']);
-  gulp.watch('app/styles/**/*.scss', ['sass']);
 });
 
 gulp.task('webserver', function () {
