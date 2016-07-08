@@ -10,16 +10,16 @@ div(class="page-sidebar")
       div(class="sidebar-mobile-menu visible-xs")
         a(class="mobile-menu-icon", data-target='#side-nav', data-toggle='collapse', href='')
           i(class="icon-menu")
-    ul#side-nav(class="main-menu navbar-collapse collapse")
+    ul(class="main-menu navbar-collapse collapse", id="side-nav")
       li(ng-repeat="menuItem in vm.menuItems", ng-class="{ active: vm.isMenuItemActive(menuItem), 'has-sub': menuItem.children.length }")
         a(ui-sref='{{menuItem.uiSref}}')
           i(class="fa", ng-class="menuItem.iconClass")
           span(class="title") {{ menuItem.label }}
         ul(class="nav")
-          li(ng-class="{ active: vm.isMenuItemActive(child)}", ng-repeat="child in menuItem.children")
-            a(ui-sref='{{child.uiSref}}')
-              i(class="fa", ng-class="child.iconClass")
-              span(class="title") {{ child.label }}
+          li(ng-class="{ active: vm.isMenuItemActive(menuItemChild), 'has-sub': (menuItemChild.children)}", ng-repeat="menuItemChild in menuItem.children")
+            a(ui-sref='{{menuItemChild.uiSref}}')
+              i(class="fa", ng-class="menuItemChild.iconClass")
+              span(class="title") {{ menuItemChild.label }}
 
 div(class="main-container")
   div(class="main-header row")
@@ -31,15 +31,6 @@ div(class="main-container")
             | {{ vm.currentUser.first_name + ' ' + vm.currentUser.last_name }}
             span(class="caret")
           ul(class="dropdown-menu")
-            li
-              a(href='')
-                i(class="icon-mail")
-                | Messages
-            li
-              a(href='')
-                i(class="icon-clipboard")
-                | Tasks
-            li(class="divider")
             li
               a(ui-sref="settings")
                 i(class="icon-cog")

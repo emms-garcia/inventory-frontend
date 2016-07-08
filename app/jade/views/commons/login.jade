@@ -1,24 +1,24 @@
-div(class="login-section section")
-  div(class="row")
-    div(class="col-md-4", style="margin: 0 auto; float: none;")
-      div(class="jumbotron")
-        div(class="row")
-          div(class="col-sm-12 text-center")
-            img(src="https://placehold.it/350x150")
-        br
-        div(class="row")
-          div(class="col-sm-10 col-sm-offset-1 text-center")
-            form(name="form", ng-submit="vm.logIn()", novalidate)
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.email.$invalid && form.email.$touched), 'has-success': form.email.$valid }")
-                input(class="form-control input-lg", id="email", tabindex="1", type="email", placeholder="{{ 'USERNAME' | translate }}", ng-model="vm.username", name="email", required)
-                span(class="help-block", ng-show="form.email.$error.email") {{ 'FIELD_EMAIL' | translate }}
-                span(class="help-block", ng-show="form.email.$error.required && form.email.$touched") {{ 'FIELD_REQUIRED' | translate }}
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.password.$invalid && form.password.$touched), 'has-success': form.password.$valid }")
-                input(class="form-control input-lg", id="password", tabindex="2", type="password", placeholder="{{ 'PASSWORD' | translate }}", ng-model="vm.password", name="password", required)
-                span(class="help-block", ng-show="form.password.$error.required && form.password.$touched") {{ 'FIELD_REQUIRED' | translate }}
-              div(class="form-group")
-                p
-                  a(ui-sref="password-reset") {{ 'FORGOT_PASSWORD' | translate }}
-              div(class="btn-group")
-                button(class="btn btn-lg btn-primary", ng-disabled="form.$invalid", type="submit")  {{ 'LOG_IN' | translate }}
-                button(class="btn btn-lg btn-default", ui-sref="signup") {{ 'SIGN_UP' | translate }}
+div(class="login-section")
+  div(class="login-container")
+    div(class="login-branding")
+      a(href='login')
+        img(src="https://placehold.it/250x100")
+    div(class="login-content")
+      h2
+        strong {{ 'WELCOME' | translate }}
+        | {{ 'WELCOME_CONTINUATION' | translate }}
+      form(name="form", ng-submit="vm.logIn()", novalidate)
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.email.$invalid && form.email.$touched), 'has-success': form.email.$valid }")
+          input(class="form-control", id="email", tabindex="1", type="email", placeholder="{{ 'USERNAME' | translate }}", ng-model="vm.username", name="email", required)
+          span(class="help-block", ng-show="form.email.$error.email") {{ 'FIELD_EMAIL' | translate }}
+          span(class="help-block", ng-show="form.email.$error.required && form.email.$touched") {{ 'FIELD_REQUIRED' | translate }}
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.password.$invalid && form.password.$touched), 'has-success': form.password.$valid }")
+          input(class="form-control", id="password", tabindex="2", type="password", placeholder="{{ 'PASSWORD' | translate }}", ng-model="vm.password", name="password", required)
+          span(class="help-block", ng-show="form.password.$error.required && form.password.$touched") {{ 'FIELD_REQUIRED' | translate }}
+        div(class="form-group")
+          button(class="btn btn-block btn-primary", ng-disabled="form.$invalid", type="submit")  {{ 'LOG_IN' | translate }}
+        p(class="text-center") {{ 'OR' | translate }}
+        div(class="form-group")
+          button(class="btn btn-block btn-default", ui-sref="signup") {{ 'SIGN_UP' | translate }}
+        p(class="text-center")
+          a(ui-sref="password-reset") {{ 'FORGOT_PASSWORD' | translate }}

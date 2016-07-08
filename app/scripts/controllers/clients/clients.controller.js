@@ -19,7 +19,7 @@ export default class ClientsController {
       animation: true,
       templateUrl: 'assets/views/clients/modals/create-client.html',
       controller: 'CreateClientModalController as vm',
-      size: 'lg'
+      size: 'md'
     });
     modalInstance.result.then(() => {
       this.clientsservice.getClientList().then((data) => {

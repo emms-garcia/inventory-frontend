@@ -3,7 +3,7 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
     h3(class="modal-title") {{ 'CREATE_CLIENT' | translate }}
   div(class="modal-body")
     div(class="row")
-      div(class="col-sm-6")
+      div(class="col-sm-12")
         div(class="row form-group")
           label(class="col-sm-4", for="name") *{{ 'NAME' | translate }}:
           div(class="col-sm-7")
@@ -32,7 +32,7 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
           label(class="col-sm-4", for="address") {{ 'ADDRESS' | translate }}:
           div(class="col-sm-7")
             input(class="form-control", id="address", ng-model="vm.address", type="text", placeholder="{{ 'ADDRESS' | translate }}")
-      div(class="col-sm-6")
+      //-div(class="col-sm-6")
         ui-gmap-google-map(center="map.center", zoom="map.zoom", dragable="true")
           ui-gmap-marker(coords="marker.coords", idkey="marker.id", options="marker.options")
   div(class="modal-footer")

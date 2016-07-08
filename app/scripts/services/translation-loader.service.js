@@ -203,9 +203,19 @@ export default function translationloaderservice($q, $timeout) {
         NO_TRANSACTIONS_FOUND: 'No se encontraron transacciones',
         INVENTORY_LIST: 'Productos',
         UOM_LIST: 'Unidades de Medida',
+        WELCOME: 'Bienvenido',
+        WELCOME_CONTINUATION: ', por favor inicia sesión',
+        OR: 'Ó',
+        HAVE_AN_ACCOUNT: 'Ya tienes cuenta? ',
+        HAVE_AN_ACCOUNT_CONTINUATION: 'Inicia Sesión'
       };
     } else if(options.key === 'en-us') {
       translations = {
+        HAVE_AN_ACCOUNT: 'Already have an account? ',
+        HAVE_AN_ACCOUNT_CONTINUATION: 'Log In',
+        OR: 'OR',
+        WELCOME: 'Welcome',
+        WELCOME_CONTINUATION: ', please login',
         INVENTORY_LIST: 'Products',
         UOM_LIST: 'Units of Measure',
         NO_UOMS_FOUND: 'No unit of measure found',

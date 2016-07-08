@@ -1,49 +1,51 @@
-div(class="signup-section section")
-  div(class="row")
-    div(class="col-md-4", style="margin: 0 auto; float: none;")
-      div(class="jumbotron")
-        div(class="row")
-          div(class="col-sm-10 col-sm-offset-1 text-center")
-            h2 {{ 'SIGN_UP' | translate }}
-            form(name="form", ng-submit="vm.create()", novalidate)
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.company.$touched && form.company.$error.required), 'has-success': form.company.$valid }")
-                input(class="form-control input-lg", id="company", name="company", required, ng-model="vm.company", type="text", placeholder="{{ 'COMPANY' | translate }}")
-                span(class="help-block", ng-show="form.company.$touched && form.company.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.company.$invalid && form.company.$touched")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.company.$valid")
+div(class="signup-section")
+  div(class="login-container")
+    div(class="login-branding")
+      a(href='login')
+        img(src="https://placehold.it/250x100")
+    div(class="login-content")
+      h2 {{ 'SIGN_UP' | translate }}
+      form(name="form", ng-submit="vm.create()", novalidate)
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.company.$touched && form.company.$error.required), 'has-success': form.company.$valid }")
+          input(class="form-control", id="company", name="company", required, ng-model="vm.company", type="text", placeholder="{{ 'COMPANY' | translate }}")
+          span(class="help-block", ng-show="form.company.$touched && form.company.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.company.$invalid && form.company.$touched")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.company.$valid")
 
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.firstName.$touched && form.firstName.$error.required), 'has-success': form.firstName.$valid }")
-                input(class="form-control input-lg", id="firstName", name="firstName", required, ng-model="vm.firstName", type="text", placeholder="{{ 'FIRST_NAME' | translate }}")
-                span(class="help-block", ng-show="form.firstName.$touched && form.firstName.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.firstName.$invalid && form.firstName.$touched")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.firstName.$valid")
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.firstName.$touched && form.firstName.$error.required), 'has-success': form.firstName.$valid }")
+          input(class="form-control", id="firstName", name="firstName", required, ng-model="vm.firstName", type="text", placeholder="{{ 'FIRST_NAME' | translate }}")
+          span(class="help-block", ng-show="form.firstName.$touched && form.firstName.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.firstName.$invalid && form.firstName.$touched")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.firstName.$valid")
 
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.lastName.$touched && form.lastName.$error.required), 'has-success': form.lastName.$valid }")
-                input(class="form-control input-lg", id="lastName", name="lastName", required, ng-model="vm.lastName", type="text", placeholder="{{ 'LAST_NAME' | translate }}")
-                span(class="help-block", ng-show="form.lastName.$touched && form.lastName.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.lastName.$invalid && form.lastName.$touched")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.lastName.$valid")
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.lastName.$touched && form.lastName.$error.required), 'has-success': form.lastName.$valid }")
+          input(class="form-control", id="lastName", name="lastName", required, ng-model="vm.lastName", type="text", placeholder="{{ 'LAST_NAME' | translate }}")
+          span(class="help-block", ng-show="form.lastName.$touched && form.lastName.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.lastName.$invalid && form.lastName.$touched")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.lastName.$valid")
 
-              div(class="form-group has-feedback", ng-class="{ 'has-error': (form.username.$touched && form.username.$error.required || form.username.$error.email), 'has-success': form.username.$valid }")
-                input(class="form-control input-lg", id="username", name="username", required, ng-model="vm.username", type="email", placeholder="{{ 'EMAIL' | translate }}")
-                span(class="help-block", ng-show="form.username.$touched && form.username.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="help-block", ng-show="form.username.$touched && form.username.$error.email") *{{ 'FIELD_EMAIL' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.username.$invalid && form.username.$touched")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.username.$valid")
+        div(class="form-group has-feedback", ng-class="{ 'has-error': (form.username.$touched && form.username.$error.required || form.username.$error.email), 'has-success': form.username.$valid }")
+          input(class="form-control", id="username", name="username", required, ng-model="vm.username", type="email", placeholder="{{ 'EMAIL' | translate }}")
+          span(class="help-block", ng-show="form.username.$touched && form.username.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="help-block", ng-show="form.username.$touched && form.username.$error.email") *{{ 'FIELD_EMAIL' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.username.$invalid && form.username.$touched")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.username.$valid")
 
-              div(class="form-group has-feedback", ng-class="{ 'has-error': form.password1.$touched && form.password1.$error.required || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch()), 'has-success': form.password1.$valid && vm.passwordsMatch()}")
-                input(class="form-control input-lg", id="password1", name="password1", required, ng-model="vm.password1", type="password", placeholder="{{ 'PASSWORD' | translate }}")
-                span(class="help-block", ng-show="form.password1.$touched && form.password1.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.password1.$invalid && form.password1.$touched || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch())")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password1.$valid && vm.passwordsMatch()")
+        div(class="form-group has-feedback", ng-class="{ 'has-error': form.password1.$touched && form.password1.$error.required || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch()), 'has-success': form.password1.$valid && vm.passwordsMatch()}")
+          input(class="form-control", id="password1", name="password1", required, ng-model="vm.password1", type="password", placeholder="{{ 'PASSWORD' | translate }}")
+          span(class="help-block", ng-show="form.password1.$touched && form.password1.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.password1.$invalid && form.password1.$touched || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch())")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password1.$valid && vm.passwordsMatch()")
 
-              div(class="form-group has-feedback", ng-class="{ 'has-error': form.password2.$touched && form.password2.$error.required || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch()), 'has-success': form.password2.$valid && vm.passwordsMatch() }")
-                input(class="form-control input-lg", id="password2", name="password2", required, ng-model="vm.password2", type="password", placeholder="{{ 'PASSWORD' | translate }}")
-                span(class="help-block", ng-show="form.password2.$touched && form.password2.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
-                span(class="help-block", ng-show="form.password1.$touched && form.password2.$touched && (vm.password1 !== vm.password2)") *{{ 'PASSWORDS_DONT_MATCH' | translate }}
-                span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.password2.$invalid && form.password2.$touched || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch())")
-                span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password2.$valid && vm.passwordsMatch()")
+        div(class="form-group has-feedback", ng-class="{ 'has-error': form.password2.$touched && form.password2.$error.required || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch()), 'has-success': form.password2.$valid && vm.passwordsMatch() }")
+          input(class="form-control", id="password2", name="password2", required, ng-model="vm.password2", type="password", placeholder="{{ 'PASSWORD' | translate }}")
+          span(class="help-block", ng-show="form.password2.$touched && form.password2.$error.required") *{{ 'FIELD_REQUIRED' | translate }}
+          span(class="help-block", ng-show="form.password1.$touched && form.password2.$touched && (vm.password1 !== vm.password2)") *{{ 'PASSWORDS_DONT_MATCH' | translate }}
+          span(class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true", ng-show="form.password2.$invalid && form.password2.$touched || (form.password1.$touched && form.password2.$touched && !vm.passwordsMatch())")
+          span(class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true", ng-show="form.password2.$valid && vm.passwordsMatch()")
 
-              div(class="btn-group")
-                button(class="btn btn-primary btn-lg", type="submit", ng-disabled="form.$invalid") {{ 'SIGN_UP' | translate }}
-                button(class="btn btn-lg", ui-sref="login") {{ 'GO_BACK' | translate }}
+        div(class="form-group")
+          button(class="btn btn-primary btn-block", type="submit", ng-disabled="form.$invalid") {{ 'SIGN_UP' | translate }}
+        p(class="text-center")
+          | {{ 'HAVE_AN_ACCOUNT' | translate }}
+          a(ui-sref='login') {{ 'HAVE_AN_ACCOUNT_CONTINUATION' | translate }}
