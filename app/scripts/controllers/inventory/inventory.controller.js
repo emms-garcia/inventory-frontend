@@ -1,20 +1,92 @@
 export default class InventoryController {
-  constructor($translate, $uibModal, productservice, utilsservice) {
+  constructor($filter, $translate, $uibModal, productservice, utilsservice) {
     this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.productservice = productservice;
     this.utilsservice = utilsservice;
 
-    this.allProductsSelected = false;
+    this.products = {
+      actions: [{
+        callback: (product) => {
+          this.deleteProducts([product]);
+        },
+        name: $translate.instant('DELETE_PRODUCT'),
+      }],
+      bulkActions: [{
+        callback: (products) => {
+          this.deleteProducts(products);
+        },
+        name: $translate.instant('DELETE_SELECTED_PRODUCTS'),
+      }],
+      columns: [
+        {
+          editable: false,
+          name: $translate.instant('ID'),
+          property: 'id',
+          sortable: true,
+        },
+        {
+          editable: false,
+          format: (product) => {
+            return $filter('date')(product.created_at * 1000, 'dd/MMM/yyyy hh:mm a');
+          },
+          name: $translate.instant('CREATED_AT'),
+          property: 'created_at',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (product, key, value) => {
+            this.updateProductData(product, key, value);
+          },
+          name: $translate.instant('NAME'),
+          property: 'name',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (product, key, value) => {
+            this.updateProductData(product, key, value);
+          },
+          name: $translate.instant('DESCRIPTION'),
+          property: 'description',
+          sortable: false,
+        },
+        {
+          editable: true,
+          editCallback: (product, key, value) => {
+            this.updateProductData(product, key, value);
+          },
+          format: (product) => {
+            return  `${product.quantity} ${product.uom.short_name}`;
+          },
+          name: $translate.instant('QUANTITIES'),
+          property: 'quantity',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (product, key, value) => {
+            this.updateProductData(product, key, value);
+          },
+          name: $translate.instant('PRICE_PER_UNIT'),
+          property: 'price_per_unit',
+          sortable: true,
+        },
+      ],
+      data: [],
+      meta: [],
+      requestMore: (next) => {
+        this.getProducts(next);
+      },
+    };
 
-    this.productGroups = [];
-    this.products = [];
-    this.queryProductGroups = '';
-    this.queryProducts = '';
-
+    // this.productGroups = [];
+    // this.queryProductGroups = '';
     this.activate();
 
     this.$inject = [
+      '$filter',
       '$translate',
       '$uibModal',
       'productservice',
@@ -22,14 +94,7 @@ export default class InventoryController {
     ];
   }
 
-  getProducts() {
-    this.productservice.getProductList().then((data) => {
-      if(data) {
-        this.products = data;
-      }
-    });
-  }
-
+  /*
   getProductGroups() {
     this.productservice.getProductGroupList().then((data) => {
       if(data) {
@@ -37,7 +102,9 @@ export default class InventoryController {
       }
     })
   }
+  */
 
+  /*
   openCreateProductGroupModal() {
     const modalInstance = this.$uibModal.open({
       animation: true,
@@ -46,7 +113,7 @@ export default class InventoryController {
       size: 'lg',
       resolve: {
         products: () => {
-          return this.products;
+          return this.products.data;
         }
       }
     });
@@ -54,20 +121,9 @@ export default class InventoryController {
       this.getProductGroups();
     });
   }
+  */
 
-  openCreateProductModal() {
-    const modalInstance = this.$uibModal.open({
-      animation: true,
-      templateUrl: 'assets/views/inventory/modals/create-product.html',
-      controller: 'CreateProductModalController as vm',
-      size: 'md',
-    });
-
-    modalInstance.result.then(() => {
-      this.getProducts();
-    });
-  }
-
+  /*
   openEditProductModal(product) {
     this.$uibModal.open({
       animation: true,
@@ -81,7 +137,9 @@ export default class InventoryController {
       }
     });
   }
+  */
 
+  /*
   deleteSelectedProductGroups() {
     const data = [];
     this.productGroups.forEach((group) => {
@@ -102,14 +160,26 @@ export default class InventoryController {
       }, null, config);
     }
   }
+  */
 
-  deleteSelectedProducts() {
-    const data = [];
-    this.products.forEach((product) => {
-      if(product.selected) {
-        data.push(product.resource_uri);
-      }
-    })
+  /*
+  importProductsModal() {
+    const modalInstance = this.$uibModal.open({
+      animation: true,
+      templateUrl: 'assets/views/inventory/modals/import-products.html',
+      controller: 'ImportProductsModalController as vm',
+      size: 'lg'
+    });
+    modalInstance.result.then(() => {
+      this.getProducts();
+    });
+  }
+  */
+
+  deleteProducts(products) {
+    const data = products.map((product) => {
+      return product.resource_uri;
+    });
 
     if(data.length > 0) {
       const config = {
@@ -124,21 +194,29 @@ export default class InventoryController {
     }
   }
 
-  importProductsModal() {
-    const modalInstance = this.$uibModal.open({
-      animation: true,
-      templateUrl: 'assets/views/inventory/modals/import-products.html',
-      controller: 'ImportProductsModalController as vm',
-      size: 'lg'
-    });
-    modalInstance.result.then(() => {
-      this.getProducts();
+  getProducts(next) {
+    this.productservice.getProductList(next).then((data) => {
+      if(data) {
+        if(next) {
+          this.products.data = this.products.data.concat(data.objects);
+        } else {
+          this.products.data = data.objects;
+        }
+        this.products.meta = data.meta;
+      }
     });
   }
 
-  toggleAllProducts() {
-    this.products.forEach((product) => {
-      product.selected = this.allProductsSelected;
+  openCreateProductModal() {
+    const modalInstance = this.$uibModal.open({
+      animation: true,
+      templateUrl: 'assets/views/inventory/modals/create-product.html',
+      controller: 'CreateProductModalController as vm',
+      size: 'md',
+    });
+
+    modalInstance.result.then(() => {
+      this.getProducts();
     });
   }
 
@@ -148,7 +226,7 @@ export default class InventoryController {
 
   activate() {
     console.log('InventoryController activated.');
-    //this.getProductGroups();
+    // this.getProductGroups();
     this.getProducts();
   }
 }

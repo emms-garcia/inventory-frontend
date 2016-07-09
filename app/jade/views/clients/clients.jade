@@ -1,68 +1,10 @@
 div(class="clients-section")
-  h2(class="page-title") {{ 'CLIENTS' | translate }}
+  div(class="header-secondary row")
+    div(class="col-md-12")
+      div(class="page-heading clearfix")
+        h1(class="page-title pull-left") {{ 'CLIENTS' | translate }}
+        button(class="btn btn-primary btn-sm btn-add", ng-click="vm.openCreateClientModal()") {{ 'ADD_NEW_CLIENT' | translate }}
 
   div(class="row")
-    div(class="col-sm-3")
-      div(class="input-group")
-        input(class="form-control col-sm-4", ng-model="vm.queryClients", type="text", placeholder="{{ 'SEARCH' | translate }}")
-        span(class="input-group-btn")
-          button(class="btn")
-            span(class="glyphicon glyphicon-search")
-    div(class="col-sm-9")
-      div(class="btn-group pull-right", uib-dropdown)
-        button(id="single-button", type="button", class="btn btn-primary", uib-dropdown-toggle, ng-disabled="disabled") &nbsp; {{ 'ACTIONS' | translate }} &nbsp;
-          span(class="caret")
-        ul(class="dropdown-menu", uib-dropdown-menu, role="menu", aria-labelledby="single-button")
-          li(role="menuitem")
-            a(href="", ng-click="vm.openCreateClientModal()")
-              span(class="glyphicon glyphicon-plus")
-              | &nbsp; {{ 'CREATE_CLIENT' | translate }}
-          li(role="menuitem")
-            a(href="", ng-click="vm.deleteSelectedClients()")
-              span(class="glyphicon glyphicon-trash")
-              | &nbsp; {{ 'DELETE_SELECTED_CLIENT' | translate }}
-
-  br
-  div(class="row")
-    div(class="col-sm-12")
-      div(class="table-responsive")
-        table(class="table table-striped table-bordered")
-          thead
-            tr
-              th
-                div(class="form-checkbox")
-                  input(type="checkbox", ng-model="vm.allClientsSelected", ng-change="vm.toggleAllClients()", ng-show="vm.clients.length > 0")
-                  span(class="check")
-                    i(class="fa fa-check")
-              th {{ 'ID' | translate }}
-              th {{ 'CREATED_AT' | translate }}
-              th {{ "NAME" | translate }}
-              th {{ "EMAIL" | translate }}
-              th {{ "COMPANY" | translate }}
-              th {{ "RFC" | translate }}
-              th {{ "PHONE" | translate }}
-              th {{ "CELLPHONE" | translate }}
-              th {{ "ADDRESS" | translate }}
-              th
-          tbody
-            tr(ng-if="vm.clients.length === 0")
-              td(class="text-center", colspan="11")
-                p(class="lead") {{ 'NO_CLIENTS_DEFINED' | translate }}
-            tr(ng-repeat="client in vm.clients | filter: vm.queryClients")
-              td
-                div(class="form-checkbox")
-                  input(type="checkbox", ng-model="client.selected")
-                  span(class="check")
-                    i(class="fa fa-check")
-              td {{ client.id }}
-              td {{ (client.created_at * 1000) | date:'dd/MMM/yyyy hh:mm a' }}
-              td {{ client.name || 'N/A' }}
-              td {{ client.email || 'N/A' }}
-              td {{ client.company || 'N/A' }}
-              td {{ client.rfc || 'N/A' }}
-              td {{ client.phone || 'N/A' }}
-              td {{ client.cellphone || 'N/A' }}
-              td {{ client.address || 'N/A' }}
-              td
-                button(class="btn btn-primary btn-xs", ui-sref="clients.detail({'clientId': client.id})")
-                  span(class="glyphicon glyphicon-pencil")
+    div(class="col-md-12")
+      my-data-table(actions="vm.clients.actions", bulk-actions="vm.clients.bulkActions", columns="vm.clients.columns", data="vm.clients.data", meta="vm.clients.meta", request-more="vm.clients.requestMore")

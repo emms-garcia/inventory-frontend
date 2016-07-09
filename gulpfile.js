@@ -4,13 +4,13 @@ var babelify = require('babelify'),
   browserify = require('browserify'),
   clean = require('gulp-clean'),
   concat = require('gulp-concat'),
-  concatCss = require('gulp-concat-css'),
   gulp = require('gulp'),
   jade = require('gulp-jade'),
   runSequence = require('run-sequence'),
-  sass = require('gulp-sass'),
   source = require('vinyl-source-stream'),
-  webserver = require('gulp-webserver');
+  watchify = require('watchify'),
+  webserver = require('gulp-webserver'),
+  _ = require('lodash');
 
 var vendorDependencies = [
   './app/assets/js/jquery.min.js',
@@ -18,6 +18,14 @@ var vendorDependencies = [
   './app/assets/js/plugins/metismenu/jquery.metisMenu.js',
   './app/assets/js/functions.js',
 ];
+
+var opts = _.assign({}, watchify.args, {
+  debug : false,
+  entries : ['./app/scripts/app.js'],
+  extensions : ['.js'],
+  transform : [babelify]
+});
+
 
 gulp.task('assets', function() {
   runSequence('css', 'vendor');
@@ -53,12 +61,7 @@ gulp.task('jade', function() {
 });
 
 gulp.task('js', function() {
-  return browserify({
-      debug : true,
-      entries : ['./app/scripts/app.js'],
-      extensions : ['.js'],
-      transform : [babelify]
-    })
+  return watchify(browserify(opts))
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./public/assets/js'));
@@ -66,15 +69,8 @@ gulp.task('js', function() {
 
 gulp.task('css', function () {
   gulp.src('./app/assets/css/*.css')
-    .pipe(concatCss("app.css"))
+    .pipe(concat("app.css"))
     .pipe(gulp.dest('./public/assets/css'));
-});
-
-
-gulp.task('sass', function() {
-  return gulp.src('./app/styles/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('./public/assets/css/'));
 });
 
 gulp.task('vendor', function() {

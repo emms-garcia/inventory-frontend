@@ -72,12 +72,12 @@ export default class productservice {
     });
   }
 
-  getProductList() {
+  getProductList(url = '/v1/inventory/products/') {
     return this.$http({
       method: 'GET',
-      url: '/v1/inventory/products/'
+      url: url
     }).then((response) => {
-      return response.data.objects;
+      return response.data;
     })
     .catch((error) => {
       console.log('XHR failed on getProductList ' + error);
@@ -220,12 +220,12 @@ export default class productservice {
     });
   }
 
-  getUOMList() {
+  getUOMList(url = '/v1/inventory/uoms/') {
     return this.$http({
       method: 'GET',
-      url: '/v1/inventory/uoms/'
+      url: url
     }).then((response) => {
-      return response.data.objects;
+      return response.data;
     })
     .catch((error) => {
       console.log('XHR failed on getUOMList ' + error);

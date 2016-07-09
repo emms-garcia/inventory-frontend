@@ -1,0 +1,52 @@
+div(class="data-table")
+  div(class="row")
+    div(class="col-md-6")
+      div(class="btn-group")
+        div(class="dropdown")
+          button(data-toggle="dropdown", class="btn btn-default")
+            | {{ 'BULK_ACTIONS' | translate }}
+            i(class="icon-down-open")
+          ul(class="dropdown-menu dropdown-menu-right")
+            li
+              a(href="", ng-click="vm.callBulkAction(action)", ng-repeat="action in vm.bulkActions") {{ action.name }}
+  br
+  div(class="row")
+    div(class="col-md-12")
+      div(class="table-responsive")
+        table(class="dataTable table table-bordered table-hover table-striped")
+          thead
+            tr(role="row")
+              th
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="vm.selectAll", ng-change="vm.toggleSelectAll()", ng-show="vm.data.length > 0")
+                  span(class="check")
+                    i(class="fa fa-check")
+              th(ng-repeat="column in vm.columns") {{ column.name }}
+              th {{ 'ACTIONS' | translate }}
+          tbody
+            tr(ng-hide="vm.data.length")
+              td(class="text-center", colspan="{{vm.columns.length + 2}}")
+                p(class="lead") {{ 'NO_DATA_FOUND' | translate }}
+            tr(ng-repeat="obj in vm.data")
+              td
+                div(class="form-checkbox")
+                  input(type="checkbox", ng-model="obj.selected")
+                  span(class="check")
+                    i(class="fa fa-check")
+              td(ng-repeat="column in vm.columns")
+                p(ng-if="!column.editable") {{ vm.display(obj, column) }}
+                a(ng-if="column.editable", editable-text="obj[column.property]", onbeforesave="column.editCallback(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
+              td
+                div(class="dropdown")
+                  a(href="", data-toggle="dropdown", class="more-link")
+                    i(class="icon-dot-3 ellipsis-icon")
+                  ul(class="dropdown-menu dropdown-menu-right")
+                    li
+                      a(href="", ng-repeat="action in vm.actions", ng-click="action.callback(obj)") {{ action.name }}
+            tr(ng-show="vm.meta.next")
+              td(colspan="{{vm.columns.length + 2}}")
+                button(class="btn btn-block btn-primary", ng-click="vm.requestMore(vm.meta.next)") {{ 'VIEW_MORE' | translate }}
+          tfoot
+            tr(ng-show="!vm.meta.next")
+              td(class="text-center", colspan="{{vm.columns.length + 2}}")
+                p(class="lead") {{ 'NO_MORE_DATA' | translate }}

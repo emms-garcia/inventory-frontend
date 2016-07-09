@@ -16,7 +16,7 @@ class TransactionHistoryController {
 }
 
 
-export default function salesHistory() {
+export default function transactionHistory() {
   return {
     controller: TransactionHistoryController,
     controllerAs: 'vm',

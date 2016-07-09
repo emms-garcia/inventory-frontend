@@ -1,17 +1,113 @@
 export default class ClientsController {
-  constructor($translate, $uibModal, clientsservice, utilsservice) {
+  constructor($filter, $translate, $uibModal, clientsservice, utilsservice) {
     this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.clientsservice = clientsservice;
     this.utilsservice = utilsservice;
 
-    this.allClientsSelected = false;
-    this.clients = [];
-    this.queryClients = '';
+    this.clients = {
+      actions: [{
+        callback: (client) => {
+          this.deleteClients([client]);
+        },
+        name: $translate.instant('DELETE_CLIENT'),
+      }],
+      bulkActions: [{
+        callback: (clients) => {
+          this.deleteClients(clients);
+        },
+        name: $translate.instant('DELETE_SELECTED_CLIENTS'),
+      }],
+      columns: [
+        {
+          editable: false,
+          name: $translate.instant('ID'),
+          property: 'id',
+          sortable: true,
+        },
+        {
+          editable: false,
+          format: (client) => {
+            return $filter('date')(client.created_at * 1000, 'dd/MMM/yyyy hh:mm a');
+          },
+          name: $translate.instant('CREATED_AT'),
+          property: 'created_at',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('NAME'),
+          property: 'name',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('EMAIL'),
+          property: 'email',
+          sortable: false,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('COMPANY'),
+          property: 'company',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('RFC'),
+          property: 'rfc',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('PHONE'),
+          property: 'phone',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('CELLPHONE'),
+          property: 'cellphone',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (client, key, value) => {
+            this.updateClientData(client, key, value);
+          },
+          name: $translate.instant('ADDRESS'),
+          property: 'address',
+          sortable: true,
+        },
+      ],
+      data: [],
+      meta: {},
+      requestMore: (next) => {
+        this.getClients(next);
+      },
+    };
 
     this.activate();
 
-    this.$inject = ['$translate', '$uibModal', 'clientsservice', 'utilsservice'];
+    this.$inject = ['$filter', '$translate', '$uibModal', 'clientsservice', 'utilsservice'];
   }
 
   openCreateClientModal() {
@@ -22,24 +118,19 @@ export default class ClientsController {
       size: 'md'
     });
     modalInstance.result.then(() => {
-      this.clientsservice.getClientList().then((data) => {
-        this.clients = data;
-      });
+      this.getClients();
     });
   }
 
-  deleteSelectedClients() {
-    const data = [];
-    this.clients.forEach((client) => {
-      if(client.selected) {
-        data.push(client.resource_uri);
-      }
-    })
+  deleteClients(clients) {
+    const data = clients.map((uom) => {
+      return clients.resource_uri;
+    });
 
     if(data.length > 0) {
       const config = {
-        bodyMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_BODY'),
-        titleMsg: this.$translate.instant('DELETE_PRODUCTS_MODAL_TITLE')
+        bodyMsg: this.$translate.instant('DELETE_CLIENTS_MODAL_BODY'),
+        titleMsg: this.$translate.instant('DELETE_CLIENTS_MODAL_TITLE')
       };
       this.utilsservice.confirmationDialog(() => {
         this.clientsservice.deleteClients(data).then(() => {
@@ -49,16 +140,21 @@ export default class ClientsController {
     }
   }
 
-  toggleAllClients() {
-    this.clients.forEach((client) => {
-      client.selected = this.allClientsSelected;
+  getClients(next) {
+    this.clientsservice.getClientList(next).then((data) => {
+      if(data) {
+        if(next) {
+          this.clients.data = this.clients.data.concat(data.objects);
+        } else {
+          this.clients.data = data.objects;
+        }
+        this.clients.meta = data.meta;
+      }
     });
   }
 
-  getClients() {
-    this.clientsservice.getClientList().then((data) => {
-      this.clients = data;
-    });
+  updateClientData(client, key, value) {
+    return this.clientsservice.updateClientData(client.id, {[key]: value});
   }
 
   activate() {

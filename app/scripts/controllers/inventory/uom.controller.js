@@ -1,14 +1,64 @@
 export default class UOMController {
-  constructor($translate, $uibModal, productservice, userservice, utilsservice) {
+  constructor($translate, $uibModal, productservice, utilsservice) {
     this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.productservice = productservice;
     this.utilsservice = utilsservice;
 
-    this.allUOMsSelected = false;
-
-    this.currentUser = userservice.currentUser;
-    this.uoms = [];
+    this.uoms = {
+      actions: [{
+        callback: (uom) => {
+          this.deleteUOMs([uom]);
+        },
+        name: $translate.instant('DELETE_UOM'),
+      }],
+      bulkActions: [{
+        callback: (uoms) => {
+          this.deleteUOMs(uoms);
+        },
+        name: $translate.instant('DELETE_SELECTED_UOMS'),
+      }],
+      columns: [
+        {
+          editable: false,
+          name: $translate.instant('ID'),
+          property: 'id',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (uom, key, value) => {
+            this.updateUOMData(uom, key, value);
+          },
+          name: $translate.instant('NAME'),
+          property: 'name',
+          sortable: true,
+        },
+        {
+          editable: true,
+          editCallback: (uom, key, value) => {
+            this.updateUOMData(uom, key, value);
+          },
+          name: $translate.instant('DESCRIPTION'),
+          property: 'description',
+          sortable: false,
+        },
+        {
+          editable: true,
+          editCallback: (uom, key, value) => {
+            this.updateUOMData(uom, key, value);
+          },
+          name: $translate.instant('SHORT_NAME'),
+          property: 'short_name',
+          sortable: true,
+        },
+      ],
+      data: [],
+      meta: {},
+      requestMore: (next) => {
+        this.getUOMs(next);
+      },
+    };
 
     this.activate();
 
@@ -16,15 +66,19 @@ export default class UOMController {
       '$translate',
       '$uibModal',
       'productservice',
-      'userservice',
       'utilsservice'
     ];
   }
 
-  getUOMs() {
-    this.productservice.getUOMList().then((data) => {
+  getUOMs(next) {
+    this.productservice.getUOMList(next).then((data) => {
       if(data) {
-        this.uoms = data;
+        if(next) {
+          this.uoms.data = this.uoms.data.concat(data.objects);
+        } else {
+          this.uoms.data = data.objects;
+        }
+        this.uoms.meta = data.meta;
       }
     });
   }
@@ -42,14 +96,10 @@ export default class UOMController {
     });
   }
 
-  deleteSelectedUOMs() {
-    const data = [];
-    this.uoms.forEach((uom) => {
-      if(uom.selected) {
-        data.push(uom.resource_uri);
-      }
-    })
-
+  deleteUOMs(uoms) {
+    const data = uoms.map((uom) => {
+      return uom.resource_uri;
+    });
     if(data.length > 0) {
       const config = {
         bodyMsg: this.$translate.instant('DELETE_UOMS_MODAL_BODY'),

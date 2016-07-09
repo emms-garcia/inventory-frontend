@@ -7,13 +7,13 @@ export default class clientsservice {
     this.$inject = ['$http', '$translate', 'utilsservice'];
   }
 
-  getClientList() {
+  getClientList(url='/v1/inventory/clients/') {
     return this.$http({
       method: 'GET',
-      url: '/v1/inventory/clients/'
+      url: url
     })
     .then((response) => {
-      return response.data.objects;
+      return response.data;
     })
     .catch((error) => {
       console.log('XHR failed on getClientList ' + error);

@@ -37,7 +37,7 @@ export default class CreateProductModalController {
     console.log('CreateProductModalController activated.');
     this.productservice.getUOMList().then((data) => {
       if(data) {
-        this.uoms = data;
+        this.uoms = data.objects;
       }
     });
   }
