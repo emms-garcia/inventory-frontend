@@ -1,3 +1,3 @@
 # inventory
 
-Whole application for Inventory project.
+Inventory project's frontend madness.

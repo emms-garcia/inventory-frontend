@@ -26,8 +26,6 @@ var vendorCss = [
 var vendorDependencies = [
   './app/assets/js/jquery.min.js',
   './app/assets/js/bootstrap.min.js',
-  './app/assets/js/plugins/metismenu/jquery.metisMenu.js',
-  './app/assets/js/functions.js',
 ];
 
 var opts = _.assign({}, watchify.args, {

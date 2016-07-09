@@ -1,7 +1,3 @@
 *.html
-.tmp
-.sass-cache
-app/views
-dist
 node_modules
 public

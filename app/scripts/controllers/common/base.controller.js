@@ -5,18 +5,19 @@ export default class BaseController {
     this.userservice = userservice;
     this.utilsservice = utilsservice;
 
+    this.showSidebar = true;
+
     this.currentUser = this.userservice.currentUser;
     this.menuItems = [
-      { children: [], collapsed: false, iconClass: 'fa-desktop', label: $translate.instant('DASHBOARD'), 'uiSref': 'dashboard' },
+      { children: [], collapsed: true, iconClass: 'fa-desktop', label: $translate.instant('DASHBOARD'), 'uiSref': 'dashboard' },
       {
         children: [
           { iconClass: 'fa-cubes', label: $translate.instant('INVENTORY_LIST'), uiSref: 'inventory' },
           { iconClass: 'fa-sort-numeric-asc', label: $translate.instant('UOM_LIST'), uiSref: 'uom' },
         ],
-        collapsed: false,
+        collapsed: true,
         iconClass: 'fa-list',
         label: $translate.instant('INVENTORY'),
-        uiSref: 'inventory'
       },
       {
         children: [
@@ -24,12 +25,11 @@ export default class BaseController {
           { iconClass: 'fa-shopping-cart', label: $translate.instant('PURCHASE'), uiSref: 'transactions-purchase' },
           { iconClass: 'fa-truck', label: $translate.instant('SALE'), uiSref: 'transactions-sale' },
         ],
-        collapsed: false,
+        collapsed: true,
         iconClass: 'fa-money',
         label: $translate.instant('TRANSACTIONS'),
-        uiSref: 'transactions',
       },
-      { children: [], collapsed: false, iconClass: 'fa-users', label: $translate.instant('CLIENTS'), uiSref: 'clients' },
+      { children: [], collapsed: true, iconClass: 'fa-users', label: $translate.instant('CLIENTS'), uiSref: 'clients' },
     ];
 
     this.activate();
