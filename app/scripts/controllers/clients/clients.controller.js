@@ -20,82 +20,66 @@ export default class ClientsController {
       }],
       columns: [
         {
-          editable: false,
           name: $translate.instant('ID'),
           property: 'id',
-          sortable: true,
         },
         {
-          editable: false,
           format: (client) => {
             return $filter('date')(client.created_at * 1000, 'dd/MMM/yyyy hh:mm a');
           },
           name: $translate.instant('CREATED_AT'),
           property: 'created_at',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('NAME'),
           property: 'name',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('EMAIL'),
           property: 'email',
-          sortable: false,
+          type: 'email',
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('COMPANY'),
           property: 'company',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('RFC'),
           property: 'rfc',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('PHONE'),
           property: 'phone',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('CELLPHONE'),
           property: 'cellphone',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (client, key, value) => {
-            this.updateClientData(client, key, value);
+          edit: (client, key, value) => {
+            return this.updateClientData(client, key, value);
           },
           name: $translate.instant('ADDRESS'),
           property: 'address',
-          sortable: true,
+          type: 'textarea',
         },
       ],
       data: [],

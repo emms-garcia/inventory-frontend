@@ -40,6 +40,5 @@ export default class CreateClientModalController {
 
   activate() {
     console.log('CreateClientModalController activated.');
-    navigator.geolocation.getCurrentPosition(function (position) {});
   }
 }

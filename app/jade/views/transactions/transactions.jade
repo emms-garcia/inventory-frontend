@@ -1,12 +1,9 @@
 div(class="transaction-section")
-  h2(class="page-title") {{ 'TRANSACTIONS' | translate }}
-  div(class="row")
-    div(class="col-sm-3")
-      div(class="input-group")
-        input(class="form-control col-sm-4", ng-model="vm.queryTransactions", type="text", placeholder="{{ 'SEARCH' | translate }}")
-        span(class="input-group-btn")
-          button(class="btn")
-            span(class="glyphicon glyphicon-search")
+  div(class="header-secondary row")
+    div(class="col-md-12")
+      div(class="page-heading clearfix")
+        h1(class="page-title pull-left") {{ 'TRANSACTIONS' | translate }}
+
   div(class="row", ng-repeat="transaction in vm.fileredTransactions = (vm.transactionsHistory | filter: vm.queryTransactions)")
     div(class="col-md-12")
       transaction-history(transaction="transaction")

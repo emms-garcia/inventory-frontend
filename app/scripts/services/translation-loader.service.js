@@ -136,7 +136,7 @@ export default function translationloaderservice($q, $timeout) {
         PRICE_PER_PRODUCT: 'Precio por Producto',
         QUANTITY: 'Cantidad',
         UPDATE_PRODUCT_SUCCESS: 'El producto fue editado exitosamente',
-        UPDATE_PRODUCT_ERROR: 'No se pudo editar el producto',
+        UPDATE_PRODUCT_ERROR: 'No se pudo actualizar el producto',
         IMPORT_PRODUCTS: 'Importar Productos',
         IMPORT_PRODUCTS_INFO: 'Importa productos desde un archivo separado por comas (CSV).',
         SELECT_FILE: 'Selecciona un archivo',
@@ -220,9 +220,17 @@ export default function translationloaderservice($q, $timeout) {
         DELETE_CLIENTS_MODAL_TITLE: 'Borrar Clientes',
         DELETE_SELECTED_CLIENTS: 'Borrar clientes seleccionados',
         NO_DATA_FOUND: 'No se encontraron datos',
+        UOM_CREATE_FAILED: 'No se pudo crear la unidad de medida',
+        UOM_DELETE_FAILED: 'No se pudo borrar la unidad de medida',
+        UPDATE_UOM_SUCCESS: 'La unidad de medida se actualizó exitosamente',
+        UPDATE_UOM_FAILED: 'No se pudo actualizar la unidad de medida',
       };
     } else if(options.key === 'en-us') {
       translations = {
+        UPDATE_UOM_SUCCESS: 'Unit of Measure updated successfully',
+        UPDATE_UOM_FAILED: 'Failed to update unit of measure',
+        UOM_DELETE_FAILED: 'Failed to delete unit of measure',
+        UOM_CREATE_FAILED: 'Failed to create unit of measure',
         NO_DATA_FOUND: 'No data found',
         DELETE_SELECTED_CLIENTS: 'Delete selected clients',
         DELETE_CLIENTS_MODAL_BODY: 'Are you sure you want to delete these clients?',

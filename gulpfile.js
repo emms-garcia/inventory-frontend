@@ -12,6 +12,17 @@ var babelify = require('babelify'),
   webserver = require('gulp-webserver'),
   _ = require('lodash');
 
+var vendorCss = [
+  './app/assets/css/bootstrap.min.css',
+  './app/assets/css/entypo.css',
+  './app/assets/css/font-awesome.min.css',
+  './app/assets/css/mouldifi-core.css',
+  './app/assets/css/mouldifi-forms.css',
+  './app/assets/css/jquery.dataTables.css',
+  './app/assets/css/angular-ui-notification.min.css',
+  './app/assets/css/xeditable.min.css',
+];
+
 var vendorDependencies = [
   './app/assets/js/jquery.min.js',
   './app/assets/js/bootstrap.min.js',
@@ -68,8 +79,8 @@ gulp.task('js', function() {
 });
 
 gulp.task('css', function () {
-  gulp.src('./app/assets/css/*.css')
-    .pipe(concat("app.css"))
+  gulp.src(vendorCss)
+    .pipe(concat('app.css'))
     .pipe(gulp.dest('./public/assets/css'));
 });
 

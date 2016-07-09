@@ -20,58 +20,49 @@ export default class InventoryController {
       }],
       columns: [
         {
-          editable: false,
           name: $translate.instant('ID'),
           property: 'id',
-          sortable: true,
         },
         {
-          editable: false,
           format: (product) => {
             return $filter('date')(product.created_at * 1000, 'dd/MMM/yyyy hh:mm a');
           },
           name: $translate.instant('CREATED_AT'),
           property: 'created_at',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (product, key, value) => {
-            this.updateProductData(product, key, value);
+          edit: (product, key, value) => {
+            return this.updateProductData(product, key, value);
           },
           name: $translate.instant('NAME'),
           property: 'name',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (product, key, value) => {
-            this.updateProductData(product, key, value);
+          edit: (product, key, value) => {
+            return this.updateProductData(product, key, value);
           },
           name: $translate.instant('DESCRIPTION'),
           property: 'description',
-          sortable: false,
+          type: 'textarea',
         },
         {
-          editable: true,
-          editCallback: (product, key, value) => {
-            this.updateProductData(product, key, value);
+          edit: (product, key, value) => {
+            return this.updateProductData(product, key, value);
           },
           format: (product) => {
-            return  `${product.quantity} ${product.uom.short_name}`;
+            return `${product.quantity} ${product.uom.short_name}`;
           },
           name: $translate.instant('QUANTITIES'),
           property: 'quantity',
-          sortable: true,
+          type: 'number',
         },
         {
-          editable: true,
-          editCallback: (product, key, value) => {
-            this.updateProductData(product, key, value);
+          edit: (product, key, value) => {
+            return this.updateProductData(product, key, value);
           },
           name: $translate.instant('PRICE_PER_UNIT'),
           property: 'price_per_unit',
-          sortable: true,
+          type: 'number',
         },
       ],
       data: [],

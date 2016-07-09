@@ -20,37 +20,30 @@ export default class UOMController {
       }],
       columns: [
         {
-          editable: false,
           name: $translate.instant('ID'),
           property: 'id',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (uom, key, value) => {
-            this.updateUOMData(uom, key, value);
+          edit: (uom, key, value) => {
+            return this.updateUOMData(uom, key, value);
           },
           name: $translate.instant('NAME'),
           property: 'name',
-          sortable: true,
         },
         {
-          editable: true,
-          editCallback: (uom, key, value) => {
-            this.updateUOMData(uom, key, value);
+          edit: (uom, key, value) => {
+            return this.updateUOMData(uom, key, value);
           },
           name: $translate.instant('DESCRIPTION'),
           property: 'description',
-          sortable: false,
+          type: 'textarea',
         },
         {
-          editable: true,
-          editCallback: (uom, key, value) => {
-            this.updateUOMData(uom, key, value);
+          edit: (uom, key, value) => {
+            return this.updateUOMData(uom, key, value);
           },
           name: $translate.instant('SHORT_NAME'),
           property: 'short_name',
-          sortable: true,
         },
       ],
       data: [],

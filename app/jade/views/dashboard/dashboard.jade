@@ -1,5 +1,8 @@
 div(class="dashboard-section")
-  h1(class="page-title") {{ 'DASHBOARD' | translate }}
+  div(class="header-secondary row")
+    div(class="col-md-12")
+      div(class="page-heading clearfix")
+        h1(class="page-title pull-left") {{ 'DASHBOARD' | translate }}
   .row
     .col-lg-6
       .row
@@ -537,4 +540,3 @@ div(class="dashboard-section")
           .flot-chart.float-chart-lg
             #graph-lines.flot-chart-content
             #graph-bars.flot-chart-content
-

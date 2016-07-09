@@ -34,8 +34,11 @@ div(class="data-table")
                   span(class="check")
                     i(class="fa fa-check")
               td(ng-repeat="column in vm.columns")
-                p(ng-if="!column.editable") {{ vm.display(obj, column) }}
-                a(ng-if="column.editable", editable-text="obj[column.property]", onbeforesave="column.editCallback(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
+                p(ng-if="!column.edit") {{ vm.display(obj, column) }}
+                a(ng-if="column.edit && (column.type === 'text' || !column.type)", editable-text="obj[column.property]", onbeforesave="column.edit(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
+                a(ng-if="column.edit && column.type === 'textarea'", editable-textarea="obj[column.property]", onbeforesave="column.edit(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
+                a(ng-if="column.edit && column.type === 'email'", editable-email="obj[column.property]", onbeforesave="column.edit(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
+                a(ng-if="column.edit && column.type === 'number'", editable-number="obj[column.property]", onbeforesave="column.edit(obj, column.property, $data)") {{ vm.display(obj, column) || 'N/A' }}
               td
                 div(class="dropdown")
                   a(href="", data-toggle="dropdown", class="more-link")
@@ -46,7 +49,3 @@ div(class="data-table")
             tr(ng-show="vm.meta.next")
               td(colspan="{{vm.columns.length + 2}}")
                 button(class="btn btn-block btn-primary", ng-click="vm.requestMore(vm.meta.next)") {{ 'VIEW_MORE' | translate }}
-          tfoot
-            tr(ng-show="!vm.meta.next")
-              td(class="text-center", colspan="{{vm.columns.length + 2}}")
-                p(class="lead") {{ 'NO_MORE_DATA' | translate }}
