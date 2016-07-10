@@ -9,7 +9,13 @@ export default class BaseController {
 
     this.currentUser = this.userservice.currentUser;
     this.menuItems = [
-      { children: [], collapsed: true, iconClass: 'fa-desktop', label: $translate.instant('DASHBOARD'), 'uiSref': 'dashboard' },
+      {
+        children: [],
+        collapsed: true,
+        iconClass: 'fa-desktop',
+        label: $translate.instant('DASHBOARD'),
+        uiSref: 'dashboard'
+      },
       {
         children: [
           { iconClass: 'fa-cubes', label: $translate.instant('INVENTORY_LIST'), uiSref: 'inventory' },
@@ -37,20 +43,10 @@ export default class BaseController {
     this.$inject = ['$state', '$translate', 'userservice', 'utilsservice'];
   }
 
-  isMenuItemActive(item) {
-    let a = false;
-    if(item.children) {
-      item.children.forEach((child) => {
-        if(this.$state.current.name === child.uiSref) {
-          a = true;
-        }
-      });
-    }
-    return a || this.$state.current.name === item.uiSref;
-  }
-
-  toggleCollapse(item) {
-    item.collapse = !item.collapse;
+  isActive(item) {
+    return (item.uiSref === this.$state.current.name) || item.children.find((child) => {
+      return (child.uiSref === this.$state.current.name);
+    });
   }
 
   logOut() {
@@ -65,6 +61,18 @@ export default class BaseController {
         }
       });
     }, null, config);
+  }
+
+  redirect(item, collapse) {
+    if(item.uiSref) {
+      this.$state.go(item.uiSref);
+    } else {
+      item.collapsed = !item.collapsed;
+    }
+  }
+
+  toggleCollapse(item) {
+    item.collapse = !item.collapse;
   }
 
   activate() {

@@ -12,13 +12,14 @@ div(class="page-container", ng-class="{ 'sidebar-collapsed': !vm.showSidebar, 'c
           a(class="mobile-menu-icon", data-target='#side-nav', data-toggle='collapse', href='')
             i(class="icon-menu")
       ul(class="main-menu navbar-collapse collapse", id="side-nav")
-        li(ng-repeat="menuItem in vm.menuItems", ng-class="{ active: vm.isMenuItemActive(menuItem), 'has-sub': menuItem.children.length }")
-          a(ui-sref='{{menuItem.uiSref}}', ng-click="menuItem.collapsed = !menuItem.collapsed; $event.stopPropagation();")
+        li(ng-repeat="menuItem in vm.menuItems", ng-class="{ active: vm.isActive(menuItem) }")
+          a(ng-click="vm.redirect(menuItem)")
             i(class="fa", ng-class="menuItem.iconClass")
             span(class="title") {{ menuItem.label }}
+            span(class="fa pull-right", ng-class="{ 'fa-angle-right': menuItem.collapsed, 'fa-angle-down': !menuItem.collapsed }", ng-if="vm.showSidebar && menuItem.children.length")
           ul(class="nav collapse", ng-class="{ in: !menuItem.collapsed }")
-            li(ng-class="{ active: vm.isMenuItemActive(menuItemChild), 'has-sub': (menuItemChild.children)}", ng-repeat="menuItemChild in menuItem.children")
-              a(ui-sref='{{menuItemChild.uiSref}}')
+            li(ng-repeat="menuItemChild in menuItem.children")
+              a(href="", ui-sref="{{menuItemChild.uiSref}}")
                 i(class="fa", ng-class="menuItemChild.iconClass")
                 span(class="title") {{ menuItemChild.label }}
 
