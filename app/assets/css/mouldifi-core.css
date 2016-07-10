@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,700,900);
-
 /* Globals
    ========================================================================== */
 html {
@@ -305,7 +303,7 @@ a.red-color:hover, a.red-color:focus {
 		display: block;
 		height: auto;
 	}
-	
+
 	.main-container {
 		display: block;
 		height: auto;
@@ -682,7 +680,7 @@ ul.main-menu li.active.has-sub > a:before {
 	  width: 100%;
 	  height: auto;
   }
-  
+
   .sidebar-fixed.ps-container {
 	  overflow: visible !important;
   }
@@ -693,13 +691,13 @@ ul.main-menu li.active.has-sub > a:before {
   .site-header {
 	  padding: 15px 20px;
   }
-  
+
   .page-sidebar {
 	  display: block;
 	  width: 100%;
 	  height: auto;
   }
-  
+
   ul.main-menu {
 	  margin-bottom: 0;
 	  border: 0 none;
@@ -1401,7 +1399,7 @@ ul.most-watched li:last-child {
 	  float: none;
 	  width: auto;
   }
-  
+
   .speed-analyzer .speed-score {
 	  width: 50%;
   }
@@ -1411,11 +1409,11 @@ ul.most-watched li:last-child {
   .notifications.dropdown .dropdown-menu {
 	  width: 260px;
   }
-  
+
   .lockup-video .lockup-thumbnail {
 	  float: none;
   }
-  
+
   .row-revenue {
 	  padding: 0;
   }
@@ -1672,11 +1670,11 @@ i.icon-dot-3.icon-more {
   .datatable-wrapper .data-col-first,  .datatable-wrapper .data-col-last {
 	  float: none;
   }
-  
+
   .datatable-wrapper .data-col-first {
 	  margin-bottom: 15px;
   }
-  
+
   .cards-container .card-content {
 	  margin-left: 0;
   }
@@ -2199,7 +2197,7 @@ i.icon-dot-3.icon-more {
 }
 
 .table-users > thead > tr > td, .table-users > tbody > tr > td, .table-users > tfoot > tr > td {
-	padding: 28px 8px;
+	padding: 15px 8px;
 }
 
 .fluid-row .table-users > thead > tr > th:first-child, .fluid-row .table-users > thead > tr > td:first-child, .fluid-row .table-users > tbody > tr > th:first-child, .fluid-row .table-users > tbody > tr > td:first-child, .fluid-row .table-users > tfoot > tr > th:first-child, .fluid-row .table-users > tfoot > tr > td:first-child {
@@ -4001,5 +3999,3 @@ ul.doughnut-legend li span {
 	border-top: solid 1px #ddd;
 	padding: 10px 0 2px;
 }
-
-

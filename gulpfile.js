@@ -13,12 +13,12 @@ var babelify = require('babelify'),
   _ = require('lodash');
 
 var vendorCss = [
+  './app/assets/css/app.css',
   './app/assets/css/bootstrap.min.css',
   './app/assets/css/entypo.css',
   './app/assets/css/font-awesome.min.css',
   './app/assets/css/mouldifi-core.css',
   './app/assets/css/mouldifi-forms.css',
-  './app/assets/css/jquery.dataTables.css',
   './app/assets/css/angular-ui-notification.min.css',
   './app/assets/css/xeditable.min.css',
 ];

@@ -23,7 +23,7 @@ export default class AddProductModalController {
     console.log('AddProductModalController activated.');
     this.productservice.getProductList().then((data) => {
       if(data) {
-        this.products = data;
+        this.products = data.objects;
       }
     });
   }
