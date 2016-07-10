@@ -171,18 +171,6 @@ function configure(
       }
     }
   })
-  .state('purchases', {
-    authenticate : true,
-    parent: 'base',
-    url:'/purchases',
-    views: {
-      mainContainer: {
-        controller : 'PurchasesController',
-        controllerAs: 'vm',
-        templateUrl: 'assets/views/purchases/purchases.html'
-      }
-    }
-  })
   .state('clients', {
     authenticate : true,
     parent: 'base',

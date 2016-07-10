@@ -1,0 +1,80 @@
+div(class="transaction-detail")
+div(class="panel panel-default")
+  div(class="panel-body")
+    div(class="row")
+      div(class="col-md-12")
+        h1(class="page-title") {{ ( vm.transaction.type === 'sale' ? 'SALE_SUMMARY' : 'PURCHASE_SUMMARY') | translate }}
+    div(class="row")
+      div(class="col-md-6")
+        p
+          strong {{ vm.currentUser.company.name }}
+        p
+          strong {{ 'ISSUER_RFC' | translate }}: 
+          | {{ vm.currentUser.company.rfc }}
+        p
+          strong {{ 'ISSUER_BILLING_ADDRESS' | translate }}:
+        p {{ vm.currentUser.company.address }}
+        p
+          strong {{ vm.transaction.client.name }}
+        p
+          strong {{ 'RECEPTOR_RFC' | translate }}: 
+          | {{ vm.transaction.client.rfc }}
+        p
+          strong {{ 'RECEPTOR_BILLING_ADDRESS' | translate }}:
+        p {{ vm.transaction.client.address }}
+      div(class="col-md-6")
+        p
+          strong {{ 'TRANSACTION_DATE' | translate }}: 
+        p {{ vm.transaction.date | date : 'dd/MMM/yyyy hh:mm a'}}
+        p
+          strong {{ 'TRANSACTION_LOCATION' | translate }}: 
+        p {{ vm.transaction.location }}
+        p
+          strong {{ 'TRANSACTION_EFFECT' | translate }}: 
+          | {{ (vm.transaction.type === 'sale' ? 'TRANSACTION_INGRESS' : 'TRANSACTION_EXIT') | translate }}
+    div(class="row")
+      div(class="col-md-12")
+        div(class="table-responsive")
+          table(class="table table-bordered")
+            thead
+              tr
+                th {{ 'QUANTITY' | translate }}
+                th {{ 'UOM' | translate }}
+                th {{ 'ID' | translate }}
+                th {{ 'NAME' | translate }}
+                th {{ 'DESCRIPTION' | translate }}
+                th {{ 'PRICE_PER_UNIT' | translate }}
+                th {{ 'AMOUNT' | translate }}
+            tbody
+              tr(ng-show="!vm.transaction.voucher.products.length")
+                td(class="text-center", colspan="5")
+                  p(class="lead") {{ 'NO_PRODUCTS_ON_TRANSACTION' | translate }}
+              tr(ng-repeat="product in vm.transaction.voucher.products")
+                td {{ product.transactionQuantity }}
+                td {{ product.uom.short_name }}
+                td {{ product.id }}
+                td {{ product.name }}
+                td {{ product.description }}
+                td ${{ product.transactionPrice }}
+                td ${{ product.transactionPrice * product.transactionQuantity }}
+
+    div(class="row")
+      div(class="col-md-6 col-md-offset-6")
+        p(class="lead text-right") {{ 'SUBTOTAL' | translate }}: ${{ vm.transaction.voucher.subtotal }}
+    div(class="row")
+      div(class="col-md-6 col-md-offset-6")
+        div(class="table-responsive")
+          table(class="table table-bordered table-hover")
+            thead
+              tr(class="header")
+                th(class="text-center", colspan="3") {{ 'TAXES' | translate }}
+            tbody
+              tr(ng-repeat="tax in vm.transaction.voucher.taxes")
+                td(class="text-right") {{ tax.name }}
+                td(class="text-right") ${{ tax.percent * vm.transaction.voucher.subtotal }}
+    div(class="row")
+      div(class="col-md-6 col-md-offset-6")
+        p(class="lead text-right") {{ 'TOTAL' | translate }}: ${{ vm.transaction.voucher.total }}
+    div(class="row")
+      div(class="col-md-6 col-md-offset-6")
+        button(class="btn btn-primary btn-block") {{ 'CONFIRM' | translate }}

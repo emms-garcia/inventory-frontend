@@ -3,11 +3,6 @@ export default class CreateProductModalController {
     this.$uibModalInstance = $uibModalInstance;
     this.productservice = productservice;
 
-    this.description = null;
-    this.name = null;
-    this.pricePerUnit = 0.0;
-    this.quantity = 0.0;
-    this.selectedUOM = null;
     this.uoms = [];
 
     this.activate();
@@ -19,7 +14,7 @@ export default class CreateProductModalController {
     this.$uibModalInstance.dismiss('cancel');
   }
 
-  create() {
+  create(addAnother) {
     this.productservice.createProduct({
       description: this.description,
       name: this.name,
@@ -28,13 +23,25 @@ export default class CreateProductModalController {
       uom: this.selectedUOM
     }).then((data) => {
       if(data) {
-        this.$uibModalInstance.close(data);
+        this.init();
+        if(!addAnother) {
+          this.$uibModalInstance.close(data);
+        }
       }
     });
   }
 
+  init() {
+    this.description = null;
+    this.name = null;
+    this.pricePerUnit = 0.0;
+    this.quantity = 0.0;
+    this.selectedUOM = null;
+  }
+
   activate() {
     console.log('CreateProductModalController activated.');
+    this.init();
     this.productservice.getUOMList().then((data) => {
       if(data) {
         this.uoms = data.objects;

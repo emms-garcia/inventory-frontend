@@ -60,6 +60,9 @@ export default class InventoryController {
           edit: (product, key, value) => {
             return this.updateProductData(product, key, value);
           },
+          format: (product) => {
+            return `$ ${product.price_per_unit}`;
+          },
           name: $translate.instant('PRICE_PER_UNIT'),
           property: 'price_per_unit',
           type: 'number',

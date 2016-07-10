@@ -25,10 +25,6 @@ form(class="form-horizonal", name="form", ng-submit="vm.create()", novalidate)
           div(class="col-sm-7")
             input(class="form-control", id="phone", ng-model="vm.phone", type="text", placeholder="{{ 'PHONE' | translate }}")
         div(class="row form-group")
-          label(class="col-sm-4", for="cellphone") {{ 'CELLPHONE' | translate }}:
-          div(class="col-sm-7")
-            input(class="form-control", id="cellphone", ng-model="vm.cellphone", type="text", placeholder="{{ 'CELLPHONE' | translate }}")
-        div(class="row form-group")
           label(class="col-sm-4", for="address") {{ 'ADDRESS' | translate }}:
           div(class="col-sm-7")
             input(class="form-control", id="address", ng-model="vm.address", type="text", placeholder="{{ 'ADDRESS' | translate }}")

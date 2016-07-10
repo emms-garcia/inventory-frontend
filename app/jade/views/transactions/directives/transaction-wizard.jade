@@ -1,127 +1,136 @@
 div(class="transaction-wizard")
-  div(class="panel panel-default")
-    div(class="panel-body")
-      form(novalidate)
-        div(class="wizard-navbar")
-          ul
-            li(ng-class="{ active: $index === vm.currentTab, completed: $index < vm.currentTab }", ng-repeat="tab in vm.tabs")
-              a(href="", ng-click="vm.currentTab = $index")
-                span {{ $index + 1 }}
-                | {{ tab }}
-        div(class="tab-content")
-          div(class="tab-pane", ng-class="{active: vm.currentTab === 0 }")
-            div(class="row")
-              div(class="col-md-6")
-                div(class="form-group")
-                  label(class="control-label", for="name") {{ 'TRANSACTION_NAME' | translate }}:
-                  input(class="form-control", id="name", placeholder="{{ 'TRANSACTION_NAME' | translate }}", type="text", required)
-            div(class="row")
-              div(class="col-md-6")
-                div(class="form-group")
-                  label(class="control-label", for='comment') {{ 'COMMENT' | translate }}:
-                  textarea(class="form-control", id="comment", placeholder="{{ 'COMMENT' | translate }}", required)
-          div(class="tab-pane", ng-class="{active: vm.currentTab === 1 }")
-            div(class="row")
-              div(class="col-md-12")
-                div(class="table-responsive")
-                  table(class="table table-bordered table-hover")
-                    thead
-                      tr
-                        th(class="text-center header", colspan="5") {{ 'PRODUCTS' | translate }}
-                          button(class="btn btn-primary btn-sm pull-right", ng-click="vm.openAddProductModal()") {{ 'ADD_PRODUCT' | translate }}
-                      tr
-                        th {{ 'NAME' | translate }}
-                        th {{ 'DESCRIPTION' | translate }}
-                        th {{ 'QUANTITY' | translate }}
-                        th {{ 'PRICE' | translate }}
-                        th(class="size-20")
-                    tbody
-                      tr(ng-show="!vm.transaction.voucher.products.length")
-                        td(class="text-center", colspan="5")
-                          p(class="lead") {{ 'NO_PRODUCTS_ON_TRANSACTION' | translate }}
-                      tr(ng-repeat="product in vm.transaction.voucher.products")
-                        td {{ product.name }}
-                        td {{ product.description }}
-                        td
-                          a(href="", editable-number="product.transactionQuantity", e-min="1") {{ product.transactionQuantity }}
-                        td
-                          a(href="", editable-number="product.transactionPrice", e-min="1") ${{ product.transactionPrice }}
-                        td
-                          button(class="btn btn-sm", ng-click="vm.removeProduct($index)")
-                            span(class="glyphicon glyphicon-trash")
-            div(class="row")
-              div(class="col-md-6 pull-right")
-                div(class="table-responsive")
-                  table(class="table table-bordered table-hover")
-                    thead
-                      tr(class="header")
-                        th(class="text-center", colspan="2") {{ 'TAXES' | translate }}
-                    tbody
-                      tr(ng-repeat="tax in vm.transaction.voucher.taxes")
-                        th(class="text-right") {{ tax.name }}
-                        th(class="text-right")
-                          | {{ 'TAX' | translate }}:
-                          | ${{ tax.percent * vm.calculateSubTotal() }}
-                    thead
-                      tr(class="header")
-                        th(class="text-center", colspan="2") {{ 'TOTALS' | translate }}
-                    tbody
-                      tr
-                        td(rowspan="2")
-                        th(class="text-right")
-                          | {{ 'SUBTOTAL' | translate }}:
-                          | ${{ vm.calculateSubTotal() }}
-                      tr
-                        th(class="text-right")
-                          | {{ 'TOTAL' | translate }}:
-                          | ${{ vm.calculateTotal() }}
-          div(class="tab-pane", ng-class="{active: vm.currentTab === 2 }")
-            div(class="row")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="client") {{ 'CLIENT' | translate }}:
-                  select(class="form-control", id="client", ng-change="vm.onClientSelected()", ng-model="vm.transaction.billing.client", ng-options="client as client.name for client in vm.clients")
-                    option(value="") {{ 'NO_OPTION_SELECTED' | translate }}
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="edit") {{ 'EDIT' | translate }}:
-                  div(class="form-checkbox")
-                    input(type="checkbox", ng-model="vm.editBilling")
-                    span(class="check")
-                      i(class="fa fa-check")
-            div(class="row")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="name") {{ 'NAME' | translate }}:
-                  input(class="form-control", id="name", placeholder="{{ 'NAME' | translate }}", type="text", ng-model="vm.transaction.billing.name")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for='comment') {{ 'COMPANY' | translate }}:
-                  input(class="form-control", id="comment", placeholder="{{ 'COMPANY' | translate }}", type="text", ng-model="vm.transaction.billing.company")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="email") {{ 'EMAIL' | translate }}:
-                  input(class="form-control", id="email", placeholder="{{ 'EMAIL' | translate }}", type="email", ng-model="vm.transaction.billing.email")
-            div(class="row")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="rfc") {{ 'RFC' | translate }}:
-                  input(class="form-control", id="rfc", placeholder="{{ 'RFC' | translate }}", type="text", ng-model="vm.transaction.billing.rfc")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for='phone') {{ 'PHONE' | translate }}:
-                  input(class="form-control", id="phone", placeholder="{{ 'PHONE' | translate }}", type="text", ng-model="vm.transaction.billing.phone")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="email") {{ 'CELLPHONE' | translate }}:
-                  input(class="form-control", id="email", placeholder="{{ 'CELLPHONE' | translate }}", type="text", ng-model="vm.transaction.billing.cellphone")
-            div(class="row")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="address") {{ 'ADDRESS' | translate }}:
-                  textarea(class="form-control", id="address", placeholder="{{ 'ADDRESS' | translate }}", ng-model="vm.transaction.billing.address")
-            div(class="row")
-              div(class="col-md-4")
-                div(class="form-group")
-                  label(class="control-label", for="comment") {{ 'COMMENT' | translate }}:
-                  textarea(class="form-control", id="comment", placeholder="{{ 'COMMENT' | translate }}", ng-model="vm.transaction.billing.comment")
+  div(class="wizard-navbar")
+    ul
+      li(ng-class="{ active: $index === vm.currentTab, completed: $index < vm.currentTab }", ng-repeat="tab in vm.tabs")
+        a(href="", ng-click="vm.currentTab = $index")
+          span {{ $index + 1 }}
+          | {{ tab }}
+  div(class="tab-content")
+    div(class="tab-pane", ng-class="{active: vm.currentTab === 0 }")
+      div(class="row")
+        div(class="col-md-6")
+          div(class="form-group")
+            label(class="control-label", for="name") {{ 'TRANSACTION_NAME' | translate }}:
+            input(class="form-control", id="name", placeholder="{{ 'TRANSACTION_NAME' | translate }}", type="text", ng-model="vm.transaction.name")
+      div(class="row")
+        div(class="col-md-6")
+          div(class="form-group")
+            label(class="control-label", for="location") {{ 'TRANSACTION_LOCATION' | translate }}:
+            input(class="form-control", id="location", placeholder="{{ 'TRANSACTION_LOCATION' | translate }}", type="text", ng-model="vm.transaction.location")
+      div(class="row")
+        div(class="col-md-6")
+          div(class="form-group")
+            label(class="control-label") {{ 'TRANSACTION_DATE' | translate }}:
+            div(class="col-sm-12") 
+              uib-datepicker(ng-model="vm.transaction.date")
+      br
+      div(class="row")
+        div(class="col-md-6")
+          div(class="form-group")
+            label(class="control-label") {{ 'TRANSACTION_TIME' | translate }}:
+            div(class="col-sm-12")
+              uib-timepicker(ng-model="vm.transaction.time", hour-step="1", minute-step="1")
+      div(class="row")
+        div(class="col-md-6")
+          div(class="form-group")
+            label(class="control-label", for='comment') {{ 'COMMENT' | translate }}:
+            textarea(class="form-control", id="comment", placeholder="{{ 'COMMENT' | translate }}", ng-model="vm.transaction.comment")
+    div(class="tab-pane", ng-class="{active: vm.currentTab === 1 }")
+      div(class="row")
+        div(class="col-md-12")
+          div(class="table-responsive")
+            table(class="table table-bordered table-hover")
+              thead
+                tr
+                  th(class="text-center header", colspan="5") {{ 'PRODUCTS' | translate }}
+                    button(class="btn btn-primary btn-sm pull-right", ng-click="vm.openAddProductModal()") {{ 'ADD_PRODUCT' | translate }}
+                tr
+                  th {{ 'NAME' | translate }}
+                  th {{ 'DESCRIPTION' | translate }}
+                  th {{ 'QUANTITY' | translate }}
+                  th {{ 'PRICE' | translate }}
+                  th(class="size-20")
+              tbody
+                tr(ng-show="!vm.transaction.voucher.products.length")
+                  td(class="text-center", colspan="5")
+                    p(class="lead") {{ 'NO_PRODUCTS_ON_TRANSACTION' | translate }}
+                tr(ng-repeat="product in vm.transaction.voucher.products")
+                  td {{ product.name }}
+                  td {{ product.description }}
+                  td
+                    a(href="", editable-number="product.transactionQuantity", e-min="1") {{ product.transactionQuantity + ' ' + product.uom.short_name }}
+                  td
+                    a(href="", editable-number="product.transactionPrice", e-min="1") ${{ product.transactionPrice }}
+                  td
+                    button(class="btn btn-sm btn-danger", ng-click="vm.removeProduct($index)")
+                      span(class="glyphicon glyphicon-trash")
+      div(class="row")
+        div(class="col-md-6 col-md-offset-6")
+          p(class="lead text-right") {{ 'SUBTOTAL' | translate }}: ${{ vm.calculateSubTotal() }}
+      div(class="row")
+        div(class="col-md-6 col-md-offset-6")
+          div(class="table-responsive")
+            table(class="table table-bordered table-hover")
+              thead
+                tr(class="header")
+                  th(class="text-center", colspan="3") {{ 'TAXES' | translate }}
+              tbody
+                tr(ng-hide="vm.taxes.length")
+                  th(class="text-center", colspan="3")
+                    p(class="lead") {{ 'NO_TAXES_DEFINED' | translate }}
+                tr(ng-repeat="tax in vm.taxes")
+                  td(class="text-center")
+                    div(class="form-checkbox")
+                      input(type="checkbox", ng-model="tax.selected", ng-change="vm.taxSelected()")
+                      span(class="check")
+                        i(class="fa fa-check")
+                  td(class="text-right") {{ tax.name }}
+                  td(class="text-right")
+                    span(ng-show="tax.selected") ${{ tax.percent * vm.calculateSubTotal() }}
+                    s(ng-show="!tax.selected") ${{ tax.percent * vm.calculateSubTotal() }}
+      div(class="row")
+        div(class="col-md-4 col-md-offset-8")
+          p(class="lead text-right") {{ 'TOTAL' | translate }}: ${{ vm.calculateTotal() }}
+    div(class="tab-pane", ng-class="{active: vm.currentTab === 2 }")
+      div(class="row")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for="client") {{ 'CLIENT' | translate }}:
+            select(class="form-control", id="client", ng-change="vm.onClientSelected()", ng-model="vm.selectedClient", ng-options="client as client.name for client in vm.clients")
+              option(value="") {{ 'NO_OPTION_SELECTED' | translate }}
+      div(class="row")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for="name") {{ 'NAME' | translate }}:
+            input(class="form-control", ng-disabled="vm.selectedClient", id="name", placeholder="{{ 'NAME' | translate }}", type="text", ng-model="vm.transaction.client.name")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for='comment') {{ 'COMPANY' | translate }}:
+            input(class="form-control", ng-disabled="vm.selectedClient", id="comment", placeholder="{{ 'COMPANY' | translate }}", type="text", ng-model="vm.transaction.client.company")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for="email") {{ 'EMAIL' | translate }}:
+            input(class="form-control", ng-disabled="vm.selectedClient", id="email", placeholder="{{ 'EMAIL' | translate }}", type="email", ng-model="vm.transaction.client.email")
+      div(class="row")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for="rfc") {{ 'RFC' | translate }}:
+            input(class="form-control", ng-disabled="vm.selectedClient", id="rfc", placeholder="{{ 'RFC' | translate }}", type="text", ng-model="vm.transaction.client.rfc")
+        div(class="col-md-4")
+          div(class="form-group")
+            label(class="control-label", for='phone') {{ 'PHONE' | translate }}:
+            input(class="form-control", ng-disabled="vm.selectedClient", id="phone", placeholder="{{ 'PHONE' | translate }}", type="text", ng-model="vm.transaction.client.phone")
+      div(class="row")
+        div(class="col-md-8")
+          div(class="form-group")
+            label(class="control-label", for="address") {{ 'ADDRESS' | translate }}:
+            textarea(class="form-control", ng-disabled="vm.selectedClient", id="address", placeholder="{{ 'ADDRESS' | translate }}", ng-model="vm.transaction.client.address")
+      div(class="row")
+        div(class="col-md-8")
+          div(class="form-group")
+            label(class="control-label", for="comment") {{ 'COMMENT' | translate }}:
+            textarea(class="form-control", ng-disabled="vm.selectedClient", id="comment", placeholder="{{ 'COMMENT' | translate }}", ng-model="vm.transaction.client.comment")
+    div(class="tab-pane", ng-class="{active: vm.currentTab === 3 }")
+      div(class="row")
+        div(class="col-md-12")
+          transaction-detail(transaction="vm.transaction")

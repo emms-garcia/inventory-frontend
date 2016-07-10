@@ -251,6 +251,20 @@ export default class productservice {
     });
   }
 
+  getTaxList(url = '/v1/inventory/taxes/') {
+    return this.$http({
+      method: 'GET',
+      url: url
+    }).then((response) => {
+      return response.data.objects;
+    })
+    .catch((error) => {
+      console.log('XHR failed on getTaxList ' + error);
+      this.utilsservice.notifyError(this.$translate.instant('TAX_LIST_FAILED'));
+      return false;
+    });
+  }
+
   /* Warehouse Stock */
   getWarehouseProductStock(productId) {
     return this.$http({

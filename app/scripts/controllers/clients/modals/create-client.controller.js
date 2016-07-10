@@ -4,7 +4,6 @@ export default class CreateClientModalController {
     this.clientsservice = clientsservice;
 
     this.address = null;
-    this.cellphone = null;
     this.company = null;
     this.email = null;
     this.name = null;
@@ -23,7 +22,6 @@ export default class CreateClientModalController {
   create() {
     this.clientsservice.createClient({
       address: this.address || '',
-      cellphone: this.cellphone || '',
       company: this.company || '',
       email: this.email || '',
       latitude: 0.0,
