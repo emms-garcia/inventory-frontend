@@ -27,7 +27,7 @@ export default class BaseController {
       },
       {
         children: [
-          { iconClass: 'fa-history', label: $translate.instant('TRANSACTIONS_HISTORY'), uiSref: 'transactions' },
+          { iconClass: 'fa-history', label: $translate.instant('TRANSACTIONS_HISTORY'), uiSref: 'transactions-history' },
           { iconClass: 'fa-shopping-cart', label: $translate.instant('PURCHASE'), uiSref: 'transactions-purchase' },
           { iconClass: 'fa-truck', label: $translate.instant('SALE'), uiSref: 'transactions-sale' },
         ],
@@ -44,8 +44,8 @@ export default class BaseController {
   }
 
   isActive(item) {
-    return (item.uiSref === this.$state.current.name) || (item.children || []).find((child) => {
-      return (child.uiSref === this.$state.current.name);
+    return (item.uiSref && this.$state.current.name.includes(item.uiSref)) || (item.children || []).find((child) => {
+      return (child.uiSref && this.$state.current.name.includes(child.uiSref));
     });
   }
 

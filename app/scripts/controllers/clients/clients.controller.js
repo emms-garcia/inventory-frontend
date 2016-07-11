@@ -70,13 +70,6 @@ export default class ClientsController {
           edit: (client, key, value) => {
             return this.updateClientData(client, key, value);
           },
-          name: $translate.instant('CELLPHONE'),
-          property: 'cellphone',
-        },
-        {
-          edit: (client, key, value) => {
-            return this.updateClientData(client, key, value);
-          },
           name: $translate.instant('ADDRESS'),
           property: 'address',
           type: 'textarea',

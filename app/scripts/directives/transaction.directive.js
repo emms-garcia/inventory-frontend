@@ -1,15 +1,18 @@
 import BigNumber from 'bignumber.js';
 
-class TransactionDetailController {
-  constructor($translate, $uibModal, userservice) {
+class TransactionController {
+  constructor($state, $translate, $uibModal, transactionsservice, userservice, utilsservice) {
+    this.$state = $state;
     this.$translate = $translate;
     this.$uibModal = $uibModal;
+    this.transactionsservice = transactionsservice;
+    this.utilsservice = utilsservice;
 
     this.currentUser = userservice.currentUser;
 
     this.activate();
 
-    this.$inject = ['$translate', '$uibModal', 'userservice'];
+    this.$inject = ['$state', '$translate', '$uibModal', 'transactionsservice', 'userservice', 'utilsservice'];
   }
 
   calculateAmount(product) {
@@ -28,26 +31,26 @@ class TransactionDetailController {
     if(this.transaction.id) {
       this.utilsservice.confirmationDialog(() => {
         this.transactionsservice.deleteTransaction(this.transaction.id).then(() => {
-          this.getTransactions();
+          this.$state.go('transactions-history');
         });
       });
     }
   }
 
   activate() {
-    console.log('TransactionDetailController activated.');
+    console.log('TransactionController activated.');
   }
 }
 
 export default function transactionDetail() {
   return {
-    controller: TransactionDetailController,
+    controller: TransactionController,
     controllerAs: 'vm',
     bindToController: true,
     restrict: 'E',
     scope: {
       transaction: '='
     },
-    templateUrl: 'assets/views/transactions/directives/transaction-detail.html'
+    templateUrl: 'assets/views/transactions/directives/transaction.html'
   };
 }

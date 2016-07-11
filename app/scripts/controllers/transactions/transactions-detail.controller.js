@@ -1,4 +1,4 @@
-export default class TransactionDetailController {
+export default class TransactionsDetailController {
   constructor($state, transactionsservice) {
     this.$state = $state;
     this.transactionsservice = transactionsservice;
@@ -9,7 +9,7 @@ export default class TransactionDetailController {
   }
 
   activate() {
-    console.log('TransactionDetailController activated.');
+    console.log('TransactionsDetailController activated.');
     this.transactionsservice.getTransactionDetail(this.$state.params.transactionID).then((data) => {
       if(data) {
         this.transaction = data;

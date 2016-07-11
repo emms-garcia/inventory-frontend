@@ -14,8 +14,8 @@ div(class="cards-container box-view grid-view")
               span(class="badge badge-success", ng-show="transaction.type === 'sale'") {{ 'SALE' | translate }}
         div(class="card-content")
           p
-            strong {{ 'CREATED_AT' | translate }}: 
-            | {{ transaction.date || 'N/A' }}
+            strong {{ 'TRANSACTION_DATE' | translate }}: 
+            | {{ transaction.voucher.date || 'N/A' }}
           p
             strong {{ 'DESCRIPTION' | translate }}: 
             | {{ transaction.description || 'N/A' }}

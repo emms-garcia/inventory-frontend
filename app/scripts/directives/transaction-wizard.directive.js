@@ -26,15 +26,15 @@ class TransactionWizardController {
     this.transaction = {
       client: {},
       description: null,
-      date: new Date(),
-      location: null,
       name: null,
-      time: new Date(),
       type: this.type || 'sale',
       voucher: {
+        date: new Date(),
+        location: null,
         products: [],
         subtotal: 0.0,
         taxes: [],
+        time: new Date(),
         total: 0.0,
       }
     };
@@ -96,7 +96,7 @@ class TransactionWizardController {
     this.utilsservice.confirmationDialog(() => {
       this.transactionsservice.createTransaction(transaction).then((success) => {
         if(success) {
-          this.$state.go('transactions');
+          this.$state.go('transactions-wizard');
         }
       });
     });

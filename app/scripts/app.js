@@ -99,6 +99,7 @@ function configure(
       }
     }
   })
+  /*
   .state('warehouses', {
     authenticate : true,
     parent: 'base',
@@ -111,6 +112,7 @@ function configure(
       }
     }
   })
+  */
   .state('inventory', {
     authenticate : true,
     parent: 'base',
@@ -135,10 +137,10 @@ function configure(
       }
     }
   })
-  .state('transactions', {
+  .state('transactions-history', {
     authenticate : true,
     parent: 'base',
-    url:'/transactions',
+    url:'/transactions/history',
     views: {
       mainContainer: {
         controller : 'TransactionsController',
@@ -177,9 +179,9 @@ function configure(
     url:'/transactions/:transactionID',
     views: {
       mainContainer: {
-        controller : 'TransactionDetailController',
+        controller : 'TransactionsDetailController',
         controllerAs: 'vm',
-        templateUrl: 'assets/views/transactions/detail.html'
+        templateUrl: 'assets/views/transactions/transactions-detail.html'
       }
     }
   })
