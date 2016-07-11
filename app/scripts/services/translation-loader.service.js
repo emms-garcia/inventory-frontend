@@ -253,9 +253,11 @@ export default function translationloaderservice($q, $timeout) {
         CLIENT_LIST: 'Lista de Clientes',
         DELETE_TRANSACTION: 'Borrar Transacción',
         PRINT_TRANSACTION: 'Imprimir Transacción',
+        404: 'Oops, un error ha ocurrido. No se encontro la página!',
       };
     } else if(options.key === 'en-us') {
       translations = {
+        404: 'Oops, an error has occurred. Page not found!',
         DELETE_TRANSACTION: 'Delete Transaction',
         PRINT_TRANSACTION: 'Print Transaction',
         CLIENT_LIST: 'Client List',
