@@ -26,6 +26,7 @@
     "babel-polyfill": "^6.8.0",
     "babel-preset-es2015": "^6.6.0",
     "babelify": "^7.3.0",
+    "bignumber.js": "^2.3.0",
     "browserify": "^13.0.1",
     "browserify-shim": "^3.8.12",
     "gulp": "^3.9.1",
@@ -42,15 +43,11 @@
     "node": ">=0.10.0"
   },
   "browser": {
-    "angular-xeditable": "./node_modules/angular-xeditable/dist/js/xeditable.js",
-    "angular-simple-logger": "./node_modules/angular-simple-logger/dist/angular-simple-logger.js"
+    "angular-xeditable": "./node_modules/angular-xeditable/dist/js/xeditable.js"
   },
   "browserify-shim": {
     "angular-xeditable": {
       "exports": "angular.module('xeditable').name"
-    },
-    "angular-simple-logger": {
-      "exports": "angular.module('nemLogging').name"
     }
   }
 }

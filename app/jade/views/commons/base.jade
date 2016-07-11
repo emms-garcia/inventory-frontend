@@ -18,7 +18,7 @@ div(class="page-container", ng-class="{ 'sidebar-collapsed': !vm.showSidebar, 'c
             span(class="title") {{ menuItem.label }}
             span(class="fa pull-right", ng-class="{ 'fa-angle-right': menuItem.collapsed, 'fa-angle-down': !menuItem.collapsed }", ng-if="vm.showSidebar && menuItem.children.length")
           ul(class="nav collapse", ng-class="{ in: !menuItem.collapsed }")
-            li(ng-repeat="menuItemChild in menuItem.children")
+            li(ng-class="{ active: vm.isActive(menuItemChild) }", ng-repeat="menuItemChild in menuItem.children")
               a(href="", ui-sref="{{menuItemChild.uiSref}}")
                 i(class="fa", ng-class="menuItemChild.iconClass")
                 span(class="title") {{ menuItemChild.label }}

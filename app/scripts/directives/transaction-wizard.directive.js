@@ -1,14 +1,19 @@
+import BigNumber from 'bignumber.js';
+
 class TransactionWizardController {
-  constructor($translate, $uibModal, clientsservice, productservice) {
+  constructor($state, $translate, $uibModal, clientsservice, productservice, transactionsservice, utilsservice) {
+    this.$state = $state;
     this.$translate = $translate;
     this.$uibModal = $uibModal;
     this.clientsservice = clientsservice;
     this.productservice = productservice;
+    this.transactionsservice = transactionsservice;
+    this.utilsservice = utilsservice;
 
     this.activate();
 
     this.clients = [];
-    this.currentTab = 3;
+    this.currentTab = 0;
     this.tabs = [
       $translate.instant('TRANSACTION_INFORMATION'),
       $translate.instant('TRANSACTION_CART'),
@@ -19,50 +24,82 @@ class TransactionWizardController {
     this.selectedClient = null;
     this.taxes = [];
     this.transaction = {
-      client: {
-        name: 'Test Company',
-        address: 'Something something #123 Something something',
-        rfc: 'XXXX122121'
-      },
-      comment: 'Test sale',
+      client: {},
+      description: null,
       date: new Date(),
-      location: 'Monterrey, Nuevo León',
-      name: 'Test',
+      location: null,
+      name: null,
       time: new Date(),
       type: this.type || 'sale',
       voucher: {
-        "products":[{"created_at":1468171737,"description":"5000","id":17,"name":"NORTHERN BREWER","owner_id":null,"price":1,"price_per_unit":0.4,"quantity":0,"resource_uri":"/v1/inventory/products/17/","uom":{"created_at":"2016-07-10T17:12:11.808987","description":"","id":6,"name":"Gramo","owner_id":null,"resource_uri":"/v1/inventory/uoms/6/","short_name":"GR","updated_at":"2016-07-10T17:12:11.808741"},"updated_at":1468171737,"$$hashKey":"object:168","transactionPrice":0.4,"transactionQuantity":100},{"created_at":1468171694,"description":"5000","id":14,"name":"FUGGLE","owner_id":null,"price":1,"price_per_unit":0.65,"quantity":0,"resource_uri":"/v1/inventory/products/14/","uom":{"created_at":"2016-07-10T17:12:11.808987","description":"","id":6,"name":"Gramo","owner_id":null,"resource_uri":"/v1/inventory/uoms/6/","short_name":"GR","updated_at":"2016-07-10T17:12:11.808741"},"updated_at":1468171694,"$$hashKey":"object:208","transactionPrice":0.65,"transactionQuantity":200},{"created_at":1468171652,"description":"5000","id":12,"name":"MOZAIC","owner_id":null,"price":1,"price_per_unit":1.06,"quantity":0,"resource_uri":"/v1/inventory/products/12/","uom":{"created_at":"2016-07-10T17:12:11.808987","description":"","id":6,"name":"Gramo","owner_id":null,"resource_uri":"/v1/inventory/uoms/6/","short_name":"GR","updated_at":"2016-07-10T17:12:11.808741"},"updated_at":1468171978,"$$hashKey":"object:247","transactionPrice":1.06,"transactionQuantity":300},{"created_at":1468171455,"description":"22.68","id":8,"name":"MALTA TRIGO CLARA","owner_id":null,"price":1,"price_per_unit":52.07,"quantity":0,"resource_uri":"/v1/inventory/products/8/","uom":{"created_at":"2016-07-10T17:11:51.131177","description":"","id":5,"name":"Kilogramo","owner_id":null,"resource_uri":"/v1/inventory/uoms/5/","short_name":"KG","updated_at":"2016-07-10T17:11:51.130991"},"updated_at":1468171455,"$$hashKey":"object:227","transactionPrice":52.07,"transactionQuantity":0}],
-        "taxes":[{"description":"IVA","id":1,"name":"IVA 16%","percent":0.16,"resource_uri":"/v1/inventory/taxes/1/","$$hashKey":"object:168","selected":true}]}
+        products: [],
+        subtotal: 0.0,
+        taxes: [],
+        total: 0.0,
+      }
     };
 
-    this.$inject = ['$translate', '$uibModal', 'clientsservice', 'productservice'];
+    this.$inject = ['$state', '$translate', '$uibModal', 'clientsservice', 'productservice', 'transactionsservice', 'utilsservice'];
   }
 
   calculateSubTotal() {
-    let subTotal = 0.0;
+    let subTotal = new BigNumber(0.0);
     for(const product of this.transaction.voucher.products) {
-      subTotal += (product.transactionPrice * product.transactionQuantity);
+      const a = new BigNumber(product.transactionPrice);
+      const b = new BigNumber(product.transactionQuantity);
+      subTotal = subTotal.plus(a.times(b));
     }
-    return subTotal;
+    return subTotal.toNumber();
   }
 
   calculateTax() {
-    const subTotal = this.calculateSubTotal();
-    let taxSum = 0.0;
+    const subTotal = new BigNumber(this.calculateSubTotal());
+    let taxSum = new BigNumber(0.0);
     for(const tax of this.taxes) {
       if(tax.selected) {
-        taxSum += subTotal * tax.percent;
+        taxSum = taxSum.plus(subTotal.times(new BigNumber(tax.percent)));
       }
     }
-    return taxSum;
+    return taxSum.toNumber();
   }
 
   calculateTotal() {
-    const subtotal = this.calculateSubTotal();
-    const total = subtotal + this.calculateTax();
-    this.transaction.voucher.subtotal = subtotal;
-    this.transaction.voucher.total = total;
-    return total;
+    const subtotal = new BigNumber(this.calculateSubTotal());
+    const total = subtotal.plus(new BigNumber(this.calculateTax()));
+    this.transaction.voucher.subtotal = subtotal.toNumber();
+    this.transaction.voucher.total = total.toNumber();
+    return total.toNumber();
+  }
+
+  confirmTransaction() {
+    const transaction = Object.assign({}, this.transaction);
+    if(transaction.voucher.products.length === 0) {
+      this.utilsservice.notifyError(this.$translate.instant('NO_PRODUCTS_ON_TRANSACTION'));
+      return;
+    }
+
+    const products = transaction.voucher.products.map((product) => {
+      const a = new BigNumber(product.transactionQuantity);
+      const b = new BigNumber(product.transactionPrice);
+      return {
+        id: product.id,
+        name: product.name,
+        quantity: product.transactionQuantity,
+        price: product.transactionPrice,
+        real_price: product.price_per_unit,
+        real_quantity: product.quantity,
+        total: a.times(b),
+      };
+    });
+
+    transaction.products = products;
+    this.utilsservice.confirmationDialog(() => {
+      this.transactionsservice.createTransaction(transaction).then((success) => {
+        if(success) {
+          this.$state.go('transactions');
+        }
+      });
+    });
   }
 
   nextTab() {
@@ -75,7 +112,7 @@ class TransactionWizardController {
   onClientSelected() {
     if(this.selectedClient) {
       this.transaction.client = {
-        client_id: this.selectedClient.id,
+        id: this.selectedClient.id,
         name: this.selectedClient.name,
         company: this.selectedClient.company,
         email: this.selectedClient.email,
@@ -100,7 +137,7 @@ class TransactionWizardController {
 
     modalInstance.result.then((data) => {
       data.transactionPrice = data.price_per_unit;
-      data.transactionQuantity = 0;
+      data.transactionQuantity = 0.0;
       this.transaction.voucher.products.push(data);
     });
   }
@@ -145,7 +182,7 @@ export default function transactionWizard() {
     bindToController: true,
     restrict: 'E',
     scope: {
-      type: '='
+      type: '=',
     },
     templateUrl: 'assets/views/transactions/directives/transaction-wizard.html'
   };

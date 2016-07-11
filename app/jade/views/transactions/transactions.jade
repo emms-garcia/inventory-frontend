@@ -2,11 +2,9 @@ div(class="transaction-section")
   div(class="header-secondary row")
     div(class="col-md-12")
       div(class="page-heading clearfix")
-        h1(class="page-title pull-left") {{ 'TRANSACTIONS' | translate }}
-
-  div(class="row", ng-repeat="transaction in vm.fileredTransactions = (vm.transactionsHistory | filter: vm.queryTransactions)")
-    div(class="col-md-12")
-      transaction-history(transaction="transaction")
-  div(class="row", ng-hide="vm.fileredTransactions.length")
-    div(class="col-md-12")
-      h3(class="text-center") {{ 'NO_TRANSACTIONS_FOUND' | translate }}
+        h1(class="page-title pull-left") {{ 'TRANSACTIONS_HISTORY' | translate }}
+  div(class="panel panel-primary")
+    div(class="panel-heading clearfix")
+      div(class="panel-title") {{ 'TRANSACTION_LIST' | translate }}
+    div(class="panel-body")
+      transaction-history(transactions="vm.transactions")

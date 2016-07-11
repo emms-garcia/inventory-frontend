@@ -247,9 +247,21 @@ export default function translationloaderservice($q, $timeout) {
         RECEPTOR_RFC: 'RFC del Receptor',
         RECEPTOR_BILLING_ADDRESS: 'Domicilio Fiscal del Receptor',
         AMOUNT: 'Importe',
+        PRODUCT_LIST: 'Lista de Productos',
+        UOM_LIST: 'Lista de Unidades de Medida',
+        TRANSACTION_LIST: 'Lista de Transacciones',
+        CLIENT_LIST: 'Lista de Clientes',
+        DELETE_TRANSACTION: 'Borrar Transacción',
+        PRINT_TRANSACTION: 'Imprimir Transacción',
       };
     } else if(options.key === 'en-us') {
       translations = {
+        DELETE_TRANSACTION: 'Delete Transaction',
+        PRINT_TRANSACTION: 'Print Transaction',
+        CLIENT_LIST: 'Client List',
+        TRANSACTION_LIST: 'Transaction List',
+        PRODUCT_LIST: 'Product List',
+        UOM_LIST: 'Unit of Measure LIst',
         AMOUNT: 'Amount',
         ISSUER_RFC: 'Issuer\'s RFC',
         ISSUER_BILLING_ADDRESS: 'Issuer\s Address',

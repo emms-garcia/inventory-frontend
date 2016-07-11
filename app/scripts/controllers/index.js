@@ -22,6 +22,7 @@ import InventoryController from './inventory/inventory.controller';
 import UOMController from './inventory/uom.controller';
 /* transactions */
 import TransactionsController from './transactions/transactions.controller';
+import TransactionDetailController from './transactions/transaction-detail.controller';
 import AddProductModalController from './transactions/modals/add-product.controller';
 import PurchaseController from './transactions/purchase.controller';
 import SaleController from './transactions/sale.controller';
@@ -53,6 +54,7 @@ export default angular.module('inventoryApp.controllers', [])
   .controller('InventoryController', InventoryController)
   .controller('UOMController', UOMController)
   .controller('TransactionsController', TransactionsController)
+  .controller('TransactionDetailController', TransactionDetailController)
   .controller('AddProductModalController', AddProductModalController)
   .controller('PurchaseController', PurchaseController)
   .controller('SaleController', SaleController)

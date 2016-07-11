@@ -1,17 +1,10 @@
 export default class TransactionsController {
-  constructor(transactionsservice) {
-    this.transactionsservice = transactionsservice;
-
+  constructor() {
     this.activate();
-    this.$inject = ['transactionsservice'];
+    this.$inject = [];
   }
 
   activate() {
     console.log('TransactionsController activated.');
-    this.transactionsHistory = [];
-
-    this.transactionsservice.getTransactionList().then((data) => {
-      this.transactionsHistory = data;
-    });
   }
 }

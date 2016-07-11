@@ -4,7 +4,8 @@ div(class="clients-section")
       div(class="page-heading clearfix")
         h1(class="page-title pull-left") {{ 'CLIENTS' | translate }}
         button(class="btn btn-primary btn-sm btn-add", ng-click="vm.openCreateClientModal()") {{ 'ADD_NEW_CLIENT' | translate }}
-
-  div(class="row")
-    div(class="col-md-12")
+  div(class="panel panel-primary")
+    div(class="panel-heading clearfix")
+      div(class="panel-title") {{ 'CLIENT_LIST' | translate }}
+    div(class="panel-body")
       my-data-table(actions="vm.clients.actions", bulk-actions="vm.clients.bulkActions", columns="vm.clients.columns", data="vm.clients.data", meta="vm.clients.meta", request-more="vm.clients.requestMore")

@@ -171,6 +171,18 @@ function configure(
       }
     }
   })
+  .state('transactions-detail', {
+    authenticate : true,
+    parent: 'base',
+    url:'/transactions/:transactionID',
+    views: {
+      mainContainer: {
+        controller : 'TransactionDetailController',
+        controllerAs: 'vm',
+        templateUrl: 'assets/views/transactions/detail.html'
+      }
+    }
+  })
   .state('clients', {
     authenticate : true,
     parent: 'base',

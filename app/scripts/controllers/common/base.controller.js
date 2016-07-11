@@ -44,7 +44,7 @@ export default class BaseController {
   }
 
   isActive(item) {
-    return (item.uiSref === this.$state.current.name) || item.children.find((child) => {
+    return (item.uiSref === this.$state.current.name) || (item.children || []).find((child) => {
       return (child.uiSref === this.$state.current.name);
     });
   }

@@ -1,17 +1,32 @@
 class TransactionHistoryController {
-  constructor() {
-    this.showDetails = false;
+  constructor(transactionsservice, utilsservice) {
+    this.transactionsservice = transactionsservice;
+    this.utilsservice = utilsservice;
+
+    this.transactions = [];
 
     this.activate();
-    this.$inject = [];
+
+    this.$inject = ['transactionsservice', 'utilsservice'];
   }
 
-  toggleDetails() {
-    this.showDetails = !this.showDetails;
+  deleteTransaction(id) {
+    this.utilsservice.confirmationDialog(() => {
+      this.transactionsservice.deleteTransaction(id).then(() => {
+        this.getTransactions();
+      });
+    });
+  }
+
+  getTransactions() {
+    this.transactionsservice.getTransactionList().then((data) => {
+      this.transactions = data;
+    });
   }
 
   activate() {
     console.log('TransactionHistoryController activated.');
+    this.getTransactions();
   }
 }
 
@@ -23,7 +38,7 @@ export default function transactionHistory() {
     bindToController: true,
     restrict: 'E',
     scope: {
-      transaction: '='
+      transactions: '='
     },
     templateUrl: 'assets/views/transactions/directives/transaction-history.html'
   };

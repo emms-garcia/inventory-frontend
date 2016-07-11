@@ -4,6 +4,8 @@ div(class="uom-section")
       div(class="page-heading clearfix")
         h1(class="page-title pull-left") {{ 'UOMS' | translate }}
         button(class="btn btn-primary btn-sm btn-add", ng-click="vm.openCreateUOMModal()") {{ 'ADD_NEW_UOM' | translate }}
-  div(class="row")
-    div(class="col-md-12")
+  div(class="panel panel-primary")
+    div(class="panel-heading clearfix")
+      div(class="panel-title") {{ 'UOM_LIST' | translate }}
+    div(class="panel-body")
       my-data-table(actions="vm.uoms.actions", bulk-actions="vm.uoms.bulkActions", columns="vm.uoms.columns", data="vm.uoms.data", meta="vm.uoms.meta", request-more="vm.uoms.requestMore")

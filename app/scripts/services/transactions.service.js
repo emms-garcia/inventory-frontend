@@ -7,17 +7,35 @@ export default class transactionsservice {
     this.$inject = ['$http', '$translate', 'utilsservice'];
   }
 
-  getTransactionList(type) {
+  createTransaction(data) {
     return this.$http({
-      method: 'GET',
+      method: 'POST',
+      data: data,
       url: '/v1/inventory/transactions/'
     })
     .then((response) => {
-      return response.data.objects;
+      this.utilsservice.notifySuccess(this.$translate.instant('TRANSACTION_CREATE_SUCCESS'));
+      return true;
     })
     .catch((error) => {
-      console.log('XHR failed on getSaleList ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_LIST_FAILED'));
+      console.log('XHR failed on createSale ' + error);
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_CREATE_FAILED'));
+      this.utilsservice.notifyError(error.data.error);
+      return false;
+    });
+  }
+
+  deleteTransaction(id) {
+    return this.$http({
+      method: 'DELETE',
+      url: `/v1/inventory/transactions/${id}/`
+    })
+    .then((response) => {
+      return true;
+    })
+    .catch((error) => {
+      console.log('XHR failed on deleteTransaction ' + error);
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_DELETE_FAILED'));
       return false;
     });
   }
@@ -37,20 +55,17 @@ export default class transactionsservice {
     });
   }
 
-  createTransaction(data) {
+  getTransactionList(type) {
     return this.$http({
-      method: 'POST',
-      data: data,
+      method: 'GET',
       url: '/v1/inventory/transactions/'
     })
     .then((response) => {
-      this.utilsservice.notifySuccess(this.$translate.instant('TRANSACTION_CREATE_SUCCESS'));
-      return true;
+      return response.data.objects;
     })
     .catch((error) => {
-      console.log('XHR failed on createSale ' + error);
-      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_CREATE_FAILED'));
-      this.utilsservice.notifyError(error.data.error);
+      console.log('XHR failed on getSaleList ' + error);
+      this.utilsservice.notifyError(this.$translate.instant('TRANSACTION_LIST_FAILED'));
       return false;
     });
   }

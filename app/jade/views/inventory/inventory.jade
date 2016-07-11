@@ -4,6 +4,9 @@ div(class="inventory-section")
       div(class="page-heading clearfix")
         h1(class="page-title pull-left") {{ 'INVENTORY' | translate }}
         button(class="btn btn-primary btn-sm btn-add", ng-click="vm.openCreateProductModal()") {{ 'ADD_NEW_PRODUCT' | translate }}
-  div(class="row")
-    div(class="col-md-12")
+
+  div(class="panel panel-primary")
+    div(class="panel-heading clearfix")
+      div(class="panel-title") {{ 'PRODUCT_LIST' | translate }}
+    div(class="panel-body")
       my-data-table(actions="vm.products.actions", bulk-actions="vm.products.bulkActions", columns="vm.products.columns", data="vm.products.data", meta="vm.products.meta", request-more="vm.products.requestMore")
